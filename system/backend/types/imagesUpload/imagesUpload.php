@@ -84,9 +84,21 @@
             $fromFolder = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/temp/{$_SESSION['user']['login']}";
             $toFolder   = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/{$pKey['value']}";
             mkdir($toFolder, 0777, true);           
-            if(file_exists($fromFolder)){
-                rename($fromFolder, $toFolder);
-            }
+            
+			# SEIA MELHOR ASSIM, MAS POR ALGUM MOTIVO
+			# TENEBROSO ISSO NÃO FUNCIONA NO WINDOWS
+			# QUEM SABE UM DIA...
+			#if(file_exists($fromFolder)){
+            #    rename($fromFolder, $toFolder);
+            #}
+			
+			$dir = scandir($fromFolder);
+			$fileList = Array();
+			foreach ($dir as $key => $val) {
+				if( (int)strpos($val, ".") > 0 ){
+					rename("$fromFolder/$val", "$toFolder/$val");
+				}
+			}
         }
 
         /**
