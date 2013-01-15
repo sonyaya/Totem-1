@@ -109,7 +109,7 @@ $(function(){
     });
 
     // TABS
-    $('div.imagesUpload nav.menu ul').on("click", ".bt-tab", function(){
+    $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab", function(){
         $this = $(this);
         $innerHolder = $this.closest(".input-holder").find(".inner-holder");
         $files = $innerHolder.find("ul");
@@ -124,7 +124,7 @@ $(function(){
     });
 
     // TAB LIST
-    $('div.imagesUpload nav.menu ul').on("click", ".bt-tab.list", function(){
+    $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab.list", function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $innerHolder = $inputHolder.find(".inner-holder");
@@ -142,7 +142,7 @@ $(function(){
     });
 
     // TAB UPLOAD
-    $('div.imagesUpload nav.menu ul').on("click", ".bt-tab.send", function(){
+    $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab.send", function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $innerHolder = $inputHolder.find(".inner-holder");

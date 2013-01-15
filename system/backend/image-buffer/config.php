@@ -10,7 +10,7 @@
     
     // BASE DIR
     $options['basedir'] = "../" . $_M_CONFIG->system['upload-path'];
-
+    
     // DEFAULT IMAGE SIZE
     $options['size']['width']  = 200;
     $options['size']['height'] = 150;

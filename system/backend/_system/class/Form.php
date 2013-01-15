@@ -377,9 +377,11 @@
 
                             // carrega propriedades do type e a sua classe
                             if( isset($loadedType['interface']['html']['list']) ){
-                                $fileHtmlPath = "$pathType/{$loadedType['interface']['html']['list']}";
+                                if( file_exists($fileHtmlPath = "$pathType/{$loadedType['interface']['html']['list']}") ){
+                                    $fileHtml = file_get_contents($fileHtmlPath);
+                                }
                             }else{
-                                $fileHtmlPath = "$pathType/";
+                                $fileHtml = "";
                             }
                             
                             $preLoadedColumnsTypes[ $val['label'] ] = array_merge(
@@ -387,7 +389,7 @@
                                     "id"            => $id,
                                     "class-path"    => $classPath,
                                     "column-number" => $columnNo,
-                                    "html"          => ( file_exists($fileHtmlPath) ) ? file_get_contents($fileHtmlPath) : "",
+                                    "html"          => $fileHtml,
                                     "class"         => new $val['type']()
                                 ),
                                 $variables,

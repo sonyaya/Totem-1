@@ -13,7 +13,7 @@
     # WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
     # See the License for the specific language governing permissions and
     # limitations under the License.
-    
+
     require_once 'config.php';
     
     $x     = ( isset($_GET['x']   ) ) ? $_GET['x']    : $options['size']['width']  ;
@@ -22,8 +22,7 @@
     $fName = ( isset($_GET['file']) ) ? $_GET['file'] : ""                         ;
     
     $file = utf8_decode( "{$options['basedir']}/$fName.$ext" );
-
-    //echo $file; exit;
+    #echo $file; exit;
 
     // Caso o arquivo exista no caminho especificado
     if( !empty($fName) && !empty($ext) && file_exists($file) ){
