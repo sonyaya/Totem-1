@@ -120,7 +120,9 @@
 
     div.main{
         float: left;
-        width: calc(100% - 200px);
+        width: -webkit-calc(100% - 200px);
+        width:    -moz-calc(100% - 200px);
+        width:         calc(100% - 200px);
         margin-left: -1px;
         border-left: 1px solid #A2AFAF; 
         position: relative;
