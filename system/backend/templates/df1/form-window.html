@@ -1,19 +1,35 @@
-<!DOCTYPE html>
-<html>
+<m.if cond="&m.var:bool:_GET.popup;">
+    <!DOCTYPE html>
+    <html>
+        <head>
+            <title>&m.var:main-title; - &m.var:title;</title>
+
+            &m.include:#template#/_head.html;        
+        </head>
+        <body class="popup-window">
+            <h1>&m.var:title;</h1>
+
+            <div class="content">
+                &m.include:#template#/form-content.html;
+            </div>
+
+            <script>
+                &m.include:#template#/script/form.inc.js;
+                &m.include:#template#/script/bodyJs.inc.js;
+            </script>
+        </body>
+    </html>
+</m.if>
+
+<m.if cond="&m.var:bool:_GET.popup; -eq- false">
     <head>
-        <title>&m.var:main-title; - &m.var:title;</title>
-        
         &m.include:#template#/_head.html;        
     </head>
-    <body class="popup-window">
-        <h1>&m.var:title;</h1>
-        
-        <div class="content">
-            &m.include:#template#/form-content.html;
-        </div>
-        
-        <script>
-            &m.include:#template#/script/bodyJs.inc.js;
-        </script>
-    </body>
-</html>    
+    <h1>&m.var:title;</h1>
+    <div class="content">
+        &m.include:#template#/form-content.html;
+    </div>
+    <script>
+        &m.include:#template#/script/bodyJs.inc.js;
+    </script>
+</m.if>

@@ -26,21 +26,44 @@ var layout = new Object();
  * SE ENCARREGA DE ABRIR POPUPS
  */
 layout.popup = function(url, title){
-    no = $("#popup-menu li.popup-tab").length + 1;
     
-    // cria a tab
-    $newTab = $("<li class='popup-tab' id='tab-popup-"+no+"'><span>x</span> "+title+"</li>");
-    
-    // cria a janela
-    $newWindow = $("<div class='window for-tab-popup-"+no+"'>Aguarde...</div>");
-    $newWindow.load(url +" #popup-window");
-    
-    // adiciona na interface os novos elementos
-    $newTab.prependTo("#popup-menu");
-    $newWindow.prependTo("#popup-window");
-    
-    // clica na nova aba criada
-    $newTab.click();
+    // abrir em uma nova aba
+    if( layout.uri("form") == layout.uri("form", url) ){    
+        no = $("#popup-menu li.popup-tab").length + 1;
+
+        // cria a tab
+        $newTab = $("<li class='popup-tab' id='tab-popup-"+no+"'><span>x</span> "+title+"</li>");
+
+        // cria a janela
+        $newWindow = $("<div class='window for-tab-popup-"+no+"'><span class='load'>Aguarde...</span></div>");
+        $newWindow.load(url);
+
+        // adiciona na interface os novos elementos
+        $newTab.prependTo("#popup-menu");
+        $newWindow.prependTo("#popup-window");
+
+        // clica na nova aba criada
+        $newTab.click();
+    }else{
+        var w = screen.width / 1.2;
+        var barSize = 70;
+        newWindow = window.open(
+            url + "&popup=1",
+            title,
+            'toolbar=no,'
+            +'scrollbars=yes,'
+            +'location=no,'
+            +'resizable=yes,'
+            +'width='+w+','
+            +'height=0'
+        );
+
+        newWindow.onload = function(){
+            $popBody = newWindow.$('body');
+            var h = $popBody.outerHeight() + barSize;
+            newWindow.resizeTo( w, h );
+        }
+    }
 }
 
 /**

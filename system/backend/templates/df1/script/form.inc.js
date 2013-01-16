@@ -1,16 +1,12 @@
 $(function(){
-    $("#bt-save-form").click(function(){
-        $(this).closest("form").submit();
-        return false;
-    });
-
-    $("#form-insert-and-update").submit(function(e){
-
-        if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
-
+    $("body").on("click", ".bt-save-form", function(){
+        //
+        $form = $(this).closest("form");
+        
+        //
         $.post(
             "?action=save-form&form=&m.var:form;",
-            $(this).closest("#form-insert-and-update").serialize(),
+            $form.serialize(),
             function(data){
                 if( data.error ){
                     mesageConcat = 'Os seguintes erros ocorreram: \r\n';
@@ -19,15 +15,13 @@ $(function(){
                     });
                     alert(mesageConcat);
                 }else{
-                    if( window.opener ){
-                        //window.close();
-                    }else{
-                        //window.location = "?action=view-update-form&form=&m.var:form;&id=" + data.result._M_PRIMARY_KEY_VALUE_;
-                    }
+                    alert("mensagem aqui");
                 }
             },
             "json"
         );
+        
+        //
         return false;
     });
 });
