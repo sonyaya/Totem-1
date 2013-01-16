@@ -24,6 +24,11 @@
          * @param type $allData
          */
         public function beforeList(&$thisData, $thisRow, $thisColumn, &$allData){
-            $thisData = "<div class='jsonArray'><ul class='list'><li>".implode("</li><li>", json_decode($thisData))."</li></ul></div>";
+            $arr = json_decode($thisData);
+            if(is_array($arr) ){
+                $thisData = "<div class='jsonArray'><ul class='list'><li>".implode("</li><li>", $arr)."</li></ul></div>";
+            }else{
+                $thisData = "";
+            }
         }
     }
