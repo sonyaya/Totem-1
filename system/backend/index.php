@@ -191,7 +191,7 @@
         case "delete-form":{
             User::check("backend", "delete-form", "json");
             $form = new Form();
-            echo json_encode( $form->deleteForm( @$_GET['form'], $_GET['id']) );
+            echo json_encode( $form->deleteForm( $_GET['form'], $_GET['id']) );
             break;
         }
         
@@ -200,7 +200,7 @@
         case "save-form":{
             User::check("backend", "save-form", "json");
             $form = new Form();
-            echo json_encode( $form->saveForm( @$_GET['form'], $_POST) );
+            echo json_encode( $form->saveForm( $_GET['form'], $_POST) );
             break;
         }
 
