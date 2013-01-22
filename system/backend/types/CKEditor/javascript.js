@@ -1,0 +1,1 @@
+CKEDITOR.replace( '&m.var:id;', &m.var:json:parameter;);

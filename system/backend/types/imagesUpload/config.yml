@@ -1,0 +1,27 @@
+interface:
+  html:
+   #list   : list.html   
+    insert : insert.html 
+    update : update.html 
+
+  css:
+    list   : []   
+    insert : [ 'plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css' , 'style.css' ]
+    update : [ 'plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css' , 'style.css' ]
+    
+  javascript:
+    head:
+      list   : [] 
+      insert : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ] 
+      update : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ] 
+
+    body:
+      list   : [] 
+      insert : [ 'insert.js' ] 
+      update : [ 'update.js' ] 
+     
+default:
+  parameter :
+    folder : "change_this_folder"
+    inputs :
+      Image Info : '<textarea name="data"></textarea>' 

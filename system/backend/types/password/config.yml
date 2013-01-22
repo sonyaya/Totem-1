@@ -1,0 +1,26 @@
+interface:
+  html:
+   #list   : list.html   
+    insert : 'insertAndUpdate.html'
+    update : 'insertAndUpdate.html'
+
+  css:
+    list   : []   
+    insert : [ 'style.css' ]   
+    update : [ 'style.css' ]   
+    
+  javascript:
+    head:
+      list   : [] 
+      insert : [] 
+      update : [] 
+
+    body:
+      list   : [] 
+      insert : [] 
+      update : [] 
+     
+default:
+  parameter : 
+      attr1 : att-1
+      attr2 : att-2

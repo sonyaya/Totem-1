@@ -1,0 +1,102 @@
+&m.include:#template#/_head.html;
+    <!-- HEADER -->
+    &m.include:#template#/_header.html;
+
+    <!-- DROPDOWN MENU -->
+    <nav role="main-menu">
+        &m.var:main-menu;
+        <div class="clear"></div>
+    </nav>
+
+    <!-- -->
+    <section role="main">
+        <aside>
+            <nav role="tabs" class="top-tab">
+                <ul>
+                    <li class="active" id="tab-list">List</li>
+                    <li id="tab-search">Pesquisar</li>
+                    <div class="clear"></div>
+                </ul>
+            </nav>
+        <aside>
+            
+        &m.include:#template#/list-content.html;
+        
+        <!-- 
+          -- SEARCH
+          -->
+        <div class="window for-tab-search">
+          <form class="search">
+              &m.var:search-form;
+          </form>
+          <div role="action-bar">
+              <button id="bt-search">Pesquisar</button>
+          </div>
+        </div>
+          
+        <!--
+          -- FOOTER
+          -->
+        <div role="message">
+            Messages
+        </div>
+
+        <div role="action-bar">
+            <button class="preview-tab">Previus</button>
+            <button class="next-tab">Next</button>
+        </div>
+    </section>
+    
+    <script>
+        // PESQUISAR
+        $("#bt-search").click(function(){
+            uri = "";
+            dados = $("form").serializeArray();
+
+            // MONTA URL
+            first = true;
+            $.each(dados, function(key, val){
+                // BUSCA VARIAVEIS PARA MONTAR URI
+                switch( val.name.replace(/-.+?$/, "") ){
+                    case 'search_comparison':
+                        comparison = val.value;
+                        break;
+
+                    case 'search_value':
+                        value = val.value;
+                        break;
+
+                    case 'search_andOr':
+                        andOr = val.value;
+                        break;
+                }
+
+                // SE TIVER AS VARIAVEIS NECESSÁRIAS 
+                // ADICIONA A URI ATUAL
+                if(
+                    typeof(comparison) !== 'undefined' &&
+                    typeof(value) !== 'undefined'
+                ){
+                    if( $.trim(value) !== '' ){
+                        andOr = ( typeof(andOr) == 'undefined' || first ) ? '_' : andOr;
+                        column = val.name.replace(/.+?-/, "");
+                        uri += "(" + andOr + column + comparison + value + andOr + ")";
+                        first = false;
+                        delete(comparison);
+                        delete(value);
+                        delete(andOr);
+                        delete(column);
+                    }
+                }
+            });
+
+            // VERIFICA SE EXISTE UMA URL MONTADA E 
+            // MANDA O BROWSER PARA A PESQUISA MONTADA
+            if( $.trim(uri) !== '' ){
+                window.location = "?action=view-list-form&form=&m.var:form;&cond="+uri;
+            }else{
+                alert('Você precisa efetuar algum tipo de pesquisa.');
+            }
+        });
+    </script>
+&m.include:#template#/_footer.html;

@@ -1,0 +1,36 @@
+header:
+    title: 'Grupos de Usuários'
+    table: _m_group
+    p-key: id
+forms:
+    list:
+        title: 'Listagm de Grupos de Usuários'
+        rows-per-page: 200
+        input:
+            - type: example
+              label: 'Nome do Grupo de Usuários'
+              column: name
+            
+            - type: example
+              label: Permissões
+              column: permissions
+    update:
+        title: 'Atualizando Grupo de Usuários'
+        input:
+            - type: example
+              label: 'Nome do Grupo de Usuários'
+              column: name
+            
+            - type: example
+              label: Permissões
+              column: permissions
+    insert:
+        title: 'Inserindo Grupo de Usuários'
+        input:
+            - type: example
+              label: 'Nome do Grupo de Usuários'
+              column: name
+            
+            - type: example
+              label: Permissões
+              column: permissions

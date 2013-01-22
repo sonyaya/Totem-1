@@ -1,0 +1,74 @@
+# CONFIGIRA INTERFACE GRÁFICA
+# E INTERFACE COM BANCO DE DADOS 
+interface:
+  html:
+   #list   : list.html   # escreve o arquivo .html literalmente na tela de listagem - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos (* diminui substancialmente a performace da tela de listagem) 
+    insert : insertUpdate.html # escreve o arquivo .html literalmente na tela de inserção - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos    
+    update : insertUpdate.html # escreve o arquivo .html literalmente na tela de atualização - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
+
+  css:
+    list   : [] # importa arquivos .css no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes   
+    insert : [] # importa arquivos .css no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes   
+    update : [] # importa arquivos .css no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
+    
+  javascript:
+    head:
+      list   : [] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
+      insert : [ "ckeditor/ckeditor.js" ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
+      update : [ "ckeditor/ckeditor.js" ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
+
+    body:
+      list   : [] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes
+      insert : [ "javascript.js" ] # escreve o arquivo .js literalmente na tela de inserção - pode importar o mesmo arquivo varias vezes
+      update : [ "javascript.js" ] # escreve o arquivo .js literalmente na tela de atualização - pode importar o mesmo arquivo varias vezes
+     
+# CONFIGURA PADRÕES DO TYPE
+default:
+
+  # parametros padrões
+  parameter : 
+    extraPlugins          : 'autogrow'
+    autoGrow_maxHeight    : 800
+    removePlugins         : 'resize'
+    toolbarCanCollapse    : true
+    toolbarStartupExpanded: false
+    
+    toolbar: 
+      #- name: 'document'
+      #  items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ]
+        
+      - name: 'document'
+        items: [ 'Source' ]
+        
+      - name: 'clipboard'
+        items: [ 'Cut', 'Copy', 'Paste', 'PasteText', 'PasteFromWord', '-', 'Undo', 'Redo' ]
+
+      - name: 'forms'
+        items: [ 'Form', 'Checkbox', 'Radio', 'TextField', 'Textarea', 'Select', 'Button', 'ImageButton', 'HiddenField' ]
+      
+      - name  : 'editing'
+        items : [ 'Find', 'Replace', '-', 'SelectAll', '-', 'Scayt' ]
+
+      - name  : 'basicstyles'
+        items : [ 'Bold', 'Italic', 'Underline', 'Strike', 'Subscript', 'Superscript', '-', 'RemoveFormat' ]
+
+      - name  : 'paragraph'
+        items : [ 'NumberedList', 'BulletedList', '-', 'Outdent', 'Indent', '-', 'Blockquote', 'CreateDiv', '-', 'JustifyLeft', 'JustifyCenter', 'JustifyRight', 'JustifyBlock', '-', 'BidiLtr', 'BidiRtl' ]
+
+      - name : 'links'
+        items: [ 'Link', 'Unlink', 'Anchor' ]
+
+      - name : 'insert'
+        items: [ 'Image', 'Flash', 'Table', 'HorizontalRule', 'Smiley', 'SpecialChar', 'PageBreak', 'Iframe' ]
+
+      - name : 'styles'
+        items: [ 'Styles', 'Format', 'Font', 'FontSize' ]
+
+      - name : 'colors'
+        items: [ 'TextColor', 'BGColor' ]
+
+      - name : 'tools'
+        items: [ 'Maximize', 'ShowBlocks' ]
+
+      - name : 'others'
+        items: [ 'MediaEmbed', '-' ]

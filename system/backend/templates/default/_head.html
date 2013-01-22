@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>&m.var:main-title; - &m.var:title;</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- DEFAULT CSS -->
+    <link rel="stylesheet" href="&m.var:template;/css/style.css">
+
+    <!-- TYPE CSS -->
+  <m.foreach var="css" key="KEY">
+    <link rel="stylesheet" href="&m.var:css.#KEY#;">
+  </m.foreach>
+
+    <!-- FRAMEWORK JAVASCRIPT -->
+    <!-- <script src="&m.var:template;/libs/jquery.js"></script> -->
+    <script src="http://code.jquery.com/jquery-2.0.0b1.js"></script>
+    <script src="http://code.jquery.com/jquery-migrate-1.0.0.js"></script>
+    
+    <!-- DEFAULT JAVASCRIPT -->
+    <script src="&m.var:template;/script/menu.js"></script>
+    <script src="&m.var:template;/script/default.js"></script>
+
+    <!-- TYPE JAVASCRIPT -->
+  <m.foreach var="javascript.head" key="KEY">
+    <script src="&m.var:javascript.head.#KEY#;"></script>
+  </m.foreach>
+
+</head>
+<body>

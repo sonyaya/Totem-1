@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>--</title>
+    <meta name="viewport" content="width=device-width">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js"></script>
+    <link rel="stylesheet" href="&m.var:template;/css/login.css">
+</head>
+<body>
+    <div class="holder">
+        <div class="box">
+            <div class="info">
+                <h1>Backend</h1>
+                <div class="text">
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                    Ut euismod, odio sit amet fermentum faucibus. 
+                </div>
+            </div>
+            <form action="javascript:void(0)">
+                <div class="input-holder">
+                    <label for="login">Login de acesso</label>
+                    <input name="login" id="login" type="text" placeholder="login" value="daniel">
+                </div>
+                <div class="input-holder">
+                    <label for="pasword">Senha de Acesso</label>
+                    <input name="password" id="password" type="password" placeholder="senha" value="123456">
+                </div>
+                <div class="buttons">
+                    <a href="javascript:void(0)" id="bt-recuperar">esqueceu sua senha?</a>
+                    <button id="bt-entrar">Entrar</button>
+                </div>
+            </form>
+            <div class="msg">
+                (!) Mensagem de erro!
+            </div>    
+        </div>
+    
+    </div>
+    <script>
+
+        function showMsg(msg, type){
+            $(".msg")
+                .hide()
+                .stop(true, true)
+                .toggleClass(type)
+                .html(msg)
+                .fadeIn("slow")
+                .delay(10 * 1000)
+                .fadeOut(
+                    "slow",
+                    function(){
+                        $(this).toggleClass(type);
+                    }
+                )
+            ;
+        }
+
+        // -- LOGAR ---------------------------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------------------------
+
+        $("#bt-entrar").click(function(){
+            $(".error").stop().hide();
+            $.post(
+                "?action=login",
+                $("form").serialize(),
+                function(data){
+                    if(data.error === false){
+                        document.location.reload(true);
+                    }else{
+                        showMsg("(!) " + data.message, "error");
+                    }
+                },
+                "json"
+            );
+        });
+
+        // -- RECUPERAR SENHA -----------------------------------------------------------------------------------------
+        // ------------------------------------------------------------------------------------------------------------
+
+        $("#bt-recuperar").click(function(){
+            $(".error").stop().hide();
+            if( $("#login").val().trim() !== "" ){
+                $.post(
+                    "?action=recover-password",
+                    $("form").serialize(),
+                    function(data){
+                        if(!data.error){
+                            showMsg("uma solicitação de troca de senha foi enviada para seu email.", "ok");
+                        }else{
+                            showMsg("(!) " + data.message, "error");
+                        }
+                    },
+                    "json"
+                );
+            }else{
+                showMsg("(!) informe login antes de solicitar recuperação de senha...", "error");
+            }
+        });
+    </script>
+</body>
+</html>

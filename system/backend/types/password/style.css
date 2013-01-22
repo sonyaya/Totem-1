@@ -1,0 +1,19 @@
+div.input-holder.password{
+    position: relative;
+    }
+
+div.input-holder.password .password{
+    width: 49.5%;
+    float: left;
+    }
+
+div.input-holder.password .password.right{
+    margin-left: 0.5%;
+    }
+
+div.input-holder.password .password.left{
+    margin-right: 0.5%;
+    }
+
+div.input-holder.password .password input{
+    }

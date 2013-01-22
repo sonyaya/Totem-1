@@ -1,0 +1,162 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Postagens'
+  table: blog_post
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagm Postagens'
+    rows-per-page: 200
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: number
+        label: Título
+        column: title
+
+      - type: example
+        label: Introdução
+        column: intro
+
+      - type: example
+        label: Postagem
+        column: post
+
+      - type: example
+        label: Introdução
+        column: intro
+
+      - type: example
+        label: Metatags
+        column: metatags
+        
+      - type: example
+        label: Categoria(s)
+        column: | 
+          (
+            SELECT 
+              group_concat(title SEPARATOR '<br>')
+
+            FROM 
+              blog_post_x_category 
+              JOIN blog_category ON blog_post_x_category.category_id = blog_category.id
+
+            WHERE 
+              blog_post.id = blog_post_x_category.post_id
+
+            GROUP BY
+              post_id
+          )   
+          
+      - type: example
+        label: "Tipo(s) é ô é ô caraio"
+        column: | 
+          (
+            SELECT 
+              group_concat(title SEPARATOR '<br>')
+
+            FROM 
+              blog_post_x_type 
+              JOIN blog_type ON blog_type.id = blog_post_x_type.type_id
+
+            WHERE 
+              blog_post.id = blog_post_x_type.post_id
+
+            GROUP BY
+              post_id
+          )
+
+           
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Post'
+    input:
+      title:
+        type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          size : 45
+
+      pub_date:
+        type: dateTimeBr
+        label: Data de Publicação
+        column: pub_date
+        parameter:
+          year : 
+            start : 'now-5'
+            stop  : 'now+5'
+
+      metatags:
+        type: example
+        label: Metatags
+        column: metatags
+
+      category:
+        type: manyToMany
+        label: Categorias
+        column: 'blog_post_x_category' # nome ficticio
+        ignore-select: true            # não busca os dados desta coluna em formulários de atualização
+        parameter:
+          nullable     : false
+          middle-table : blog_post_x_category
+          middle-fk    : post_id
+          middle-pk    : category_id
+          right-table  : blog_category
+          right-fk     : id
+          right-label  : title
+          insert-form  : "blog/category" 
+          
+      type:
+        type: manyToMany
+        label: Tipo
+        column: 'blog_post_x_type'
+        ignore-select: true
+        parameter:
+          nullable     : false
+          middle-table : blog_post_x_type
+          middle-fk    : post_id
+          middle-pk    : type_id
+          right-table  : blog_type
+          right-fk     : id
+          right-label  : title
+          insert-form  : "blog/type" 
+
+      imgage:
+        type: imagesUpload
+        label: imagesUpload
+        column: 'images_data'
+        parameter :
+          folder : "teste2"
+       
+      intro:
+        type: textarea
+        label: Introdução
+        column: intro
+       
+      post:
+        type: CKEditor
+        label: Postagem
+        column: post
+          
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Post'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []

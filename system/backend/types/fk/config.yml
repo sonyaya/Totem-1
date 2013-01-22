@@ -1,0 +1,26 @@
+interface:
+  html:
+   #list   : list.html    
+    insert : insert.html 
+    update : update.html 
+
+  css:
+    list   : [] 
+    insert : [ 'style.css' ] 
+    update : [ 'style.css' ] 
+    
+  javascript:
+    head:
+      list   : []  
+      insert : [ 'javascript.js' ] 
+      update : [ 'javascript.js' ] 
+
+    body:
+      list   : [] 
+      insert : [] 
+      update : [] 
+     
+default:
+  parameter : 
+    table  : table
+    column : column

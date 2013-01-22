@@ -1,0 +1,55 @@
+# -- Module User ---------------------------------------------------------------
+- label: Usuários
+  link: "?action=view-list-form&form=user/user"
+  submenu:
+    
+    - label: "Listar Usuários"
+      link: "?action=view-list-form&form=user/user"
+      
+    - label: "Inserir novo usuário"
+      link: "?action=view-insert-form&form=user/user"
+      
+    - label: "Grupos de Usuários"
+      link: "?action=view-list-form&form=group"
+      submenu: 
+        
+        - label: "Listar Grupos de Usuários"
+          link: "?action=view-list-form&form=user/group"
+          
+        - label: "Inserir Grupos de Usuários"
+          link: "?action=view-insert-form&form=user/group"
+          
+          
+# -- Module Blog ---------------------------------------------------------------
+- label: Blog
+  submenu: 
+    
+    - label: "Postagens"
+      link: "?action=view-list-form&form=blog/post"
+      submenu: 
+        
+        - label: "Lista de Posts"
+          link: "?action=view-list-form&form=blog/post"
+          
+        - label: "Inserir Novo Post"
+          link: "?action=view-insert-form&form=blog/post"  
+          
+    - label: "Categorias"
+      link: "?action=view-list-form&form=blog/category"
+      submenu: 
+        
+        - label: "Lista de Posts"
+          link: "?action=view-list-form&form=blog/category"
+          
+        - label: "Inserir Novo Post"
+          link: "?action=view-insert-form&form=blog/category"
+          
+    - label: "Tipos"
+      link: "?action=view-list-form&form=blog/type"
+      submenu: 
+        
+        - label: "Lista de Posts"
+          link: "?action=view-list-form&form=blog/type"
+          
+        - label: "Inserir Novo Post"
+          link: "?action=view-insert-form&form=blog/type"
