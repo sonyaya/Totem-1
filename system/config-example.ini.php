@@ -12,8 +12,8 @@
   password           = "example"
   port               = 465
   SMTPSecure         = "ssl";
-  default-from-name  = "Não Responda"
-  default-from-email = "nao-reponda@nao-responda.com"
+  default-from-name  = "noreply"
+  default-from-email = "noreply@noreply.com"
 
 [mysql] 
   host     = "127.0.0.1"
