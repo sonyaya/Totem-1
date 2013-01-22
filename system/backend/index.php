@@ -23,9 +23,9 @@
         $pad0 = str_pad("", $deep);
         $pad1 = str_pad("", $deep+($indent) );
         $pad2 = str_pad("", $deep+($indent*2) );
-        $ret = $pad0 . "<ul>\r\n";
+        $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
         foreach ($array as $key => $val) {
-            $ret .= $pad1 . "<li class='deep_$deepClass'>\r\n";
+            $ret .= $pad1 . "<li>\r\n";
             if(isset($val['link'])){
                 $ret .= $pad2 . "<a href='{$val['link']}'>{$val['label']}</a>\r\n";
             }else{
