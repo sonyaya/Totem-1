@@ -618,7 +618,7 @@
             // RETORNA INTERFACE GRÁFICA
             return 
                 new Frontend(
-                    $_M_CONFIG->console['template'] ."/". $this->listLayout,
+                    $_M_THIS_CONFIG['template'] ."/". $this->listLayout,
                     array_merge(
                         $_M_THIS_CONFIG,
                         Array( 
