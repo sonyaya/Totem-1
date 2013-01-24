@@ -1,7 +1,6 @@
 $(function(){
-    $(".top-tab ul").on("click", "li", function(){
-        $tabs = $(".top-tab ul li");
-        $tabs.removeClass("active");
+    $(".top-tabs ul").on("click", "li", function(){
+        $(this).siblings().removeClass("active");
         $(this).addClass("active");
         $(".window").hide();
         $(".for-" + $(this).attr("id")).show();

@@ -5,28 +5,79 @@
     class backendIndex{
 
         /**
-         *
+         * Mostra tela de Inserção de dados
+         * 
+         * @param type $formLayout
          */
         static public function viewFormInsert($formLayout){
             $Form = new Form();
-            $Form->setFormLayout($formLayout);
-            echo $Form->viewForm($_GET['form']);
+            $Form
+                ->setLayout($formLayout)
+                ->viewForm($_GET['form'])
+                ->writeHTML()
+            ;
         }
 
         /**
-         *
+         * Mostra tela de atualização de dados
+         * 
+         * @param type $formLayout
          */
         static public function viewFormUpdate($formLayout){
             $Form = new Form();
-            $Form->setFormLayout($formLayout);
-            echo $Form->viewForm($_GET['form'], $_GET['id']);
+            $Form
+                ->setLayout($formLayout)
+                ->viewForm($_GET['form'], $_GET['id'])
+                ->writeHTML()
+            ; 
         }
 
         /**
+         * Mostra tela de listagem de dados
          * 
+         * @param type $listLayout
          */
         static public function viewFormList($listLayout){
-            if( isset($_GET['orderBy']) ){
+            $orderBy = self::prepareOrderBy();
+            $paginator = self::preparePaginator();
+            $page = $paginator['page'];
+            $rowsPerPage = $paginator['rowsPerPage'];  
+            
+            $form = new Form();
+            $form
+                ->setLayout($listLayout)
+                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy /*, $cond */)
+                ->writeHTML()
+            ;
+        }
+
+        /**
+         * Mostra tela de listagem e atualização
+         * 
+         * @param type $listLayout
+         */
+        static function viewFormListAndInsert($listLayout){
+            $orderBy = self::prepareOrderBy();
+            $paginator = self::preparePaginator();
+            $page = $paginator['page'];
+            $rowsPerPage = $paginator['rowsPerPage']; 
+            
+            $form = new Form();
+            $form
+                ->setLayout($listLayout)
+                ->viewForm($_GET['form'])
+                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy /*, $cond */)
+                ->writeHTML()
+            ;            
+        }
+        
+        /**
+         * Prepara o order by para telas de listagem
+         * 
+         * @return Array
+         */
+        static private function prepareOrderBy(){
+             if( isset($_GET['orderBy']) ){
                 $orderBy = $_GET['orderBy'];
 
                 // ORDER BY Valor!/ID
@@ -38,46 +89,27 @@
                         $orderBy[$key] = preg_replace("/(.*?)!/i", "`$1` DESC", $val);
                     }
                 }
-                $orderBy = implode(", ", $orderBy);
+                
+                return implode(", ", $orderBy);
             }else{
-                $orderBy = null;
-            }
-
-            // CONDITION
-            $cond = (isset($_GET['cond']))? $_GET['cond'] : '';
-            $condList = Array();
-            preg_match_all("/\((?P<andOr>[-_!])(?P<column>\w+?)(?P<comparison>[:;^*-])(?P<value>.+?)(?P=andOr)\)/i", $cond, $condList, PREG_SET_ORDER);
-            
-            $andOr['-'] = " AND";
-            $andOr['x'] = " OR";
-            $andOr['_'] = '';
-            
-            $comparison[':'] = '=';
-            $comparison[';'] = '<>';
-            $comparison['^'] = 'RLIKE';
-            $comparison['*'] = 'LIKE';
-            $comparison['-'] = 'BETEWEEN';
-            
-            $cond = '';
-            foreach($condList as $key=>$val){
-                if( !is_numeric($val['value'])){
-                    $value = "'{$val['value']}'";
-                }else{
-                     $value = $val['value'];
-                }
-                $cond .= "{$andOr[$val['andOr']]} `{$val['column']}` {$comparison[$val['comparison']]} $value";
-            }
-
-            // MOSTRA LISTAGEM
-            $page = (isset($_GET['page']))? $_GET['page'] : '1';
-            $rowsPerPage = (isset($_GET['rowsPerPage']))?  $_GET['rowsPerPage'] : '';
-            
-            $form = new Form();
-            $form->setListLayout($listLayout);
-            echo $result = $form->viewList($_GET['form'], $page, $rowsPerPage, $orderBy, $cond);
+                return null;
+            }           
         }
 
         /**
+         * Prepara paginação de talas de listagem
+         * 
+         * @return array
+         */
+        static private function preparePaginator(){
+            $page = (isset($_GET['page']))? $_GET['page'] : '1';
+            $rowsPerPage = (isset($_GET['rowsPerPage']))?  $_GET['rowsPerPage'] : '';
+            return Array("page" => $page, "rowsPerPage" => $rowsPerPage);
+        }
+
+        
+        /**
+         * Mostra a tela de recuperação de senha
          * 
          * @global type $_M_CONFIG
          * @global type $_M_THIS_CONFIG

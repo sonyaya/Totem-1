@@ -81,6 +81,16 @@
             break;
         }
         
+        // BUSCA LISTA DE DADOS REFERENTE 
+        // AO FORMULÁRIO NO BANCO DE DADOS
+        // E O FORMULÁRIO DE INSERÇÃO
+        case "view-listAndInsert-form":{
+            User::check("backend", "view-insert-form", "html");
+            User::check("backend", "view-list-form", "html");
+            backendIndex::viewFormListAndInsert("listAndInsert.html");
+            break;
+        }
+        
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE INSERÇÃO
         // EM JANELA

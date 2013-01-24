@@ -1,51 +1,46 @@
-<!-- 
-  -- LIST
-  --> 
-<div class="window for-tab-list list">
-    <table>
-      <thead>
-        &m.var:table.thead;
-        <m.if cond="false">
-        <!-- pode fazer isso, mas é muito mais lento
-        <tr>
-            <th class="action"></th>
-          <-m.foreach var="table.columns" key="KEY">
-            <th class='&-m.var:table.columns.#KEY#;.label title_&-m.var:table.columns.#KEY#;.number'>&-m.var:table.columns.#KEY#;.label</th>
-          </-m.foreach>
-        </tr>
-        -->
-       </m.if>
-      </thead>
+<table>
+  <thead>
+    &m.var:table.thead;
+    <m.if cond="false">
+    <!-- pode fazer isso, mas é muito mais lento
+    <tr>
+        <th class="action"></th>
+      <-m.foreach var="table.columns" key="KEY">
+        <th class='&-m.var:table.columns.#KEY#;.label title_&-m.var:table.columns.#KEY#;.number'>&-m.var:table.columns.#KEY#;.label</th>
+      </-m.foreach>
+    </tr>
+    -->
+   </m.if>
+  </thead>
 
-      <tbody>
-        &m.var:table.tbody;
-        <m.if cond="false">
-        <!-- pode fazer isso, mas é muito mais lento
-        <-m.foreach var="table.data" key="ROW">
-          <tr>
-              <td class="action">action</td>
-            <-m.foreach var="table.data.#ROW#" key="COLUMN">
-              <td>&-m.var:table.data.#ROW#.#COLUMN#;</td>
-            </-m.foreach>
-          </tr>
+  <tbody>
+    &m.var:table.tbody;
+    <m.if cond="false">
+    <!-- pode fazer isso, mas é muito mais lento
+    <-m.foreach var="table.data" key="ROW">
+      <tr>
+          <td class="action">action</td>
+        <-m.foreach var="table.data.#ROW#" key="COLUMN">
+          <td>&-m.var:table.data.#ROW#.#COLUMN#;</td>
         </-m.foreach>
-        -->
-       </m.if>
-      </tbody>
-    </table>
+      </tr>
+    </-m.foreach>
+    -->
+   </m.if>
+  </tbody>
+</table>
 
-  <m.if cond="&m.var:bool:pages.list;">
-    <div class="action-bar center">
-        <button class="bt-page" rel="page=1">Inicio</button>
-        <button class="prev-page">Anterior</button>
-       <m.foreach var="pages.list" key="KEY">
-        <button class="bt-page &m.var:pages.list.#KEY#.active;" rel="&m.var:pages.list.#KEY#.link;">&m.var:pages.list.#KEY#.number;</button>
-       </m.foreach>
-        <button class="next-page">Próximo</button>
-        <button class="bt-page" rel="&m.var:pages.last.link;">Fim</button>
-    </div>
-  </m.if>
+<m.if cond="&m.var:bool:pages.list;">
+<div class="action-bar center">
+    <button class="bt-page" rel="page=1">Inicio</button>
+    <button class="prev-page">Anterior</button>
+   <m.foreach var="pages.list" key="KEY">
+    <button class="bt-page &m.var:pages.list.#KEY#.active;" rel="&m.var:pages.list.#KEY#.link;">&m.var:pages.list.#KEY#.number;</button>
+   </m.foreach>
+    <button class="next-page">Próximo</button>
+    <button class="bt-page" rel="&m.var:pages.last.link;">Fim</button>
 </div>
+</m.if>
 
 <script>
     <m.if cond='&m.var:bool:_GET.orderBy;'>
@@ -73,7 +68,7 @@
         }
 
         window.location = 
-            "?action=view-list-form"
+            "?action=&m.var:_GET.action;"
             + "&form=&m.var:form;"
             + "&cond=<m.if cond='&m.var:bool:_GET.cond;'>&m.var:_GET.cond;</m.if>"
             + "&page=<m.if cond='&m.var:bool:_GET.page;'>&m.var:_GET.page;</m.if>"
@@ -84,7 +79,7 @@
     // PAGINAÇÃO
     $(".list").on("click", ".bt-page", function(){
         window.location = 
-            "?action=view-list-form"
+            "?action=&m.var:_GET.action;"
             + "&form=&m.var:form;"
             + "&cond=<m.if cond='&m.var:bool:_GET.cond;'>&m.var:_GET.cond;</m.if>"
             + "&orderBy=<m.if cond='&m.var:bool:_GET.orderBy;'>&m.var:_GET.orderBy;</m.if>"

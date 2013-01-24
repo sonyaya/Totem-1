@@ -13,14 +13,15 @@
          *
          * @var type 
          */
-        private $formLayout = "form.html";
+        private $htmlLayout = "";
         
         /**
          *
          * @var type 
          */
-        private $listLayout = "list.html";
-
+        private $sendArrayToLayout = Array();
+        
+        
         /**
          * Gera HTML do formulário
          * 
@@ -204,10 +205,10 @@
                 }
             }
 
-            // RETORNA A INTERFACE GRÁFICA DO FORMULÁRIO
-            return 
-                new Frontend(
-                    $_M_THIS_CONFIG['template'] ."/". $this->formLayout,
+            // RETORNA DADOS PARA A INTERFACE GRÁFICA DO FORMULÁRIO
+            $this->sendArrayToLayout =
+                array_replace_recursive(
+                    $this->sendArrayToLayout,
                     array_merge(
                         $_M_THIS_CONFIG,
                         Array(  
@@ -227,6 +228,9 @@
                     )
                 )
             ;
+            
+            //
+            return $this;
         }
 
 
@@ -615,10 +619,10 @@
                 $columnNo++;
             }
 
-            // RETORNA INTERFACE GRÁFICA
-            return 
-                new Frontend(
-                    $_M_THIS_CONFIG['template'] ."/". $this->listLayout,
+            // RETORNA VALORES PARA INTERFACE GRÁFICA
+            $this->sendArrayToLayout =
+                array_replace_recursive(
+                    $this->sendArrayToLayout,
                     array_merge(
                         $_M_THIS_CONFIG,
                         Array( 
@@ -644,8 +648,12 @@
                     )
                 )
             ;
+            
+            // 
+            return $this;
         }
 
+        
         /**
          * Salva ou atualiza dados no banco de dados
          *
@@ -988,16 +996,17 @@
          * 
          * @param type $formLayout
          */
-        public function setFormLayout($formLayout) {
-            $this->formLayout = $formLayout;
+        public function setLayout($layout) {
+            $this->htmlLayout = $layout;
+            return $this;
         }
 
         /**
          * 
-         * @param type $listLayout
          */
-        public function setListLayout($listLayout) {
-            $this->listLayout = $listLayout;
+        public function writeHTML(){
+            global $_M_THIS_CONFIG;
+            echo new Frontend($_M_THIS_CONFIG['template'] ."/". $this->htmlLayout, $this->sendArrayToLayout);
         }
-
+        
     }

@@ -1,46 +1,32 @@
-&m.include:#template#/_head.html;
-    <!-- HEADER -->
-    &m.include:#template#/_header.html;
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+        
+        &m.include:#template#/_head.html;        
+    </head>
+    <body>
+        <header>
+            <div class="user">
+                teste
+            </div>
+        </header>
+        
+        <nav class="side">
+            &m.var:main-menu;
+        </nav>
 
-    <!-- DROPDOWN MENU -->
-    <nav role="main-menu">
-        &m.var:main-menu;
+        <div class="main list">
+            <div class="content">
+                &m.include:#template#/form-content.html;
+            </div>
+        </div>
+
+        
         <div class="clear"></div>
-    </nav>
-
-    <!-- -->
-    <section role="main">
-        <aside>
-            <nav role="tabs" class="top-tab">
-                <ul>
-                  <m.if cond="'&m.var:method;' -eq- 'update'">
-                    <li class="active">Atualizando</li>
-                    <div class="clear"></div>
-                  </m.if>
-                  <m.if cond="'&m.var:method;' -eq- 'insert'">
-                    <li class="active">Inserindo</li>
-                    <div class="clear"></div>
-                  </m.if>
-                </ul>
-            </nav>
-        <aside>
-            
-        <!--
-          -- INSERT AND UPDATE FORM
-          -->
-        &m.include:#template#/form-content.html;
-
-        <!--
-          -- FOOTER
-          -->
-        <div role="message">
-            Messages
-        </div>
-
-        <div role="action-bar">
-            <button class="preview-tab">Previus</button>
-            <button class="next-tab">Next</button>
-        </div>
-    </section>
-    
-&m.include:#template#/_footer.html;
+        
+        <footer>
+            asdsad
+        </footer>
+    </body>
+</html>    

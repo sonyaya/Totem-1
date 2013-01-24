@@ -2,10 +2,18 @@
     margin:0; 
     padding:0; 
     }
+    
 .clear{
     clear: both;
     }
 
+.window{
+    display: none;
+    }
+    
+.window:first-child{
+    display: block;    
+    }
 
 /* ---------------------------------------------------------------------------- */
     
@@ -22,6 +30,7 @@
         pdding: 0;
         margin: 0;
         border: 0 none;
+        overflow-x: hidden;
         }
     
     
@@ -51,7 +60,6 @@
     div.main{
         float: left;
         width: 85%;
-        
         margin-left: -1px;
         border-left: 1px solid #A2AFAF; 
         position: relative;
@@ -145,6 +153,52 @@
         display: block;
         }
 
+        
+/* --- SIDE MENU -------------------------------------------------------------- */
+
+
+    nav.top-tabs{
+        width: 100%;
+        border-bottom: 1px solid #A2AFAF;
+        padding-left: 1.5%;
+        background-color: #F9F9F9;
+        
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #DDDDDD), color-stop(100%, #F9F9F9));
+        background: -webkit-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
+        background:    -moz-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
+        background:     -ms-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
+        background:      -o-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
+        background:   linear-gradient(to bottom, #DDDDDD 0%, #F9F9F9 100%);
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#CCCCCC', endColorstr='#F9F9F9', GradientType=0);
+    }
+    
+    nav.top-tabs ul,
+    nav.top-tabs ul li{
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        border: 0 none;
+        }    
+
+    nav.top-tabs ul li{
+        float: left;
+        margin: 1% 0 0 0;
+        padding: 0.5%;
+        border: 1px solid #A2AFAF;
+        border-bottom: 0 none;
+        border-left: 0 none;
+        margin-bottom: -1px;
+        background: #F9F9F9;
+        }
+        
+    nav.top-tabs ul li:first-child{
+        border-left: 1px solid #A2AFAF;
+        }
+        
+    nav.top-tabs ul li.active{
+        border-bottom: 1px #F9F9F9 solid;
+        }
+        
     
 /* ---  TABLE ----------------------------------------------------------------- */
 
