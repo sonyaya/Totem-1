@@ -1,189 +1,301 @@
-/* ------- ITEM MENU ------- */
-
-nav.side{
-    float: left;
-    width: 30%;
-    background: #DDD;
+* {
+    margin:0; 
+    padding:0; 
+    }
+.clear{
+    clear: both;
     }
 
-nav.side ul,
-nav.side ul li{
-    padding: 0;
-    margin: 0;
-    border: 0 none;
-    list-style: none;
-    }
 
-nav.side ul{
-    border-bottom: 1px solid #000;
-    }
+/* ---------------------------------------------------------------------------- */
+    
+    html,
+    body {
+        height: 100%;
+        }
 
-nav.side ul li{
-    border: 1px solid #000;
-    border-bottom: 0 none;
-    }
+    body{
+        background: #F9F9F9;
+        font-family: HelveticaNeue,​Helvetica,​Arial;
+        font-color: #4C4C4C;
+        font-size: 0.8em;
+        pdding: 0;
+        margin: 0;
+        border: 0 none;
+        }
+    
+    
+/* --- HEADER ----------------------------------------------------------------- */
 
-nav.side ul li ul{
-    border: 0 none;
-    display: none
-    }
 
-nav.side ul li ul li{
-    padding-left: 5%;
-    border: 0 none;
-    }
+    header{
+        background: url("../img/stream.jpg");
+        height: 212px;
+        position: relative;
+        z-index: 2;
+        }
+        
+    header div.user{
+        width: 15%;
+        height: 100%;
+        border-right: 1px solid #A2AFAF; 
+        
+        -webkit-box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);
+        -moz-box-shadow   : inset 0 2px 15px rgba(0,0,0,0.3);
+        box-shadow        : inset 0 2px 15px rgba(0,0,0,0.3);
+        }
 
-nav.side ul li:hover > ul{
-    display: block;
-    }
+/* --- MAIN ------------------------------------------------------------------- */
+
+
+    div.main{
+        float: left;
+        width: 85%;
+        
+        margin-left: -1px;
+        border-left: 1px solid #A2AFAF; 
+        position: relative;
+        z-index: 1;
+        
+        min-height: -webkit-calc(100% - 212px - 50px);
+        min-height:    -moz-calc(100% - 212px - 50px);
+        min-height:         calc(100% - 212px - 50px);
+        
+        -webkit-box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+        -moz-box-shadow   : 0 2px 15px rgba(0,0,0,0.3);
+        box-shadow        : 0 2px 15px rgba(0,0,0,0.3);
+        }
+
+    div.main div.content{
+        margin: 2%;
+        }
+
+        
+/* --- MODULE MENU ------------------------------------------------------------ */
+
+
+    nav.modules{
+
+        }
+
+        
+/* --- SIDE MENU -------------------------------------------------------------- */
+
+
+    nav.side{
+        float: left;
+        width: 15%;
+        font-weight: 700;
+        font-size: 1em;
+        text-transform: uppercase;
+        }
+
+    nav.side ul,
+    nav.side ul li{
+        padding: 0;
+        margin: 0;
+        border: 0 none;
+        list-style: none;
+        }
+
+
+    nav.side ul a{
+        color: #000;
+        text-decoration: none;
+        }
+
+    nav.side ul{
+        }
+
+    nav.side ul li{
+        border-bottom: 1px solid #A2AFAF;
+        padding: 0 5%;
+        }
+
+    nav.side ul.deep_1 > li{
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
+        color: #6A6F76;
+        cursor: default;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+        line-height: 50px;
+        }
+
+    nav.side ul.deep_1 > li:first-child{ /* change this to active */
+        background: #B7C5C5;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #DEE3E3), color-stop(100%, #B7C5C5));
+        background: -webkit-linear-gradient(top, #DEE3E3 0%, #B7C5C5 100%);
+        background:    -moz-linear-gradient(top, #DEE3E3 0%, #B7C5C5 100%);
+        background:     -ms-linear-gradient(top, #DEE3E3 0%, #B7C5C5 100%);
+        background:      -o-linear-gradient(top, #DEE3E3 0%, #B7C5C5 100%);
+        background:   linear-gradient(to bottom, #DEE3E3 0%, #B7C5C5 100%);
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#DEE3E3', endColorstr='#B7C5C5', GradientType=0);
+        }
+
+    nav.side ul li ul{
+        border: 0 none;
+        display: none
+        }
+
+    nav.side ul li ul li{
+        padding-left: 5%;
+        border: 0 none;
+        }
+
+    nav.side ul li:hover > ul{
+        display: block;
+        }
 
     
-/* ------- MAIN ------- */
+/* ---  TABLE ----------------------------------------------------------------- */
 
-div.main{
-    float: left;
-    width: 70%;
-    }
 
-div.main div.content{
-    margin: 0 1%;
-    }
+    div.list table{
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arimo,sans-serif;
+        font-size: 1.0em;
+        }
 
-    
-/* ------- TABLE ------- */
+    div.list table thead tr th{
+        color: #F7F7F7;
+        background: #3A454E;
+        padding: 0.5%;
+        font-size: 1em;
+        font-weight: 100;
+        cursor: pointer;
+        text-align: left;
+        }
 
-div.list table{
-    width: 100%;
-    border-collapse: collapse;
-    font-family: Arimo,sans-serif;
-    font-size: 1.0em;
-    }
+    div.list table thead tr th.CHANGE_TO_DESC{
+        background: url("../img/fugue/icons/sort-date-descending.png") 95% center no-repeat #3a454e;
+        }
 
-div.list table thead tr th{
-    color: #F7F7F7;
-    background: #3A454E;
-    padding: 0.5%;
-    font-size: 1em;
-    font-weight: 100;
-    cursor: pointer;
-    text-align: left;
-    }
+    div.list table thead tr th.CHANGE_TO_ASC{
+        background: url("../img/fugue/icons/sort-date.png") 95% center no-repeat #3a454e;
+        }
 
-div.list table thead tr th.CHANGE_TO_DESC{
-    background: url("../img/fugue/icons/sort-date-descending.png") 95% center no-repeat #3a454e;
-    }
+    div.list table thead .action{
+        background: transparent;
+        border-bottom: 1px solid #C7C7C7;
+        }
 
-div.list table thead tr th.CHANGE_TO_ASC{
-    background: url("../img/fugue/icons/sort-date.png") 95% center no-repeat #3a454e;
-    }
+    div.list table tbody{
+        border-left: 1px solid #C7C7C7;
+        border-right: 1px solid #C7C7C7;
+        border-bottom: 2px solid #303030;
+        }
 
-div.list table thead .action{
-    background: transparent;
-    border-bottom: 1px solid #C7C7C7;
-    }
+    div.list table tbody tr td{
+        color: #707070;
+        background: #F7F7F7;
+        border-bottom: 1px solid #E7E7E7;
+        padding: 1%;
+        vertical-align: top;
+        }
 
-div.list table tbody{
-    border-left: 1px solid #C7C7C7;
-    border-right: 1px solid #C7C7C7;
-    border-bottom: 2px solid #303030;
-    }
+    div.list table tbody tr td a{
+        color: inherit;
+        text-decoration: none;
+        }
 
-div.list table tbody tr td{
-    color: #707070;
-    background: #F7F7F7;
-    border-bottom: 1px solid #E7E7E7;
-    padding: 1%;
-    vertical-align: top;
-    }
+    div.list table tbody tr td a:active{
+        color: red;
+        }
 
-div.list table tbody tr td a{
-    color: inherit;text-decoration: none;
-    }
+    div.list table tbody tr:hover td{
+        background: #F0F0F0;
+        color: #000000;
+        }
 
-div.list table tbody tr td a:active{
-    color: red;
-    }
+    div.list table tbody .action{
+        background: #EEEEEE;
+        width: 100px;
+        }
 
-div.list table tbody tr:hover td{
-    background: #F0F0F0;color: #000000;
-    }
+    div.list td.action a.edit,
+    div.list td.action a.delete,
+    div.list td.action a.select{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url("../img/fugue/icons/tick.png") center center;
+        }
 
-div.list table tbody .action{
-    background: #EEEEEE;
-    width: 100px;
-    }
+    div.list td.action a.edit{
+        margin: 0 2px;
+        background: url("../img/fugue/icons/disk--pencil.png") center center;
+        }
 
-div.list td.action a.edit,
-div.list td.action a.delete,
-div.list td.action a.select{
-    display: inline-block;
-    width: 16px;
-    height: 16px;
-    background: url("../img/fugue/icons/tick.png") center center;
-    }
-
-div.list td.action a.edit{
-    margin: 0 2px;
-    background: url("../img/fugue/icons/disk--pencil.png") center center;
-    }
-
-div.list td.action a.delete{
-    background: url("../img/fugue/icons/cross-octagon.png") center center;
-    }
+    div.list td.action a.delete{
+        background: url("../img/fugue/icons/cross-octagon.png") center center;
+        }
 
     
-/* ------- BUTTONS ------- */ 
+/* --- BUTTONS ---------------------------------------------------------------- */ 
 
-button,
-.button{
-    border: 1px solid #B2B2B2;
-    border-radius: 5px;
-    padding: 0.5%;
-    color: #333;
-    cursor: pointer;
-    background: #f2f2f2;
-    background: -webkit-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
-    background: -moz-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
-    background: -o-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
-    background: -ms-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
-    background: linear-gradient(to bottom, #f2f2f2 0%, #c9c9c9 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(100%, #c9c9c9));
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#c9c9c9', GradientType=0);
-    }
 
-button.square,
-.button.square{
-    border-radius: 0;
-    }
+    button,
+    .button{
+        border: 1px solid #B2B2B2;
+        border-radius: 5px;
+        padding: 0.5%;
+        color: #333;
+        cursor: pointer;
+        background: #f2f2f2;
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #f2f2f2), color-stop(100%, #c9c9c9));
+        background: -webkit-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
+        background:    -moz-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
+        background:     -ms-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
+        background:      -o-linear-gradient(top, #f2f2f2 0%, #c9c9c9 100%);
+        background:   linear-gradient(to bottom, #f2f2f2 0%, #c9c9c9 100%);
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#f2f2f2', endColorstr='#c9c9c9', GradientType=0);
+        }
 
-button.small,
-.button.small{
-    padding: 0.2%;
-    }
+    button.square,
+    .button.square{
+        border-radius: 0;
+        }
 
-button.active,
-.button.active{
-    background: -webkit-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
-    background: -moz-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
-    background: -o-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
-    background: -ms-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
-    background: linear-gradient(to bottom, #e2ebe2 0%, #bcc5bc 100%);
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e2ebe2), color-stop(100%, #bcc5bc));
-    filter: progid:dximagetransform.microsoft.gradient(startColorstr='#E2EBE2', endColorstr='#BCC5BC', GradientType=0);
-    }
+    button.small,
+    .button.small{
+        padding: 0.2%;
+        }
+
+    button.active,
+    .button.active{
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #e2ebe2), color-stop(100%, #bcc5bc));
+        background: -webkit-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
+        background:    -moz-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
+        background:     -ms-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
+        background:      -o-linear-gradient(top, #e2ebe2 0%, #bcc5bc 100%);
+        background:   linear-gradient(to bottom, #e2ebe2 0%, #bcc5bc 100%);
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#E2EBE2', endColorstr='#BCC5BC', GradientType=0);
+        }
 
     
-/* ------- ACTION BAR ------- */ 
+/* --- ACTION BAR ------------------------------------------------------------- */ 
 
-div.action-bar{
-    padding:1% 2%;
-    text-align:right;
-    }
 
-div.action-bar.small{
-    padding:0.5%;
-    }
+    div.action-bar{
+        padding:1% 2%;
+        text-align:right;
+        }
 
-div.action-bar.center{
-    text-align:center; 
-    }
+    div.action-bar.small{
+        padding:0.5%;
+        }
+
+    div.action-bar.center{
+        text-align:center; 
+        }
+        
+        
+ /* --- FOOTER ----------------------------------------------------------------- */
+
+
+    footer{
+        background: #262C36;
+        height: 50px;
+        position: relative;
+        z-index: 2;
+        }
