@@ -1,4 +1,4 @@
-/* HOLDER INTERNO */
+/* */
 .imagesUpload .inner-holder{
     width: 100%;
     }
@@ -100,4 +100,37 @@
     float: right;
     font-size: 0.5em;
     float: right;
+    }
+    
+/* */
+.imagesUpload  nav.small-tabs{
+    border-bottom: 1px solid #A2AFAF;
+    padding-left: 1.5%;
+}
+
+.imagesUpload  nav.small-tabs ul,
+.imagesUpload  nav.small-tabs ul li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    }    
+
+.imagesUpload  nav.small-tabs ul li{
+    float: left;
+    margin: 1% 0 0 0;
+    padding: 0.5%;
+    border: 1px solid #A2AFAF;
+    border-bottom: 0 none;
+    border-left: 0 none;
+    margin-bottom: -1px;
+    background: #F9F9F9;
+    }
+
+.imagesUpload  nav.small-tabs ul li:first-child{
+    border-left: 1px solid #A2AFAF;
+    }
+
+.imagesUpload  nav.small-tabs ul li.active{
+    border-bottom: 1px #F9F9F9 solid;
     }

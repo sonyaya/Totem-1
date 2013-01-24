@@ -17,6 +17,8 @@ div.input-holder.manyToMany .manyToMany.right{
     }
 
 div.input-holder.manyToMany input{
+    width: 100%;
+    border: 1px solid #D0D0D0;
     }
 
 div.input-holder.manyToMany .buttons{
