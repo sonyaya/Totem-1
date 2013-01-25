@@ -1,3 +1,3 @@
 $(function(){
-    $('div.imagesUpload').find('.bt-tab.list').click();    
+    $('div.imagesUpload').find(".bt-reload").click();  
 });

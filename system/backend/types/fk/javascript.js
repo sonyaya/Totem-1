@@ -3,7 +3,7 @@ $(function(){
 
         // AO CLICAR NO form input.fk-finder
         .on('click', 
-            'input.fk-finder', 
+            '.fk input.fk-finder', 
             function(){
                 $(this).keyup();
             }
@@ -11,7 +11,7 @@ $(function(){
 
         // AO PRECIONAR UMA TECLA NO form input.fk-finder
         .on('keyup', 
-            'input.fk-finder', 
+            '.fk input.fk-finder', 
             function(e){
                 // BUSCA DOM
                 $this   = $(this);
@@ -115,7 +115,7 @@ $(function(){
 
         // AO form input.fk-finder PERDER O FOCO
         .on('focusout', 
-            'input.fk-finder', 
+            '.fk input.fk-finder', 
             function(){
                 $this   = $(this);
                 $holder = $this.closest('.inner-holder');
@@ -130,7 +130,7 @@ $(function(){
 
         // AO form input.fk-finder RECEBER O FOCO
         .on('focusin', 
-            'input.fk-finder', 
+            '.fk input.fk-finder', 
             function(){
                 $this   = $(this);
                 $holder = $this.closest('.inner-holder');
@@ -141,7 +141,7 @@ $(function(){
 
         // AO CLICAR EM UM DOS ITENS DA LISTAGEM
         .on('click',
-            'ul.fk-list li',
+            '.fk ul.fk-list li',
             function(){
                 // BUSCA OS ELEMENTOS A SEREM UTILIZADOS
                 $this   = $(this);
@@ -160,7 +160,7 @@ $(function(){
 
         // AO COLOCAR O MOUSE SOBRE UM DOS ITENS DA LISTAGEM
         .on('mouseover',
-            'ul.fk-list li',
+            '.fk ul.fk-list li',
             function(){
                 // BUSCA OS ELEMENTOS A SEREM UTILIZADOS
                 $this   = $(this);
@@ -170,6 +170,23 @@ $(function(){
                 // SELECIONA O CAMPO CLICADO
                 $list.find('.over').removeClass('over');
                 $this.addClass('over');
+            }
+        )
+           
+        // AO CLICAR NO BOTÃO NEW
+        .on('click',
+            '.fk .combo .new',
+            function(){
+                if( typeof layout == 'object' ){
+                    if( typeof layout.popup == 'function' ){
+                        layout.popup("?action=view-insert-window-form&form=" + $(this).attr('rel'), "Inserindo");
+                    }else{
+                         alert("O layout que você esta utilizando não possui o método popup. \r\nTenha como exemplo o arquivo do template default 'script/default.js'.");
+                    }
+                }else{
+                    alert("O layout que você esta utilizando não possui um objeto javascript chamado layout. \r\nTenha como exemplo o arquivo do template default 'script/default.js'.");
+                }
+                return false;
             }
         )
     ;

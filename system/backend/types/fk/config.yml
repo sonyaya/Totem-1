@@ -22,5 +22,6 @@ interface:
      
 default:
   parameter : 
-    table  : table
+    table : table
     column : column
+    insert-form : "" 

@@ -21,7 +21,7 @@ div.input-holder.fk ul.fk-list{
 
 div.input-holder.fk ul.fk-list li{
     background: #F4F4F4;
-    padding: 1%;
+    padding: 0.5em;
     }
 
 div.input-holder.fk ul.fk-list li.active{
@@ -30,4 +30,21 @@ div.input-holder.fk ul.fk-list li.active{
 
 div.input-holder.fk ul.fk-list li.over{
     background: #DFDFDF;
+    }
+    
+div.input-holder.fk div.combo{    
+    position: relative;
+    }
+    
+div.input-holder.fk div.combo input{
+    
+    }
+    
+div.input-holder.fk div.combo button{
+    position: absolute;
+    top: 10%;
+    right: 1px;
+    height: 80%;
+    width: 25px;
+    line-height: 0;
     }

@@ -125,20 +125,6 @@ $(function(){
 
     // TAB LIST
     $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab.list", function(){
-        $this = $(this);
-        $inputHolder = $this.closest(".input-holder");
-        $innerHolder = $inputHolder.find(".inner-holder");
-        $windowListUl = $innerHolder.find(".window.files ul");
-        $.post(
-            '?action=type-ajax&ajax=list&type=imagesUpload&folder=' + $inputHolder.attr("data-folder"),
-            function(data){
-                html = '';
-                $.each(data.files.order, function(key, val){
-                    html += '<li data-file="'+ data.folder +"/"+ val +'"><input value="'+ data.folder +"/"+ val +'" name="'+ $inputHolder.attr("data-name") +'[]" type="hidden"><img src="image-buffer/130x95/'+ data.folder +"/"+ val +'"></li>';
-                });
-                $windowListUl.html( html ).sortable();
-            }, "json"
-        );
     });
 
     // TAB UPLOAD
@@ -159,17 +145,51 @@ $(function(){
                 UploadProgress: function(up, file) {
                     if(up.total.percent == 100){
                         $inputHolder.find(".bt-tab.list").click();
+                        $inputHolder.find(".bt-reload").click();
                     }
                 }
             }
         });
     });
 
-    // bt-del-file
+    // DELETE bt-del-file
     $('div.imagesUpload').on("click", ".bt-del-file", function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $inputHolder.find(".window.files").find(".selected").remove();
+    });
+
+    // RELOAD bt-reload
+    $('div.imagesUpload').on("click", ".bt-reload", function(){
+        $this = $(this);
+        $inputHolder = $this.closest(".input-holder");
+        $innerHolder = $inputHolder.find(".inner-holder");
+        $windowListUl = $innerHolder.find(".window.files ul");
+        $.post(
+            '?action=type-ajax&ajax=list&type=imagesUpload&folder=' + $inputHolder.attr("data-folder"),
+            function(data){
+                html = '';
+                $.each(data.files.order, function(key, val){
+                    html += '<li data-file="'+ data.folder +"/"+ val +'"><input value="'+ data.folder +"/"+ val +'" name="'+ $inputHolder.attr("data-name") +'[]" type="hidden"><img src="image-buffer/130x95/'+ data.folder +"/"+ val +'"></li>';
+                });
+                $windowListUl.html( html ).sortable();
+            }, "json"
+        );
+    });
+
+    // SELECT ALL bt-select-all
+    $('div.imagesUpload').on("click", ".bt-select-all", function(){
+        $(this).closest(".input-holder").find(".inner-holder ul li").addClass("selected");
+    });
+
+    // SELECT NONE bt-select-none
+    $('div.imagesUpload').on("click", ".bt-select-none", function(){
+        $(this).closest(".input-holder").find(".inner-holder ul li").removeClass("selected");
+    });
+
+    // SELECT INVERSE bt-select-inverse
+    $('div.imagesUpload').on("click", ".bt-select-inverse", function(){
+        $(this).closest(".input-holder").find(".inner-holder ul li").toggleClass("selected");
     });
 
     // REMOVER INPUTS DE TODOS OS PL-UPLOADER PRA E FECHAR A JANELA DE EDIÇÃO 

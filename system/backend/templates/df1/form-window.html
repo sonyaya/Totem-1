@@ -1,6 +1,20 @@
-&m.include:#template#/_head.html;
-    &m.include:#template#/form-content.html;
-    <script>
-        &m.include:#template#/script/form.inc.js;
-    </script>
-&m.include:#template#/_footer.html;
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+        
+        &m.include:#template#/_head.html;        
+    </head>
+    <body class="popup-window">
+        <h1>&m.var:title;</h1>
+        
+        <div class="content">
+            &m.include:#template#/form-content.html;
+        </div>
+        
+        <script>
+            &m.include:#template#/script/form.inc.js;
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>    

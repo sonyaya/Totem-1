@@ -57,6 +57,7 @@ forms:
                 column: id
                 table: _m_group
                 label: name 
+                insert-form  : "user/group" 
               
             - type: example
               label: 'Primeiro Nome'
@@ -87,39 +88,5 @@ forms:
               column: Email
     insert:
         title: 'Inserindo Usuário'
-        input:
-            - type: fk
-              label: Grupo
-              column: group_id
-              parameter:
-                column: id
-                table: _m_group
-                label: name 
-              
-            - type: example
-              label: 'Primeiro Nome'
-              column: first_name
-              
-            - type: example
-              label: 'Nome do Meio'
-              column: middle_name
-              
-            - type: example
-              label: Sobrenome
-              column: last_name
-              
-            - type: example
-              label: Login
-              column: login
-              
-            - type: password
-              label: Senha
-              column: password
-              
-            - type: example
-              label: Permissões
-              column: permissions
-              
-            - type: example
-              label: email
-              column: Email
+        merge-form: [ insert, update ]
+        input: []

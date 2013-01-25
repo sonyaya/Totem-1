@@ -29,7 +29,7 @@ $(function(){
 
         // AO PRECIONAR UMA TECLA NO finder
         .on('keyup', 
-            'input.manyToMany-finder', 
+            '.manyToMany input.manyToMany-finder', 
             function(e){
                 // BUSCA DOM
                 $this = $(this);
@@ -120,7 +120,7 @@ $(function(){
 
         // AO CLICAR NO BOTÃO ADD
         .on('click',
-            '.add',
+            '.manyToMany .add',
             function(){
                 manyToMany.add($(this), "active");
             }
@@ -128,7 +128,7 @@ $(function(){
 
         // AO CLICAR NO BOTÃO REMOVE
         .on('click',
-            '.remove',
+            '.manyToMany .remove',
             function(){
                 manyToMany.remove($(this));
             }
@@ -136,33 +136,24 @@ $(function(){
             
         // AO CLICAR NO BOTÃO ADD
         .on('click',
-            '.new',
+            '.manyToMany .new',
             function(){
-                var w = 640;
-                newWindow = window.open(
-                    "?action=view-insert-window-form&form=" + $(this).attr('rel'), 
-                    'Insert', 
-                    'toolbar=no,'
-                    +'scrollbars=yes,'
-                    +'location=no,'
-                    +'resizable=yes,'
-                    +'width='+w+','
-                    +'height=0'
-                );
-                    
-                newWindow.onload = function(){
-                    $popBody = newWindow.$('body');
-                    var h = $popBody.height() + 50;
-                    newWindow.resizeTo( w, h );
+                if( typeof layout == 'object' ){
+                    if( typeof layout.popup == 'function' ){
+                        layout.popup("?action=view-insert-window-form&form=" + $(this).attr('rel'), "Inserindo");
+                    }else{
+                         alert("O layout que você esta utilizando não possui o método popup. \r\nTenha como exemplo o arquivo do template default 'script/default.js'.");
+                    }
+                }else{
+                    alert("O layout que você esta utilizando não possui um objeto javascript chamado layout. \r\nTenha como exemplo o arquivo do template default 'script/default.js'.");
                 }
-                
                 return false;
             }
         )
 
         // AO finder RECEBER FOCO
         .on('focusin', 
-            'input.manyToMany-finder', 
+            '.manyToMany input.manyToMany-finder', 
             function(){
                 $(this).keyup();
             }
@@ -170,7 +161,7 @@ $(function(){
 
         // AO CLICAR EM UM DOS ITENS DA LISTAGEM DA ESQUERDA
         .on('click',
-            'div.manyToMany.left div.selections ul li',
+            '.manyToMany div.manyToMany.left div.selections ul li',
             function(){
                 // BUSCA DOM
                 $this = $(this);
@@ -191,7 +182,7 @@ $(function(){
 
         // AO CLICAR EM UM DOS ITENS DA LISTAGEM DA DIREITA
         .on('click',
-            'div.manyToMany.right div.selections ul li',
+            '.manyToMany div.manyToMany.right div.selections ul li',
             function(){
                 // BUSCA DOM
                 $this = $(this);
@@ -201,7 +192,7 @@ $(function(){
 
         // AO COLOCAR O MOUSE SOBRE UM DOS ITENS DA LISTAGEM
         .on('mouseover',
-            '.selections ul li',
+            '.manyToMany .selections ul li',
             function(){
                 // BUSCA OS ELEMENTOS A SEREM UTILIZADOS
                 $this   = $(this);
