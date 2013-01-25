@@ -1,6 +1,7 @@
 * {
     margin:0; 
     padding:0; 
+    font-family: Verdana;
     }
     
 .clear{
@@ -14,7 +15,6 @@
 .window:first-child{
     display: block;    
     }
-
 /* ---------------------------------------------------------------------------- */
     
     html,
@@ -24,7 +24,6 @@
 
     body{
         background: #F9F9F9;
-        font-family: HelveticaNeue,​Helvetica,​Arial;
         font-color: #4C4C4C;
         font-size: 0.8em;
         pdding: 0;
@@ -193,9 +192,39 @@
     nav.top-tabs ul li.active{
         border-bottom: 1px #F9F9F9 solid;
         }
+    
+/* --- FORM ------------------------------------------------------------------- */
+
+    input,
+    select,
+    textarea{
+        background: transparent;
+        border: 1px solid #D0D0D0; 
+        margin: 0;
+        padding: 0.5em;
+        width: -webkit-calc(100% - 1em) !important;
+        width:    -moz-calc(100% - 1em) !important;
+        width:         calc(100% - 1em) !important;
+        }
+        
+    textarea{
+        height: 250px;
+        }
+    
+    div.input-holder{
+        margin: 1em 0 2em 0;
+        }
+    
+    div.input-holder label{
+        margin: 0 0 0.2em 0;
+        display: block;
+        font-size: 1em;
+        text-transform: uppercase;
+        }
+    
         
     
-/* ---  TABLE ----------------------------------------------------------------- */
+/* --- TABLE ------------------------------------------------------------------ */
 
 
     div.list table{
