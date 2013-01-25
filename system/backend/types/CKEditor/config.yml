@@ -14,8 +14,8 @@ interface:
   javascript:
     head:
       list   : [] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
-      insert : [ "ckeditor/ckeditor.js" ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
-      update : [ "ckeditor/ckeditor.js" ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
+      insert : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
+      update : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
 
     body:
       list   : [] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes

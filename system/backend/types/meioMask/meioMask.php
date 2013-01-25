@@ -45,7 +45,7 @@
         }
         
         public function beforeLoadDataToForm(&$thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
-
+            $thisData = htmlentities($thisData);
         }
         
         public function beforeList(&$thisData, $thisRow, $thisColumn, &$allData, $parameters){

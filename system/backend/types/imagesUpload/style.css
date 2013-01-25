@@ -99,12 +99,6 @@
     position: relative;
     }
 
-.imagesUpload .edit-image-window .imageDataForm .bt_imageDataForm_close{
-    float: right;
-    font-size: 0.5em;
-    float: right;
-    }
-    
 /* */
 .imagesUpload  nav.small-tabs{
     border-bottom: 1px solid #A2AFAF;
@@ -136,4 +130,21 @@
 
 .imagesUpload  nav.small-tabs ul li.active{
     border-bottom: 1px #F9F9F9 solid;
+    }
+
+.imagesUpload .bt{
+    width: 20px;
+    height: 20px;
+    background: black;
+    overflow: hidden;    
+    float: right;
+    margin-left: 2px;
+    }
+
+.imagesUpload .bt_imageDataForm_close{
+    background: red;
+    }
+
+.imagesUpload .bt_imageDataForm_open{
+    background: green;
     }

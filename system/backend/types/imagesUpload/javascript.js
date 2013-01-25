@@ -35,8 +35,9 @@ $(function(){
         inputList = JSON.parse( $inputHolder.attr("data-inputs") );
         html  = '';
         html += '<div class="imageDataForm">';
-        html +=   '<span class="bt_imageDataForm_close">close</span>';
-        html +=   '<input type="hidden" name="_m_filename" value="'+ fileName +'">';
+        html +=   '<a class="bt bt_imageDataForm_close">close</a>';
+        html +=   '<a class="bt bt_imageDataForm_open">open</a>';
+        html +=   '<input type="hidden" name="_m_filename" class="_m_filename" value="'+ fileName +'">';
         $.each(inputList, function(key, val){
           html +=   '<div class="input-holder">';
           html +=     '<label>'+ key +'</label>';
@@ -58,11 +59,11 @@ $(function(){
 
     // SAVE EDIT IMAGE DATA
     $('div.imagesUpload div.inner-holder').on("keyup", "textarea,input", function(){ 
-      return imagesUpload_changeDataImage($(this)); 
+        imagesUpload_changeDataImage($(this)); 
     });
 
     $('div.imagesUpload div.inner-holder').on("change", "select", function(){ 
-      return imagesUpload_changeDataImage($(this)); 
+        imagesUpload_changeDataImage($(this)); 
     });
 
     function imagesUpload_changeDataImage($this){
@@ -108,6 +109,16 @@ $(function(){
         $windowFiles.find(".edit-image-window").empty();
     });
 
+    // OPEN RAW IMAGE
+    $('div.imagesUpload div.inner-holder').on("click", ".bt_imageDataForm_open", function(){
+         $this = $(this);
+         $holder = $this.closest(".input-holder");
+         uploadFolder = $holder.attr("data-upload-folder");
+         folder = $holder.attr("data-folder");
+         fileName = $this.siblings("._m_filename").val();
+         window.open(uploadFolder+"/"+folder+"/"+fileName, fileName);
+    });
+
     // TABS
     $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab", function(){
         $this = $(this);
@@ -121,10 +132,6 @@ $(function(){
 
         $window.hide();
         $actualWindow.show();
-    });
-
-    // TAB LIST
-    $('div.imagesUpload nav.small-tabs ul').on("click", ".bt-tab.list", function(){
     });
 
     // TAB UPLOAD

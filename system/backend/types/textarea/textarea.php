@@ -9,7 +9,7 @@
          * @param type $thisLabel
          */
         public function validate($thisData, $thisColumn, &$allData, $parameters, $thisLabel){
-             if( empty($thisData) ){
+            if( empty($thisData) ){
                 return Array( "error" => true, "message" => "O campo $thisLabel, não pode ser vazio." );
             }else{
                 return Array( "error" => false );

@@ -45,6 +45,7 @@
 
         /**
          * 
+         * @global array $_M_CONFIG
          * @param type $thisData
          * @param type $thisColumn
          * @param type $allData
@@ -52,7 +53,11 @@
          * @param type $toTypeLayout
          * @param type $pKey
          */
+
+
         public function beforeLoadDataToForm(&$thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
+            global $_M_CONFIG;
+            
             if( !isset($pKey['value']) || empty($pKey['value']) ){
                 $folder = "{$parameters['folder']}/temp/{$_SESSION['user']['login']}";
             }else{
@@ -60,7 +65,8 @@
             }
             $toTypeLayout = Array(
                 "folder" => $folder,
-                "files" => json_decode($thisData, true)
+                "files" => json_decode($thisData, true),
+                "upload-folder" => $_M_CONFIG->system['upload-path']
             );
         }
 

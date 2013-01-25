@@ -785,6 +785,10 @@
                     // DE CADA TYPE PARA CADA COLUNA DEFINIDA EM DATA
                     foreach($data as $key=>$val){
                         if( isset($preLoadedColumnsTypes[$key]['class']) ){
+                            if(is_string($val)){
+                                $data[ $key ] = addslashes( $val );
+                            }
+                            
                             if( method_exists($obj = $preLoadedColumnsTypes[$key]['class'], $method = "before".ucwords($action)) ){
                                 $obj->$method($data[$key], $key, $data, $preLoadedColumnsTypes[$key]['parameter'], Array( "column"=>$pk, "value"=>$id ));
                             }
