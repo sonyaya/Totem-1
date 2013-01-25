@@ -1,6 +1,6 @@
 <div class="input-holder &m.var:type;" data-folder="&m.var:toLayout.folder;" data-name="&m.var:name;" data-inputs='&m.var:json:parameter.inputs;'>
-  <label>&m.var:label;</label>
-
+  <label>&m.var:label; &m.var:method;</label>
+  
   <nav class="small-tabs">
     <ul>
       <li class="bt-tab list active" rel="files">Listar Arquivos</li>
@@ -23,7 +23,11 @@
         </div>
 
         <ul>
-            <!-- lis -->
+          <m.if cond="&m.var:bool:_GET.id;">
+          <m.foreach var="toLayout.files.order" key="KEY">
+            <li data-file="&m.var:toLayout.files.order.#KEY#;"><input value="&m.var:toLayout.files.order.#KEY#;" name="&m.var:name;[]" type="hidden"><img src="image-buffer/130x95/&m.var:toLayout.files.order.#KEY#;"></li>
+          </m.foreach>
+          </m.if>
         </ul>
 
         <div class="edit-image-window"></div>

@@ -1,8 +1,8 @@
 interface:
   html:
    #list   : list.html   
-    insert : insert.html 
-    update : update.html 
+    insert : updateAndInsert.html 
+    update : updateAndInsert.html 
 
   css:
     list   : []   
