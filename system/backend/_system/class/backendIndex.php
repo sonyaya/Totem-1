@@ -77,7 +77,7 @@
          * @return Array
          */
         static private function prepareOrderBy(){
-             if( isset($_GET['orderBy']) ){
+             if( isset($_GET['orderBy']) && !empty($_GET['orderBy']) ){
                 $orderBy = $_GET['orderBy'];
 
                 // ORDER BY Valor!/ID
