@@ -1,7 +1,6 @@
 <?php // ♣
 
-    // ADPTAÇÃO PARA O TOTEM
-    # CONFIGURAÇÕES
+    # CONFIGURAÇÕES ADAPTADAS PARA O TOTEM
     if(file_exists($file = "../../config.ini.php")){
         $_M_CONFIG = (object)parse_ini_file($file, true);
     }else{
