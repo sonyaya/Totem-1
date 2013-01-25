@@ -1,8 +1,9 @@
 $(function(){
     $(".top-tabs ul").on("click", "li", function(){
-        $(this).siblings().removeClass("active");
-        $(this).addClass("active");
-        $(".window").hide();
+        $this = $(this);
+        $this.siblings().removeClass("active");
+        $this.addClass("active");
+        $this.closest(".window-holder").find(".content > .window").hide();
         $(".for-" + $(this).attr("id")).show();
     });
 

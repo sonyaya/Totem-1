@@ -19,6 +19,10 @@
 /* */
 .imagesUpload .window{
     }
+    
+.imagesUpload .window.files{
+    display: block;
+    }
 
 
 .imagesUpload .window .input-holder{
