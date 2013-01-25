@@ -86,10 +86,9 @@
     float: right;
     border: 1px solid #D0D0D0;
     border-right: 0 none;
-    background: #E0E0E0;
     width: 48.5%;
     margin-right: 1%;
-    margin-top: 25px;
+    margin-bottom: 1em;
     height: 300px;
     display: none;
     overflow: auto;
