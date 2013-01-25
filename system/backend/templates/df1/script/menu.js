@@ -4,8 +4,13 @@ $(function(){
         $this.siblings().removeClass("active");
         $this.addClass("active");
         $this.closest(".window-holder").find(".content > .window").hide();
-        $(".for-" + $(this).attr("id")).show();
+        $(".for-" + $this.attr("id")).show();
+        window.location.hash = $this.attr("id");
     });
+
+    if( (deepLink = window.location.hash) !== ''){
+        $(deepLink).click();
+    }
 
     $(".next-tab").click(function(){
         $(".top-tab ul").find(".active").next().click();
