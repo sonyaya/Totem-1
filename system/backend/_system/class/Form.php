@@ -25,17 +25,13 @@
         /**
          * Gera HTML do formulário
          * 
-         * @global type $_M_THIS_CONFIG
-         * @global type $_M_MENU
-         * @global type $_M_USER
+         * @global array $_M_THIS_CONFIG
          * @param type $formFilename
          * @param type $updateId
          * @return \backend\Frontend
          */
         public function viewForm($formFilename, $updateId=null){
             global $_M_THIS_CONFIG;
-            global $_M_MENU;
-            global $_M_USER;
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
@@ -102,6 +98,7 @@
             }
 
             // PERCORRE TODOS OS TYPES
+            $counter = 0;
             foreach ( $formArray['forms'][ $insertOrUpdate ]['input'] as $key => $val) {
 
                 // verifica se o arquivo de 
@@ -206,24 +203,17 @@
             }
 
             // RETORNA DADOS PARA A INTERFACE GRÁFICA DO FORMULÁRIO
-            $this->sendArrayToLayout =
-                array_replace_recursive(
-                    $this->sendArrayToLayout,
-                    array_merge(
-                        $_M_THIS_CONFIG,
-                        Array(  
-                            "user"       => $_M_USER ,
-                            "main-menu"  => $_M_MENU ,
-                            "main-title" => $formArray['header']['title'] ,
-                            "title"      => $formArray['forms'][$insertOrUpdate]['title'] ,
-                            "form"       => $formFilename ,
-                            "inputs"     => implode("\r\n\r\n", $inputs) ,
-                            "css"        => array_unique($headCSS) ,
-                            "method"     => $insertOrUpdate ,
-                            "javascript" => Array(
-                                "head" => array_unique($headJS),
-                                "body" => $bodyJS
-                            )
+            $this->addToArrayLayout(
+                    Array(
+                        "main-title" => $formArray['header']['title'] ,
+                        "title"      => $formArray['forms'][$insertOrUpdate]['title'] ,
+                        "form"       => $formFilename ,
+                        "inputs"     => implode("\r\n\r\n", $inputs) ,
+                        "css"        => array_unique($headCSS) ,
+                        "method"     => $insertOrUpdate ,
+                        "javascript" => Array(
+                            "head" => array_unique($headJS),
+                            "body" => $bodyJS
                         )
                     )
                 )
@@ -238,10 +228,8 @@
         /**
          *
          *  
-         * @global type $_M_CONFIG
-         * @global \backend\type $_M_THIS_CONFIG
-         * @global \backend\type $_M_MENU
-         * @global \backend\type $_M_USER
+         * @global array $_M_CONFIG
+         * @global array $_M_THIS_CONFIG
          * @param type $formFilename
          * @param type $page
          * @param type $rowsPerPage
@@ -252,8 +240,6 @@
         public function viewList($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1){
             global $_M_CONFIG;
             global $_M_THIS_CONFIG;
-            global $_M_MENU;
-            global $_M_USER;
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
@@ -622,30 +608,23 @@
             }
 
             // RETORNA VALORES PARA INTERFACE GRÁFICA
-            $this->sendArrayToLayout =
-                array_replace_recursive(
-                    $this->sendArrayToLayout,
-                    array_merge(
-                        $_M_THIS_CONFIG,
-                        Array( 
-                            "user"        => $_M_USER ,
-                            "main-menu"   => $_M_MENU ,
-                            "main-title"  => $formArray['header']['title']          ,
-                            "title"       => $formArray['forms']['list']['title']   ,
-                            "form"        => $formFilename                          ,
-                            "pages"       => $result['pages']                       ,
-                            "search-form" => $searchForm                            ,
-                            "css"         => array_unique($headCSS)                 ,
-                            "javascript" => array(
-                                "head" => array_unique($headJS),
-                                "body" => $bodyJS
-                            ),
-                            "table" => Array(
-                                "columns" => $result['columns'],
-                                "data"    => $result['data'],
-                                "tbody"   => $result['tbody'],
-                                "thead"   => $result['thead']
-                            )
+            $this->addToArrayLayout(
+                    Array( 
+                        "main-title"  => $formArray['header']['title']          ,
+                        "title"       => $formArray['forms']['list']['title']   ,
+                        "form"        => $formFilename                          ,
+                        "pages"       => $result['pages']                       ,
+                        "search-form" => $searchForm                            ,
+                        "css"         => array_unique($headCSS)                 ,
+                        "javascript" => array(
+                            "head" => array_unique($headJS),
+                            "body" => $bodyJS
+                        ),
+                        "table" => Array(
+                            "columns" => $result['columns'],
+                            "data"    => $result['data'],
+                            "tbody"   => $result['tbody'],
+                            "thead"   => $result['thead']
                         )
                     )
                 )
@@ -659,8 +638,8 @@
         /**
          * Salva ou atualiza dados no banco de dados
          *
-         * @global \backend\type $_M_CONFIG
-         * @global \backend\type $_M_THIS_CONFIG
+         * @global array $_M_CONFIG
+         * @global array $_M_THIS_CONFIG
          * @param type $formFilename
          * @param type $data
          * @return boolean
@@ -866,10 +845,10 @@
         
         /**
          * 
-         * @global \backend\type $_M_CONFIG
-         * @global \backend\type $_M_THIS_CONFIG
-         * @global \backend\type $_M_MENU
-         * @global \backend\type $_M_USER
+         * @global array $_M_CONFIG
+         * @global array $_M_THIS_CONFIG
+         * @global array $_M_MENU
+         * @global array $_M_USER
          */
         public function deleteForm($formFilename, $deleteId){
             #global $_M_CONFIG;
@@ -1005,10 +984,76 @@
 
         /**
          * 
+         * @global array $_M_THIS_CONFIG
          */
         public function writeHTML(){
             global $_M_THIS_CONFIG;
             echo new Frontend($_M_THIS_CONFIG['template'] ."/". $this->htmlLayout, $this->sendArrayToLayout);
+        }
+        
+        /**
+         * Adiciona informações a serem enviados para listagem e formulário
+         * 
+         * @global array $_M_THIS_CONFIG
+         * @param array $array
+         */
+        private function addToArrayLayout(array $array){
+            global $_M_THIS_CONFIG;
+            global $_M_MENU;
+            global $_M_USER;
+            
+            // O minimo que o array deve ter
+            $arrayBase = Array(  
+                "user"       => "" ,
+                "main-menu"  => "" ,
+                "main-title" => "",
+                "title"      => "" ,
+                "form"       => "" ,
+                "inputs"     => "",
+                "pages"       => "" ,
+                "search-form" => "" ,
+                "css"         => array() ,
+                "javascript" => array(
+                    "head" => array(),
+                    "body" => array()
+                ),
+                "table" => Array(
+                    "columns" => "" ,
+                    "data"    => "",
+                    "tbody"   => "" ,
+                    "thead"   => ""
+                )
+            );
+            
+            //
+            $this->sendArrayToLayout = array_replace_recursive($arrayBase, $this->sendArrayToLayout);
+            $array = array_replace($arrayBase, $array);
+            
+            // Monta o array
+            $array = Array(  
+                "user"       => $_M_USER ,
+                "main-menu"  => $_M_MENU ,
+                "main-title" => $array["main-title"],
+                "title"      => $array["title"] ,
+                "form"       => $array["form"] ,
+                "inputs"     => $this->sendArrayToLayout['inputs'] ."\r\n". $array['inputs'],
+                "pages"       => $array['pages'] ,
+                "search-form" => $array['search-form'] ,
+                "css"         => array_unique( array_merge($array['css'], $this->sendArrayToLayout['css']) ) ,
+                "javascript" => array(
+                    "head" => array_unique( array_merge($array['javascript']['head'], $this->sendArrayToLayout['javascript']['head']) ),
+                    "body" => array_unique( array_merge($array['javascript']['body'], $this->sendArrayToLayout['javascript']['body']) )
+                ),
+                "table" => Array(
+                    "columns" => $array['table']['columns'] ,
+                    "data"    => $array['table']['data'] ,
+                    "tbody"   => $array['table']['tbody'] ,
+                    "thead"   => $array['table']['thead']
+                )
+            );
+            
+            // Retorna para a variavel que irá para a tela
+            $this->sendArrayToLayout = array_merge($_M_THIS_CONFIG, $array);
         }
         
     }
