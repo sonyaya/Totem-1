@@ -97,7 +97,7 @@ forms:
             stop  : 'now+5'
 
       metatags:
-        type: example
+        type: jsonArray
         label: Metatags
         column: metatags
 
