@@ -387,21 +387,42 @@
         }
         
         
- /* --- WINDOW POPUP ----------------------------------------------------------------- */
+ /* --- WINDOW POPUP ---------------------------------------------------------- */
+ 
     
-body.popup-window{
-    height: auto;
-    }
+    body.popup-window{
+        height: auto;
+        }
+
+     body.popup-window div.content{
+        padding: 20px;
+        height: auto;
+        }
+
+    body.popup-window h1{
+        padding: 10px;
+        font-size: 1.5em;
+        background: #A2AFAF;
+        text-transform: uppercase;
+        color: #EEE;
+        }
         
- body.popup-window div.content{
-    padding: 20px;
-    height: auto;
-    }
+
+/* --- SEARCH FORM ------------------------------------------------------------ */
+ 
+ 
+    form.search{
+        }
     
-body.popup-window h1{
-    padding: 10px;
-    font-size: 1.5em;
-    background: #A2AFAF;
-    text-transform: uppercase;
-    color: #EEE;
-    }
+    form.search select.and-or,
+    form.search select.comparison{
+        width: calc(10% - 1em) !important;
+        }
+     
+    form.search div:first-child select{
+        width: calc(20% - 2em) !important;
+        }
+        
+    form.search input.value{
+        width: calc(80% - 1em) !important;
+        }
