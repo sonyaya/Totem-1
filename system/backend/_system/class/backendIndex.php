@@ -40,13 +40,14 @@
         static public function viewFormList($listLayout){
             $orderBy = self::prepareOrderBy();
             $paginator = self::preparePaginator();
+            $cond = self::prepareCondition();
             $page = $paginator['page'];
             $rowsPerPage = $paginator['rowsPerPage'];  
             
             $form = new Form();
             $form
                 ->setLayout($listLayout)
-                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy /*, $cond */)
+                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;
         }
@@ -59,6 +60,7 @@
         static function viewFormListAndInsert($listLayout){
             $orderBy = self::prepareOrderBy();
             $paginator = self::preparePaginator();
+            $cond = self::prepareCondition();
             $page = $paginator['page'];
             $rowsPerPage = $paginator['rowsPerPage']; 
             
@@ -66,7 +68,7 @@
             $form
                 ->setLayout($listLayout)
                 ->viewForm($_GET['form'])
-                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy /*, $cond */)
+                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy/*, $cond*/)
                 ->writeHTML()
             ;            
         }
@@ -107,6 +109,16 @@
             return Array("page" => $page, "rowsPerPage" => $rowsPerPage);
         }
 
+
+        /**
+         * Prepara condeições de listagem / search
+         * 
+         * @return string
+         */
+        static private function prepareCondition(){
+
+            return "";
+        }
         
         /**
          * Mostra a tela de recuperação de senha

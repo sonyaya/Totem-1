@@ -9,4 +9,4 @@ Templates
 
 List
 ----
-- Recriar o formulário de pesquisa
+- Criado um formulário de pesquisa, porém ele é limitado e portanto deve se melhorado.

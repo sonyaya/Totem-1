@@ -85,3 +85,35 @@ $("table").on("click", ".delete", function(){
 $("table").on("click", ".select", function(){
     alert("select");
 });
+
+// PESQUISA / SEARCH
+$("#bt-search").click(function(){
+    $("div.for-tab-search form").submit();
+});
+
+$("div.for-tab-search form").submit(function(){
+    countColumns = $(this).find("div.search").length;
+
+    search = [];
+    for(i=1; i<=countColumns; i++){
+        if( $.trim(val = $("[name=search_value-"+i+"]").val()) !="" ){
+            search[i]['column'] = $("[name=search_column-"+i+"]").val();
+            search[i]['compare'] = $("[name=search_comparison-"+i+"]").val();
+            search[i]['case'] = $("[name=search_andOr-"+i+"]").val() || " ";
+            search[i]['value'] = val;            
+        }
+    }
+    
+    console.log( search );
+    return false;
+    
+    window.location = 
+        "?action=&m.var:_GET.action;"
+        + "&form=&m.var:form;"
+        + "&cond=" + JSON.stringify(search)
+        + "&page=<m.if cond='&m.var:bool:_GET.page;'>&m.var:_GET.page;</m.if>"
+        + "&orderBy=<m.if cond='&m.var:bool:_GET.orderBy;'>&m.var:_GET.orderBy;</m.if>"
+    ;
+    
+    return false;
+});
