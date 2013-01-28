@@ -23,8 +23,8 @@ $(function(){
                         }
                         
                         // Adiciona no ul e no json
-                        if( $.inArray(val, ret) < 0 ){
-                            ret.push( val );
+                        if( $.inArray(val, ret) < 0 && $.trim(val) !== "" ){
+                            ret.push( $.trim(val) );
                             $json.val( JSON.stringify(ret) );
                             $this.siblings("ul").append( "<li rel='"+ val +"'>" + val + " <a href='#'>[x]</a></li>" );
                             $this.val("");
