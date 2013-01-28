@@ -1,16 +1,16 @@
 $(function(){
     $("#bt-save-form").click(function(){
-        $("form").submit();
+        $("#form-insert-and-update").submit();
         return false;
     });
 
-    $("form").submit(function(e){
+    $("#form-insert-and-update").submit(function(e){
 
         if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
 
         $.post(
             "?action=save-form&form=&m.var:form;",
-            $(this).closest("form").serialize(),
+            $(this).closest("#form-insert-and-update").serialize(),
             function(data){
                 if( data.error ){
                     mesageConcat = 'Os seguintes erros ocorreram: \r\n';
@@ -54,5 +54,4 @@ $(function(){
         return false;
     });
   </m.if>
-
 });
