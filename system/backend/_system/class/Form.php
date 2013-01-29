@@ -400,22 +400,28 @@
                 }
             }
             
-            
-
-            // BUSCA DADOS NO BANCO DE DADOS
+            // MONTA TABLE SELECT
             $db = new MySQL();
-            $result = $db
+            $table = $db
               ->setTable($table)
               ->setPage($page)
               ->setRowsPerPage($rowsPerPage)
-              ->select(
+              ->getSelectQuery(
                 array_merge(
                     Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
                     $defaultColumns
                 ),
-                $condition . " ORDER BY " . $orderBy
+                "1 ORDER BY " . $orderBy
               )
             ;
+
+            // BUSCA DADOS NO BANCO DE DADOS
+            $result = $db
+              ->setTable("($table)")
+              ->select(null, $condition, false, false)
+            ;
+            
+            
             $resultReference = Array();
             $resultReference = $result;
 
@@ -586,23 +592,23 @@
                     $colname = (isset($colname[0]))? $colname[0] : '';
                 }
                 
-                $searchForm .= "<div id='search_{$val['label']}' class='input-holder {$val['type']} search column_$columnNo'>\r\n";
+                $searchForm .= "<div id='search_". Util::slug($val['label']) ."' class='input-holder search column_$columnNo'>\r\n";
                 $searchForm .= "    <label>{$val['label']}</label>\r\n";
-                $searchForm .= "    <input type='hidden' name='cond[$columnNo][column]' value='". str_replace("'", "˙˙", $val['label']) ."'>\r\n";
+                $searchForm .= "    <input type='hidden' id='cond-column-$columnNo' name='cond[$columnNo][column]' value='". str_replace("'", "˙˙", $val['label']) ."'>\r\n";
                 if(!$first){
-                  $searchForm .= "    <select class='and-or' name='cond[$columnNo][and-or]'>\r\n";
+                  $searchForm .= "    <select class='and-or' id='cond-and-or-$columnNo' name='cond[$columnNo][and-or]'>\r\n";
                   $searchForm .= "       <option value='-'>e (and)</option>\r\n";
                   $searchForm .= "       <option value='!'>ou (or)</option>\r\n";
                   $searchForm .= "    </select>\r\n";
                 }
-                $searchForm .= "    <select class='comparison' name='cond[$columnNo][comparison]'>\r\n";
+                $searchForm .= "    <select class='comparison' id='cond-comparison-$columnNo' name='cond[$columnNo][comparison]'>\r\n";
                 $searchForm .= "       <option value=':'>igual (=)</option>\r\n";
                 $searchForm .= "       <option value=';'>diferente (<>)</option>\r\n";
                 $searchForm .= "       <option value='*'>parecido (like)</option>\r\n";
                 $searchForm .= "       <option value='^'>expressão regular (rlike)</option>\r\n";
                 $searchForm .= "       <option value='-'>entre (between), ex: 1,100</option>\r\n";
                 $searchForm .= "    </select>\r\n";
-                $searchForm .= "    <input class='value' type='text' name='cond[$columnNo][value]'>\r\n";
+                $searchForm .= "    <input class='value' type='text' id='cond-value-$columnNo' name='cond[$columnNo][value]'>\r\n";
                 $searchForm .= "</div>\r\n";
                 $first = false;
                 $columnNo++;
