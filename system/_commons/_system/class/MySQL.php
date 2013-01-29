@@ -259,6 +259,7 @@
             // BUSCA ARRAY DE RESULTADO
             $query = "SELECT $strColumns FROM `{$this->table}` WHERE {$where} $limit";
             $this->setQuery($query);
+            
             if( !$this->getErrors() ){
                 if( $result = $this->PDO->query( $this->getQuery() ) ){
                     $return = $result->fetchAll(\PDO::FETCH_ASSOC);
@@ -495,7 +496,7 @@
          * @return String
          */
         public function getQuery(){
-            if( isset($this->queries[ count($this->queries)-1 ]) ){
+            if( !empty($this->queries) ){
                 return $this->queries[ count($this->queries)-1 ];
             }else{
                 trigger_error("Nenhuma query foi definida. (Execute setQuery() antes de executar getQuery()" , E_USER_ERROR);
