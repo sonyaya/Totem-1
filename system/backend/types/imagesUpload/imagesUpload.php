@@ -83,10 +83,6 @@
             global $_M_CONFIG;
             $fromFolder = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/temp/{$_SESSION['user']['login']}";
             $toFolder   = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/{$pKey['value']}";
-            
-            print_r($pKey);
-            
-            exit;
             mkdir($toFolder, 0777, true);           
             if(file_exists($fromFolder)){
                 rename($fromFolder, $toFolder);
@@ -146,12 +142,14 @@
          */
         public function afterDelete(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
             global $_M_CONFIG;
-            $dir   = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/{$pKey['value']}";
-            foreach (scandir($dir) as $item) {
-                if ($item == '.' || $item == '..') continue;
-                unlink($dir.DIRECTORY_SEPARATOR.$item);
+            $dir = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/{$pKey['value']}";
+            if(is_dir($dir) ){
+                foreach (scandir($dir) as $item) {
+                    if ($item == '.' || $item == '..') continue;
+                    unlink($dir.DIRECTORY_SEPARATOR.$item);
+                }
+                rmdir($dir);
             }
-            rmdir($dir);
         }
         
         /**
