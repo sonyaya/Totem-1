@@ -139,24 +139,42 @@ $(function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $innerHolder = $inputHolder.find(".inner-holder");
-        $innerHolder.find(".uploaderOfImages").pluploadQueue({
-            runtimes : 'flash,silverlight,browserplus,html5',
-            url : '?action=type-ajax&ajax=upload&type=imagesUpload&folder=' + $inputHolder.attr("data-folder"),
-            max_file_size : '1024mb',
-            chunk_size : '1mb',
-            unique_names : true,
-            filters : [ {title : "Image files" , extensions : "jpg,gif,png"} ],
-            flash_swf_url : 'types/imagesUpload/plupload/js/plupload.flash.swf',
-            silverlight_xap_url : 'types/imagesUpload/plupload/js/plupload.silverlight.xap',
-            init : {
-                UploadProgress: function(up, file) {
-                    if(up.total.percent == 100){
-                        $inputHolder.find(".bt-tab.list").click();
-                        $inputHolder.find(".bt-reload").click();
+        $uploadOfImages = $innerHolder.find(".uploaderOfImages");
+        
+        // verifica se existe algo na lista de upload ainda não enviado
+        // caso axista, impede de que o pupload seja recriado
+        recreate = true;
+        if( typeof $(".uploaderOfImages").pluploadQueue() == "object" ){
+            total = $(".uploaderOfImages").pluploadQueue().total;
+            if( total.size !== total.loaded ){
+                recreate = false;
+            }else{
+                recreate = true;
+            }
+        }
+        
+        // recria o pupload caso não exista nada 
+        // na fila de upload ainda não enviado
+        if( recreate ){
+            $uploadOfImages.pluploadQueue({
+                runtimes : 'flash,silverlight,browserplus,html5',
+                url : '?action=type-ajax&ajax=upload&type=imagesUpload&folder=' + $inputHolder.attr("data-folder"),
+                max_file_size : '1024mb',
+                chunk_size : '1mb',
+                unique_names : true,
+                filters : [ {title : "Image files" , extensions : "jpg,gif,png"} ],
+                flash_swf_url : 'types/imagesUpload/plupload/js/plupload.flash.swf',
+                silverlight_xap_url : 'types/imagesUpload/plupload/js/plupload.silverlight.xap',
+                init : {
+                    UploadProgress: function(up, file) {
+                        if(up.total.percent == 100){
+                            $inputHolder.find(".bt-tab.list").click();
+                            $inputHolder.find(".bt-reload").click();
+                        }
                     }
                 }
-            }
-        });
+            });
+        }
     });
 
     // DELETE bt-del-file
