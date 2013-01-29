@@ -15,10 +15,25 @@
         <nav class="side">
             &m.var:main-menu;
         </nav>
-
-        <div class="main list">
+        
+        <div class="window-holder main list">
+            <nav class="top-tabs">
+                <ul>
+                    <li id="tab-list"><a href="?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-list">Listar</a></li>
+                    <li id="tab-search"><a href="?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-search">Pesquisar</a></li>
+                    <li id="tab-insert"><a href="?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-insert">Inserir</a></li>
+                    <li id="tab-update" class="active">Atualizando</li>
+                    <div class="clear"></div>
+                </ul>
+            </nav>
+            
             <div class="content">
-                &m.include:#template#/form-content.html;
+                <div class="window for-tab-update">
+                    &m.include:#template#/form-content.html;
+                </div>
+               <div class="window for-tab-list for-tab-search for-tab-insert">
+                    Aguarde...
+                </div>
             </div>
         </div>
 
