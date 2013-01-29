@@ -1,0 +1,9 @@
+#
+# PERMISSÕES NO BACKEND
+#
+backend:
+    view-update-form : true
+    view-insert-form : true
+    view-list-form   : true
+    save-form        : true
+    delete-form      : true
