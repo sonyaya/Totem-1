@@ -68,7 +68,7 @@
             $form
                 ->setLayout($listLayout)
                 ->viewForm($_GET['form'])
-                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy/*, $cond*/)
+                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;            
         }
@@ -116,7 +116,34 @@
          * @return string
          */
         static private function prepareCondition(){
+            if( isset($_GET['cond']) ){
+                $cond = json_decode($_GET['cond']);
 
+                if(is_array($cond) ){
+                    $andOr[" "] = "";
+                    $andOr["!"] = "OR";
+                    $andOr["-"] = "AND";
+
+                    $condition[":"] = "=";
+                    $condition[";"] = "<>";
+                    $condition["*"] = "LIKE";
+                    $condition["^"] = "RLIKE";
+                    $condition["-"] = "BETWEEN";
+
+                    $firstTime = true;
+                    $condStr = '';
+                    foreach($cond as $val){
+                        if( !empty($val[3]) ){
+                            if( $firstTime ) $val[0] = " ";
+                            $condStr .= "{$andOr[ $val[0] ]} `{$val[1]}` {$condition[ $val[2] ]} '{$val[3]}' ";
+                            $firstTime = false;
+                        }
+                    }
+
+                    return "$condStr";
+                }
+            }
+            
             return "";
         }
         
