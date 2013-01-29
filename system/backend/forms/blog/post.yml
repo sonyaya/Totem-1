@@ -27,10 +27,6 @@ forms:
         column: intro
 
       - type: example
-        label: Postagem
-        column: post
-
-      - type: example
         label: Introdução
         column: intro
 
@@ -57,7 +53,7 @@ forms:
           )   
           
       - type: example
-        label: "Tipo(s) é ô é ô caraio"
+        label: "Tipo(s)"
         column: | 
           (
             SELECT 
