@@ -38,7 +38,7 @@
                     $string
                 )
             ;
-	    $newstring = preg_replace("/[^a-zA-Z0-9_.]/", "", $newstring);
+	    $newstring = preg_replace("/[^a-zA-Z0-9_]/", "", $newstring);
             return $newstring;
 	}
     }
