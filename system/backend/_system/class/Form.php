@@ -402,7 +402,7 @@
             
             // MONTA TABLE SELECT
             $db = new MySQL();
-            $table = $db
+            $selectTable = $db
               ->setTable($table)
               ->setPage($page)
               ->setRowsPerPage($rowsPerPage)
@@ -410,23 +410,24 @@
                 array_merge(
                     Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
                     $defaultColumns
-                ),
-                "1 ORDER BY " . $orderBy
+                ), 
+                1
               )
             ;
 
             // BUSCA DADOS NO BANCO DE DADOS
             $result = $db
-              ->setTable("($table)")
-              ->select(null, $condition, false, false)
+              ->setTable("($selectTable)")
+              ->select(null, "$condition ORDER BY $orderBy", false, false)
             ;
-            
-            
             $resultReference = Array();
             $resultReference = $result;
 
             // BUSCA NUMÉRO DE PAGINAS
-            $maxPages = $db->getLastPage($condition);
+            $maxPages = $db
+              ->setTable($table)
+              ->getLastPage($condition)
+            ;
 
             //
             $TDs = "";

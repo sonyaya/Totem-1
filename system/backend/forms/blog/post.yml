@@ -12,7 +12,7 @@ forms:
   
   list:
     title: 'Listagm Postagens'
-    rows-per-page: 200
+    rows-per-page: 1
     input:
       - type: number
         label: Cod.
