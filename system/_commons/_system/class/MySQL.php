@@ -211,6 +211,28 @@
                 if( $result = $this->PDO->query( $this->getQuery() ) ){
                     $return = $result->fetchAll(\PDO::FETCH_ASSOC);
                     array_pop($this->queries);
+                    
+                    // BUSCA RELACIONAMENTOS
+                    foreach ($columns as $key => $val) {
+                        // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
+                        // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
+                        // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
+                        // PARA ESTE RELACIONAMENTO
+                        if(!is_numeric($key) && is_array($val)){
+                            $strColumns[] = "'$key'";
+                            $relationships[$key] = $val;
+                        }
+
+                        // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
+                        // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
+                        // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
+                        // RELACIONAMENTO
+                        else if(is_numeric($key) && is_array($val)){
+                            $key = "column_without_alias_$key";
+                            $strColumns[] = "'$key'";
+                            $relationships[$key] = $val;
+                        }
+                    }
 
                     // EXECUTA RECURSIVO DE RELACIONAMENTO
                     if(!empty($relationships)){
@@ -504,25 +526,6 @@
                         }else{
                             $strColumns[] = "`$val` as '$key'";  
                         }  
-                    }
-
-                    // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
-                    // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
-                    // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
-                    // PARA ESTE RELACIONAMENTO
-                    else if(!is_numeric($key) && is_array($val)){
-                        $strColumns[] = "'$key'";
-                        $relationships[$key] = $val;
-                    }
-
-                    // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
-                    // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
-                    // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
-                    // RELACIONAMENTO
-                    else if(is_numeric($key) && is_array($val)){
-                        $key = "column_without_alias_$key";
-                        $strColumns[] = "'$key'";
-                        $relationships[$key] = $val;
                     }
                 }
                 $strColumns = implode(", ", $strColumns);
