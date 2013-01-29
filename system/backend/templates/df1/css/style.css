@@ -310,16 +310,19 @@
         display: inline-block;
         width: 16px;
         height: 16px;
-        background: url("../img/fugue/icons/tick.png") center center;
+        background: url("../img/iconic/check.svg") no-repeat center center;
+        background-size: contain;
         }
 
     div.list td.action a.edit{
         margin: 0 2px;
-        background: url("../img/fugue/icons/disk--pencil.png") center center;
+        background: url("../img/iconic/pen_alt2.svg") no-repeat center center;
+        background-size: contain;
         }
 
     div.list td.action a.delete{
-        background: url("../img/fugue/icons/cross-octagon.png") center center;
+        background: url("../img/iconic/denied.svg") no-repeat center center;
+        background-size: contain;
         }
 
     
