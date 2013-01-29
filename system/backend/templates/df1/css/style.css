@@ -185,6 +185,12 @@
         border-left: 0 none;
         margin-bottom: -1px;
         background: #F9F9F9;
+        cursor: pointer;
+        }
+        
+    nav.top-tabs ul li a{
+        color: inherit;
+        text-decoration: inherit;
         }
         
     nav.top-tabs ul li:first-child{
