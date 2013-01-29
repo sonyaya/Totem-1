@@ -81,7 +81,6 @@
 
 
     nav.modules{
-
         }
 
         
@@ -434,4 +433,35 @@
         
     form.search input.value{
         width: calc(80% - 1em) !important;
+        }
+        
+        
+
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+/* --- ESTILOS PARA TYPES ----------------------------------------------------- */
+        
+
+     div.imagesUpload .bt_imageDataForm_open{
+        background: url("../img/iconic/magnifying_glass.svg") no-repeat center center;
+        background-size: contain;
+        text-indent: -9999em;
+        }
+        
+     div.imagesUpload .bt_imageDataForm_close{
+        background: url("../img/iconic/x.svg") no-repeat center center;
+        background-size: contain;
+        text-indent: -9999em;
+        }
+        
+     div.imagesUpload textarea{
+        height: 150px;
         }
