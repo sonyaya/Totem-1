@@ -1,3 +1,9 @@
+action = "&m.var:_GET.action;";
+form = "&m.var:form;";
+cond = <m.if cond='&m.var:bool:_GET.cond;'>&m.var:_GET.cond;</m.if><m.if cond='&m.var:bool:_GET.cond; -eq- false'>[]</m.if>;
+page = "<m.if cond='&m.var:bool:_GET.page;'>&m.var:_GET.page;</m.if>";
+orderBy = "<m.if cond='&m.var:bool:_GET.orderBy;'>&m.var:_GET.orderBy;</m.if>";
+
 <m.if cond='&m.var:bool:_GET.orderBy;'>
 // ADICIONA CLASSE A COLUNA QUE ESTA 
 // SENDO UTILIZADA COMO ORDENADORA
@@ -23,22 +29,22 @@ $("table").on("click", "th", function(){
     }
 
     window.location = 
-        "?action=&m.var:_GET.action;"
-        + "&form=&m.var:form;"
-        + "&cond=<m.if cond='&m.var:bool:_GET.cond;'>&m.var:_GET.cond;</m.if>"
-        + "&page=<m.if cond='&m.var:bool:_GET.page;'>&m.var:_GET.page;</m.if>"
+        "?action=" + action
+        + "&form=" + form
+        + "&page=" + page
         + "&orderBy=" + order
+        + "&cond=" + JSON.stringify(cond)
     ;
 });
 
 // PAGINAÇÃO
 $(".list").on("click", ".bt-page", function(){
     window.location = 
-        "?action=&m.var:_GET.action;"
-        + "&form=&m.var:form;"
-        + "&cond=<m.if cond='&m.var:bool:_GET.cond;'>&m.var:_GET.cond;</m.if>"
-        + "&orderBy=<m.if cond='&m.var:bool:_GET.orderBy;'>&m.var:_GET.orderBy;</m.if>"
+        "?action=" + action
+        + "&form=" + form
         + "&" + $(this).attr("rel")
+        + "&orderBy=" + orderBy
+        + "&cond=" + JSON.stringify(cond)
     ;
 });
 
@@ -52,7 +58,7 @@ $(".prev-page").click(function(){
 
 // ACTIONS
 $("table").on("click", ".edit", function(){
-    window.location = "?action=view-update-form&form=&m.var:form;&id=" + $(this).attr('href');
+    window.location = "?action=view-update-form&form=" + form + "&id=" + $(this).attr('href');
     return false;
 });
 
@@ -96,24 +102,30 @@ $("div.for-tab-search form").submit(function(){
 
     search = [];
     for(i=1; i<=countColumns; i++){
-        if( $.trim(val = $("[name=search_value-"+i+"]").val()) !="" ){
-            search[i]['column'] = $("[name=search_column-"+i+"]").val();
-            search[i]['compare'] = $("[name=search_comparison-"+i+"]").val();
-            search[i]['case'] = $("[name=search_andOr-"+i+"]").val() || " ";
-            search[i]['value'] = val;            
-        }
+        search.push([ 
+            $("#cond-and-or-"+i).val() || " ", 
+            $("#cond-column-"+i).val(),
+            $("#cond-comparison-"+i).val(),
+            $("#cond-value-"+i).val()
+        ]);
     }
     
-    console.log( search );
-    return false;
-    
     window.location = 
-        "?action=&m.var:_GET.action;"
-        + "&form=&m.var:form;"
+        "?action=" + action
+        + "&form=" + form
+        + "&page=" + page
+        + "&orderBy=" + orderBy
         + "&cond=" + JSON.stringify(search)
-        + "&page=<m.if cond='&m.var:bool:_GET.page;'>&m.var:_GET.page;</m.if>"
-        + "&orderBy=<m.if cond='&m.var:bool:_GET.orderBy;'>&m.var:_GET.orderBy;</m.if>"
     ;
     
     return false;
+});
+
+// POPULAR FORMULÁRIO DE PESQUISA / SEARCH
+$.each(cond, function(key, val){
+    i = key+1;
+    $("#cond-and-or-"+i).val( val[0] ), 
+    $("#cond-column-"+i).val( val[1] ),
+    $("#cond-comparison-"+i).val( val[2] ),
+    $("#cond-value-"+i).val( val[3] )
 });
