@@ -83,6 +83,10 @@
             global $_M_CONFIG;
             $fromFolder = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/temp/{$_SESSION['user']['login']}";
             $toFolder   = "{$_M_CONFIG->system['upload-path']}/{$parameters['folder']}/{$pKey['value']}";
+            
+            print_r($pKey);
+            
+            exit;
             mkdir($toFolder, 0777, true);           
             if(file_exists($fromFolder)){
                 rename($fromFolder, $toFolder);
