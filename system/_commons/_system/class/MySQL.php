@@ -202,7 +202,7 @@
          * @return Array 
          */
         public function select($columns, $where, $ifOneCuts=false, $paginate=true){
-            $query = $this->getSelectQuery($columns, $where, $ifOneCuts=false, $paginate=true);
+            $query = $this->getSelectQuery($columns, $where, $ifOneCuts, $paginate);
             
             // BUSCA ARRAY DE RESULTADO
             $this->setQuery($query);
@@ -503,7 +503,7 @@
             // PAGINAÇÃO
             if($this->page>=1 && $paginate){
                 $startRow = $this->rowsPerPage * ($this->page - 1);
-                $limit = "LIMIT $startRow,{$this->rowsPerPage}";
+                $limit = "LIMIT $startRow, {$this->rowsPerPage}";
             }else{
                 $limit = "";
             }
