@@ -404,8 +404,6 @@
             $db = new MySQL();
             $selectTable = $db
               ->setTable($table)
-              ->setPage($page)
-              ->setRowsPerPage($rowsPerPage)
               ->getSelectQuery(
                 array_merge(
                     Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
@@ -418,17 +416,16 @@
             // BUSCA DADOS NO BANCO DE DADOS
             $result = $db
               ->setTable("($selectTable)")
-              ->select(null, "$condition ORDER BY $orderBy", false, false)
+              ->setPage($page)
+              ->setRowsPerPage($rowsPerPage)
+              ->select(null, "$condition ORDER BY $orderBy")
             ;
             $resultReference = Array();
             $resultReference = $result;
 
             // BUSCA NUMÉRO DE PAGINAS
-            $maxPages = $db
-              ->setTable($table)
-              ->getLastPage($condition)
-            ;
-
+            $maxPages = $db->getLastPage($condition);
+            
             //
             $TDs = "";
             $tbody = "";
