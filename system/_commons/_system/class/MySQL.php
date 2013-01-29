@@ -212,105 +212,108 @@
                     $return = $result->fetchAll(\PDO::FETCH_ASSOC);
                     array_pop($this->queries);
                     
-                    // BUSCA RELACIONAMENTOS
-                    foreach ($columns as $key => $val) {
-                        // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
-                        // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
-                        // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
-                        // PARA ESTE RELACIONAMENTO
-                        if(!is_numeric($key) && is_array($val)){
-                            $strColumns[] = "'$key'";
-                            $relationships[$key] = $val;
+                    if(!is_null($columns)){
+                        
+                        // BUSCA RELACIONAMENTOS
+                        foreach ($columns as $key => $val) {
+                            // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
+                            // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
+                            // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
+                            // PARA ESTE RELACIONAMENTO
+                            if(!is_numeric($key) && is_array($val)){
+                                $strColumns[] = "'$key'";
+                                $relationships[$key] = $val;
+                            }
+
+                            // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
+                            // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
+                            // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
+                            // RELACIONAMENTO
+                            else if(is_numeric($key) && is_array($val)){
+                                $key = "column_without_alias_$key";
+                                $strColumns[] = "'$key'";
+                                $relationships[$key] = $val;
+                            }
                         }
 
-                        // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
-                        // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
-                        // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
-                        // RELACIONAMENTO
-                        else if(is_numeric($key) && is_array($val)){
-                            $key = "column_without_alias_$key";
-                            $strColumns[] = "'$key'";
-                            $relationships[$key] = $val;
-                        }
-                    }
+                        // EXECUTA RECURSIVO DE RELACIONAMENTO
+                        if(!empty($relationships)){
+                            // GUARDA A TABELA QUE ESTA SENDO UTILIZADA
+                            // ANTES DE EXECUTAR O RELACIONAMENTO
+                            $originalSelectTable = $this->table;
 
-                    // EXECUTA RECURSIVO DE RELACIONAMENTO
-                    if(!empty($relationships)){
-                        // GUARDA A TABELA QUE ESTA SENDO UTILIZADA
-                        // ANTES DE EXECUTAR O RELACIONAMENTO
-                        $originalSelectTable = $this->table;
+                            // PERORRE O ARRAY EXECUTANDO O RELACIONAMENTO
+                            $that =& $this; // pog pra poder usar $this dentro do array_walk -- PHP 5.3
+                            array_walk(
+                                $return, 
+                                function(&$return, $key, $param) use($that){
+                                    foreach ($param['relationships'] as $relation_key => $relation_val) {
 
-                        // PERORRE O ARRAY EXECUTANDO O RELACIONAMENTO
-                        $that =& $this; // pog pra poder usar $this dentro do array_walk -- PHP 5.3
-                        array_walk(
-                            $return, 
-                            function(&$return, $key, $param) use($that){
-                                foreach ($param['relationships'] as $relation_key => $relation_val) {
+                                        // SHORT CIRCUIT TO GET P-KEY
+                                        ($pk = @$relation_val[0]) ||
+                                        ($pk = @$relation_val['p-key']) ;
 
-                                    // SHORT CIRCUIT TO GET P-KEY
-                                    ($pk = @$relation_val[0]) ||
-                                    ($pk = @$relation_val['p-key']) ;
-                                    
-                                    // SHORT CIRCUIT TO GET F-KEY
-                                    ($tableAndColumn = @$relation_val[1])     || 
-                                    ($tableAndColumn = @$relation_val['f-key']) ;
+                                        // SHORT CIRCUIT TO GET F-KEY
+                                        ($tableAndColumn = @$relation_val[1])     || 
+                                        ($tableAndColumn = @$relation_val['f-key']) ;
 
-                                    // SHORT CIRCUIT TO GET COLUMNS
-                                    ($show_columns = @$relation_val[2]) ||
-                                    ($show_columns = @$relation_val['columns']) ;
+                                        // SHORT CIRCUIT TO GET COLUMNS
+                                        ($show_columns = @$relation_val[2]) ||
+                                        ($show_columns = @$relation_val['columns']) ;
 
-                                    // VERIFICA SE A TABLEANDCOLUMN ESTÃO CORRETOS
-                                    if( substr_count($tableAndColumn, ".") !== 1 ){
-                                        trigger_error(
-                                            "O segundo parametro do relacionamento no método select() deve conter ".
-                                            "tabelaRelaciona.colunaRelacionada, você informou {$tableAndColumn}.", 
-                                            E_USER_ERROR
-                                        );
-                                        exit;        
-                                    }
-                                    
-                                    // VARIAVEIS DE RELACIONAMENTO
-                                    $tableAndColumn = explode(".", $tableAndColumn);
-                                    $pk_value = @$return[$pk];
-                                    $fk_table = $tableAndColumn[0];
-                                    $fk       = $tableAndColumn[1];
-                                    $where    = (
-                                                    isset($relation_val['where'])  &&
-                                                    !empty($relation_val['where'])
+                                        // VERIFICA SE A TABLEANDCOLUMN ESTÃO CORRETOS
+                                        if( substr_count($tableAndColumn, ".") !== 1 ){
+                                            trigger_error(
+                                                "O segundo parametro do relacionamento no método select() deve conter ".
+                                                "tabelaRelaciona.colunaRelacionada, você informou {$tableAndColumn}.", 
+                                                E_USER_ERROR
+                                            );
+                                            exit;        
+                                        }
+
+                                        // VARIAVEIS DE RELACIONAMENTO
+                                        $tableAndColumn = explode(".", $tableAndColumn);
+                                        $pk_value = @$return[$pk];
+                                        $fk_table = $tableAndColumn[0];
+                                        $fk       = $tableAndColumn[1];
+                                        $where    = (
+                                                        isset($relation_val['where'])  &&
+                                                        !empty($relation_val['where'])
+                                                    )
+                                                        ? $relation_val['where'] 
+                                                        : '1'
+                                                    ;
+
+                                        //
+                                        if( isset($relation_val['concat']) && !empty($relation_val['concat'][0]) ){
+                                            $return[$relation_key] =
+                                                 Util::implode_recursive(
+                                                    $that
+                                                        ->setTable($fk_table)
+                                                        ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], true)
+                                                    ,
+                                                     $relation_val['concat'][0], 
+                                                     @$relation_val['concat'][1]
                                                 )
-                                                    ? $relation_val['where'] 
-                                                    : '1'
-                                                ;
-
-                                    //
-                                    if( isset($relation_val['concat']) && !empty($relation_val['concat'][0]) ){
-                                        $return[$relation_key] =
-                                             Util::implode_recursive(
+                                            ;
+                                        }else{
+                                            $return[$relation_key] = 
                                                 $that
                                                     ->setTable($fk_table)
-                                                    ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], true)
-                                                ,
-                                                 $relation_val['concat'][0], 
-                                                 @$relation_val['concat'][1]
-                                            )
-                                        ;
-                                    }else{
-                                        $return[$relation_key] = 
-                                            $that
-                                                ->setTable($fk_table)
-                                                ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], false)
-                                        ;
+                                                    ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], false)
+                                            ;
+                                        }
                                     }
-                                }
-                            },
-                            Array( 
-                                'relationships' => $relationships,
-                                'ifOneCuts' => $ifOneCuts
-                            )
-                        );
+                                },
+                                Array( 
+                                    'relationships' => $relationships,
+                                    'ifOneCuts' => $ifOneCuts
+                                )
+                            );
 
-                        // RETORNA PARA TABELA SETADA ANTES DE EXECUTAR O RELACIONAMENTO
-                        $this->table = $originalSelectTable;
+                            // RETORNA PARA TABELA SETADA ANTES DE EXECUTAR O RELACIONAMENTO
+                            $this->table = $originalSelectTable;
+                        }
                     }
 
                     // SE O SELECT ENCONTRAR SOMENTE UMA LINHA DEVE SER
@@ -559,7 +562,8 @@
             }
 
             //
-            $query = "SHOW TABLE STATUS LIKE '{$this->table}'";
+            $table = Util::slug($this->table);
+            $query = "SHOW TABLE STATUS LIKE '{$table}'";
             $this->setQuery($query);
             if( !$this->getErrors() ){
                 if( $result = $this->PDO->query( $this->getQuery() ) ){
