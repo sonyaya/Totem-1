@@ -4,6 +4,9 @@
      * Version: 0.6a
      *
      * Changes::
+     *    0.7:
+     *      - getSelectQuery  : Retorna query string do select
+     * 
      *    0.6a:
      *      - getTableInfo     : Retorna array com informações sobre a tabela
      *      - getNextId        : Retorna qual é o valor da próxima chave primária
@@ -152,7 +155,7 @@
                 $values  = implode( ", " , $values  );
 
                 // MONTA QUERY DE INSERÇÃO
-                $this->setQuery("INSERT INTO `{$this->table}`($columns) VALUES($values)");
+                $this->setQuery("INSERT INTO {$this->table}($columns) VALUES($values)");
 
                 // EXECUTA INSERÇÃO CASO NÃO OCORRA ERROS
                 if($this->getErrors()){
@@ -175,7 +178,7 @@
                 $set = implode( ", " , $set );
 
                 // MONTA QUERY DE ATUALIZAÇÃO
-                $this->setQuery("UPDATE `{$this->table}` SET $set WHERE $where");
+                $this->setQuery("UPDATE {$this->table} SET $set WHERE $where");
 
                 // EXECUTA ATUALIZAÇÃO CASO NÃO OCORRA ERROS
                 if($this->getErrors()){
@@ -199,65 +202,9 @@
          * @return Array 
          */
         public function select($columns, $where, $ifOneCuts=false, $paginate=true){
-            // VERIFICA TABLE
-            if( !isset($this->table) ){
-                trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
-            }
-
-            // PAGINAÇÃO
-            if($this->page>=1 && $paginate){
-                $startRow = $this->rowsPerPage * ($this->page - 1);
-                $limit = "LIMIT $startRow,{$this->rowsPerPage}";
-            }else{
-                $limit = "";
-            }
-
-            // MONTA LISTA DE COLUNAS E LISTA DE RELACIONAMENTOS
-            $strColumns = Array();
-            $relationships = Array();
-            foreach ($columns as $key => $val) {
-                // SE A CHAVE FOR NUMERICA E O CAMPO NÃO FOR 
-                // UM ARRAY SIGNIFICA QUE NÃO FOI DEFINIDO NENHUM
-                // ALIAS PARA A COLUNA
-                if(is_numeric($key) && !is_array($val)){
-                    $strColumns[] = "`$val`";
-                }
-
-                // SE A CHAVE FOR NÃO FOR NUMERICA E O VALOR
-                // NÃO FOR UM ARRAY, SIGNIFICA QUE UM ALIAS 
-                // FOI DEFINIDO PARA A COLUNA
-                else if(!is_numeric($key) && !is_array($val)){
-                    if(preg_match("/^[\d\W]/i", $val) ){
-                        $strColumns[] = "$val as '$key'";  
-                    }else{
-                        $strColumns[] = "`$val` as '$key'";  
-                    }  
-                }
-
-                // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
-                // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
-                // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
-                // PARA ESTE RELACIONAMENTO
-                else if(!is_numeric($key) && is_array($val)){
-                    $strColumns[] = "'$key'";
-                    $relationships[$key] = $val;
-                }
-
-                // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
-                // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
-                // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
-                // RELACIONAMENTO
-                else if(is_numeric($key) && is_array($val)){
-                    $key = "column_without_alias_$key";
-                    $strColumns[] = "'$key'";
-                    $relationships[$key] = $val;
-                }
-            }
-            $strColumns = implode(", ", $strColumns);
-
+            $query = $this->getSelectQuery($columns, $where, $ifOneCuts=false, $paginate=true);
+            
             // BUSCA ARRAY DE RESULTADO
-            $query = "SELECT $strColumns FROM `{$this->table}` WHERE {$where} $limit";
             $this->setQuery($query);
             
             if( !$this->getErrors() ){
@@ -375,7 +322,7 @@
             }
 
             // BUSCA ARRAY DE RESULTADO
-            $query = "SELECT count(*) AS `counter` FROM `{$this->table}` WHERE {$where}";
+            $query = "SELECT count(*) AS `counter` FROM {$this->table} WHERE {$where}";
             $this->setQuery($query);
             if( !$this->getErrors() ){
                 if( $result = $this->PDO->query( $this->getQuery() ) ){
@@ -454,20 +401,23 @@
          *
          * @param String $table nome da tabela
          */
-        public function setTable($table){
+        public function setTable($table, $alias="table"){
             global $_M_CONFIG;
-            $query = "SELECT 1 FROM Information_schema.tables WHERE table_name = '$table' AND table_schema = '{$_M_CONFIG->mysql['database']}'";
-            if( $result = $this->PDO->query( $query ) ){;
-                $resultArray = $result->fetchAll(\PDO::FETCH_ASSOC);
-                if( !empty($resultArray) ){
-                    $this->table = $table;
-                    return $this;
-                }else{
-                    trigger_error("A tabela $table não existe na base de dados {$_M_CONFIG->mysql['database']}." , E_USER_ERROR);
-                    exit;    
+            if( substr($table, 0, 1) !== "(" ){
+                $query = "SELECT 1 FROM Information_schema.tables WHERE table_name = '$table' AND table_schema = '{$_M_CONFIG->mysql['database']}'";
+                if( $result = $this->PDO->query( $query ) ){;
+                    $resultArray = $result->fetchAll(\PDO::FETCH_ASSOC);
+                    if( empty($resultArray) ){
+                        trigger_error("A tabela $table não existe na base de dados {$_M_CONFIG->mysql['database']}." , E_USER_ERROR);
+                        exit;    
+                    }else{
+                        $this->table = "`$table`";
+                    }
                 }
+            }else{
+                $this->table = "$table as `$alias`";
             }
-
+            return $this;
         }
 
         /**
@@ -511,6 +461,77 @@
          */
         public function getQueries(){
             return $this->queries;
+        }
+        
+        /**
+         * Retorna query string do select
+         * 
+         * @return string
+         */
+        public function getSelectQuery($columns, $where, $ifOneCuts=false, $paginate=true){
+            // VERIFICA TABLE
+            if( !isset($this->table) ){
+                trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
+                exit;                
+            }
+
+            // PAGINAÇÃO
+            if($this->page>=1 && $paginate){
+                $startRow = $this->rowsPerPage * ($this->page - 1);
+                $limit = "LIMIT $startRow,{$this->rowsPerPage}";
+            }else{
+                $limit = "";
+            }
+
+            // MONTA LISTA DE COLUNAS E LISTA DE RELACIONAMENTOS
+            if( !is_null($columns) ){
+                $strColumns = Array();
+                $relationships = Array();
+                foreach ($columns as $key => $val) {
+                    // SE A CHAVE FOR NUMERICA E O CAMPO NÃO FOR 
+                    // UM ARRAY SIGNIFICA QUE NÃO FOI DEFINIDO NENHUM
+                    // ALIAS PARA A COLUNA
+                    if(is_numeric($key) && !is_array($val)){
+                        $strColumns[] = "`$val`";
+                    }
+
+                    // SE A CHAVE FOR NÃO FOR NUMERICA E O VALOR
+                    // NÃO FOR UM ARRAY, SIGNIFICA QUE UM ALIAS 
+                    // FOI DEFINIDO PARA A COLUNA
+                    else if(!is_numeric($key) && !is_array($val)){
+                        if(preg_match("/^[\d\W]/i", $val) ){
+                            $strColumns[] = "$val as '$key'";  
+                        }else{
+                            $strColumns[] = "`$val` as '$key'";  
+                        }  
+                    }
+
+                    // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
+                    // UM ARRAY, SIGNIFICA QUE FOI DEFINIDO UM
+                    // RELACIONAMENTO E QUE FOI DEFINIDO UM ALIAS
+                    // PARA ESTE RELACIONAMENTO
+                    else if(!is_numeric($key) && is_array($val)){
+                        $strColumns[] = "'$key'";
+                        $relationships[$key] = $val;
+                    }
+
+                    // SE A CHAVE FOR NUMERICA E O VALOR FOR UM ARRAY
+                    // SIGNIFICA QUE FOI DEFINIDO UM RELACIONAMENTO
+                    // MAS QUE NÃO FOI DEFINIDO UM ALIAS PARA ESTE
+                    // RELACIONAMENTO
+                    else if(is_numeric($key) && is_array($val)){
+                        $key = "column_without_alias_$key";
+                        $strColumns[] = "'$key'";
+                        $relationships[$key] = $val;
+                    }
+                }
+                $strColumns = implode(", ", $strColumns);
+            }else{
+                $strColumns = "*";
+            }
+
+            // BUSCA ARRAY DE RESULTADO
+            return "SELECT $strColumns FROM {$this->table} WHERE {$where} $limit";
         }
 
         /**
