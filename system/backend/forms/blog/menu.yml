@@ -1,5 +1,4 @@
 - label: "Postagens"
-  link: "?action=view-listAndInsert-form&form=blog/post"
   submenu: 
 
     - label: "Lista de Posts"
@@ -9,7 +8,6 @@
       link: "?action=view-insert-form&form=blog/post"  
 
 - label: "Categorias"
-  link: "?action=view-listAndInsert-form&form=blog/category"
   submenu: 
 
     - label: "Lista de Posts"
@@ -19,7 +17,6 @@
       link: "?action=view-insert-form&form=blog/category"
 
 - label: "Tipos"
-  link: "?action=view-listAndInsert-form&form=blog/type"
   submenu: 
 
     - label: "Lista de Posts"
