@@ -23,3 +23,21 @@ layout.popup = function(url, title){
         newWindow.resizeTo( w, h );
     }
 }
+
+/**
+ * URI
+ */
+layout.uri = (function(key, uriArray){
+    if(typeof uriArray == "undefined")
+        uriArray = window.location.search
+    
+    uriArray = uriArray.split(/[?&](.*?)=.*?/im);
+    
+    pos = $.inArray(key, uriArray);
+    
+    if( pos % 2 ){
+        return uriArray[ pos+1 ];
+    }else{
+        return null;
+    }
+})
