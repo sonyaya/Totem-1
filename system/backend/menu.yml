@@ -1,6 +1,8 @@
 - label: Usuários
   load-from-module: user
+  module-start-url: ?action=view-listAndInsert-form&form=user/user
 
 - label: Blog
   load-from-module: blog
+  module-start-url: ?action=view-listAndInsert-form&form=blog/post
   
