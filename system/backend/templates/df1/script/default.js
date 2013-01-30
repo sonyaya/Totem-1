@@ -4,7 +4,7 @@ var layout = new Object();
  * SE ENCARREGA DE ABRIR POPUPS
  */
 layout.popup = function(url, title){
-    var w = 640;
+    var w = screen.width / 1.2;
     var barSize = 70;
     newWindow = window.open(
         url,
