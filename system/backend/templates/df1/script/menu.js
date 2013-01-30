@@ -1,4 +1,5 @@
 $(function(){
+    // TOP-TABS
     $(".top-tabs ul").on("click", "li", function(){
         $this = $(this);
         $this.siblings().removeClass("active");
@@ -12,11 +13,19 @@ $(function(){
         $(deepLink).click();
     }
 
-    $(".next-tab").click(function(){
+    // BOTÕES DE NAVEGAÇÃO ENTRE ABAS
+    $("body").on("click", ".next-tab", function(){
         $(".top-tab ul").find(".active").next().click();
     });
 
-    $(".preview-tab").click(function(){
+    $("body").on("click", ".preview-tab", function(){
         $(".top-tab ul").find(".active").prev().click();
     });
+    
+    // ADICIONAR A CLASSE ACTIVE E ACTIVE-PARENT NOS MENUS
+    $("[href='"+ window.location.search +"']")
+        .addClass("active")
+        .parents("li")
+            .addClass('active-parent');
+    ;
 });
