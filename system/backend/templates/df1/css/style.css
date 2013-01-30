@@ -2,6 +2,9 @@
     margin:0; 
     padding:0; 
     font-family: Verdana;
+    -webkit-transition: all 0.4s ease-in-out 0s;
+    -moz-transition   : all 0.4s ease-in-out 0s;
+    transition        : all 0.4s ease-in-out 0s;
     }
     
 .clear{
@@ -41,34 +44,89 @@
 
     header{
         background: url("../img/stream.jpg");
-        height: 212px;
+        min-height: 140px;
         position: relative;
         z-index: 2;
         }
         
     header div.user{
-        width: 15%;
-        height: 100%;
+        float: left;
+        width: 200px;
+        height: 140px;
         border-right: 1px solid #A2AFAF;         
         -webkit-box-shadow: inset 0 2px 15px rgba(0,0,0,0.3);
         -moz-box-shadow   : inset 0 2px 15px rgba(0,0,0,0.3);
         box-shadow        : inset 0 2px 15px rgba(0,0,0,0.3);
         }
 
+    header div.modules{
+        float: left;
+        font-size: 16px;
+        width: -webkit-calc(85% - 201px);
+        width:    -moz-calc(85% - 201px);
+        width:         calc(85% - 201px);
+        overflow: auto;
+        }
+    
+    header div.modules nav ul,
+    header div.modules nav li{
+        padding: 0;
+        margin: 0;
+        list-style: none;
+        }
+        
+    header div.modules nav ul{
+        height: 100%;
+        }
+        
+    header div.modules nav ul li a{
+        cursor: pointer;
+        display: block;
+        text-decoration: none;
+        height: 140px;
+        border-right: 1px solid rgba(0, 0, 0, 0.25);
+        box-shadow: 1px 0 0 rgba(255, 255, 255, 0.25);
+        float: left;
+        overflow: hidden;
+        text-align: center;
+        width: -webkit-calc(100% / 10 - 1px);
+        width:    -moz-calc(100% / 10 - 1px);
+        width:         calc(100% / 10 - 1px);
+        
+        line-height: 170px;
+        color: #EEE;
+        }
+        
+    header div.modules nav ul li:hover a{
+        background: none repeat scroll 0 0 rgba(255, 255, 255, 0.1);
+        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 1px 0 0 rgba(255, 255, 255, 0.25);
+        text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.9), 1px 0 0 rgba(255, 255, 255, 0.25);
+        }
+        
+    header div.modules nav ul li.user a{
+        background: url("../img/iconic/user.svg") no-repeat center 20px;
+        background-size: 40px;
+        }
+        
+    header div.modules nav ul li.blog a{
+        background: url("../img/iconic/rss_alt.svg") no-repeat center 30px;
+        background-size: 40px;
+        }
+        
         
 /* --- MAIN ------------------------------------------------------------------- */
 
 
     div.main{
         float: left;
-        width: 85%;
+        width: calc(100% - 200px);
         margin-left: -1px;
         border-left: 1px solid #A2AFAF; 
         position: relative;
         z-index: 1;
-        min-height: -webkit-calc(100% - 212px - 50px);
-        min-height:    -moz-calc(100% - 212px - 50px);
-        min-height:         calc(100% - 212px - 50px);
+        min-height: -webkit-calc(100% - 140px - 50px);
+        min-height:    -moz-calc(100% - 140px - 50px);
+        min-height:         calc(100% - 140px - 50px);
         -webkit-box-shadow: 0 2px 15px rgba(0,0,0,0.3);
         -moz-box-shadow   : 0 2px 15px rgba(0,0,0,0.3);
         box-shadow        : 0 2px 15px rgba(0,0,0,0.3);
@@ -79,19 +137,12 @@
         }
 
         
-/* --- MODULE MENU ------------------------------------------------------------ */
-
-
-    nav.modules{
-        }
-
-        
 /* --- SIDE MENU -------------------------------------------------------------- */
 
 
     nav.side{
         float: left;
-        width: 15%;
+        width: 200px;
         font-weight: 700;
         font-size: 1em;
         text-transform: uppercase;
@@ -145,20 +196,26 @@
         padding-left: 10%;
         background-image: url("../img/tree.png");
         background-repeat: no-repeat;
-        background-position: calc(10% - 8px) center;
+        background-position: -webkit-calc(10% - 8px) center;
+        background-position:    -moz-calc(10% - 8px) center;
+        background-position:         calc(10% - 8px) center;
         }        
         
     nav.side ul li li li a,
     nav.side ul li li li span{
         padding-left: 15%;
-        background-position: calc(15% - 8px) center;
+        background-position: -webkit-calc(15% - 8px) center;
+        background-position:    -moz-calc(15% - 8px) center;
+        background-position:         calc(15% - 8px) center;
         }
         
         
     nav.side ul li li li li a,
     nav.side ul li li li li span{
         padding-left: 20%;
-        background-position: calc(20% - 8px) center;
+        background-position: -webkit-calc(20% - 8px) center;
+        background-position:    -moz-calc(20% - 8px) center;
+        background-position:         calc(20% - 8px) center;
         }
         
     nav.side ul > li .active:last-child{
@@ -182,7 +239,7 @@
     /* abre e fecha o menu */
     nav.side ul li ul{
         border: 0 none;
-        display: none
+        display: none;
         }
         
     nav.side ul li:hover > ul,
@@ -207,7 +264,7 @@
         background:      -o-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
         background:   linear-gradient(to bottom, #DDDDDD 0%, #F9F9F9 100%);
         filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#CCCCCC', endColorstr='#F9F9F9', GradientType=0);
-    }
+        }
     
     nav.top-tabs ul,
     nav.top-tabs ul li{
@@ -465,19 +522,23 @@
     
     form.search select.and-or,
     form.search select.comparison{
-        width: calc(10% - 1em) !important;
+        width: -webkit-calc(10% - 1em) !important;
+        width:    -moz-calc(10% - 1em) !important;
+        width:         calc(10% - 1em) !important;
         }
      
     form.search div:first-child select{
-        width: calc(20% - 2em) !important;
+        width: -webkit-calc(20% - 2em) !important;
+        width:    -moz-calc(20% - 2em) !important;
+        width:         calc(20% - 2em) !important;
         }
         
     form.search input.value{
-        width: calc(80% - 1em) !important;
+        width: -webkit-calc(80% - 1em) !important;
+        width:    -moz-calc(80% - 1em) !important;
+        width:         calc(80% - 1em) !important;
         }
-        
-        
-        
+                      
         
 /* --- ESTILOS PARA TYPES ----------------------------------------------------- */
         
