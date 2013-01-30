@@ -59,33 +59,43 @@ forms:
                 label: name 
                 insert-form  : "user/group" 
               
-            - type: example
+            - type: meioMask
               label: 'Primeiro Nome'
               column: first_name
+              parameter:
+                size: 20
               
-            - type: example
+            - type: meioMask
               label: 'Nome do Meio'
               column: middle_name
+              parameter:
+                size: 20
               
-            - type: example
+            - type: meioMask
               label: Sobrenome
               column: last_name
+              parameter:
+                size: 20
               
-            - type: example
+            - type: meioMask
               label: Login
               column: login
+              parameter:
+                size: 20
               
             - type: password
               label: Senha
               column: password
               
-            - type: example
+            - type: textarea
               label: Permissões
               column: permissions
               
-            - type: example
+            - type: meioMask
               label: email
               column: Email
+              parameter:
+                size: 100
     insert:
         title: 'Inserindo Usuário'
         merge-form: [ insert, update ]
