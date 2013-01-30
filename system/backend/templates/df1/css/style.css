@@ -105,28 +105,7 @@
         list-style: none;
         }
 
-    nav.side ul a{
-        color: #000;
-        text-decoration: none;
-        }
-
-    nav.side ul{
-        }
-
-    nav.side ul li{
-        border-bottom: 1px solid #A2AFAF;
-        padding: 0 5%;
-        }
-
-    nav.side ul.deep_1 > li{
-        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;
-        color: #6A6F76;
-        cursor: default;
-        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
-        line-height: 50px;
-        }
-
-    nav.side ul.deep_1 > li:first-child{ /* change this to active */
+    nav.side > ul{
         background: #B7C5C5;
         background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #DEE3E3), color-stop(100%, #B7C5C5));
         background: -webkit-linear-gradient(top, #DEE3E3 0%, #B7C5C5 100%);
@@ -136,20 +115,81 @@
         background:   linear-gradient(to bottom, #DEE3E3 0%, #B7C5C5 100%);
         filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#DEE3E3', endColorstr='#B7C5C5', GradientType=0);
         }
+        
+    nav.side ul li a:hover,
+    nav.side ul li span:hover{
+        background-color: rgba(255, 255, 255, 0.3);
+        }
 
+    nav.side ul li span,
+    nav.side ul li a{
+        display: block;
+        color: #222;
+        padding: 0 5%;
+        line-height: 50px;
+        text-decoration: none;
+        text-shadow: 0 1px 0 rgba(255, 255, 255, 0.7);
+        }
+        
+    nav.side ul li li a,
+    nav.side ul li li span{
+        background: none;
+        line-height: 40px;
+        font-weight: 100;
+        text-transform: capitalize;
+        padding-left: 10%;
+        }
+        
+    nav.side ul li li a,
+    nav.side ul li li span{
+        padding-left: 10%;
+        background-image: url("../img/tree.png");
+        background-repeat: no-repeat;
+        background-position: calc(10% - 8px) center;
+        }        
+        
+    nav.side ul li li li a,
+    nav.side ul li li li span{
+        padding-left: 15%;
+        background-position: calc(15% - 8px) center;
+        }
+        
+        
+    nav.side ul li li li li a,
+    nav.side ul li li li li span{
+        padding-left: 20%;
+        background-position: calc(20% - 8px) center;
+        }
+        
+    nav.side ul > li .active:last-child{
+        background-color: rgba(255, 255, 255, 0.3)
+        }
+
+    nav.side .deep_1 > li{
+        border-bottom: 1px solid #A2AFAF;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;        
+        }
+        
+    nav.side .deep_2{
+        border-bottom: 0 none;
+        box-shadow: 0; 
+        }
+        
+    nav.side .deep_2 .active-parent{
+        background: none;
+        }
+
+    /* abre e fecha o menu */
     nav.side ul li ul{
         border: 0 none;
         display: none
         }
-
-    nav.side ul li ul li{
-        padding-left: 5%;
-        border: 0 none;
-        }
-
-    nav.side ul li:hover > ul{
+        
+    nav.side ul li:hover > ul,
+    nav.side .active-parent > ul{
         display: block;
         }
+        
 
         
 /* --- TOP TABS --------------------------------------------------------------- */
