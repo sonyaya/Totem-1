@@ -17,7 +17,7 @@
 
     # -- MONTA O MENU ----------------------------------------------------------
     
-    $menuModule = "<ul>";
+    $menuModule = "";
     $menuParts = "";
     $menu = Yaml::parse( file_get_contents("menu.yml") );
     
@@ -35,15 +35,19 @@
                 $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
             }
 
-            // Recursividade
+            // Recursividade de modulo
             if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
                 global $menuParts;
                 global $menuModule;
-                $menuModule .= "<li>{$val['load-from-module']}</li>";
+                
+                $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a href='{$val['module-start-url']}'>{$val['label']}</a></li>";
                 $smenu = Yaml::parse( file_get_contents("forms/{$val['load-from-module']}/menu.yml") );
                 $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
                 $ret .= $menuParts[ $val['load-from-module'] ];
-            }elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+            }
+            
+            // Recursividade de menu
+            elseif( isset($val['submenu']) && is_array($val['submenu']) ){
                 $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
             }
             
@@ -52,11 +56,10 @@
         $ret .= $pad0 . "</ul>\r\n";
         return $ret;
     }
-    $menuModule .= "</ul>";
 
-    $_M_MENU_MODULE = $menuModule;
-    $_M_MENU_PARTS = $menuParts;
     $_M_MENU = createMenuRecursive($menu);
+    $_M_MENU_MODULE = "<ul>$menuModule\r\n</ul>";
+    $_M_MENU_PARTS = $menuParts;
     
     unset($menuModule);
     unset($menuParts);
