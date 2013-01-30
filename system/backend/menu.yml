@@ -1,5 +1,4 @@
 - label: Usuários
-  link: "?action=view-listAndInsert-form&form=user/user"
   load-from-module: user
 
 - label: Blog
