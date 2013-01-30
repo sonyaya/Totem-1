@@ -1009,29 +1009,33 @@
         private function addToArrayLayout(array $array){
             global $_M_THIS_CONFIG;
             global $_M_MENU;
+            global $_M_MENU_PARTS;
+            global $_M_MENU_MODULE;
             global $_M_USER;
             
             // O minimo que o array deve ter
             $arrayBase = Array(  
-                "user"       => "" ,
-                "main-menu"  => "" ,
+                "user" => "" ,
+                "main-menu" => "" ,
+                "main-menu-parts" => "",
+                "menu-modules" => "",
                 "main-title" => "" ,
-                "title"      => "" ,
-                "form"       => "" ,
-                "inputs"     => "" ,
-                "method"     => "" ,
-                "pages"       => "" ,
+                "title" => "" ,
+                "form" => "" ,
+                "inputs" => "" ,
+                "method" => "" ,
+                "pages" => "" ,
                 "search-form" => "" ,
-                "css"         => array() ,
+                "css" => array() ,
                 "javascript" => array(
                     "head" => array(),
                     "body" => array()
                 ),
                 "table" => Array(
                     "columns" => "" ,
-                    "data"    => "",
-                    "tbody"   => "" ,
-                    "thead"   => ""
+                    "data" => "",
+                    "tbody" => "" ,
+                    "thead" => ""
                 )
             );
             
@@ -1041,25 +1045,27 @@
             
             // Monta o array
             $array = Array(  
-                "user"       => $_M_USER ,
-                "main-menu"  => $_M_MENU ,
+                "user" => $_M_USER ,
+                "main-menu" => $_M_MENU ,
+                "main-menu-parts" => $_M_MENU_PARTS,
+                "menu-modules" => $_M_MENU_MODULE,
                 "main-title" => $array["main-title"] ,
-                "title"      => $array["title"] ,
-                "form"       => $array["form"] ,
-                "inputs"     => $this->sendArrayToLayout['inputs'] ."\r\n". $array['inputs'] ,
-                "method"     => (!empty($array['method'])) ? $array['method'] : "" ,
-                "pages"       => $array['pages'] ,
+                "title" => $array["title"] ,
+                "form" => $array["form"] ,
+                "inputs" => $this->sendArrayToLayout['inputs'] ."\r\n". $array['inputs'] ,
+                "method" => (!empty($array['method'])) ? $array['method'] : "" ,
+                "pages" => $array['pages'] ,
                 "search-form" => $array['search-form'] ,
-                "css"         => array_unique( array_merge($array['css'], $this->sendArrayToLayout['css']) ) ,
+                "css" => array_unique( array_merge($array['css'], $this->sendArrayToLayout['css']) ) ,
                 "javascript" => array(
                     "head" => array_unique( array_merge($array['javascript']['head'], $this->sendArrayToLayout['javascript']['head']) ),
                     "body" => array_unique( array_merge($array['javascript']['body'], $this->sendArrayToLayout['javascript']['body']) )
                 ),
                 "table" => Array(
                     "columns" => $array['table']['columns'] ,
-                    "data"    => $array['table']['data'] ,
-                    "tbody"   => $array['table']['tbody'] ,
-                    "thead"   => $array['table']['thead']
+                    "data" => $array['table']['data'] ,
+                    "tbody" => $array['table']['tbody'] ,
+                    "thead" => $array['table']['thead']
                 )
             );
             

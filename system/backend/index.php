@@ -17,7 +17,10 @@
 
     # -- MONTA O MENU ----------------------------------------------------------
     
+    $menuModule = "<ul>";
+    $menuParts = "";
     $menu = Yaml::parse( file_get_contents("menu.yml") );
+    
     function createMenuRecursive($array, $deep=0, $deepClass=1){
         $indent = 4;
         $pad0 = str_pad("", $deep);
@@ -34,11 +37,13 @@
 
             // Recursividade
             if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
+                global $menuParts;
+                global $menuModule;
+                $menuModule .= "<li>{$val['load-from-module']}</li>";
                 $smenu = Yaml::parse( file_get_contents("forms/{$val['load-from-module']}/menu.yml") );
-                $ret .= createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
-            }
-            
-            elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+                $ret .= $menuParts[ $val['load-from-module'] ];
+            }elseif( isset($val['submenu']) && is_array($val['submenu']) ){
                 $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
             }
             
@@ -47,10 +52,16 @@
         $ret .= $pad0 . "</ul>\r\n";
         return $ret;
     }
+    $menuModule .= "</ul>";
 
+    $_M_MENU_MODULE = $menuModule;
+    $_M_MENU_PARTS = $menuParts;
     $_M_MENU = createMenuRecursive($menu);
+    
+    unset($menuModule);
+    unset($menuParts);
     unset($menu);
-
+    
     # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
     
     $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
