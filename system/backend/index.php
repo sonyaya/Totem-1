@@ -14,6 +14,15 @@
     # -- USED VENDORS CLASSES --------------------------------------------------
     
     use vendor\Symfony\Component\Yaml\Yaml;
+    
+    # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
+    
+    $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
+    $_M_USER['first_name']  = ( isset($_SESSION['user']['first_name']  ) ) ? $_SESSION['user']['first_name']  : '' ;
+    $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
+    $_M_USER['last_name']   = ( isset($_SESSION['user']['last_name']   ) ) ? $_SESSION['user']['last_name']   : '' ;
+    $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
+
 
     # -- MONTA O MENU ----------------------------------------------------------
     
@@ -40,9 +49,18 @@
                 global $menuParts;
                 global $menuModule;
                 
-                $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+                // verifica se o menu do modulo é ativo
+                $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
+                $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
+                
+                // cria item do menu de modulo
+                $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+                
+                // cria o itens filhos a partir do menu de formulário no main-menu
                 $smenu = Yaml::parse( file_get_contents("forms/{$val['load-from-module']}/menu.yml") );
                 $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+                
+                // retorna o menu
                 $ret .= $menuParts[ $val['load-from-module'] ];
             }
             
@@ -61,18 +79,11 @@
     $_M_MENU_MODULE = "<ul>$menuModule\r\n</ul>";
     $_M_MENU_PARTS = $menuParts;
     
+    unset($class);
     unset($menuModule);
     unset($menuParts);
     unset($menu);
     
-    # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
-    
-    $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
-    $_M_USER['first_name']  = ( isset($_SESSION['user']['first_name']  ) ) ? $_SESSION['user']['first_name']  : '' ;
-    $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
-    $_M_USER['last_name']   = ( isset($_SESSION['user']['last_name']   ) ) ? $_SESSION['user']['last_name']   : '' ;
-    $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
-
     // -- DECIDE QUAL AÇÃO EXECUTAR --------------------------------------------
     
     $action = (isset($_GET['action']))? $_GET['action'] : "";
