@@ -25,16 +25,13 @@ layout.popup = function(url, title){
 }
 
 /**
- * URI
+ * SE ENCARREGA DE FACILTAR A NAVEGAÇÃO PELA URI
  */
 layout.uri = (function(key, uriArray){
     if(typeof uriArray == "undefined")
         uriArray = window.location.search
-    
     uriArray = uriArray.split(/[?&](.*?)=.*?/im);
-    
     pos = $.inArray(key, uriArray);
-    
     if( pos % 2 ){
         return uriArray[ pos+1 ];
     }else{
