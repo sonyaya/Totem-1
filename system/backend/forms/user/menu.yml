@@ -5,7 +5,6 @@
   link: "?action=view-insert-form&form=user/user"
 
 - label: "Grupos de Usuários"
-  link: "?action=view-listAndInsert-form&form=user/group"
   submenu: 
 
     - label: "Listar Grupos de Usuários"
