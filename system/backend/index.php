@@ -17,7 +17,7 @@
 
     # -- MONTA O MENU ----------------------------------------------------------
     
-    $menu = Yaml::parse(file_get_contents("menu.yml"));
+    $menu = Yaml::parse( file_get_contents("menu.yml") );
     function createMenuRecursive($array, $deep=0, $deepClass=1){
         $indent = 4;
         $pad0 = str_pad("", $deep);
@@ -32,8 +32,14 @@
                 $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
             }
 
-            if( isset($val['submenu']) && is_array($val['submenu']) ){
-                $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);
+            // Recursividade
+            if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
+                $smenu = Yaml::parse( file_get_contents("forms/{$val['load-from-module']}/menu.yml") );
+                $ret .= createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+            }
+            
+            elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
             }
             
             $ret .= $pad1 . "</li>\r\n";
