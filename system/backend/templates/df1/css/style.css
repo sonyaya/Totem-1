@@ -97,6 +97,7 @@
         color: #EEE;
         }
         
+    header div.modules nav ul li a.active,
     header div.modules nav ul li:hover a{
         background: none repeat scroll 0 0 rgba(255, 255, 255, 0.1);
         box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 1px 0 0 rgba(255, 255, 255, 0.25);
