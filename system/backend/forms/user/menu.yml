@@ -1,14 +1,5 @@
-- label: "Listar Usuários"
+- label: "Usuários"
   link: "?action=view-listAndInsert-form&form=user/user"
 
-- label: "Inserir novo usuário"
-  link: "?action=view-insert-form&form=user/user"
-
 - label: "Grupos de Usuários"
-  submenu: 
-
-    - label: "Listar Grupos de Usuários"
-      link: "?action=view-listAndInsert-form&form=user/group"
-
-    - label: "Inserir Grupos de Usuários"
-      link: "?action=view-insert-form&form=user/group"
+  link: "?action=view-listAndInsert-form&form=user/group"

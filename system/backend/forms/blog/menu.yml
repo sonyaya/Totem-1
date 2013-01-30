@@ -1,26 +1,8 @@
 - label: "Postagens"
-  submenu: 
-
-    - label: "Lista de Posts"
-      link: "?action=view-listAndInsert-form&form=blog/post"
-
-    - label: "Inserir Novo Post"
-      link: "?action=view-insert-form&form=blog/post"  
+  link: "?action=view-listAndInsert-form&form=blog/post"
 
 - label: "Categorias"
-  submenu: 
-
-    - label: "Lista de Posts"
-      link: "?action=view-listAndInsert-form&form=blog/category"
-
-    - label: "Inserir Novo Post"
-      link: "?action=view-insert-form&form=blog/category"
+  link: "?action=view-listAndInsert-form&form=blog/category"
 
 - label: "Tipos"
-  submenu: 
-
-    - label: "Lista de Posts"
-      link: "?action=view-listAndInsert-form&form=blog/type"
-
-    - label: "Inserir Novo Post"
-      link: "?action=view-insert-form&form=blog/type"
+  link: "?action=view-listAndInsert-form&form=blog/type"
