@@ -35,11 +35,43 @@
         $pad0 = str_pad("", $deep);
         $pad1 = str_pad("", $deep+($indent) );
         $pad2 = str_pad("", $deep+($indent*2) );
+        
         $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
         foreach ($array as $key => $val) {
             $ret .= $pad1 . "<li>\r\n";
-            if(isset($val['link'])){
-                $ret .= $pad2 . "<a href='{$val['link']}'>{$val['label']}</a>\r\n";
+            if(isset($val['link'])){                
+                // os arrays de comparação devem 
+                // ter no minimo estas chaves
+                $arrCompare['form'] = "";
+                $arrCompare['action'] = "";
+                $arrCompare['module'] = "";
+                
+                // array do menu atual
+                parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
+                $mLnk = array_replace($arrCompare, $mLnk);
+                $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['form']);
+                
+                
+                // array da pagina atual
+                $pLnk = array_replace($arrCompare, $_GET);
+                $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['form']);
+                
+                // comparações para adicionar classes
+                if($pLnk['module'] == $mLnk['module']){
+                    $cssClassByModule = "active-by-module";
+                    $cssClassByForm   = ( $pLnk['form']   == $mLnk['form']   ) ? "active-by-form"   : "";
+                    $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
+                    $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
+                }else{
+                    $cssClassByModule = "";
+                    $cssClassByForm   = "";
+                    $cssClassByAction = "";
+                    $cssClass         = "";
+                }
+                $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
+                
+                // 
+                $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
             }else{
                 $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
             }
@@ -79,7 +111,6 @@
     $_M_MENU_MODULE = "<ul>$menuModule\r\n</ul>";
     $_M_MENU_PARTS = $menuParts;
     
-    unset($class);
     unset($menuModule);
     unset($menuParts);
     unset($menu);
