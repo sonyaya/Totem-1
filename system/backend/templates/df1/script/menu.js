@@ -22,11 +22,6 @@ $(function(){
         $(".top-tab ul").find(".active").prev().click();
     });
     
-    // ADICIONAR A CLASSE ACTIVE E ACTIVE-PARENT NO SIDE-MENU
-    $("[href='"+ window.location.search +"']")
-        .addClass("active")
-        .parents("li")
-            .addClass('active-parent');
-    ; console.log("remova isso do menu.js e deixe diretamente no index.php assim como o menu de modulos faz.");
-    
+    // ADICIONAR A CLASSE ACTIVE-PARENT NO SIDE-MENU
+    $("nav.side").find(".active").parents("li").addClass('active-parent');
 });
