@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+
+        &m.include:#template#/_head.html;        
+    </head>
+    <body>
+        <header>
+            <div class="user">
+                teste
+            </div>
+            <div class="modules">
+                <nav>
+                    &m.var:menu-modules;
+                </nav>
+            </div>
+        </header>
+        
+        <nav class="side">
+            &m.var:main-menu;
+        </nav>
+                
+        <div class="window-holder main list">
+            <nav class="top-tabs">
+                <ul>
+                    <li class="active" id="tab-list">Listar</li>
+                    <li id="tab-search">Pesquisar</li>
+                    <li id="tab-insert">Inserir</li>
+                    <div class="clear"></div>
+                </ul>
+            </nav>
+            
+            <div class="content">
+                <div class="window for-tab-list list">
+                    &m.include:#template#/list-content.html;
+                </div>
+                
+                <div class="window for-tab-search">
+                    <form class="search">
+                        &m.var:search-form;
+                    </form>
+                    <div class="action-bar">
+                        <button id="bt-search">Pesquisar</button>
+                    </div>
+                </div>
+                
+                <div class="window for-tab-insert list">
+                    &m.include:#template#/form-content.html;
+                </div>
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        
+        <footer>
+            asdsad
+        </footer>
+        
+        <script>
+            &m.include:#template#/script/list.inc.js;
+            &m.include:#template#/script/form.inc.js;
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>    

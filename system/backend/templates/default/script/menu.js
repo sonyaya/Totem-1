@@ -1,17 +1,27 @@
 $(function(){
-    $(".top-tab ul").on("click", "li", function(){
-        $tabs = $(".top-tab ul li");
-        $tabs.removeClass("active");
-        $(this).addClass("active");
-        $(".window").hide();
-        $(".for-" + $(this).attr("id")).show();
+    // TOP-TABS
+    $(".top-tabs ul").on("click", "li", function(){
+        $this = $(this);
+        $this.siblings().removeClass("active");
+        $this.addClass("active");
+        $this.closest(".window-holder").find(".content > .window").hide();
+        $(".for-" + $this.attr("id")).show();
+        window.location.hash = $this.attr("id");
     });
 
-    $(".next-tab").click(function(){
+    if( (deepLink = window.location.hash) !== ''){
+        $(deepLink).click();
+    }
+
+    // BOTÕES DE NAVEGAÇÃO ENTRE ABAS
+    $("body").on("click", ".next-tab", function(){
         $(".top-tab ul").find(".active").next().click();
     });
 
-    $(".preview-tab").click(function(){
+    $("body").on("click", ".preview-tab", function(){
         $(".top-tab ul").find(".active").prev().click();
     });
+    
+    // ADICIONAR A CLASSE ACTIVE-PARENT NO SIDE-MENU
+    $("nav.side").find(".active").parents("li").addClass('active-parent');
 });

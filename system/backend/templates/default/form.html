@@ -1,46 +1,56 @@
-&m.include:#template#/_head.html;
-    <!-- HEADER -->
-    &m.include:#template#/_header.html;
-
-    <!-- DROPDOWN MENU -->
-    <nav role="main-menu">
-        &m.var:main-menu;
-        <div class="clear"></div>
-    </nav>
-
-    <!-- -->
-    <section role="main">
-        <aside>
-            <nav role="tabs" class="top-tab">
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+        
+        &m.include:#template#/_head.html;        
+    </head>
+    <body>
+        <header>
+            <div class="user">
+                teste
+            </div>
+            <div class="modules">
+                <nav>
+                    &m.var:menu-modules;
+                </nav>
+            </div>
+        </header>
+        
+        <nav class="side">
+            &m.var:main-menu;
+        </nav>
+        
+        <div class="window-holder main list">
+            <nav class="top-tabs">
                 <ul>
-                  <m.if cond="'&m.var:method;' -eq- 'update'">
-                    <li class="active">Atualizando</li>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-list'" id="tab-list">Listar</li>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-search'" id="tab-search">Pesquisar</li>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-insert'" id="tab-insert">Inserir</li>
+                    <li id="tab-update" class="active">Atualizar</li>
                     <div class="clear"></div>
-                  </m.if>
-                  <m.if cond="'&m.var:method;' -eq- 'insert'">
-                    <li class="active">Inserindo</li>
-                    <div class="clear"></div>
-                  </m.if>
                 </ul>
             </nav>
-        <aside>
             
-        <!--
-          -- INSERT AND UPDATE FORM
-          -->
-        &m.include:#template#/form-content.html;
-
-        <!--
-          -- FOOTER
-          -->
-        <div role="message">
-            Messages
+            <div class="content">
+                <div class="window for-tab-update">
+                    &m.include:#template#/form-content.html;
+                </div>
+               <div class="window for-tab-list for-tab-search for-tab-insert">
+                    Aguarde...
+                </div>
+            </div>
         </div>
 
-        <div role="action-bar">
-            <button class="preview-tab">Previus</button>
-            <button class="next-tab">Next</button>
-        </div>
-    </section>
-    
-&m.include:#template#/_footer.html;
+        
+        <div class="clear"></div>
+        
+        <footer>
+            asdsad
+        </footer>
+        <script>
+            &m.include:#template#/script/form.inc.js;
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>    
