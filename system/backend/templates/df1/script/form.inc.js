@@ -1,6 +1,6 @@
 $(function(){
     $("#bt-save-form").click(function(){
-        $("#form-insert-and-update").submit();
+        $(this).closest("form").submit();
         return false;
     });
 
@@ -20,38 +20,14 @@ $(function(){
                     alert(mesageConcat);
                 }else{
                     if( window.opener ){
-                        window.close();
+                        //window.close();
                     }else{
-                        window.location = "?action=view-update-form&form=&m.var:form;&id=" + data.result._M_PRIMARY_KEY_VALUE_;
+                        //window.location = "?action=view-update-form&form=&m.var:form;&id=" + data.result._M_PRIMARY_KEY_VALUE_;
                     }
                 }
             },
             "json"
         );
-
         return false;
     });
-
-  <m.if cond="'&m.var:method;' -eq- 'update'">
-    $("#bt-delete-form").click(function(){
-        msg  = "ATENÇÃO!\r\n\r\n"
-        msg += "- Você esta prestes a deletar este formulário, esta ação não pode ser desfeita, clique \r\n";
-        msg += "em OK caso realmente deseja excluir estas informações ou clique em CANCELAR \r\n";
-        msg += "para impedir a exclusão destes dados.";
-        if( confirm(msg) ){
-            $.post(
-                "?action=delete-form&form=&m.var:form;&id=&m.var:_GET.id;",
-                function(data){
-                    if(data.error){
-                        alert(data.message);
-                    }else{
-                        window.location = "?action=view-list-form&form=&m.var:form;";
-                    }
-                },
-                "json"
-            );
-        }
-        return false;
-    });
-  </m.if>
 });
