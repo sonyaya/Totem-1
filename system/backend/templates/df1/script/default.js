@@ -75,7 +75,7 @@ layout.uri = (function(key, uriArray){
     uriArray = uriArray.split(/[?&](.*?)=.*?/im);
     pos = $.inArray(key, uriArray);
     if( pos % 2 ){
-        return uriArray[ pos+1 ];
+        return decodeURIComponent(uriArray[ pos+1 ]);
     }else{
         return null;
     }
