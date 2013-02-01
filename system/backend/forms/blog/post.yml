@@ -125,15 +125,15 @@ forms:
           right-table  : blog_type
           right-fk     : id
           right-label  : title
-          insert-form  : "blog/type" 
+          insert-form  : "blog/type"
 
       imgage:
         type: imagesUpload
         label: imagesUpload
         column: 'images_data'
         parameter :
-          folder : "teste2"
-       
+        folder : "teste2"
+
       intro:
         type: textarea
         label: Introdução

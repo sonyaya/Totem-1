@@ -1,5 +1,34 @@
+//
+ajaxQueue = [];
+$.ajaxSetup({
+    beforeSend: function(xhr){
+        // executa se for o inicio da fila
+        if( ajaxQueue.length == 0 ){            
+            $('#loader').fadeIn();
+        }
+        
+        // adiciona a fila
+        ajaxQueue.push( xhr );
+    },
+
+    complete: function(xhr){
+        // remove da fila
+        pos = $.inArray(xhr, ajaxQueue);
+        ajaxQueue.splice(pos, 1);
+        
+        // executa se a fila acabar
+        if( ajaxQueue.length == 0 ){
+            $('#loader').fadeOut();
+        }
+    }
+});
+    
+    
+//    
 $(function(){
-    // close de abas
+
+    
+    // x que fecha as abas
     // adiciona função ao botão fechar da top-tab
     $("#popup-menu").on("click", "li span", function(){
         $this = $(this);
@@ -25,7 +54,7 @@ var layout = new Object();
 /**
  * SE ENCARREGA DE ABRIR POPUPS
  */
-layout.popup = function(url, title){
+layout.popup = (function(url, title){
     
     // abrir em uma nova aba
     if( layout.uri("form") == layout.uri("form", url) ){    
@@ -64,7 +93,7 @@ layout.popup = function(url, title){
             newWindow.resizeTo( w, h );
         }
     }
-}
+});
 
 /**
  * SE ENCARREGA DE FACILTAR A NAVEGAÇÃO PELA URI
@@ -79,4 +108,4 @@ layout.uri = (function(key, uriArray){
     }else{
         return null;
     }
-})
+});

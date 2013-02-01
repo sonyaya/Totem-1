@@ -10,6 +10,8 @@
             <script src="&m.var:template;/script/form.js"></script>
         </head>
         <body class="popup-window">
+            <div id="loader">Carregando...</div>
+        
             <h1>&m.var:title;</h1>
 
             <div class="content">
@@ -25,7 +27,9 @@
 
 <m.if cond="&m.var:bool:_GET.popup; -eq- false">
     <head>
-        &m.include:#template#/_head.html;        
+      <m.foreach var="javascript.head" key="KEY">
+        <script src="&m.var:javascript.head.#KEY#;"></script>
+      </m.foreach>
     </head>
     <h1>&m.var:title;</h1>
     <div class="content">
