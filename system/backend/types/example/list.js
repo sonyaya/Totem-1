@@ -30,7 +30,7 @@ $(function(){
                 switch(event.keyCode){
                     case 13:
                         $.post(
-                            "?action=save-form&form="+_M_CONFIG_.form,                 
+                            "?action=save-form&form=" + layout.uri("form"),                 
                             "_M_ACTION=update:"+pkValue+"&"+column+"="+value,
                             function(data){
                                 // coloca o resultado retornado na coluna
