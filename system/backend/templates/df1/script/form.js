@@ -1,6 +1,5 @@
 $(function(){
     $("body").on("click", ".bt-save-form", function(e){
-        alert("bt save");
         $form = $(this).closest("form");
         $form.submit();
         return false;
