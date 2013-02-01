@@ -7,7 +7,7 @@ interface:
     update : update.html
 
   css:
-    list   : []
+    list   : [ "style.css" ]
     insert : [ "style.css" ]
     update : [ "style.css" ]
     

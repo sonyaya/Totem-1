@@ -22,3 +22,13 @@ div.jsonArray li a{
     color: #FFF;
     margin-left: 1em;
     }
+    
+div.jsonArray ul.list{
+    max-width: 400px;    
+    }
+    
+div.jsonArray ul.list li{
+    padding: 0.25em !important;
+    margin: 0.2em !important;
+    border-radius: 5px !important;
+    }
