@@ -122,12 +122,14 @@ $(function(){
     });
 
     // POPULAR FORMULÁRIO DE PESQUISA / SEARCH
-    cond = $.parseJSON(cond);
-    $.each(cond, function(key, val){
-        i = key+1;
-        $("#cond-and-or-"+i).val( val[0] ), 
-        $("#cond-column-"+i).val( val[1] ),
-        $("#cond-comparison-"+i).val( val[2] ),
-        $("#cond-value-"+i).val( val[3] )
-    });
+    if($.trim(cond) !== ""){
+        cond = $.parseJSON(cond);
+        $.each(cond, function(key, val){
+            i = key+1;
+            $("#cond-and-or-"+i).val( val[0] ), 
+            $("#cond-column-"+i).val( val[1] ),
+            $("#cond-comparison-"+i).val( val[2] ),
+            $("#cond-value-"+i).val( val[3] )
+        });
+    }
 });
