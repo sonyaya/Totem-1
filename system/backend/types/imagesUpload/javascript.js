@@ -229,7 +229,7 @@ $(function(){
 
     // REMOVER INPUTS DE TODOS OS PL-UPLOADER PRA E FECHAR A JANELA DE EDIÇÃO 
     // DE DADOS DA IMAGEM NÃO DAR PROBLEMAS AO INSERIR NO BANCO DE DADOS
-    $("form").submit(function(){ 
+    $("form").submit(function(){
         $(".uploaderOfImages").find("input").remove();
         $('div.imagesUpload div.inner-holder').find(".bt_imageDataForm_close").click();
     });
