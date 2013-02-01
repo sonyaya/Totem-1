@@ -107,6 +107,7 @@ $(function(){
         $windowFiles.find("ul").css("width" , "auto").find(".edit").removeClass("edit");
         $windowFiles.find(".edit-image-window").hide();
         $windowFiles.find(".edit-image-window").empty();
+        return false;
     });
 
     // OPEN RAW IMAGE
@@ -117,6 +118,7 @@ $(function(){
          folder = $holder.attr("data-folder");
          fileName = $this.siblings("._m_filename").val();
          window.open(uploadFolder+"/"+folder+"/"+fileName, fileName);
+         return false;
     });
 
     // TABS
@@ -132,6 +134,8 @@ $(function(){
 
         $window.hide();
         $actualWindow.show();
+        
+        return false;
     });
 
     // TAB UPLOAD
@@ -151,6 +155,7 @@ $(function(){
             }else{
                 recreate = true;
             }
+            return false;
         }
         
         // recria o pupload caso não exista nada 
@@ -182,6 +187,7 @@ $(function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $inputHolder.find(".window.files").find(".selected").remove();
+        return false;
     });
 
     // RELOAD bt-reload
@@ -200,21 +206,25 @@ $(function(){
                 $windowListUl.html( html ).sortable();
             }, "json"
         );
+        return false;
     });
 
     // SELECT ALL bt-select-all
     $('div.imagesUpload').on("click", ".bt-select-all", function(){
         $(this).closest(".input-holder").find(".inner-holder ul li").addClass("selected");
+        return false;
     });
 
     // SELECT NONE bt-select-none
     $('div.imagesUpload').on("click", ".bt-select-none", function(){
         $(this).closest(".input-holder").find(".inner-holder ul li").removeClass("selected");
+        return false;
     });
 
     // SELECT INVERSE bt-select-inverse
     $('div.imagesUpload').on("click", ".bt-select-inverse", function(){
         $(this).closest(".input-holder").find(".inner-holder ul li").toggleClass("selected");
+        return false;
     });
 
     // REMOVER INPUTS DE TODOS OS PL-UPLOADER PRA E FECHAR A JANELA DE EDIÇÃO 
