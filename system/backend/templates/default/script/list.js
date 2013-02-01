@@ -57,8 +57,7 @@ $(function(){
 
     // ACTIONS
     $("table").on("click", ".edit", function(){
-        //window.location = "?action=view-update-form&form=" + form + "&id=" + $(this).attr('href');
-        layout.popup("?action=view-update-window-form&form=" + form + "&id=" + $(this).attr('href'), "Atualizando");
+        layout.popup("?action=view-update-window-form&form=" + form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
         return false;
     });
 
