@@ -9,7 +9,6 @@ $(function(){
 
 //
 function saveForm(form){
-    alert("submit do form");
     $.post(
         "?action=save-form&form=" + layout.uri("form"),
         $(form).serialize(),
