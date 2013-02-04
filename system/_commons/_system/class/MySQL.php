@@ -13,7 +13,7 @@
      *
      *    0.5a:
      *      - getLastPage      : Retorna a quantidade de paginas existentes com base em setRowsPerPage()
-     *        - rowsCount        : Equivalente ao Count do MySQL
+     *      - rowsCount        : Equivalente ao Count do MySQL
      *
      *    0.4a:
      *      - affectedRows     : Retorna a quantidade de linhas afetadas na execução do ultimo SQL Query
