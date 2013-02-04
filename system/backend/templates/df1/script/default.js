@@ -1,33 +1,5 @@
-//
-ajaxQueue = [];
-$.ajaxSetup({
-    beforeSend: function(xhr){
-        // executa se for o inicio da fila
-        if( ajaxQueue.length == 0 ){            
-            $('#loader').fadeIn();
-        }
-        
-        // adiciona a fila
-        ajaxQueue.push( xhr );
-    },
-
-    complete: function(xhr){
-        // remove da fila
-        pos = $.inArray(xhr, ajaxQueue);
-        ajaxQueue.splice(pos, 1);
-        
-        // executa se a fila acabar
-        if( ajaxQueue.length == 0 ){
-            $('#loader').fadeOut();
-        }
-    }
-});
-    
-    
 //    
-$(function(){
-
-    
+$(function(){    
     // x que fecha as abas
     // adiciona função ao botão fechar da top-tab
     $("#popup-menu").on("click", "li span", function(){
@@ -57,7 +29,11 @@ var layout = new Object();
 layout.popup = (function(url, title){
     
     // abrir em uma nova aba
-    if( layout.uri("form") == layout.uri("form", url) ){    
+    if( layout.uri("form") == layout.uri("form", url) ){
+        // Abre tela de load
+        layout.ajax.showLoader();
+        
+        // Número de abas
         no = $("#popup-menu li.popup-tab").length + 1;
 
         // cria a tab
@@ -73,6 +49,9 @@ layout.popup = (function(url, title){
 
         // clica na nova aba criada
         $newTab.click();
+        
+        // Fecha a tela de load
+        layout.ajax.hideLoader();
     }else{
         var w = screen.width / 1.2;
         var barSize = 70;
@@ -109,3 +88,23 @@ layout.uri = (function(key, uriArray){
         return null;
     }
 });
+
+/**
+ * 
+ */
+layout.ajax = {};
+
+/**
+ * 
+ */
+layout.ajax.showLoader = function(xhr){
+    $('#loader').fadeIn();
+}
+
+
+/**
+ * 
+ */
+layout.ajax.hideLoader = function(xhr){
+    $('#loader').fadeOut();
+}
