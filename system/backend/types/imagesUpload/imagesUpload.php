@@ -53,8 +53,6 @@
          * @param type $toTypeLayout
          * @param type $pKey
          */
-
-
         public function beforeLoadDataToForm(&$thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
             global $_M_CONFIG;
             
