@@ -8,6 +8,7 @@ $(function(){
 
 //
 function saveForm(form){
+    layout.ajax.showLoader();
     $.post(
         "?action=save-form&form=" + layout.uri("form"),
         $(form).serialize(),
@@ -18,8 +19,9 @@ function saveForm(form){
                     mesageConcat += "- "+val+"\r\n";
                 });
                 alert(mesageConcat);
+                layout.ajax.hideLoader();
             }else{
-                alert("mensagem aqui");
+                layout.ajax.hideLoader();
             }
         },
         "json"
