@@ -309,12 +309,17 @@
                 // LISTA ARQUIVOS NO INSERT
                 // 
                 case 'list':{
-                    $dir = scandir($folder);
                     $fileList = Array();
-                    foreach ($dir as $key => $val) {
-                        if( (int)strpos($val, ".") > 0 ){
-                            $fileList[] = $val;
+                    
+                    if(file_exists($folder) ){
+                        $dir = scandir($folder);
+                        foreach ($dir as $key => $val) {
+                            if( (int)strpos($val, ".") > 0 ){
+                                $fileList[] = $val;
+                            }
                         }
+                    }else{
+                        $fileList = Array();
                     }
 
                     echo json_encode(Array(
