@@ -38,3 +38,23 @@ layout.uri = (function(key, uriArray){
         return null;
     }
 })
+
+/**
+ * 
+ */
+layout.ajax = {};
+
+/**
+ * SE ENCARREGA DE MOSTRAR O LOADER QUANDO UM AJAX FOR EXECUTADO
+ */
+layout.ajax.showLoader = function(){
+    
+}
+
+
+/**
+ * SE ENCARREGA DE ESCONDER O LOADER DOS AJAX
+ */
+layout.ajax.hideLoader = function(){
+    
+}
