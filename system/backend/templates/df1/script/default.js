@@ -97,7 +97,7 @@ layout.ajax = {};
 /**
  * 
  */
-layout.ajax.showLoader = function(xhr){
+layout.ajax.showLoader = function(){
     $('#loader').fadeIn();
 }
 
@@ -105,6 +105,6 @@ layout.ajax.showLoader = function(xhr){
 /**
  * 
  */
-layout.ajax.hideLoader = function(xhr){
+layout.ajax.hideLoader = function(){
     $('#loader').fadeOut();
 }
