@@ -80,3 +80,8 @@
 
     div.list table .action{
         }
+        
+
+    div.list table thead tr th{
+        font-size: 0.8em;
+        }

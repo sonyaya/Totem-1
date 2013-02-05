@@ -11,6 +11,19 @@ table tbody *{
     transition        : all 0.4s ease-in-out 0s;
     }
     
+#loader{
+    position: absolute;
+    height: 100%;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 999999;
+    display: none;
+    position: fixed;
+    font-size: 2em;
+    text-align: center;
+    color: #FFF;
+    }
+    
 .clear{
     clear: both;
     }
@@ -21,6 +34,13 @@ table tbody *{
     
 .window:first-child{
     display: block;    
+    }
+    
+iframe{
+    width: 100%;
+    height: 0px;
+    border: 0 none;
+    overflow: hidden;
     }
     
     
@@ -360,11 +380,14 @@ table tbody *{
     div.list table thead tr th{
         color: #F7F7F7;
         background: #3A454E;
-        padding: 0.5%;
+        padding: 0.5% 1%;
         font-size: 1em;
         font-weight: 100;
         cursor: pointer;
         text-align: left;
+        border-right: 1px solid #657A89;
+        overflow: hidden;
+        vertical-align: bottom;
         }
 
     div.list table thead tr th.CHANGE_TO_DESC{

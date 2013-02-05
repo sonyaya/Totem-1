@@ -5,7 +5,7 @@
     }
 
 nav ul *,
-table *{
+table tbody *{
     -webkit-transition: all 0.4s ease-in-out 0s;
     -moz-transition   : all 0.4s ease-in-out 0s;
     transition        : all 0.4s ease-in-out 0s;
@@ -380,11 +380,14 @@ iframe{
     div.list table thead tr th{
         color: #F7F7F7;
         background: #3A454E;
-        padding: 0.5%;
+        padding: 0.5% 1%;
         font-size: 1em;
         font-weight: 100;
         cursor: pointer;
         text-align: left;
+        border-right: 1px solid #657A89;
+        overflow: hidden;
+        vertical-align: bottom;
         }
 
     div.list table thead tr th.CHANGE_TO_DESC{
