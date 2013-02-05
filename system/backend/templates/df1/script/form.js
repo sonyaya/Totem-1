@@ -7,7 +7,10 @@ $(function(){
     });
 
     //
-    $("body").on("submit", "form.form-insert-or-update", function(){
+    $("body").on("submit", "form.form-insert-or-update", function(e){
+        
+        if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
+        
         layout.ajax.showLoader();
         $.post(
             "?action=save-form&form=" + layout.uri("form"),
