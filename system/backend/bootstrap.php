@@ -1,17 +1,21 @@
 <?php
-    # START DEFAULT SESSION
+
+    # -- START DEFAULT SESSION -------------------------------------------------
+
     session_start();
 
-    # SET DEFAULT PHP CHARSET
+    # -- SET DEFAULT PHP CHARSET -----------------------------------------------
+
     ini_set('default_charset','UTF-8');
 
-    # VERIFICAÇÃO DE DEPENDENCIAS PHP
+    # -- VERIFICAÇÃO DE DEPENDENCIAS PHP ---------------------------------------
+
     $_SESSION['php_check'] = false;
-    
+
     if( !isset($_SESSION['php_check']) || !$_SESSION['php_check'] ){
         // Extensões Carregadas
         $ext = get_loaded_extensions();
-        
+
         // Extensões Necessárias
         $extNeeded = Array(
             "PDO",
@@ -34,14 +38,16 @@
             $_SESSION['php_check'] = false;
         }
     }
-    
-    # SAVE PHP ERROS IN A FILE
+
+    # -- SAVE PHP ERROS IN A FILE ----------------------------------------------
+
     error_reporting(E_ALL);
     //ini_set ("display_errors" , "off");
     //ini_set ("log_errors"     , "On");
     //ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
-    
-    # AUTOLOAD
+
+    # -- AUTOLOAD --------------------------------------------------------------
+
     spl_autoload_register( 
         function($str){
             $pathOrig  = explode("\\", $str);
@@ -70,7 +76,8 @@
         }
     );
 
-    # CONFIGURAÇÕES
+    # -- CONFIGURAÇÕES ---------------------------------------------------------
+
     if(file_exists("../config.ini.php")){
         $_M_CONFIG = (object)parse_ini_file("../config.ini.php", true);
 
@@ -79,6 +86,7 @@
     }else{
         die("Configuration file ../config.ini.php not found!");
     }
-    
-    # DEFINE TIME ZONE ATUAL
+
+    # -- DEFINE TIME ZONE ATUAL ------------------------------------------------
+
     date_default_timezone_set( $_M_CONFIG->system['time-zone'] );
