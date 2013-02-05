@@ -12,7 +12,7 @@ forms:
               column: id
 
             - type: example
-              label: 'Primeiro Nome'
+              label: 'Nome'
               column: first_name
               
             - type: example
@@ -28,24 +28,12 @@ forms:
               column: login
               
             - type: example
-              label: Permissões
-              column: permissions
+              label: Email
+              column: Email
               
             - type: example
-              label: email
-              column: Email
-
-            - type: example
-              label: Cod_grupo
-              column: group_id
-
-            - type: fk
               label: Grupo
-              column:
-                  p-key   : 'Cod_grupo'
-                  f-key   : '_m_group.id'
-                  columns : ['name']
-                  concat: [', ']
+              column: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
 
     update:
         title: 'Atualizando Usuário'
