@@ -1,26 +1,5 @@
-<!DOCTYPE html>
-<html>
-    <head>
-        <title>&m.var:main-title; - &m.var:title;</title>
+&m.include:#template#/list-content.html;
 
-        &m.include:#template#/_head.html;
-        
-        <!-- FORM SCRIPTS -->
-        <script src="&m.var:template;/script/list.js"></script>
-    </head>
-    <body id="popup-window">
-        <div class="loader">Carregando...</div>
-        
-        <h1>&m.var:title;</h1>
-        
-        <div class="content">
-            <div class="window for-tab-list list">
-                &m.include:#template#/list-content.html;
-            </div>
-        </div>
-        
-        <script>
-            &m.include:#template#/script/bodyJs.inc.js;
-        </script>
-    </body>
-</html>    
+<script>
+    &m.include:#template#/script/bodyJs.inc.js;
+</script>

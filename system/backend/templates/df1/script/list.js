@@ -20,7 +20,7 @@ $(function(){
     });
 
     // ORDENAÇÃO
-    $("table").on("click", "th", function(){
+    $(".window.list").on("click", "th", function(){
         if( $(this).hasClass('CHANGE_TO_DESC') ){
             order = $(this).text() + "!";
         }else{
@@ -35,33 +35,59 @@ $(function(){
             + "&cond=" + JSON.stringify(cond)
         ;
     });
+    
+    // ATUALIZAR TELA DE LISTAGEM NO DF1
+    $(".window.list").on("click", ".bt-reload-list", function(){
+        layout.ajax.showLoader();
+        url = 
+            "?action=view-list-window-form"
+            +"&form="+ form
+            +"&" + $(this).attr("rel")
+            +"&orderBy="+ orderBy
+            +"&cond="+ JSON.stringify(cond)
+        ;
+        
+        $(".list-content").load(url)
+        layout.ajax.hideLoader();
+    });
 
     // PAGINAÇÃO
-    $(".list").on("click", ".bt-page", function(){
-        window.location = 
-            "?action=" + action
+    $(".window.list").on("click", ".bt-page", function(){
+        url = 
+            "?action=view-list-window-form"
             + "&form=" + form
             + "&" + $(this).attr("rel")
             + "&orderBy=" + orderBy
             + "&cond=" + JSON.stringify(cond)
         ;
+        
+        layout.ajax.showLoader();
+        $(".list-content").load(url)
+        layout.ajax.hideLoader();
+        
     });
 
-    $(".next-page").click(function(){
-        $(this).closest("div.action-bar").find(".active").next().click();
+    $(".window.list").on("click", ".next-page", function(){
+        $next = $(this).closest(".action-bar").find(".active").next(".bt-page");
+        if(typeof $next[0] == "object"){
+            $next.click();
+        }
     });
 
-    $(".prev-page").click(function(){
-        $(this).closest("div.action-bar").find(".active").prev().click();
+    $(".window.list").on("click", ".prev-page", function(){
+        $prev = $(this).closest(".action-bar").find(".active").prev(".bt-page");
+        if(typeof $prev[0] == "object"){
+            $prev.click();
+        }
     });
 
     // ACTIONS
-    $("table").on("click", ".edit", function(){
+    $(".window.list").on("click", ".edit", function(){
         layout.popup("?action=view-update-window-form&form=" + form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
         return false;
     });
 
-    $("table").on("click", ".delete", function(){
+    $(".window.list").on("click", ".delete", function(){
         msg  = "ATENÇÃO!\r\n\r\n"
         msg += "- Você esta prestes a deletar um registro do banco de dados, \r\n"
         msg += "esta ação não poderá ser desfeita, clique em OK se realmente \r\n"
@@ -87,7 +113,7 @@ $(function(){
         return false;
     });
 
-    $("table").on("click", ".select", function(){
+    $(".window.list").on("click", ".select", function(){
         alert("select");
     });
 
