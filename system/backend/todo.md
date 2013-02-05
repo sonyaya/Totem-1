@@ -6,12 +6,16 @@ Forms
 - Adicionar before e after, update e insert para formulários, por enquanto só existe para os types.
 
 
+List
+----
+- Adicionar ajax para pesquisas
+- Nomes com espaços não estão sendo pesquisados corretamente no DF1
+
 BUGS
 ====
 
 Templates
 ---------
-- Padronizar todos os jQuery de todas as paginas, incluindo login.
 - O CSS do template df1 esta utilizando o calc (compativel somente com webkit e moz) é preciso encontrar um alternativa para isso.
 
 
