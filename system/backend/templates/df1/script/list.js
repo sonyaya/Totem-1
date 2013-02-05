@@ -1,23 +1,29 @@
 $(function(){
+    list = {};
+    
     // 
-    action  = layout.uri("action"); 
-    form    = layout.uri("form");
-    cond    = layout.uri("cond");
-    page    = layout.uri("page");
-    orderBy = layout.uri("orderBy");
+    list.action  = layout.uri("action"); 
+    list.form    = layout.uri("form");
+    list.cond    = layout.uri("cond");
+    list.page    = layout.uri("page");
+    list.orderBy = layout.uri("orderBy");
 
     // ADICIONA CLASSE A COLUNA QUE ESTA 
     // SENDO UTILIZADA COMO ORDENADORA
-    orderBy = orderBy.split('/');
-    $.each(orderBy, function(key, val){
-        if( val.indexOf("!") > 0 ){
-            DOM = val.replace("!", "");
-            DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_ASC');
-        }else{
-            DOM = val.replace("!", "");
-            DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_DESC');
-        }
-    });
+    list.addOrderClass = function(orderBy){
+        orderBy = (typeof orderBy == "undefined") ? layout.uri("orderBy") : orderBy ;
+        orderBy = orderBy.split('/');
+        $.each(orderBy, function(key, val){
+            if( val.indexOf("!") > 0 ){
+                DOM = val.replace("!", "");
+                DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_ASC');
+            }else{
+                DOM = val.replace("!", "");
+                DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_DESC');
+            }
+        });
+    }
+    list.addOrderClass(list.orderBy);
 
     // ORDENAÇÃO
     $(".window.list").on("click", "th", function(){
@@ -27,42 +33,44 @@ $(function(){
             order = $(this).text();
         }
 
-        window.location = 
-            "?action=" + action
-            + "&form=" + form
-            + "&page=" + page
+        url = "&form=" + list.form
+            + "&page=" + list.page
             + "&orderBy=" + order
-            + "&cond=" + JSON.stringify(cond)
+            + "&cond=" + JSON.stringify(list.cond)
         ;
+        
+        layout.ajax.showLoader();
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass(order) });
+        layout.ajax.hideLoader();
+        
+        var stateObj = { foo: "bar" };
+        history.pushState(stateObj, null, "?action=view-listAndInsert-form"+url);
     });
     
     // ATUALIZAR TELA DE LISTAGEM NO DF1
     $(".window.list").on("click", ".bt-reload-list", function(){
-        layout.ajax.showLoader();
-        url = 
-            "?action=view-list-window-form"
-            +"&form="+ form
-            +"&" + $(this).attr("rel")
-            +"&orderBy="+ orderBy
-            +"&cond="+ JSON.stringify(cond)
+        
+        url = "&form="+ list.form
+            + "&page=" + list.page
+            + "&orderBy="+ list.orderBy
+            + "&cond="+ JSON.stringify(list.cond)
         ;
         
-        $(".list-content").load(url)
+        layout.ajax.showLoader();
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass() });
         layout.ajax.hideLoader();
     });
 
     // PAGINAÇÃO
     $(".window.list").on("click", ".bt-page", function(){
-        url = 
-            "?action=view-list-window-form"
-            + "&form=" + form
+        url = "&form=" + list.form
             + "&" + $(this).attr("rel")
-            + "&orderBy=" + orderBy
-            + "&cond=" + JSON.stringify(cond)
+            + "&orderBy=" + list.orderBy
+            + "&cond=" + JSON.stringify(list.cond)
         ;
         
         layout.ajax.showLoader();
-        $(".list-content").load(url)
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass() });
         layout.ajax.hideLoader();
         
     });
@@ -83,7 +91,7 @@ $(function(){
 
     // ACTIONS
     $(".window.list").on("click", ".edit", function(){
-        layout.popup("?action=view-update-window-form&form=" + form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
+        layout.popup("?action=view-update-window-form&form=" + list.form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
         return false;
     });
 
@@ -136,19 +144,19 @@ $(function(){
         }
 
         window.location = 
-            "?action=" + action
-            + "&form=" + form
-            + "&page=" + page
-            + "&orderBy=" + orderBy
-            + "&cond=" + JSON.stringify(search)
+            "?action=" + list.action
+            + "&form=" + list.form
+            + "&page=" + list.page
+            + "&orderBy=" + list.orderBy
+            + "&cond=" + JSON.stringify(list.search)
         ;
 
         return false;
     });
 
     // POPULAR FORMULÁRIO DE PESQUISA / SEARCH
-    if($.trim(cond) !== ""){
-        cond = $.parseJSON(cond);
+    if($.trim(list.cond) !== ""){
+        cond = $.parseJSON(list.cond);
         $.each(cond, function(key, val){
             i = key+1;
             $("#cond-and-or-"+i).val( val[0] ), 
