@@ -4,7 +4,7 @@ $(function(){
     // 
     list.action  = layout.uri("action"); 
     list.form    = layout.uri("form");
-    list.cond    = layout.uri("cond");
+    list.cond    = ($.trim(list.cond = layout.uri("cond")) == "") ? [] : $.parseJSON(list.cond);
     list.page    = layout.uri("page");
     list.orderBy = layout.uri("orderBy");
 
@@ -14,6 +14,7 @@ $(function(){
         orderBy = (typeof orderBy == "undefined") ? layout.uri("orderBy") : orderBy ;
         orderBy = orderBy.split('/');
         $.each(orderBy, function(key, val){
+            val = decodeURIComponent(val);
             if( val.indexOf("!") > 0 ){
                 DOM = val.replace("!", "");
                 DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_ASC');
@@ -33,6 +34,8 @@ $(function(){
             order = $(this).text();
         }
 
+        order = encodeURIComponent(order);
+
         url = "&form=" + list.form
             + "&page=" + list.page
             + "&orderBy=" + order
@@ -40,7 +43,9 @@ $(function(){
         ;
         
         layout.ajax.showLoader();
-        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass(order) });
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ 
+            list.addOrderClass(order); 
+        });
         layout.ajax.hideLoader();
         
         var stateObj = { foo: "bar" };
@@ -57,7 +62,9 @@ $(function(){
         ;
         
         layout.ajax.showLoader();
-        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass() });
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ 
+            list.addOrderClass();
+        });
         layout.ajax.hideLoader();
     });
 
@@ -70,7 +77,9 @@ $(function(){
         ;
         
         layout.ajax.showLoader();
-        $(".list-content").load("?action=view-list-window-form" + url, function(){ list.addOrderClass() });
+        $(".list-content").load("?action=view-list-window-form" + url, function(){ 
+            list.addOrderClass(); 
+        });
         layout.ajax.hideLoader();
         
     });
@@ -155,15 +164,13 @@ $(function(){
     });
 
     // POPULAR FORMULÁRIO DE PESQUISA / SEARCH
-    if($.trim(list.cond) !== ""){
-        cond = $.parseJSON(list.cond);
-        $.each(cond, function(key, val){
-            i = key+1;
-            $("#cond-and-or-"+i).val( val[0] ), 
-            $("#cond-column-"+i).val( val[1] ),
-            $("#cond-comparison-"+i).val( val[2] ),
-            $("#cond-value-"+i).val( val[3] )
-        });
-    }
+    $.each(list.cond, function(key, val){
+        i = key+1;
+        $("#cond-and-or-"+i).val( val[0] ), 
+        $("#cond-column-"+i).val( val[1] ),
+        $("#cond-comparison-"+i).val( val[2] ),
+        $("#cond-value-"+i).val( val[3] )
+    });
+
 });
     
