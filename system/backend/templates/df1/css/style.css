@@ -178,11 +178,13 @@ iframe{
 
 
     nav.side{
+        background: #E6EAEA;
         float: left;
-        width: 200px;
-        font-weight: 700;
         font-size: 1em;
+        font-weight: 100;
+        min-height: calc(100% - 120px - 50px);
         text-transform: uppercase;
+        width: 200px;
         }
 
     nav.side ul,
