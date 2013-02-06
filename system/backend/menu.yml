@@ -5,4 +5,8 @@
 - label: Blog
   load-from-module: blog
   module-start-url: ?action=view-listAndInsert-form&form=blog/post
+
+- label: DiscoGráfia do Rock
+  load-from-module: ddr
+  module-start-url: ?action=view-listAndInsert-form&form=ddr/artist
   
