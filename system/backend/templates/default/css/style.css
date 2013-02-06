@@ -87,10 +87,11 @@ iframe{
         float: left;
         overflow: hidden;
         font-size: 16px;
-        height: 120px;
+        height: 119px;
+        border-bottom: 1px solid #A2AFAF;
         width: -webkit-calc(100% - 201px);
         width:    -moz-calc(100% - 201px);
-        width:         calc(100% - 201px);
+        wi
         }
     
     header div.modules nav ul,
@@ -303,6 +304,7 @@ iframe{
         background:      -o-linear-gradient(top, #DDDDDD 0%, #F9F9F9 100%);
         background:   linear-gradient(to bottom, #DDDDDD 0%, #F9F9F9 100%);
         filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#CCCCCC', endColorstr='#F9F9F9', GradientType=0);
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.7) inset;  
         }
     
     nav.top-tabs ul,
