@@ -139,7 +139,12 @@ iframe{
         }
         
     header div.modules nav ul li.blog a{
-        background: url("../img/iconic/rss_alt.svg") no-repeat center 30px;
+        background: url("../img/iconic/rss_alt.svg") no-repeat center 32px;
+        background-size: 40px;
+        }
+        
+    header div.modules nav ul li.ddr a{
+        background: url("../img/iconic/mic.svg") no-repeat center 20px;
         background-size: 40px;
         }
         
