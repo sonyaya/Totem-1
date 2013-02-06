@@ -53,7 +53,7 @@ layout.popup = (function(url, title){
         // Fecha a tela de load
         layout.ajax.hideLoader();
     }else{
-        var w = screen.width / 1.2;
+        var w = 600;
         var barSize = 70;
         newWindow = window.open(
             url + "&popup=1",
