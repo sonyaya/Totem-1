@@ -2,11 +2,14 @@ $(function(){
     list = {};
     
     // 
-    list.action  = layout.uri("action"); 
-    list.form    = layout.uri("form");
-    list.cond    = ($.trim(list.cond = layout.uri("cond")) == "") ? [] : $.parseJSON(list.cond);
-    list.page    = layout.uri("page");
-    list.orderBy = layout.uri("orderBy");
+    list.updateAttributes = function(){
+        list.action  = layout.uri("action"); 
+        list.form    = layout.uri("form");
+        list.cond    = ($.trim(list.cond = layout.uri("cond")) == "") ? [] : $.parseJSON(list.cond);
+        list.page    = layout.uri("page");
+        list.orderBy = layout.uri("orderBy");
+    }
+    list.updateAttributes();
 
     // ADICIONA CLASSE A COLUNA QUE ESTA 
     // SENDO UTILIZADA COMO ORDENADORA
@@ -35,7 +38,8 @@ $(function(){
         }
 
         order = encodeURIComponent(order);
-
+        
+        list.updateAttributes();
         url = "&form=" + list.form
             + "&page=" + list.page
             + "&orderBy=" + order
@@ -54,7 +58,7 @@ $(function(){
     
     // ATUALIZAR TELA DE LISTAGEM NO DF1
     $(".window.list").on("click", ".bt-reload-list", function(){
-        
+        list.updateAttributes();
         url = "&form="+ list.form
             + "&page=" + list.page
             + "&orderBy="+ list.orderBy
@@ -70,6 +74,7 @@ $(function(){
 
     // PAGINAÇÃO
     $(".window.list").on("click", ".bt-page", function(){
+        list.updateAttributes();
         url = "&form=" + list.form
             + "&" + $(this).attr("rel")
             + "&orderBy=" + list.orderBy
