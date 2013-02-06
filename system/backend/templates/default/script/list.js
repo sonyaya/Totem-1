@@ -2,7 +2,7 @@ $(function(){
     // 
     action  = layout.uri("action"); 
     form    = layout.uri("form");
-    cond    = layout.uri("cond");
+    cond    = ($.trim(cond = layout.uri("cond")) == "") ? [] : $.parseJSON(cond);
     page    = layout.uri("page");
     orderBy = layout.uri("orderBy");
 
@@ -11,6 +11,7 @@ $(function(){
     orderBy = orderBy.split('/');
     $.each(orderBy, function(key, val){
         if( val.indexOf("!") > 0 ){
+            val = decodeURIComponent(val);
             DOM = val.replace("!", "");
             DOM = $("th[rel='"+DOM+"']").addClass('CHANGE_TO_ASC');
         }else{
@@ -27,8 +28,10 @@ $(function(){
             order = $(this).text();
         }
 
+        order = encodeURIComponent(order);
+
         window.location = 
-            "?action=" + action
+              "?action=" + action
             + "&form=" + form
             + "&page=" + page
             + "&orderBy=" + order
@@ -39,7 +42,7 @@ $(function(){
     // PAGINAÇÃO
     $(".list").on("click", ".bt-page", function(){
         window.location = 
-            "?action=" + action
+             "?action=" + action
             + "&form=" + form
             + "&" + $(this).attr("rel")
             + "&orderBy=" + orderBy
@@ -121,14 +124,12 @@ $(function(){
     });
 
     // POPULAR FORMULÁRIO DE PESQUISA / SEARCH
-    if($.trim(cond) !== ""){
-        cond = $.parseJSON(cond);
-        $.each(cond, function(key, val){
-            i = key+1;
-            $("#cond-and-or-"+i).val( val[0] ), 
-            $("#cond-column-"+i).val( val[1] ),
-            $("#cond-comparison-"+i).val( val[2] ),
-            $("#cond-value-"+i).val( val[3] )
-        });
-    }
+    $.each(cond, function(key, val){
+        i = key+1;
+        $("#cond-and-or-"+i).val( val[0] ), 
+        $("#cond-column-"+i).val( val[1] ),
+        $("#cond-comparison-"+i).val( val[2] ),
+        $("#cond-value-"+i).val( val[3] )
+    });
+    
 });
