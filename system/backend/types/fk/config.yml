@@ -24,4 +24,5 @@ default:
   parameter : 
     table : table
     column : column
+    label : column-label
     insert-form : "" 
