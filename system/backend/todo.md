@@ -8,8 +8,7 @@ Forms
 
 List
 ----
-- Adicionar ajax para pesquisas
-- Nomes com espaços não estão sendo pesquisados corretamente no DF1
+- Adicionar ajax para pesquisas no template DF1
 
 BUGS
 ====
