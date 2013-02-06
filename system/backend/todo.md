@@ -1,6 +1,8 @@
 TO-DO
 =====
 
+- Criar sistema de log de alterações e permissões por módulos.
+
 Forms
 -----
 - Adicionar before e after, update e insert para formulários, por enquanto só existe para os types.
