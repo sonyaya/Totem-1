@@ -82,7 +82,10 @@
     div.list table .action{
         }
         
-
+   div.list table tbody tr td{
+        font-size: 0.9em;
+        }
+        
     div.list table thead tr th{
         font-size: 0.8em;
         }

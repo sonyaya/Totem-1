@@ -91,7 +91,7 @@ iframe{
         border-bottom: 1px solid #A2AFAF;
         width: -webkit-calc(100% - 201px);
         width:    -moz-calc(100% - 201px);
-        wi
+        width:         calc(100% - 201px);
         }
     
     header div.modules nav ul,
@@ -386,31 +386,54 @@ iframe{
         font-size: 1.0em;
         }
 
+    div.list table thead tr{
+        }
+        
     div.list table thead tr th{
-        color: #F7F7F7;
-        background: #3A454E;
+        color: #878787;
         padding: 0.5% 1%;
-        font-size: 1em;
+        font-size: 0.9em;
         font-weight: 100;
         cursor: pointer;
         text-align: left;
         overflow: hidden;
         vertical-align: bottom;
+        border-top: 1px solid #CDCDCD;
+        border-bottom: 1px solid #CDCDCD;
+        text-align: center;
+        
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA), color-stop(100%, #EFEFEF));
+        background: -webkit-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:    -moz-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:     -ms-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:      -o-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:   linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#EFEFEF', GradientType=0);
+        }
+        
+    div.list table thead tr th:first-child,    
+    div.list table thead tr th:last-child{
+        border-right: 1px solid #CDCDCD;
         }
 
     div.list table thead tr th.CHANGE_TO_DESC{
-        background: url("../img/fugue/icons/sort-date-descending.png") 95% center no-repeat #3a454e;
+        background: url("../img/fugue/icons/sort-date-descending.png")  no-repeat 95% center #EFEFEF;
+        border-right: 1px solid #CDCDCD;
+        border-left: 1px solid #CDCDCD;
         }
 
     div.list table thead tr th.CHANGE_TO_ASC{
-        background: url("../img/fugue/icons/sort-date.png") 95% center no-repeat #3a454e;
+        background: url("../img/fugue/icons/sort-date.png") no-repeat 95% center #EFEFEF;
+        border-right: 1px solid #CDCDCD;
+        border-left: 1px solid #CDCDCD;
         }
 
     div.list table thead .action{
         background: transparent;
+        border: 0 none;
         border-bottom: 1px solid #C7C7C7;
         }
-
+        
     div.list table tbody{
         border-left: 1px solid #C7C7C7;
         border-right: 1px solid #C7C7C7;
@@ -419,12 +442,19 @@ iframe{
 
     div.list table tbody tr td{
         color: #707070;
-        background: #F7F7F7;
-        border-bottom: 1px solid #E7E7E7;
+        border: 1px solid #CDCDCD;
         padding: 1%;
         vertical-align: top;
         }
+    
+    div.list table tbody tr:nth-child(even){
+        background: #FAFAFA;
+        }
 
+    div.list table tbody tr:nth-child(odd){
+        background: #F5F5F5;
+        }
+        
     div.list table tbody tr td a{
         color: inherit;
         text-decoration: none;
@@ -435,16 +465,25 @@ iframe{
         }
 
     div.list table tbody tr:hover td{
-        background: #F0F0F0;
-        color: #000000;
+        background: #F0F0F0 !important;
+        color: #000000 !important;
         }
-
+        
     div.list table tbody .action{
-        background: #EEEEEE;
         border-bottom: 1px solid #C7C7C7;
-        width: 95px;
+        vertical-align: middle;
+        text-align: center;
+        width: 85px;
         }
-
+        
+    div.list table tbody tr:nth-child(even) .action{
+        background: #F7F7F7;
+        }
+        
+    div.list table tbody tr:nth-child(odd) .action{
+        background: #EEEEEE;
+        }
+        
     div.list td.action a.edit,
     div.list td.action a.delete,
     div.list td.action a.select{
