@@ -64,7 +64,6 @@
 
     nav.side{
         width: 100%;
-        min-height: auto;
         }
         
     nav.side:hover ul{

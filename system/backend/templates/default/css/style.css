@@ -53,7 +53,7 @@ iframe{
         }
 
     body{
-        background: #F9F9F9;
+        background: #E6EAEA;
         font-color: #4C4C4C;
         font-size: 0.8em;
         pdding: 0;
@@ -162,6 +162,7 @@ iframe{
         border-left: 1px solid #A2AFAF; 
         position: relative;
         z-index: 1;
+        background: #F9F9F9;
         min-height: -webkit-calc(100% - 120px - 50px);
         min-height:    -moz-calc(100% - 120px - 50px);
         min-height:         calc(100% - 120px - 50px);
@@ -179,11 +180,9 @@ iframe{
 
 
     nav.side{
-        background: #E6EAEA;
         float: left;
         font-size: 1em;
         font-weight: 100;
-        min-height: calc(100% - 120px - 50px);
         text-transform: uppercase;
         width: 200px;
         }
