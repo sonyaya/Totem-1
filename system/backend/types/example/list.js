@@ -1,5 +1,5 @@
 $(function(){
-    $("table").on("keypress", "td.example a", function(){
+    $("body").on("keypress", "table td.example a", function(){
         $this = $(this);
         $td   = $this.parent('td');
 
