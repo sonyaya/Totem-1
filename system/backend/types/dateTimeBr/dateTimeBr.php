@@ -96,6 +96,10 @@
          * @param type $pKey
          */
         public function beforeInsertAndUpdate(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            $thisData = "{$thisData['year']}-{$thisData['month']}-{$thisData['day']} {$thisData['hours']}:{$thisData['minutes']}:{$thisData['seconds']}";    
+            if( $thisData['year'] !== "--"){
+                $thisData = "{$thisData['year']}-{$thisData['month']}-{$thisData['day']} {$thisData['hours']}:{$thisData['minutes']}:{$thisData['seconds']}";    
+            }else{
+                $thisData = null;
+            }
         }
     }

@@ -12,6 +12,13 @@ function DateTimeBr_loadDays($this){
 }
 
 $(function(){
+    $(".dateTimeBr").on("change", "select", function(){
+        if( $(this).val() == "--" ){
+            $(this).closest(".inner-holder").find("select").val("--"); 
+            $inputHolder.find(".input-day").html("<option>--</option>");
+        }
+    });
+    
     $(".dateTimeBr").on("focus", ".input-day", function(){
         DateTimeBr_loadDays($(this));
     });
