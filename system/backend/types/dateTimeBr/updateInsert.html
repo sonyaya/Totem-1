@@ -5,6 +5,9 @@
     <div class="box year">
       <label>Ano</label> 
       <select name="&m.var:name;[year]" class="input-year" id="&m.var:id;_year" required>
+          <m.if cond="&m.var:bool:parameter.nullable;">
+            <option val="--">--</option>
+          </m.if>  
           <m.repeat start="toLayout.year.start" stop="toLayout.year.stop" alias="YEAR">
             <option>#YEAR#</option>
           </m.repeat>
@@ -14,6 +17,9 @@
     <div class="box month">
       <label>Mês</label>
       <select name="&m.var:name;[month]" class="input-month" id="&m.var:id;_month" required>
+        <m.if cond="&m.var:bool:parameter.nullable;">
+          <option val="--">--</option>
+        </m.if> 
         <m.repeat start="01" stop="12" alias="MONTH">
           <option>#MONTH#</option>
         </m.repeat>
@@ -30,6 +36,9 @@
     <div class="box hour">
       <label>Hora</label>
       <select name="&m.var:name;[hours]" id="&m.var:id;_hours" required>
+        <m.if cond="&m.var:bool:parameter.nullable;">
+          <option val="--">--</option>
+        </m.if>
         <m.repeat start="01" stop="24" alias="HOUR">
           <option>#HOUR#</option>
         </m.repeat>
@@ -39,6 +48,9 @@
     <div class="box minute">
       <label>Minutos</label>
       <select name="&m.var:name;[minutes]" id="&m.var:id;_minutes" required>
+        <m.if cond="&m.var:bool:parameter.nullable;">
+          <option val="--">--</option>
+        </m.if>
         <m.repeat start="00" stop="59" alias="MINUTE">
           <option>#MINUTE#</option>
         </m.repeat>
@@ -49,6 +61,9 @@
     <div class="box seconds">
       <label>Segundos</label>
       <select name="&m.var:name;[seconds]" id="&m.var:id;_seconds" required>
+        <m.if cond="&m.var:bool:parameter.nullable;">
+          <option val="--">--</option>
+        </m.if>
         <m.repeat start="00" stop="59" alias="SENCONDS">
           <option>#SENCONDS#</option>
         </m.repeat>
