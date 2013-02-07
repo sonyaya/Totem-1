@@ -1,0 +1,6 @@
+interface:
+  html: dashboard.html
+  css: [ ] 
+  javascript:
+    head: [ ]
+    body: [ ]
