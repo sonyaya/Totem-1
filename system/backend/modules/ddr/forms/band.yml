@@ -86,7 +86,7 @@ forms:
           table : ddr_city
           column : id
           label : name
-          insert-form : "ddr/city" 
+          insert-form : "ddr/forms/city" 
           
       gender:
         type: manyToMany
@@ -100,7 +100,7 @@ forms:
           right-table  : ddr_gender
           right-fk     : id
           right-label  : name
-          insert-form  : "ddr/gender"
+          insert-form  : "ddr/forms/gender"
           
       band:
         type: manyToMany
@@ -115,7 +115,7 @@ forms:
           right-table  : ddr_artist
           right-fk     : id
           right-label  : name
-          insert-form  : "ddr/band"  
+          insert-form  : "ddr/forms/band"  
             
   # -- UPDATE ------------------------------------------------------------------
   

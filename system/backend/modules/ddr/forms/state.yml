@@ -42,7 +42,7 @@ forms:
           table : ddr_cowntry
           column : id
           label : name
-          insert-form : "ddr/cowntry" 
+          insert-form : "ddr/forms/cowntry" 
             
   # -- UPDATE ------------------------------------------------------------------
   

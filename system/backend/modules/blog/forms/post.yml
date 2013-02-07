@@ -110,7 +110,7 @@ forms:
           right-table  : blog_category
           right-fk     : id
           right-label  : title
-          insert-form  : "blog/category" 
+          insert-form  : "blog/forms/category" 
           
       type:
         type: manyToMany
@@ -125,7 +125,7 @@ forms:
           right-table  : blog_type
           right-fk     : id
           right-label  : title
-          insert-form  : "blog/type"
+          insert-form  : "blog/forms/type"
 
       imgage:
         type: imagesUpload

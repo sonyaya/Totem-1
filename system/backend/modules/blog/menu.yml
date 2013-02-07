@@ -1,8 +1,8 @@
 - label: "Postagens"
-  link: "?action=view-listAndInsert-form&form=blog/post"
+  link: "?action=view-listAndInsert-form&form=blog/forms/post"
 
 - label: "Categorias"
-  link: "?action=view-listAndInsert-form&form=blog/category"
+  link: "?action=view-listAndInsert-form&form=blog/forms/category"
 
 - label: "Tipos"
-  link: "?action=view-listAndInsert-form&form=blog/type"
+  link: "?action=view-listAndInsert-form&form=blog/forms/type"

@@ -1,5 +1,5 @@
 - label: "Artistas"
-  link: "?action=view-listAndInsert-form&form=ddr/artist"
+  link: "?action=view-listAndInsert-form&form=ddr/forms/artist"
   
 - label: "Bandas"
-  link: "?action=view-listAndInsert-form&form=ddr/band"
+  link: "?action=view-listAndInsert-form&form=ddr/forms/band"
