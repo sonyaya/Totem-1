@@ -25,7 +25,16 @@
         public function beforeInsert(&$thisData, $thisColumn, &$allData){
             $this->beforeUpdateAndInsert($thisData, $thisColumn, $allData);
         }
-
+        
+        /**
+         * 
+         * @param type $thisData
+         * @param type $thisColumn
+         * @param type $allData
+         */
+        public function beforeUpdate(&$thisData, $thisColumn, &$allData){
+            $this->beforeUpdateAndInsert($thisData, $thisColumn, $allData);
+        }
 
         /**
          * 
