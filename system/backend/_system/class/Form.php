@@ -1004,6 +1004,10 @@
          * Adiciona informações a serem enviados para listagem e formulário
          * 
          * @global array $_M_THIS_CONFIG
+         * @global array $_M_MENU
+         * @global type $_M_MENU_PARTS
+         * @global type $_M_MENU_MODULE
+         * @global array $_M_USER
          * @param array $array
          */
         private function addToArrayLayout(array $array){
