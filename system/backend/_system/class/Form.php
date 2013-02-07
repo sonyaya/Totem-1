@@ -166,7 +166,7 @@
                     // importa js do body
                     if(is_array($bodyJSPaths = $confTypeArray['interface']['javascript']['body'][ $insertOrUpdate ])){
                         foreach ($bodyJSPaths as $bodyJSPath) {
-                            $bodyJS[] = (string)new Frontend("$path/$bodyJSPath", $variables);;
+                            $bodyJS[] = (string)new Frontend("$path/$bodyJSPath", $variables);
                         }
                     }else{
                         $bodyJS[] = (string)new Frontend("$path/$bodyJSPaths", $variables);
