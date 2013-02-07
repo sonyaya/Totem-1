@@ -1,3 +1,4 @@
+title: "Dash board"
 interface:
   html: dashboard.html
   css: [ ] 

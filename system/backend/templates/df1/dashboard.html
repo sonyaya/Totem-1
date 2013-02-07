@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
     <head>
-        <title>&m.var:main-title; - &m.var:title;</title>
+        <title>&m.var:title;</title>
         
         &m.include:#template#/_head.html;
     </head>
@@ -15,10 +15,11 @@
         </nav>
         
         <div class="main">
-            &m.var:dashboardHtml;
+            <div class="content">
+                &m.var:dashboardHtml;
+            </div>
         </div>
 
-        
         <div class="clear"></div>
         
         <footer>

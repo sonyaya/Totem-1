@@ -12,7 +12,16 @@
         private $dashboardData = Array();
         private $dashboardConfig = Array();
         
-        
+        /**
+         * 
+         * @global type $_M_THIS_CONFIG
+         * @global type $_M_MENU
+         * @global type $_M_MENU_PARTS
+         * @global type $_M_MENU_MODULE
+         * @global type $_M_USER
+         * @param type $dashFilename
+         * @param type $templateHtml
+         */
         public function viewDashboard($dashFilename, $templateHtml){
             global $_M_THIS_CONFIG;
             global $_M_MENU;
@@ -38,11 +47,13 @@
             }
             // Array To Layout
             $arrayBase = Array(  
-                "user" => $_M_USER ,
+                "user" => $_M_USER,
+                "title" => $this->dashboardConfig['title'],
                 "main-menu" => $_M_MENU ,
                 "main-menu-parts" => $_M_MENU_PARTS,
                 "menu-modules" => $_M_MENU_MODULE,
-                "dashboard" => $dashFilename
+                "dashboard" => $dashFilename,
+                "data" => $this->dashboardData
             );
             
             // MODULE FOLDER
