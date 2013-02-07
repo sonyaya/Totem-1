@@ -8,6 +8,7 @@
 
     use backend\User;
     use backend\Form;
+    use backend\DashboardComposer;
     use backend\Frontend;
     use backend\backendIndex;
 
@@ -117,6 +118,15 @@
 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
     switch( $action ) {
+        // MOSTRA A INTERFACE GRÁFICA DO
+        // DASHBOARD ESPECIFÍCO
+        case "view-dashboard":{
+            User::check("backend", "view-dashboard", "html");
+            $dashboard = new DashboardComposer();
+            $dashboard->viewDashboard( $_GET['dashboard'], "dashboard.html" );
+            break;
+        }
+        
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE INSERÇÃO
         case "view-insert-form":{
