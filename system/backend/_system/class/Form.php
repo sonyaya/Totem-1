@@ -35,7 +35,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "forms/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -243,7 +243,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "forms/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -665,7 +665,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "forms/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -867,7 +867,7 @@
             
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "forms/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{

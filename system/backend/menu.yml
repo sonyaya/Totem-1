@@ -10,3 +10,8 @@
   load-from-module: ddr
   module-start-url: ?action=view-listAndInsert-form&form=ddr/artist
   
+- label: Example
+  submenu:
+    label: Dashboard
+    link: ?action=view-dashboard&dashboard=example/dashboards/dashboard
+  

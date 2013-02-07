@@ -1,0 +1,5 @@
+- label: "Usuários"
+  link: "?action=view-listAndInsert-form&form=user/user"
+
+- label: "Grupos de Usuários"
+  link: "?action=view-listAndInsert-form&form=user/group"

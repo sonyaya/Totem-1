@@ -88,7 +88,7 @@
                 $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
 
                 // cria o itens filhos a partir do menu de formulário no main-menu
-                $smenu = Yaml::parse( file_get_contents("forms/{$val['load-from-module']}/menu.yml") );
+                $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
                 $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
 
                 // retorna o menu

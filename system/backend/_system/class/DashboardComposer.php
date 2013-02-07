@@ -31,8 +31,8 @@
             
             // IMPORTA E RODA A CLASSE DE DASHBOARD E CONFIGURAÇÕES
             if(
-                file_exists($filenameDash = "dashboards/$dashFilename.php") &&
-                file_exists($filenameYaml = "dashboards/$dashFilename.yml")
+                file_exists($filenameDash = "modules/$dashFilename.php") &&
+                file_exists($filenameYaml = "modules/$dashFilename.yml")
             ){
                 // calsse do dashboard
                 require_once $filenameDash;
@@ -62,19 +62,19 @@
             // JS HEAD
             $jsHead = Array();
             foreach($this->dashboardConfig['interface']['javascript']['head'] as $file){
-                $jsHead[] = "dashboards/$moduleFolder/$file";
+                $jsHead[] = "modules/$moduleFolder/$file";
             }
             
             // JS BODY
             $jsBody = Array();
             foreach($this->dashboardConfig['interface']['javascript']['body'] as $file){
-                $jsBody[] = (string)new Frontend("dashboards/$moduleFolder/$file", $arrayBase);
+                $jsBody[] = (string)new Frontend("modules/$moduleFolder/$file", $arrayBase);
             }
             
             // CSS HEAD
             $styles = Array();
             foreach($this->dashboardConfig['interface']['css'] as $file){
-                $styles[] = "dashboards/$moduleFolder/$file";
+                $styles[] = "modules/$moduleFolder/$file";
             }
             
             // 
@@ -91,7 +91,7 @@
             ;
             
             // 
-            if( file_exists($fileHtml = "dashboards/$moduleFolder/{$this->dashboardConfig['interface']['html']}" ) ){
+            if( file_exists($fileHtml = "modules/$moduleFolder/{$this->dashboardConfig['interface']['html']}" ) ){
                 $toLayout["dashboardHtml"] = (string)new Frontend($fileHtml, $toLayout);
             }else{
                  $toLayout["dashboardHtml"] = "'$fileHtml' não foi encontrado.";
