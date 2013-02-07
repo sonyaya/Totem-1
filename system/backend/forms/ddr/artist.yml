@@ -115,6 +115,7 @@ forms:
         column: 'ddr_band_x_artist' # nome ficticio
         ignore-select: true         # não busca os dados desta coluna em formulários de atualização
         parameter:
+          nullable     : true;
           middle-table : ddr_band_x_artist
           middle-fk    : ddr_artist_id
           middle-pk    : ddr_band_id
