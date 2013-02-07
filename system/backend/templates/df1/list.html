@@ -9,7 +9,12 @@
         <script src="&m.var:template;/script/list.js"></script>
     </head>
     <body>
-        <div id="loader">Carregando...</div>
+        <div id="loader">
+            <div class="inner-loader">
+                <div id="canvasloader-container"></div>
+                Carregando...
+            </div>
+        </div>
         
         <header>
             &m.include:#template#/_header.html;

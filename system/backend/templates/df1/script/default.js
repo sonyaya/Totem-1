@@ -1,7 +1,18 @@
 //    
-$(function(){    
-    // x que fecha as abas
-    // adiciona função ao botão fechar da top-tab
+$(function(){
+    // CRIA O LOADER 
+    var cl = new CanvasLoader('canvasloader-container');
+    cl.setColor('#FFFFFF'); // default is '#000000'
+    cl.setShape('spiral'); // default is 'oval'
+    cl.setDiameter(122); // default is 40
+    cl.setDensity(35); // default is 40
+    cl.setRange(2); // default is 1.3
+    cl.setSpeed(1); // default is 2
+    cl.setFPS(20); // default is 24
+    cl.show(); // Hidden by default
+    
+    // X QUE FECHA AS ABAS
+    // ADICIONA FUNÇÃO AO BOTÃO FECHAR DA TOP-TAB
     $("#popup-menu").on("click", "li span", function(){
         $this = $(this);
         $li = $this.closest("li");

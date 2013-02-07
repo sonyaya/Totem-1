@@ -24,6 +24,13 @@ table tbody *{
     color: #FFF;
     }
     
+#loader div.inner-loader{
+    position: relative;
+    top: -webkit-calc(50% - 80px);        
+    top:    -moz-calc(50% - 80px);        
+    top:         calc(50% - 80px);        
+    }    
+    
 .clear{
     clear: both;
     }
