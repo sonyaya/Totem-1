@@ -1,15 +1,25 @@
 //    
 $(function(){
     // CRIA O LOADER 
-    var cl = new CanvasLoader('canvasloader-container');
-    cl.setColor('#FFFFFF'); // default is '#000000'
-    cl.setShape('spiral'); // default is 'oval'
-    cl.setDiameter(122); // default is 40
-    cl.setDensity(35); // default is 40
-    cl.setRange(2); // default is 1.3
-    cl.setSpeed(1); // default is 2
-    cl.setFPS(20); // default is 24
-    cl.show(); // Hidden by default
+var opts = {
+  lines: 6, // The number of lines to draw
+  length: 0, // The length of each line
+  width: 10, // The line thickness
+  radius: 11, // The radius of the inner circle
+  corners: 1, // Corner roundness (0..1)
+  rotate: 0, // The rotation offset
+  color: '#fff', // #rgb or #rrggbb
+  speed: 0.5, // Rounds per second
+  trail: 10, // Afterglow percentage
+  shadow: true, // Whether to render a shadow
+  hwaccel: true, // Whether to use hardware acceleration
+  className: 'spinner', // The CSS class to assign to the spinner
+  zIndex: 2e9, // The z-index (defaults to 2000000000)
+  top: 'auto', // Top position relative to parent in px
+  left: 'auto' // Left position relative to parent in px
+};
+    var target = document.getElementById('canvasloader-container');
+    var spinner = new Spinner(opts).spin(target);
     
     // X QUE FECHA AS ABAS
     // ADICIONA FUNÇÃO AO BOTÃO FECHAR DA TOP-TAB

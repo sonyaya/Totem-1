@@ -15,20 +15,32 @@ table tbody *{
     position: absolute;
     height: 100%;
     width: 100%;
-    background: rgba(0, 0, 0, 0.9);
+    background: url("../img/scamline.png") rgba(33, 33, 33, 0.95);
     z-index: 999999;
     display: none;
     position: fixed;
-    font-size: 2em;
+    font-size: 1em;
     text-align: center;
     color: #FFF;
+    text-transform: lowercase;
+    }
+    
+#loader span{ 
+    margin-top: 28px;
+    display: block;
+    }
+    
+#loader #canvasloader-container{
+    height: 1px;
+    margin: 0 auto;
+    width: 1px;
     }
     
 #loader div.inner-loader{
     position: relative;
-    top: -webkit-calc(50% - 80px);        
-    top:    -moz-calc(50% - 80px);        
-    top:         calc(50% - 80px);        
+    top: -webkit-calc(50% - 12px);        
+    top:    -moz-calc(50% - 12px);        
+    top:         calc(50% - 12px);        
     }    
     
 .clear{
