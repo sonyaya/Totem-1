@@ -1,0 +1,7 @@
+title: "Dash board"
+interface:
+  html: dashboard.html
+  css: ["style.css" ] 
+  javascript:
+    head: [ "Highcharts/js/highcharts.js", "Highcharts/js/modules/exporting.js" ]
+    body: [ "javascript/area-basic.js", "javascript/column-basic.js", "javascript/line-basic.js", "javascript/pie-donut.js" ]
