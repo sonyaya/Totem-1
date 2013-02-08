@@ -37,7 +37,7 @@ lineBasic = new Highcharts.Chart({
     plotOptions: {
         line: {
             dataLabels: {
-                enabled: true
+                enabled: false // colocar valores nas linhas
             },
             enableMouseTracking: true
         }
