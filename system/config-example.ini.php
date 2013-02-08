@@ -34,7 +34,7 @@
   path          = "backend/"
   template      = "templates/default/"
   max-page-list = 10
-  start-place   = "?action=view-list-form&form=user/user"
+  start-place   = "?action=view-dashboard&form=user/dashboard/dashboard"
         
 [console]
   site-url = "http://127.0.0.1/!/system/"
