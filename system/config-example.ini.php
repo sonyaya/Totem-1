@@ -34,7 +34,7 @@
   path          = "backend/"
   template      = "templates/default/"
   max-page-list = 10
-  start-place   = "?action=view-dashboard&dashboard=user/dashboard/dashboard"
+  start-place   = "?action=view-dashboard&dashboard=user/dashboards/dashboard"
         
 [console]
   site-url = "http://127.0.0.1/!/system/"
