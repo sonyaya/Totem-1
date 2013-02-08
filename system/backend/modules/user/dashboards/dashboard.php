@@ -8,10 +8,10 @@
         
         public function getData(){
             $db = new MySQL();
-            $db->setTable("_m_user");
+            $db->setTable("_m_user_message");
             
-            $data = $db->select(array("first_name", "login"), 1, true, false);
-            $data = $db->rowsCount(1);
+            $data = $db->select(array("message", "from_user", "to_user"), 1, true, false);
+            //$data = $db->rowsCount(1);
             
             return Array($data);
         }
