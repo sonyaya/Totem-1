@@ -111,7 +111,7 @@
                 
                 // executa FormEvents::afterLoadData
                 if(method_exists($formEvents, "afterLoadData")){
-                    $formEvents->afterLoadData($loadedData[0]);
+                    $formEvents->afterLoadData(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $updateId), $loadedData[0]));
                 }
                 
             }
@@ -843,13 +843,13 @@
                         $where = "`$pk` = '$id'";
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "beforeUpdate")){
-                            $formEvents->beforeUpdate($data);
+                            $formEvents->beforeUpdate(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $updateId), $data[0]));
                         }
                     }else{
                         $where = null;
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "beforeInsert")){
-                            $formEvents->beforeInsert($data);
+                            $formEvents->beforeInsert(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => null), $data[0]));
                         }
                     }
 
@@ -867,12 +867,12 @@
                     if($action == "update"){
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "afterUpdate")){
-                            $formEvents->afterUpdate($data);
+                            $formEvents->afterUpdate(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $updateId), $data[0]));
                         }
                     }else{
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "afterInsert")){
-                            $formEvents->afterInsert($data);
+                            $formEvents->afterInsert(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => null), $data[0]));
                         }
                     }
 
