@@ -111,7 +111,7 @@
                 
                 // executa FormEvents::afterLoadData
                 if(method_exists($formEvents, "afterLoadData")){
-                    $formEvents->afterLoadData(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $updateId), $loadedData[0]));
+                    $formEvents->afterLoadData($loadedData[0], Array($formArray['header']['p-key']=>$updateId) );
                 }
                 
             }
@@ -832,7 +832,7 @@
                             }
                             
                             if( method_exists($obj = $preLoadedColumnsTypes[$key]['class'], $method = "before".ucwords($action)) ){
-                                $obj->$method($data[$key], $key, $data, $preLoadedColumnsTypes[$key]['parameter'], Array( "column"=>$pk, "value"=>$id ));
+                                $obj->$method($data[$key], $key, $data, $preLoadedColumnsTypes[$key]['parameter'], Array( "column"=>$pk, "value"=>$id));
                             }
                         }
                     }
@@ -843,13 +843,13 @@
                         $where = "`$pk` = '$id'";
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "beforeUpdate")){
-                            $formEvents->beforeUpdate(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $id), $data));
+                            $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id));
                         }
                     }else{
                         $where = null;
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "beforeInsert")){
-                            $formEvents->beforeInsert(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => null), $data));
+                            $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null));
                         }
                     }
 
@@ -867,12 +867,12 @@
                     if($action == "update"){
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "afterUpdate")){
-                            $formEvents->afterUpdate(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => $id), $data));
+                            $formEvents->afterUpdate($data, Array($formArray['header']['p-key']=>$id));
                         }
                     }else{
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "afterInsert")){
-                            $formEvents->afterInsert(array_merge(Array("_M_PRIMARY_KEY_VALUE_" => null), $data));
+                            $formEvents->afterInsert($data, Array($formArray['header']['p-key']=>null));
                         }
                     }
 
@@ -1026,7 +1026,7 @@
             
             // executa FormEvents::beforeDelete
             if(method_exists($formEvents, "beforeDelete")){
-                $formEvents->beforeDelete($loadedData);
+                $formEvents->beforeDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId));
             }
                     
             // BEFORE DELETE
@@ -1054,7 +1054,7 @@
             
             // executa FormEvents::afterDelete
             if(method_exists($formEvents, "afterDelete")){
-                $formEvents->afterDelete($loadedData);
+                $formEvents->afterDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId));
             }
             
             //
