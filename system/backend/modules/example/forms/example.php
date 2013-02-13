@@ -13,49 +13,49 @@ class FormEvents {
      * 
      * @param array $loadedData
      * /
-    function afterLoadData(&$loadedData){
+    function afterLoadData(&$loadedData, $pkey){
         
     } */
     
     /**
      * Executa ao enviar o formulário para ser salvo antes de inserir
      * /
-    function beforeInsert(&$data){
+    function beforeInsert(&$data, $pkey){
         
     } */
     
     /**
      * Executa ao enviar o formulário para ser salvo depois de inserir
      * /
-    function afterInsert($data){
+    function afterInsert($data, $pkey){
         
     } */
     
     /**
      * Executa ao enviar o formulário para ser salvo antes de atualiza
      * /
-    function beforeUpdate(&$data){
+    function beforeUpdate(&$data, $pkey){
         
     } */
     
     /**
      * Executa ao enviar o formulário para ser salvo depois de atualizar
      * /
-    function afterUpdate($data){
+    function afterUpdate($data, $pkey){
         
     } */
     
     /**
      * Executa antes de deletar formulário
      * /
-    function beforeDelete(&$data){
+    function beforeDelete(&$data, $pkey){
         
     }*/
     
     /**
      * Executa depois de deletar formulário
      * /
-    function afterDelete($data){
+    function afterDelete($data, $pkey){
         
     } */
 }
