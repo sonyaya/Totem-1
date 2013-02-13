@@ -121,6 +121,7 @@
     unset($menuModule);
     unset($menuParts);
     unset($menu);
+    
     // -- DECIDE QUAL AÇÃO EXECUTAR --------------------------------------------
 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
