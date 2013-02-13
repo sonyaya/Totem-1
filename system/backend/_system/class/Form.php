@@ -44,6 +44,15 @@
                 exit;
             }
 
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
+            }
+            
             // INSERT OR UPDATE
             $insertOrUpdate = is_null($updateId) ? "insert" : "update";
             
@@ -53,7 +62,7 @@
                 $formB = Array();
                 foreach($formArray['forms'][ $insertOrUpdate ]['merge-form'] as $formKey){
                     if( isset($formArray['forms'][ $formKey]) && is_array($formArray['forms'][ $formKey]) ){
-                        $formA = $formArray['forms'][ $formKey];
+                        $formA = $formArray['forms'][$formKey];
                     }
                     $formB = array_replace_recursive($formA, $formB);
                 }
@@ -83,6 +92,11 @@
                         $selectColumns[] = $val['column'];
                     }
                 }
+                
+                // executa FormEvents::beforeLoadData
+                if(method_exists($formEvents, "beforeLoadData")){
+                    $formEvents->beforeLoadData();
+                }
 
                 // busca dados no banco
                 $db = new MySQL();
@@ -94,6 +108,11 @@
                         "`{$formArray['header']['p-key']}` = '$updateId'"
                       )
                 ;
+                
+                // executa FormEvents::afterLoadData
+                if(method_exists($formEvents, "afterLoadData")){
+                    $formEvents->afterLoadData($loadedData[0]);
+                }
                 
             }
 
@@ -252,6 +271,15 @@
                 exit;
             }
 
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
+            }
+            
             // VARIAVES COMUNS
             $table       = $formArray['header']['table'];
             $pk          = $formArray['header']['p-key'];
@@ -674,6 +702,15 @@
                 exit;
             }
             
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
+            }
+            
             //
             $action = $data['_M_ACTION'];
             $table  = $formArray['header']['table'];
@@ -801,10 +838,19 @@
                     }
 
                     // VERIFICA SE É PRA INSERIR OU ATUALIZAR
+                    // E EXECUTA EVENTO SE EXISTENTE
                     if($action == "update"){
                         $where = "`$pk` = '$id'";
+                        // executa FormEvents::beforeUpdate
+                        if(method_exists($formEvents, "beforeUpdate")){
+                            $formEvents->beforeUpdate($data);
+                        }
                     }else{
                         $where = null;
+                        // executa FormEvents::beforeInsert
+                        if(method_exists($formEvents, "beforeInsert")){
+                            $formEvents->beforeInsert($data);
+                        }
                     }
 
                     // INSERE OU ATUALIZA DADOS NO BANCO DE DADOS
@@ -816,7 +862,21 @@
                         $where
                       )
                     ;
+                    
+                    // EXECUTA EVENTO SE EXISTENTE
+                    if($action == "update"){
+                        // executa FormEvents::beforeUpdate
+                        if(method_exists($formEvents, "afterUpdate")){
+                            $formEvents->afterUpdate($data);
+                        }
+                    }else{
+                        // executa FormEvents::beforeInsert
+                        if(method_exists($formEvents, "afterInsert")){
+                            $formEvents->afterInsert($data);
+                        }
+                    }
 
+                    // TRATA ERROS
                     if($db->getErrors()){
                         return Array(
                             "error"     => true,
@@ -874,6 +934,15 @@
                 // caso não exista, mostra mensagem de erro
                 trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
                 exit;
+            }
+            
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
             }
             
             // MESCLA FORULÁRIOS SE NECESSÁRIO
@@ -955,6 +1024,11 @@
                   )
             ;
             
+            // executa FormEvents::beforeDelete
+            if(method_exists($formEvents, "beforeDelete")){
+                $formEvents->beforeDelete($loadedData);
+            }
+                    
             // BEFORE DELETE
             foreach($preLoadedColumnsTypes as $key => $type){
                 $typeObject = $type['object'];
@@ -976,6 +1050,11 @@
                 if( method_exists($typeObject, "afterDelete")){
                     $typeObject->afterDelete($loadedData[$key], $key, $loadedData, $type['parameter'], Array("column"=>$formArray['header']['p-key'], "value"=>$deleteId) );
                 }
+            }
+            
+            // executa FormEvents::afterDelete
+            if(method_exists($formEvents, "afterDelete")){
+                $formEvents->afterDelete($loadedData);
             }
             
             //
