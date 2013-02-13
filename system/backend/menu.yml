@@ -1,6 +1,6 @@
 - label: Usuários
   load-from-module: user
-  module-start-url: ?action=view-listAndInsert-form&form=user/forms/user
+  module-start-url: ?action=view-dashboard&dashboard=user/dashboards/dashboard
 
 - label: Blog
   load-from-module: blog
