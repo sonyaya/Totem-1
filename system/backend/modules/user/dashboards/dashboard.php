@@ -14,8 +14,9 @@
             $messages = $db->select(
                 array(
                     "id", 
-                    "from_user", 
+                    "title", 
                     "send_at" => "(DATE_FORMAT(send_at, '%d/%m/%Y %H:%i:%s'))",
+                    "from_user", 
                     "from_user_name" => array(
                         "from_user",
                         "_m_user.id",
