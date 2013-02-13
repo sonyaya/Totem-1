@@ -113,7 +113,13 @@
     unset($menuModule);
     unset($menuParts);
     unset($menu);
-
+    
+    // -- EXECUTA ADD ON BOOTSTRAP ---------------------------------------------
+    
+    foreach(json_decode("[{$_M_THIS_CONFIG['bootstrap']}]") as $path){
+       require_once $path; 
+    }
+    
     // -- DECIDE QUAL AÇÃO EXECUTAR --------------------------------------------
 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
