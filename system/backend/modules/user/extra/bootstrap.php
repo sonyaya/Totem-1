@@ -1,8 +1,18 @@
 <?php
 
-    foreach ($menu as $key=>$val){
-        if(isset($val['load-from-module']) && $val['load-from-module']=="user"){
-            $menu[ $key ]['label'] .= "<span>123</span>";
-            break;
+class userBootstrap{
+    function __construct($_M_THIS_CONFIG, $_M_USER, &$menu){
+        foreach ($menu as $key=>$val){
+            $db = new \backend\MySQL();
+            $db->setTable("_m_user_message");
+            $messagesCount = $db->rowsCount("to_user=1 AND `read`=0");
+            
+            if($messagesCount > 0){
+                if(isset($val['load-from-module']) && $val['load-from-module']=="user"){
+                    $menu[ $key ]['label'] .= "<span class='count'>$messagesCount</span>";
+                    break;
+                }
+            }
         }
     }
+}

@@ -24,6 +24,7 @@
 
     # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
 
+    $_M_USER['id']          = ( isset($_SESSION['user']['id']          ) ) ? $_SESSION['user']['id']          : '' ;
     $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
     $_M_USER['first_name']  = ( isset($_SESSION['user']['first_name']  ) ) ? $_SESSION['user']['first_name']  : '' ;
     $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
@@ -32,8 +33,9 @@
     
     // -- EXECUTA ADD ON BOOTSTRAP ---------------------------------------------
     
-    foreach(json_decode("[{$_M_THIS_CONFIG['bootstrap']}]") as $path){
-       require_once $path; 
+    foreach(json_decode("{{$_M_THIS_CONFIG['bootstrap']}}") as $key=>$path){
+       require_once $path;
+       new $key($_M_THIS_CONFIG, $_M_USER, $menu);
     }
     
     # -- MONTA O MENU ----------------------------------------------------------

@@ -36,7 +36,7 @@
   max-page-list = 10
   start-place   = "?action=view-dashboard&dashboard=user/dashboards/dashboard"
   bootstrap     = '
-    "modules/user/extra/bootstrap.php"
+    "userBootstrap" : "modules/user/extra/bootstrap.php"
   '
         
 [console]
