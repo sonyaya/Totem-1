@@ -93,6 +93,7 @@
 
                 // verifica se o menu do modulo é ativo
                 $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
+                $cssClass = (!empty($cssClass))? $cssClass : $_GET['dashboard'];
                 $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
 
                 // cria item do menu de modulo
