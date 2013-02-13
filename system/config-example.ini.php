@@ -35,6 +35,9 @@
   template      = "templates/default/"
   max-page-list = 10
   start-place   = "?action=view-dashboard&dashboard=user/dashboards/dashboard"
+  bootstrap     = '
+    "modules/user/extra/bootstrap.php"
+  '
         
 [console]
   site-url = "http://127.0.0.1/!/system/"
