@@ -1,0 +1,39 @@
+header:
+    title: 'Cadastro de Usuários'
+    table: _m_user_message
+    p-key: id
+forms:
+    list:
+        title: 'Listagm de Usuários'
+        rows-per-page: 200
+        input:
+            - type: example
+              label: Cod.
+              column: id
+              
+            - type: example
+              label: Usuário
+              column: (SELECT `first_name` FROM _m_user WHERE id = _m_user_message.from_user)
+              
+            - type: example
+              label: Mensagem
+              column: message
+
+    update:
+        title: 'Mensagem'
+        input:
+            - type: rawText
+              label: De
+              column: from_user
+              
+            - type: rawText
+              label: Mensagem
+              column: message
+              
+            - type: rawText
+              label: "Enviado em"
+              column: send_at
+    insert:
+        title: 'Inserindo Usuário'
+        merge-form: [ insert, update ]
+        input: []
