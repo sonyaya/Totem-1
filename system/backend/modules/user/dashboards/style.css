@@ -21,15 +21,13 @@ div.dash div.chart{
             }
     }
     
-    
 /* -- -- */
 div.messages a{
     display: block;
     text-decoration: none;
     color: #000;
     }
-
-
+    
 div.messages a:hover{
     color: #777;
     }
