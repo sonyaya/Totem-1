@@ -196,6 +196,10 @@ iframe{
         border: 0 none;
         list-style: none;
         }
+        
+    nav.side span.count{
+        display: none;
+        }
 
     nav.side > ul{
         background: #B7C5C5;
