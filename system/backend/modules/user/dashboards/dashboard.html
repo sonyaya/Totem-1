@@ -10,18 +10,18 @@
           <thead>
             <tr>
               <th class="action"></th>
+              <th>De</th>
               <th>Título</th>
               <th>Enviado em</th>
-              <th>De</th>
             </tr>
           </thead>
           <tbody>
             <m.foreach var="data.messages" key="KEY">
               <tr>
                 <td><a href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.messages.#KEY#.id;')">ler</a></td>
+                <td>&m.var:data.messages.#KEY#.from_user_name;</td>
                 <td>&m.var:data.messages.#KEY#.title;</td>
                 <td>&m.var:data.messages.#KEY#.send_at;</td>
-                <td>&m.var:data.messages.#KEY#.from_user_name;</td>
               </tr>
             </m.foreach>
           </tbody>
