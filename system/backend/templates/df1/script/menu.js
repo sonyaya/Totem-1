@@ -23,5 +23,5 @@ $(function(){
     });
     
     // ADICIONAR A CLASSE ACTIVE-PARENT NO SIDE-MENU
-    $("nav.side").find(".active").parents("li").addClass('active-parent');
+    $("nav.side").find(".active-by-module").parents("li").addClass('active-parent');
 });
