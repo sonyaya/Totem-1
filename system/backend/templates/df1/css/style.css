@@ -228,6 +228,10 @@ iframe{
         border: 0 none;
         list-style: none;
         }
+        
+    nav.side span.count{
+        display: none;
+        }
 
     nav.side > ul{
         background: #B7C5C5;
@@ -272,7 +276,7 @@ iframe{
         background-position: -webkit-calc(10% - 8px) center;
         background-position:    -moz-calc(10% - 8px) center;
         background-position:         calc(10% - 8px) center;
-        }        
+        }  
         
     nav.side ul li li li a,
     nav.side ul li li li span{
