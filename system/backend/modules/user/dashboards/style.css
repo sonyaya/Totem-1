@@ -20,12 +20,16 @@ div.dash div.chart{
             margin-right: 0; 
             }
     }
-
+    
+    
 /* -- -- */
-@media screen and (min-width: 1500px){
-        div.dash div.box{
-            float: left;
-            width: calc(33.333% - 10px);
-            margin-right: 10px; 
-            }
+div.messages a{
+    display: block;
+    text-decoration: none;
+    color: #000;
+    }
+
+
+div.messages a:hover{
+    color: #777;
     }
