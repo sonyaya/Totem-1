@@ -1,59 +1,30 @@
 <?php
+
+use backend\MySQL;
+
 class FormEvents {
-    
-    /**
-     * Execut em formulários de atualização antes de carregar os valores do banco de dados
-     */
-    function beforeLoadData(){
-        echo "before load data";
-    }
-    
-    /**
-     * Execut em formulários de atualização depois de carregar os valores do banco de dados
-     * 
-     * @param array $loadedData
-     */
-    function afterLoadData(&$loadedData){
-       echo "after load data";
-    }
-    
-    /**
-     * Executa ao enviar o formulário para ser salvo antes de inserir
-     */
-    function beforeInsert(&$data){
-    }
-    
-    /**
-     * Executa ao enviar o formulário para ser salvo depois de inserir
-     */
-    function afterInsert($data){
-        
-    }
-    
-    /**
-     * Executa ao enviar o formulário para ser salvo antes de atualiza
-     */
-    function beforeUpdate(&$data){
-        
-    }
-    
     /**
      * Executa ao enviar o formulário para ser salvo depois de atualizar
      */
-    function afterUpdate($data){
+    function afterLoadData($data, $pkey, $config){
+        $key = array_keys($pkey);
+        $key = $key[0];
         
-    }
-    
-    /**
-     * Executa antes de deletar formulário
-     */
-    function beforeDelete(&$data){
+        $keyVal = $pkey[ $key ];
         
-    }    
-    /**
-     * Executa depois de deletar formulário
-     */
-    function afterDelete($data){
+        $db = new MySQL();
+        $db->setTable($config['table']);
         
+        $result = $db->select(Array("read_at"), "$key = $keyVal", true, false);
+        
+        if( empty($result['read_at']) ){
+            $db->save(
+                Array(
+                    "read_at" => date("Y-m-d H:i-s"),
+                    "read" => "1"
+                )
+                ,"$key = $keyVal")
+            ;
+        }
     }
 }
