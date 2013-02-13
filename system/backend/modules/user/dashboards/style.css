@@ -31,3 +31,14 @@ div.messages a{
 div.messages a:hover{
     color: #777;
     }
+    
+div.messages a.blured{
+    color: #888;
+    font-size: 0.9em;
+    text-align: right;
+    font-style: italic;
+    }
+    
+div.messages a.blured:hover{
+    color: #000;
+    }
