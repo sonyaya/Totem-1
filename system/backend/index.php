@@ -53,17 +53,18 @@
                 // os arrays de comparação devem 
                 // ter no minimo estas chaves
                 $arrCompare['form'] = "";
+                $arrCompare['module'] = "";
                 $arrCompare['action'] = "";
                 $arrCompare['module'] = "";
 
                 // array do menu atual
                 parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
                 $mLnk = array_replace($arrCompare, $mLnk);
-                $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['form']);
+                $mLnk['module'] = preg_replace("/\/.*$/", "", ($mLnk['form'])? $mLnk['form'] : $mLnk['dashboard'] );
 
                 // array da pagina atual
                 $pLnk = array_replace($arrCompare, $_GET);
-                $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['form']);
+                $pLnk['module'] = preg_replace("/\/.*$/", "", ($pLnk['form'])? $pLnk['form'] : $pLnk['dashboard'] );
 
                 // comparações para adicionar classes
                 if($pLnk['module'] == $mLnk['module']){
