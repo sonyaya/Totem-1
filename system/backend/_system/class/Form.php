@@ -95,7 +95,7 @@
                 
                 // executa FormEvents::beforeLoadData
                 if(method_exists($formEvents, "beforeLoadData")){
-                    $formEvents->beforeLoadData();
+                    $formEvents->beforeLoadData(Array($formArray['header']['p-key']=>null), $formArray['header']);
                 }
 
                 // busca dados no banco
@@ -111,7 +111,7 @@
                 
                 // executa FormEvents::afterLoadData
                 if(method_exists($formEvents, "afterLoadData")){
-                    $formEvents->afterLoadData($loadedData[0], Array($formArray['header']['p-key']=>$updateId) );
+                    $formEvents->afterLoadData($loadedData[0], Array($formArray['header']['p-key']=>$updateId), $formArray['header']);
                 }
                 
             }
@@ -843,13 +843,13 @@
                         $where = "`$pk` = '$id'";
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "beforeUpdate")){
-                            $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id));
+                            $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
                         }
                     }else{
                         $where = null;
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "beforeInsert")){
-                            $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null));
+                            $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
                         }
                     }
 
@@ -867,12 +867,12 @@
                     if($action == "update"){
                         // executa FormEvents::beforeUpdate
                         if(method_exists($formEvents, "afterUpdate")){
-                            $formEvents->afterUpdate($data, Array($formArray['header']['p-key']=>$id));
+                            $formEvents->afterUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
                         }
                     }else{
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "afterInsert")){
-                            $formEvents->afterInsert($data, Array($formArray['header']['p-key']=>null));
+                            $formEvents->afterInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
                         }
                     }
 
@@ -1026,7 +1026,7 @@
             
             // executa FormEvents::beforeDelete
             if(method_exists($formEvents, "beforeDelete")){
-                $formEvents->beforeDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId));
+                $formEvents->beforeDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId), $formArray['header'], $formArray['header']);
             }
                     
             // BEFORE DELETE
@@ -1054,7 +1054,7 @@
             
             // executa FormEvents::afterDelete
             if(method_exists($formEvents, "afterDelete")){
-                $formEvents->afterDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId));
+                $formEvents->afterDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId), $formArray['header']);
             }
             
             //
