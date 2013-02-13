@@ -15,6 +15,12 @@
     # -- USED VENDORS CLASSES --------------------------------------------------
 
     use vendor\Symfony\Component\Yaml\Yaml;
+    
+    # -- VARIAVEIS -------------------------------------------------------------
+
+    $menuModule = "";
+    $menuParts = "";
+    $menu = Yaml::parse( file_get_contents("menu.yml") );
 
     # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
 
@@ -23,12 +29,14 @@
     $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
     $_M_USER['last_name']   = ( isset($_SESSION['user']['last_name']   ) ) ? $_SESSION['user']['last_name']   : '' ;
     $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
-
+    
+    // -- EXECUTA ADD ON BOOTSTRAP ---------------------------------------------
+    
+    foreach(json_decode("[{$_M_THIS_CONFIG['bootstrap']}]") as $path){
+       require_once $path; 
+    }
+    
     # -- MONTA O MENU ----------------------------------------------------------
-
-    $menuModule = "";
-    $menuParts = "";
-    $menu = Yaml::parse( file_get_contents("menu.yml") );
 
     function createMenuRecursive($array, $deep=0, $deepClass=1){
         $indent = 4;
@@ -113,13 +121,6 @@
     unset($menuModule);
     unset($menuParts);
     unset($menu);
-    
-    // -- EXECUTA ADD ON BOOTSTRAP ---------------------------------------------
-    
-    foreach(json_decode("[{$_M_THIS_CONFIG['bootstrap']}]") as $path){
-       require_once $path; 
-    }
-    
     // -- DECIDE QUAL AÇÃO EXECUTAR --------------------------------------------
 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
