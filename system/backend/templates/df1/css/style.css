@@ -138,12 +138,27 @@ iframe{
         min-width: 120px;
         height: 120px;
         
+        position: relative;
+        
         width: -webkit-calc(100% / 10 - 1px);
         width:    -moz-calc(100% / 10 - 1px);
         width:         calc(100% / 10 - 1px);
         
         line-height: 170px;
         color: #EEE;
+        }
+        
+    header div.modules a span.count{
+        background: #4E4E50;
+        border-radius: 15px 15px 15px 15px;
+        font-size: 11px;
+        height: 12px;
+        line-height: 11px;
+        padding: 3px;
+        position: absolute;
+        right: 5px;
+        top: 5px;
+        width: 12px;
         }
         
     header div.modules nav ul li a.active,
