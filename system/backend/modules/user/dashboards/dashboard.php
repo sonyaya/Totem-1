@@ -23,11 +23,11 @@
                         "concat" => array(" ")
                     )
                 ), 
-                "to_user = {$_SESSION['user']['id']} ORDER BY send_at DESC", 
-                true, 
+                "`read`=false AND `to_user`={$_SESSION['user']['id']} ORDER BY send_at DESC", 
+                false, 
                 false
             );
-               
+                
             // Número de mensagens
             $messagesCount = $db->rowsCount(1);
             
