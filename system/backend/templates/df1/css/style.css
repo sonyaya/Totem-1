@@ -158,7 +158,7 @@ iframe{
         position: absolute;
         right: 5px;
         top: 5px;
-        width: 12px;
+        min-width: 12px;
         }
         
     header div.modules nav ul li a.active,
