@@ -1,44 +1,152 @@
-div.dash div.box{
-    float: left;
-    width: 49%;
-    margin-right: 1%; 
+    div.dash div.box{
+        float: left;
+        width: 49%;
+        margin-right: 1%; 
 
-    }
-    
-div.dash div.chart{
-    width: 100%;
-    margin-bottom: 50px;
-    height: 300px;
-    min-width: 50px;
-    }
+        }
+
+    div.dash div.chart{
+        width: 100%;
+        margin-bottom: 50px;
+        height: 300px;
+        min-width: 50px;
+        }
+
+/* -- -- */
+
+    @media screen and (max-width: 900px){
+            div.dash div.box{
+                float: none;
+                width: 100%;
+                margin-right: 0; 
+                }
+        }
     
 /* -- -- */
-@media screen and (max-width: 900px){
-        div.dash div.box{
-            float: none;
-            width: 100%;
-            margin-right: 0; 
-            }
-    }
+
+    div.messages a{
+        display: block;
+        text-decoration: none;
+        color: #000;
+        }
+
+    div.messages a:hover{
+        color: #777;
+        }
+
+    div.messages a.blured{
+        color: #888;
+        font-size: 0.9em;
+        text-align: right;
+        font-style: italic;
+        }
+
+    div.messages a.blured:hover{
+        color: #000;
+        }
     
-/* -- -- */
-div.messages a{
-    display: block;
-    text-decoration: none;
-    color: #000;
-    }
+
+        
+/* --- TABLE ------------------------------------------------------------------ */
+
+
+    div.messages table{
+        width: 100%;
+        border-collapse: collapse;
+        font-family: Arimo,sans-serif;
+        font-size: 1.0em;
+        }
+
+    div.messages table thead tr{
+        }
+        
+    div.messages table thead tr th{
+        color: #878787;
+        padding: 0.5% 1%;
+        font-size: 0.9em;
+        font-weight: 100;
+        cursor: pointer;
+        text-align: left;
+        overflow: hidden;
+        vertical-align: bottom;
+        border-top: 1px solid #CDCDCD;
+        border-bottom: 1px solid #CDCDCD;
+        text-align: center;
+        
+        background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #FAFAFA), color-stop(100%, #EFEFEF));
+        background: -webkit-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:    -moz-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:     -ms-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:      -o-linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        background:   linear-gradient(to bottom, #FAFAFA 0%, #EFEFEF) repeat scroll 0 0 transparent;
+        filter    : progid:dximagetransform.microsoft.gradient(startColorstr='#FAFAFA', endColorstr='#EFEFEF', GradientType=0);
+        }
+        
+    div.messages table thead tr th:first-child,    
+    div.messages table thead tr th:last-child{
+        border-right: 1px solid #CDCDCD;
+        }
+
+    div.messages table thead .action{
+        background: transparent;
+        border: 0 none;
+        border-bottom: 1px solid #C7C7C7;
+        }
+        
+    div.messages table tbody{
+        border-left: 1px solid #C7C7C7;
+        border-right: 1px solid #C7C7C7;
+        border-bottom: 2px solid #303030;
+        }
+
+    div.messages table tbody tr td{
+        color: #707070;
+        border: 1px solid #CDCDCD;
+        padding: 1%;
+        vertical-align: top;
+        }
     
-div.messages a:hover{
-    color: #777;
-    }
-    
-div.messages a.blured{
-    color: #888;
-    font-size: 0.9em;
-    text-align: right;
-    font-style: italic;
-    }
-    
-div.messages a.blured:hover{
-    color: #000;
-    }
+    div.messages table tbody tr:nth-child(even){
+        background: #FAFAFA;
+        }
+
+    div.messages table tbody tr:nth-child(odd){
+        background: #F5F5F5;
+        }
+        
+    div.messages table tbody tr td a{
+        color: inherit;
+        text-decoration: none;
+        }
+
+    div.messages table tbody tr td a:active{
+        color: red;
+        }
+
+    div.messages table tbody tr:hover td{
+        background: #F0F0F0 !important;
+        color: #000000 !important;
+        }
+        
+    div.messages table tbody .action{
+        border-bottom: 1px solid #C7C7C7;
+        vertical-align: middle;
+        text-align: center;
+        width: 50px;
+        }
+        
+    div.messages table tbody tr:nth-child(even) .action{
+        background: #F7F7F7;
+        }
+        
+    div.messages table tbody tr:nth-child(odd) .action{
+        background: #EEEEEE;
+        }
+        
+    div.messages td.action a.read{
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        background: url("img/mail.svg") no-repeat center center;
+        background-size: contain;
+        }

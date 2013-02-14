@@ -1,9 +1,13 @@
 <div class="dash">
     <div class="box">
-        novas mensagens
+        box 1
     </div>
     
-    <div class="box messages list">
+    <div class="box">
+        box 2
+    </div>
+    
+    <div class="messages">
       <h2>Mensagens não lidas</h2>
       <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- true">
         <table>
@@ -18,7 +22,7 @@
           <tbody>
             <m.foreach var="data.messages" key="KEY">
               <tr>
-                <td><a href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.messages.#KEY#.id;')">ler</a></td>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.messages.#KEY#.id;')"></a></td>
                 <td>&m.var:data.messages.#KEY#.from_user_name;</td>
                 <td>&m.var:data.messages.#KEY#.title;</td>
                 <td>&m.var:data.messages.#KEY#.send_at;</td>
