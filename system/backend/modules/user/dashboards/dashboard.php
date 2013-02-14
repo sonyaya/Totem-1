@@ -69,9 +69,9 @@
                     "id", 
                     "title", 
                     "send_at" => "(DATE_FORMAT(send_at, '%d/%m/%Y às %H:%i'))",
-                    "from_user", 
-                    "from_user_name" => array(
-                        "from_user",
+                    "to_user", 
+                    "to_user_name" => array(
+                        "to_user",
                         "_m_user.id",
                         array("first_name", "middle_name", "last_name"),
                         "concat" => array(" ")
@@ -96,9 +96,9 @@
                     "id", 
                     "title", 
                     "send_at" => "(DATE_FORMAT(send_at, '%d/%m/%Y às %H:%i'))",
-                    "from_user", 
-                    "from_user_name" => array(
-                        "from_user",
+                    "to_user", 
+                    "to_user_name" => array(
+                        "to_user",
                         "_m_user.id",
                         array("first_name", "middle_name", "last_name"),
                         "concat" => array(" ")
