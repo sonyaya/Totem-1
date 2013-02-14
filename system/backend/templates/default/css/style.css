@@ -74,16 +74,17 @@ iframe{
         background: url("../img/noThumb.jpg") rgba(255, 255, 255, 0.1);
         background-size: contain;
         float: left;
-        height: 100px;
-        margin: 8px 5px;
-        width: 100px;
+        height: 80px;
+        width: 80px;
+        margin: 10px 8px;
         box-shadow: 2px 2px 2px #4C4C4C;
         }
 
     header div.user div.info{
-        margin-top: 10px;
+        margin-top: 24px;
         }
         
+    header div.user div.info aspan,
     header div.user div.info a{
         display: block;
         }

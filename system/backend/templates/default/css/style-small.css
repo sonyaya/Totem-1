@@ -35,10 +35,14 @@
         margin-top: 9px;
         }
         
+    header div.user div.info aspan,
     header div.user div.info a{
         display: inline;
         }
         
+    header div.user div.info span.login{
+        display: none; 
+        }
         
         
 /* --- MAIN ------------------------------------------------------------------- */
