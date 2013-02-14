@@ -15,7 +15,7 @@
                 array(
                     "id", 
                     "title", 
-                    "send_at" => "(DATE_FORMAT(send_at, '%d/%m/%Y %H:%i:%s'))",
+                    "send_at" => "(DATE_FORMAT(send_at, '%d/%m/%Y às %H:%i'))",
                     "from_user", 
                     "from_user_name" => array(
                         "from_user",
