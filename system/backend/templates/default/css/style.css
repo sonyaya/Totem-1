@@ -70,6 +70,24 @@ iframe{
         box-shadow        : inset 0 2px 15px rgba(0,0,0,0.3);
         }
 
+    header div.user div.image{
+        background: url("../img/noThumb.jpg") rgba(255, 255, 255, 0.1);
+        background-size: contain;
+        float: left;
+        height: 100px;
+        margin: 8px 5px;
+        width: 100px;
+        box-shadow: 2px 2px 2px #4C4C4C;
+        }
+
+    header div.user div.info{
+        margin-top: 10px;
+        }
+        
+    header div.user div.info a{
+        display: block;
+        }
+
     header div.modules{
         float: left;
         overflow: hidden;

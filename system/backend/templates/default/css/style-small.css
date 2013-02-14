@@ -26,6 +26,20 @@
         background-position: center center !important;
         }
         
+    header div.user div.image{
+        width: 17px;
+        height: 17px;
+        }        
+        
+    header div.user div.info{
+        margin-top: 9px;
+        }
+        
+    header div.user div.info a{
+        display: inline;
+        }
+        
+        
         
 /* --- MAIN ------------------------------------------------------------------- */
 

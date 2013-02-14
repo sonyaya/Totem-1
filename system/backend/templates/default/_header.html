@@ -1,14 +1,13 @@
-<header>
-    <div class="logo">
-        <div class="image"></div>
-        <div class="title">
-            <h1>Ninja!</h1>
-            <h2>backend</h2>
-        </div>
+<div class="user">
+    <div class="image"></div>
+    <div class="info">
+        &m.var:print_r:user.name;
+        <a href="?action=logout" title="sair">sair</a>
     </div>
-    
-    <div class="user">
-        Olá &m.var:print_r:user.name;,
-        <a href='?action=logout'>sair</a>
-    </div>
-</header>
+</div>
+
+<div class="modules">
+    <nav>
+        &m.var:menu-modules;
+    </nav>
+</div>
