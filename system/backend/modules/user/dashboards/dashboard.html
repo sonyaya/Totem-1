@@ -1,39 +1,113 @@
 <div class="dash">
-    <div class="box">
-        box 1
-    </div>
     
-    <div class="box">
-        box 2
-    </div>
+    <h2>Mensagens Recebidas</h2>
     
-    <div class="messages">
-      <h2>Mensagens não lidas</h2>
-      <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- true">
+    <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- true">
+      <div class="messages">
         <table>
           <thead>
             <tr>
               <th class="action"></th>
-              <th>De</th>
-              <th>Título</th>
-              <th>Enviado em</th>
+              <th>Mensagens que você ainda não leu</th>
             </tr>
           </thead>
           <tbody>
             <m.foreach var="data.messages" key="KEY">
               <tr>
                 <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.messages.#KEY#.id;')"></a></td>
-                <td>&m.var:data.messages.#KEY#.from_user_name;</td>
-                <td>&m.var:data.messages.#KEY#.title;</td>
-                <td>&m.var:data.messages.#KEY#.send_at;</td>
+                <td>
+                    &m.var:data.messages.#KEY#.from_user_name;<br>
+                    <strong>&m.var:data.messages.#KEY#.title;</strong><br>
+                    <span class="blured">&m.var:data.messages.#KEY#.send_at;</span>
+                </td>
               </tr>
             </m.foreach>
           </tbody>
         </table>
-      </m.if>
-      <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- false">
-        Nenhuma nova mensagem mensagem!
-      </m.if>
-      <a class="blured" href="?action=view-listAndInsert-form&form=user/forms/message">ver lista completa de mensagens!</a>
-    </div>
+      </div>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.old-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>As últimas mensagens que você leu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.old-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.old-messages.#KEY#.id;')"></a></td>
+                <td>
+                    &m.var:data.old-messages.#KEY#.from_user_name;<br>
+                    <strong>&m.var:data.old-messages.#KEY#.title;</strong><br>
+                    <span class="blured">&m.var:data.old-messages.#KEY#.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <div class="clear"></div>
+    
+    <m.if cond="&m.var:bool:data.read-send-messages.0.send_at; || &m.var:bool:data.unread-send-messages.0.send_at;">
+      <h2>Mensagens Enviadas</h2>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.unread-send-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>Mensagen que você enviou e ainda não foram lidas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.unread-send-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.unread-send-messages.#KEY#.id;')"></a></td>
+                <td>
+                    &m.var:data.unread-send-messages.#KEY#.from_user_name;<br>
+                    <strong>&m.var:data.unread-send-messages.#KEY#.title;</strong><br>
+                    <span class="blured">&m.var:data.unread-send-messages.#KEY#.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.read-send-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>Mensagen que você enviou e já foram lidas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.read-send-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.read-send-messages.#KEY#.id;')"></a></td>
+                <td>
+                    &m.var:data.read-send-messages.#KEY#.from_user_name;<br>
+                    <strong>&m.var:data.read-send-messages.#KEY#.title;</strong><br>
+                    <span class="blured">&m.var:data.read-send-messages.#KEY#.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <div class="clear"></div>
+    
  </div>

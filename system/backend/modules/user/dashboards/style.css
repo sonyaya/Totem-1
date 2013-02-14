@@ -11,17 +11,11 @@
         height: 300px;
         min-width: 50px;
         }
-
-/* -- -- */
-
-    @media screen and (max-width: 900px){
-            div.dash div.box{
-                float: none;
-                width: 100%;
-                margin-right: 0; 
-                }
+        
+    div.dash h2{
+        margin-bottom: 2%;
         }
-    
+
 /* -- -- */
 
     div.messages a{
@@ -34,6 +28,7 @@
         color: #777;
         }
 
+    div.messages span.blured,
     div.messages a.blured{
         color: #888;
         font-size: 0.9em;
@@ -55,6 +50,7 @@
         border-collapse: collapse;
         font-family: Arimo,sans-serif;
         font-size: 1.0em;
+        margin-bottom: 2em;
         }
 
     div.messages table thead tr{

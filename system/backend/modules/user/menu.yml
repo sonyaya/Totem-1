@@ -3,3 +3,6 @@
 
 - label: "Grupos de Usuários"
   link: "?action=view-listAndInsert-form&form=user/forms/group"
+  
+- label: "Mensagens"
+  link: "?action=view-listAndInsert-form&form=user/forms/message"
