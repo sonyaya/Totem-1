@@ -53,6 +53,7 @@
                 // os arrays de comparação devem 
                 // ter no minimo estas chaves
                 $arrCompare['form'] = "";
+                $arrCompare['dashboard'] = "";
                 $arrCompare['module'] = "";
                 $arrCompare['action'] = "";
                 $arrCompare['module'] = "";
@@ -93,7 +94,7 @@
 
                 // verifica se o menu do modulo é ativo
                 $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
-                $cssClass = (!empty($cssClass))? $cssClass : $_GET['dashboard'];
+                $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
                 $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
 
                 // cria item do menu de modulo

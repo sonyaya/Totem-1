@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:title;</title>
+        
+        &m.include:#template#/_head.html;
+    </head>
+    <body>
+        <header>
+            &m.include:#template#/_header.html;
+        </header>
+        
+        <nav class="side">
+            &m.var:main-menu;
+        </nav>
+        
+        <div class="main">
+            <div class="content">
+                &m.var:dashboardHtml;
+            </div>
+        </div>
+
+        <div class="clear"></div>
+        
+        <footer>
+            asdsad
+        </footer>
+        
+        <script>
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>    
