@@ -16,116 +16,124 @@
 
     use vendor\Symfony\Component\Yaml\Yaml;
     
-    # -- VARIAVEIS -------------------------------------------------------------
-
-    $menuModule = "";
-    $menuParts = "";
-    $menu = Yaml::parse( file_get_contents("menu.yml") );
-
-    # -- DADOS DO USUÁRIO LOGADO -----------------------------------------------
-
-    $_M_USER['id']          = ( isset($_SESSION['user']['id']          ) ) ? $_SESSION['user']['id']          : '' ;
-    $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
-    $_M_USER['first_name']  = ( isset($_SESSION['user']['first_name']  ) ) ? $_SESSION['user']['first_name']  : '' ;
-    $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
-    $_M_USER['last_name']   = ( isset($_SESSION['user']['last_name']   ) ) ? $_SESSION['user']['last_name']   : '' ;
-    $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
     
-    // -- EXECUTA ADD ON BOOTSTRAP ---------------------------------------------
+    # -- EXECUTA SOMENTE SE EXISTIR USUÁRIO LOGADO -----------------------------
     
-    foreach(json_decode("{{$_M_THIS_CONFIG['bootstrap']}}") as $key=>$path){
-       require_once $path;
-       new $key($_M_THIS_CONFIG, $_M_USER, $menu);
-    }
+    if( isset($_SESSION['user']) && !empty($_SESSION['user']) ){
+        
     
-    # -- MONTA O MENU ----------------------------------------------------------
+        # -- VARIAVEIS ---------------------------------------------------------
 
-    function createMenuRecursive($array, $deep=0, $deepClass=1){
-        $indent = 4;
-        $pad0 = str_pad("", $deep);
-        $pad1 = str_pad("", $deep+($indent) );
-        $pad2 = str_pad("", $deep+($indent*2) );
+        $menuModule = "";
+        $menuParts = "";
+        $menu = Yaml::parse( file_get_contents("menu.yml") );
 
-        $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
-        foreach ($array as $key => $val) {
-            $ret .= $pad1 . "<li>\r\n";
-            if(isset($val['link'])){                
-                // os arrays de comparação devem 
-                // ter no minimo estas chaves
-                $arrCompare['form'] = "";
-                $arrCompare['dashboard'] = "";
-                $arrCompare['module'] = "";
-                $arrCompare['action'] = "";
-                $arrCompare['module'] = "";
+        # -- DADOS DO USUÁRIO LOGADO -------------------------------------------
 
-                // array do menu atual
-                parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
-                $mLnk = array_replace($arrCompare, $mLnk);
-                $mLnk['module'] = preg_replace("/\/.*$/", "", ($mLnk['form'])? $mLnk['form'] : $mLnk['dashboard'] );
+        $_M_USER['id']          = ( isset($_SESSION['user']['id']          ) ) ? $_SESSION['user']['id']          : '' ;
+        $_M_USER['login']       = ( isset($_SESSION['user']['login']       ) ) ? $_SESSION['user']['login']       : '' ;
+        $_M_USER['first_name']  = ( isset($_SESSION['user']['first_name']  ) ) ? $_SESSION['user']['first_name']  : '' ;
+        $_M_USER['middle_name'] = ( isset($_SESSION['user']['middle_name'] ) ) ? $_SESSION['user']['middle_name'] : '' ;
+        $_M_USER['last_name']   = ( isset($_SESSION['user']['last_name']   ) ) ? $_SESSION['user']['last_name']   : '' ;
+        $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
 
-                // array da pagina atual
-                $pLnk = array_replace($arrCompare, $_GET);
-                $pLnk['module'] = preg_replace("/\/.*$/", "", ($pLnk['form'])? $pLnk['form'] : $pLnk['dashboard'] );
+        // -- EXECUTA ADD ON BOOTSTRAP -----------------------------------------
 
-                // comparações para adicionar classes
-                if($pLnk['module'] == $mLnk['module']){
-                    $cssClassByModule = "active-by-module";
-                    $cssClassByForm   = ( $pLnk['form']   == $mLnk['form']   ) ? "active-by-form"   : "";
-                    $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
-                    $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
-                }else{
-                    $cssClassByModule = "";
-                    $cssClassByForm   = "";
-                    $cssClassByAction = "";
-                    $cssClass         = "";
-                }
-                $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
-
-                // 
-                $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
-            }else{
-                $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
-            }
-
-            // Recursividade de modulo
-            if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
-                global $menuParts;
-                global $menuModule;
-
-                // verifica se o menu do modulo é ativo
-                $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
-                $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
-                $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
-
-                // cria item do menu de modulo
-                $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
-
-                // cria o itens filhos a partir do menu de formulário no main-menu
-                $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
-                $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
-
-                // retorna o menu
-                $ret .= $menuParts[ $val['load-from-module'] ];
-            }
-
-            // Recursividade de menu
-            elseif( isset($val['submenu']) && is_array($val['submenu']) ){
-                $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
-            }
-
-            $ret .= $pad1 . "</li>\r\n";
+        foreach(json_decode("{{$_M_THIS_CONFIG['bootstrap']}}") as $key=>$path){
+           require_once $path;
+           new $key($_M_THIS_CONFIG, $_M_USER, $menu);
         }
-        $ret .= $pad0 . "</ul>\r\n";
-        return $ret;
+        
+        # -- MONTA O MENU ------------------------------------------------------
+
+        function createMenuRecursive($array, $deep=0, $deepClass=1){
+            $indent = 4;
+            $pad0 = str_pad("", $deep);
+            $pad1 = str_pad("", $deep+($indent) );
+            $pad2 = str_pad("", $deep+($indent*2) );
+
+            $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
+            foreach ($array as $key => $val) {
+                $ret .= $pad1 . "<li>\r\n";
+                if(isset($val['link'])){                
+                    // os arrays de comparação devem 
+                    // ter no minimo estas chaves
+                    $arrCompare['form'] = "";
+                    $arrCompare['dashboard'] = "";
+                    $arrCompare['module'] = "";
+                    $arrCompare['action'] = "";
+                    $arrCompare['module'] = "";
+
+                    // array do menu atual
+                    parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
+                    $mLnk = array_replace($arrCompare, $mLnk);
+                    $mLnk['module'] = preg_replace("/\/.*$/", "", ($mLnk['form'])? $mLnk['form'] : $mLnk['dashboard'] );
+
+                    // array da pagina atual
+                    $pLnk = array_replace($arrCompare, $_GET);
+                    $pLnk['module'] = preg_replace("/\/.*$/", "", ($pLnk['form'])? $pLnk['form'] : $pLnk['dashboard'] );
+
+                    // comparações para adicionar classes
+                    if($pLnk['module'] == $mLnk['module']){
+                        $cssClassByModule = "active-by-module";
+                        $cssClassByForm   = ( $pLnk['form']   == $mLnk['form']   ) ? "active-by-form"   : "";
+                        $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
+                        $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
+                    }else{
+                        $cssClassByModule = "";
+                        $cssClassByForm   = "";
+                        $cssClassByAction = "";
+                        $cssClass         = "";
+                    }
+                    $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
+
+                    // 
+                    $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
+                }else{
+                    $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                }
+
+                // Recursividade de modulo
+                if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
+                    global $menuParts;
+                    global $menuModule;
+
+                    // verifica se o menu do modulo é ativo
+                    $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
+                    $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
+                    $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
+
+                    // cria item do menu de modulo
+                    $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+
+                    // cria o itens filhos a partir do menu de formulário no main-menu
+                    $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
+                    $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+
+                    // retorna o menu
+                    $ret .= $menuParts[ $val['load-from-module'] ];
+                }
+
+                // Recursividade de menu
+                elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                    $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
+                }
+
+                $ret .= $pad1 . "</li>\r\n";
+            }
+            $ret .= $pad0 . "</ul>\r\n";
+            return $ret;
+        }
+
+        $_M_MENU = createMenuRecursive($menu);
+        $_M_MENU_MODULE = "<ul>$menuModule\r\n</ul>";
+        $_M_MENU_PARTS = $menuParts;
+
+        unset($menuModule);
+        unset($menuParts);
+        unset($menu);
+        
     }
-
-    $_M_MENU = createMenuRecursive($menu);
-    $_M_MENU_MODULE = "<ul>$menuModule\r\n</ul>";
-    $_M_MENU_PARTS = $menuParts;
-
-    unset($menuModule);
-    unset($menuParts);
-    unset($menu);
     
     // -- DECIDE QUAL AÇÃO EXECUTAR --------------------------------------------
 
