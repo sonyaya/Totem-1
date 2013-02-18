@@ -70,8 +70,7 @@ pieChart = new Highcharts.Chart({
             size: '60%',
             dataLabels: {
                 formatter: function() {
-                    console.log(this)
-                    return this.y > 1 ? this.point.name : null;
+                    return this.y > 1 ? '<b>'+ this.point.name +':</b> ' : null;
                 },
                 color: 'white',
                 distance: -35
@@ -83,7 +82,7 @@ pieChart = new Highcharts.Chart({
             innerSize: '50%',
             dataLabels: {
                 formatter: function() {
-                    return this.y > 5 ? this.point.name : null;
+                    return this.y > 5 ? '<b>'+ this.point.name +':</b> ' : null;
                 },
                 color: 'white',
                 distance: -20
