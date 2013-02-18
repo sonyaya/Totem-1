@@ -70,21 +70,23 @@ pieChart = new Highcharts.Chart({
             size: '60%',
             dataLabels: {
                 formatter: function() {
-                    return this.y > 5 ? this.point.name : null;
+                    console.log(this)
+                    return this.y > 1 ? this.point.name : null;
                 },
                 color: 'white',
-                distance: -30
+                distance: -35
             }
         }, 
         {
             name: 'Estados',
             data: estadoData,
-            innerSize: '60%',
+            innerSize: '50%',
             dataLabels: {
                 formatter: function() {
-                    // display only if larger than 1
-                    return this.y > 1 ? '<b>'+ this.point.name +':</b> '+ this.y +'%'  : null;
-                }
+                    return this.y > 5 ? this.point.name : null;
+                },
+                color: 'white',
+                distance: -20
             }
         }, 
         {
