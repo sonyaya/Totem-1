@@ -1,6 +1,9 @@
 var columnBasic;
 
 columnBasic = new Highcharts.Chart({
+    credits:{
+      enabled: false  
+    },
     chart: {
         renderTo: 'column-basic',
         type: 'column'

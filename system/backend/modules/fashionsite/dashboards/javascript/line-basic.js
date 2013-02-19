@@ -1,5 +1,8 @@
 var lineBasic;
 lineBasic = new Highcharts.Chart({
+    credits:{
+      enabled: false  
+    },
     chart: {
         renderTo: 'line-basic',
         type: 'line',

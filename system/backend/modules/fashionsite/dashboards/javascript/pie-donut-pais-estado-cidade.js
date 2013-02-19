@@ -45,6 +45,9 @@ for(key in paisEstadoCidade['pais']){
 
 // Create the chart
 pieChart = new Highcharts.Chart({
+    credits:{
+      enabled: false  
+    },
     chart: {
         renderTo: 'pie-chart-pais-estado-cidade',
         type: 'pie'
