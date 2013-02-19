@@ -11,7 +11,7 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagm Postagens'
+    title: 'Listagem Postagens'
     rows-per-page: 15
     input:
       - type: number
@@ -129,7 +129,7 @@ forms:
 
       imgage:
         type: imagesUpload
-        label: imagesUpload
+        label: Imagens
         column: 'images_data'
         parameter :
           folder : "posts"
