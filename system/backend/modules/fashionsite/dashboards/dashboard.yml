@@ -10,3 +10,4 @@ interface:
     body:
       - "Highcharts/js/themes/drache.js"
       - "javascript/pie-donut-pais-estado-cidade.js"
+      - "javascript/showExportOnmouseOver.js"
