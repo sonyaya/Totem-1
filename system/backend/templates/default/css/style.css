@@ -152,24 +152,23 @@ iframe{
         color: #DDD;
         }
         
-    header div.modules nav ul li a.active,
-    header div.modules nav ul li:hover a{
-        background: rgba(255, 255, 255, 0.1);
-        box-shadow: 0 0 30px rgba(0, 0, 0, 0.5), 1px 0 0 rgba(255, 255, 255, 0.25);
-        }
-        
     header div.modules nav ul li.user a{
         background: url("../img/iconic/user.svg") no-repeat center 20px;
         background-size: 40px;
         }
         
     header div.modules nav ul li.blog a{
-        background: url("../img/iconic/rss_alt.svg") no-repeat center 32px;
+        background: url("../img/iconic/rss_alt.svg") no-repeat center 33px;
         background-size: 40px;
         }
         
     header div.modules nav ul li.ddr a{
         background: url("../img/iconic/mic.svg") no-repeat center 20px;
+        background-size: 40px;
+        }
+        
+    header div.modules nav ul li.fashionsite a{
+        background: url("../img/iconic/camera.svg") no-repeat center 33px;
         background-size: 40px;
         }
         
