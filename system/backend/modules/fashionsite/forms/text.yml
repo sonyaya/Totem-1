@@ -1,0 +1,63 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Textos'
+  table: fashionsite_text
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagm Postagens'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Título
+        column: title
+        
+      - type: example
+        label: Referencia
+        column: reference
+
+           
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Texto'
+    input:
+      - type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          size : 45
+          
+      - type: CKEditor
+        label: Texto
+        column: text
+
+      - type: meioMask
+        label: Referencia
+        column: reference
+        parameter : 
+          size : 45
+
+          
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Texto'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []

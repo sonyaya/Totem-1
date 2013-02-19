@@ -1,0 +1,77 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Clipping'
+  table: fashionsite_clipping
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Clippings'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Título
+        column: title
+              
+      - type: example
+        label: Tipo
+        column: (SELECT `name` FROM fashionsite_clipping_type WHERE id = fashionsite_clipping.type_id)
+
+        
+           
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Clipping'
+    input:
+      - type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          size : 45
+
+      - type: fk
+        label: Tipo 
+        column: type_id
+        parameter:
+          column: id
+          table: fashionsite_clipping_type
+          label: name 
+          insert-form  : "fashionsite/forms/clipping-type" 
+          
+      - type: textarea
+        label: Sobre
+        column: about
+        
+      - type: dateBr
+        label: Data
+        column: date
+    
+      - type: imagesUpload
+        label: Imagens
+        column: 'images'
+        parameter :
+          folder : "fashionsite/clipping"
+
+          
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Clipping'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []

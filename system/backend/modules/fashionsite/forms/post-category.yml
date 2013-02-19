@@ -1,8 +1,8 @@
 # -- HEADER --------------------------------------------------------------------
 
 header:
-  title: 'Tipo'
-  table: fashionsite_type
+  title: 'Categorias'
+  table: fashionsite_post_category
   p-key: id
   
 # -- FORMS ---------------------------------------------------------------------
@@ -11,7 +11,7 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagm de Tipos'
+    title: 'Listagm de Categorias'
     rows-per-page: 200
     merge-form: [ list, insert ]
     input: []
@@ -19,7 +19,7 @@ forms:
   # -- INSERT ------------------------------------------------------------------
   
   insert:
-    title: 'Inserindo Tipo'
+    title: 'Inserindo Categoria'
     input:
       titulo:
         type: meioMask
@@ -38,7 +38,7 @@ forms:
   # -- UPDATE ------------------------------------------------------------------
   
   update:
-    title: 'Atualizando Tipo'
+    title: 'Atualizando Categoria'
     merge-form: [ update, insert ]
     input: []
       

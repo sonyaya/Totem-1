@@ -1,8 +1,8 @@
 # -- HEADER --------------------------------------------------------------------
 
 header:
-  title: 'Categorias'
-  table: fashionsite_category
+  title: 'Tipo de Clipping'
+  table: fashionsite_collection_type
   p-key: id
   
 # -- FORMS ---------------------------------------------------------------------
@@ -11,37 +11,47 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagm de Categorias'
-    rows-per-page: 200
-    merge-form: [ list, insert ]
-    input: []
+    title: 'Listagem de Tipos de Clippings'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Nome
+        column: name
+        
+      - type: example
+        label: Slug
+        column: slug
+        
            
   # -- INSERT ------------------------------------------------------------------
   
   insert:
-    title: 'Inserindo Categoria'
+    title: 'Inserindo Tipo de Clipping'
     input:
-      titulo:
-        type: meioMask
-        label: Título
-        column: title
+      - type: meioMask
+        label: Nome
+        column: name
         parameter : 
           size : 45
-       
-      slug:
-        type: meioMask
+          
+      - type: meioMask
         label: Slug
         column: slug
         parameter : 
           size : 45
+
           
   # -- UPDATE ------------------------------------------------------------------
   
   update:
-    title: 'Atualizando Categoria'
+    title: 'Atualizando Tipo de Clipping'
     merge-form: [ update, insert ]
     input: []
-      
+          
   # -- DELETE ------------------------------------------------------------------
   
   delete:
