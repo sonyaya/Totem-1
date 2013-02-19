@@ -10,6 +10,10 @@
   load-from-module: ddr
   module-start-url: ?action=view-listAndInsert-form&form=ddr/forms/artist
   
+- label: Fashion Site
+  load-from-module: fashionsite
+  module-start-url: ?action=view-dashboard&dashboard=fashionSite/dashboards/dashboard
+  
 - label: Example
   submenu:
     - label: Dashboard
