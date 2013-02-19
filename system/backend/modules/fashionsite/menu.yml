@@ -1,2 +1,22 @@
 - label: "Dashboard"
   link: "?action=view-dashboard&dashboard=fashionSite/dashboards/dashboard"
+ 
+- label: "Textos"
+  link: "?action=view-listAndInsert-form&form=fashionsite/forms/text"
+ 
+- label: "Clippings"
+  link: "?action=view-listAndInsert-form&form=fashionsite/forms/clipping"
+  
+- label: "Coleções"
+  link: "?action=view-listAndInsert-form&form=fashionsite/forms/collection"
+  
+- label: artigos
+  submenu:
+    - label: "Postagens"
+      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post"
+
+    - label: "Categorias"
+      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post-category"
+
+    - label: "Tipos"
+      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post-type"
