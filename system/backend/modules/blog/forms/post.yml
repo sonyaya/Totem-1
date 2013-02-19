@@ -132,7 +132,7 @@ forms:
         label: Imagens
         column: 'images_data'
         parameter :
-          folder : "posts"
+          folder : "blog/posts"
 
       intro:
         type: textarea
