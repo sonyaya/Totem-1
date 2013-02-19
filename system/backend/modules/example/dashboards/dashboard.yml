@@ -13,3 +13,4 @@ interface:
       - "javascript/column-basic.js"
       - "javascript/line-basic.js"
       - "javascript/pie-donut.js"
+      - "javascript/showExportOnmouseOver.js"
