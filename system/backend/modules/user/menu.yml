@@ -1,3 +1,6 @@
+- label: "Dashboard"
+  link: "?action=view-dashboard&dashboard=user/dashboards/dashboard"
+  
 - label: "Usuários"
   link: "?action=view-listAndInsert-form&form=user/forms/user"
 
