@@ -47,18 +47,11 @@
             if( !empty($thisData) ){
                 $dateTime = explode(" ", $thisData);
                 $date = explode("-", $dateTime[0]);
-                $time = explode(":", $dateTime[1]);
                 $loaded = Array(
                     "date" => Array(
                         "year"  => $date[0] ,
                         "month" => $date[1] ,
                         "day"   => $date[2]
-                    ),
-
-                    "time" => Array(
-                        "hours"   => $time[0] ,
-                        "minutes" => $time[1] ,
-                        "seconds" => $time[2]
                     )
                 );
             }else{
@@ -67,12 +60,6 @@
                         "year"  => date('Y') ,
                         "month" => date('m') ,
                         "day"   => date('d')
-                    ),
-
-                    "time" => Array(
-                        "hours"   => date('H') ,
-                        "minutes" => date('i') ,
-                        "seconds" => date('s')
                     )
                 );
             }
@@ -97,7 +84,7 @@
          */
         public function beforeInsertAndUpdate(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
             if( $thisData['year'] !== "--"){
-                $thisData = "{$thisData['year']}-{$thisData['month']}-{$thisData['day']} {$thisData['hours']}:{$thisData['minutes']}:{$thisData['seconds']}";    
+                $thisData = "{$thisData['year']}-{$thisData['month']}-{$thisData['day']}";    
             }else{
                 $thisData = null;
             }

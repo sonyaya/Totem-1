@@ -1,4 +1,4 @@
-function DateTimeBr_loadDays($this){
+function DateBr_loadDays($this){
     $inputHolder = $this.closest(".input-holder");
     year  = $inputHolder.find(".input-year").val();
     month = $inputHolder.find(".input-month").val();
@@ -12,18 +12,18 @@ function DateTimeBr_loadDays($this){
 }
 
 $(function(){
-    $(".dateTimeBr").on("change", "select", function(){
+    $(".dateBr").on("change", "select", function(){
         if( $(this).val() == "--" ){
             $(this).closest(".inner-holder").find("select").val("--"); 
             $inputHolder.find(".input-day").html("<option>--</option>");
         }
     });
     
-    $(".dateTimeBr").on("focus", ".input-day", function(){
-        DateTimeBr_loadDays($(this));
+    $(".dateBr").on("focus", ".input-day", function(){
+        DateBr_loadDays($(this));
     });
 
-    $(".dateTimeBr").on("change", ".input-month", function(){
-        DateTimeBr_loadDays($(this));
+    $(".dateBr").on("change", ".input-month", function(){
+        DateBr_loadDays($(this));
     });
 });
