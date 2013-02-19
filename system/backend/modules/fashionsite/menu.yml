@@ -10,6 +10,14 @@
 - label: "Coleções"
   link: "?action=view-listAndInsert-form&form=fashionsite/forms/collection"
   
+- label: "Entidades"
+  submenu:
+    - label: Representantes
+      link: "?action=view-listAndInsert-form&form=fashionsite/forms/representante"
+      
+    - label: Lojas
+      link: "?action=view-listAndInsert-form&form=fashionsite/forms/store"
+  
 - label: artigos
   submenu:
     - label: "Postagens"

@@ -1,0 +1,85 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Lojas'
+  table: fashionsite_store
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Lejas'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Nome
+        column: name
+
+        
+           
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Loja'
+    input:
+      - type: meioMask
+        label: Nome
+        column: name
+        parameter : 
+          size : 45
+          
+      - type: textarea
+        label: Sobre
+        column: about
+    
+      - type: jsonArray
+        label: Emails (vários)
+        column: email
+        
+      - type: jsonArray
+        label: Telefones (vários)
+        column: phone
+        
+      - type: jsonArray
+        label: Celulares (vários)
+        column: cellphone
+        
+      - type: fk
+        label: Cidade
+        column: city_id
+        parameter : 
+          table : fashionsite_city
+          column : id
+          label : name
+          insert-form : "fashionsite/forms/city" 
+          
+      - type: textarea
+        label: Endereço
+        column: address
+          
+      - type: imagesUpload
+        label: Imagens
+        column: 'images'
+        parameter :
+          folder : "fashionsite/loja"
+
+          
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Loja'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []

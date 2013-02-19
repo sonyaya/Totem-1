@@ -1,0 +1,55 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'País'
+  table: fashionsite_cowntry
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Paises'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Nome
+        column: name
+
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Paises'
+    input:
+      name:
+        type: meioMask
+        label: Name
+        column: name
+        parameter : 
+          size : 45
+          
+      isoCode:
+        type: meioMask
+        label: "ISO Code"
+        column: "iso-code"
+        parameter : 
+          size : 3
+            
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Cidade'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []
