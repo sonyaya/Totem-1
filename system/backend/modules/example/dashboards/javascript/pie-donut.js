@@ -42,6 +42,9 @@ var estadosData = [
 
 // Create the chart
 pieChart = new Highcharts.Chart({
+    credits:{
+      enabled: false  
+    },
     chart: {
         renderTo: 'pie-chart',
         type: 'pie'

@@ -1,5 +1,8 @@
 var areaBasic;
 areaBasic = new Highcharts.Chart({
+    credits:{
+      enabled: false  
+    },
     chart: {
         renderTo: 'area-basic',
         type: 'area'
@@ -46,6 +49,10 @@ areaBasic = new Highcharts.Chart({
                 }
             }
         }
+    },
+    legend: {
+        backgroundColor: '#FFFFFF',
+        shadow: true
     },
     series: [ 
         {
