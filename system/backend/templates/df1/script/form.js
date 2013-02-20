@@ -21,8 +21,8 @@ $(function(){
                         mesageConcat = 'Os seguintes erros ocorreram: \r\n' ;
                         $.each(data.message, function(key, val){
                             mesageConcat += "- "+val+"\r\n";
-                            alert(mesageConcat);
                         });
+                        alert(mesageConcat);
                     }else{
                         alert(data.message);
                     }
