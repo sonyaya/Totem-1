@@ -17,11 +17,15 @@ $(function(){
             $(this).serialize(),
             function(data){
                 if( data.error ){
-                    mesageConcat = 'Os seguintes erros ocorreram: \r\n';
-                    $.each(data.message, function(key, val){
-                        mesageConcat += "- "+val+"\r\n";
-                    });
-                    alert(mesageConcat);
+                    if( typeof data.message !== "string"){
+                        mesageConcat = 'Os seguintes erros ocorreram: \r\n' ;
+                        $.each(data.message, function(key, val){
+                            mesageConcat += "- "+val+"\r\n";
+                            alert(mesageConcat);
+                        });
+                    }else{
+                        alert(data.message);
+                    }
                     layout.ajax.hideLoader();
                 }else{
                     layout.ajax.hideLoader();
