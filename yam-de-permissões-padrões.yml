@@ -7,9 +7,6 @@ backend:
         view: true
         save: true
         
-#    # bloqueios de tipos
-#    types:
-#      ajax: true
 #      
 #    # hide menu of a module
 #    hide-module:
