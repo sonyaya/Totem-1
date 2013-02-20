@@ -55,7 +55,9 @@
             $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
             foreach ($array as $key => $val) {
                 $ret .= $pad1 . "<li>\r\n";
-                if(isset($val['link'])){                
+                
+                
+                if(isset($val['link'])){
                     // os arrays de comparação devem 
                     // ter no minimo estas chaves
                     $arrCompare['form'] = "";
@@ -90,34 +92,40 @@
                     // 
                     $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
                 }else{
-                    $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                    // Recursividade de modulo
+                    if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
+                        // verifica se o usuário pode ver este módulo
+                        if( !User::check("backend/hide-module/{$val['load-from-module']}", "bool") ){
+                            $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                            
+                            // variaveis comuns
+                            global $menuParts;
+                            global $menuModule;
+
+                            // verifica se o menu do modulo é ativo
+                            $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
+                            $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
+                            $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
+
+                            // cria item do menu de modulo
+                            $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+
+                            // cria o itens filhos a partir do menu de formulário no main-menu
+                            $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
+                            $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+
+                            // retorna o menu
+                            $ret .= $menuParts[ $val['load-from-module'] ];
+                        }
+                    }
+
+                    // Recursividade de menu
+                    elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                        $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                        $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
+                    }
                 }
 
-                // Recursividade de modulo
-                if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
-                    global $menuParts;
-                    global $menuModule;
-
-                    // verifica se o menu do modulo é ativo
-                    $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
-                    $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
-                    $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
-
-                    // cria item do menu de modulo
-                    $menuModule .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
-
-                    // cria o itens filhos a partir do menu de formulário no main-menu
-                    $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
-                    $menuParts[ $val['load-from-module'] ] =  createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
-
-                    // retorna o menu
-                    $ret .= $menuParts[ $val['load-from-module'] ];
-                }
-
-                // Recursividade de menu
-                elseif( isset($val['submenu']) && is_array($val['submenu']) ){
-                    $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
-                }
 
                 $ret .= $pad1 . "</li>\r\n";
             }
