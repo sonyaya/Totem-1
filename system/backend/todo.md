@@ -1,11 +1,10 @@
 TO-DO
 =====
+- Alter dashboard e form do GET para path
 - Criar sistema de log de alterações e permissões por módulos.
-- Organizar os modulos em pastas específicas.
 
 Forms
 -----
-- Adicionar before e after, update e insert para formulários, por enquanto só existe para os types.
 
 
 List
@@ -14,11 +13,6 @@ List
 
 BUGS
 ====
-
-Templates
----------
-- O CSS do template df1 esta utilizando o calc (compativel somente com webkit e moz) é preciso encontrar um alternativa para isso.
-
 
 List
 ----
