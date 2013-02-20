@@ -258,7 +258,6 @@
 
         // EXECUTA AJAX DE ALGUM TYPE ESPECIFICO
         case "type-ajax":{
-            User::check("backend/types/ajax", "json");
             $type = $_GET['type'];
             if( file_exists($fileType = "types/$type/$type.php") ){
                 require_once $fileType;
