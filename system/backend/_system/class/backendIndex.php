@@ -57,7 +57,7 @@
          * 
          * @param type $listLayout
          */
-        static function viewFormListAndInsert($listLayout){
+        static function viewFormInTabs($listLayout){
             $orderBy = self::prepareOrderBy();
             $paginator = self::preparePaginator();
             $cond = self::prepareCondition();
