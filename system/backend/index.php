@@ -142,7 +142,8 @@
         // MOSTRA A INTERFACE GRÁFICA DO
         // DASHBOARD ESPECIFÍCO
         case "view-dashboard":{
-            User::check("backend/forms/view/dashboard", "html");
+            if( !User::check("backend/forms/view/dashboard", "bool") )
+                User::check("backend/modules/view/dashboard/{$_GET['dashboard']}", "html");
             $dashboard = new DashboardComposer();
             $dashboard->viewDashboard( $_GET['dashboard'], "dashboard.html" );
             break;
@@ -151,7 +152,8 @@
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE INSERÇÃO
         case "view-insert-form":{
-            User::check("backend/forms/view/insert", "html");
+            if( !User::check("backend/forms/view/insert", "bool") )
+                User::check("backend/modules/view/insert/{$_GET['form']}", "html");
             backendIndex::viewFormInsert("form.html");
             break;
         }
@@ -159,7 +161,8 @@
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
         case "view-update-form":{
-            User::check("backend/forms/view/update", "html");
+            if( !User::check("backend/forms/view/update", "bool") )
+                User::check("backend/modules/view/update/{$_GET['form']}", "html");
             backendIndex::viewFormUpdate("form.html");
             break;
         }
@@ -167,7 +170,8 @@
         // BUSCA LISTA DE DADOS REFERENTE 
         // AO FORMULÁRIO NO BANCO DE DADOS
         case "view-list-form":{
-            User::check("backend/forms/view/list", "html");
+            if( !User::check("backend/forms/view/list", "bool") )
+                User::check("backend/modules/view/list/{$_GET['form']}", "html");
             backendIndex::viewFormList("list.html");
             break;
         }
@@ -175,9 +179,9 @@
         // BUSCA LISTA DE DADOS REFERENTE 
         // AO FORMULÁRIO NO BANCO DE DADOS
         // E O FORMULÁRIO DE INSERÇÃO
-        case "view-listAndInsert-form":{
-            User::check("backend/forms/view/insert", "html");
-            User::check("backend/forms/view/list", "html");
+        case "view-inTabs-form":{
+            if( !User::check("backend/forms/view/inTabs", "bool") )
+                User::check("backend/modules/view/inTabs/{$_GET['form']}", "html");
             backendIndex::viewFormListAndInsert("listAndInsert.html");
             break;
         }
@@ -186,7 +190,8 @@
         // TELA DE FORMULÁRIO DE INSERÇÃO
         // EM JANELA
         case "view-insert-window-form":{
-            User::check("backend/forms/view/insert", "html");
+            if( !User::check("backend/forms/view/insert", "bool") )
+                User::check("backend/modules/save/insert/{$_GET['form']}", "html");
             backendIndex::viewFormInsert("form-window.html");
             break;
         }
@@ -195,7 +200,8 @@
         // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
         // EM JANELA
         case "view-update-window-form":{
-            User::check("backend/forms/view/update", "html");
+            if( !User::check("backend/forms/view/update", "bool") )
+                User::check("backend/modules/save/update/{$_GET['form']}", "html");
             backendIndex::viewFormUpdate("form-window.html");
             break;
         }
@@ -204,7 +210,8 @@
         // AO FORMULÁRIO NO BANCO DE DADOS
         // EM JANELA
         case "view-list-window-form":{
-            User::check("backend/forms/view/list", "html");
+            if( !User::check("backend/forms/view/list", "bool") )
+                User::check("backend/modules/save/list/{$_GET['form']}", "html");
             backendIndex::viewFormList("list-window.html");
             break;
         }
@@ -218,7 +225,8 @@
 
         // DELETA UM FORMULÁRIO
         case "delete-form":{
-            User::check("backend", "delete-form", "json");
+            if( !User::check("backend/forms/save/delete", "bool") )
+                User::check("backend/modules/save/delete/{$_GET['form']}", "json");
             $form = new Form();
             echo json_encode( $form->deleteForm( $_GET['form'], $_GET['id']) );
             break;
@@ -227,8 +235,14 @@
         // INSERE OU ATUALIZA DADOS 
         // NO BANCO DE DADOS
         case "save-form":{
-            User::check("backend/forms/save/insert", "json");
-            User::check("backend/forms/save/update", "json");
+            if( preg_match("/update\:.*/i", $_POST['_M_ACTION']) ){
+                if( !User::check("backend/forms/save/update", "bool") )
+                    User::check("backend/modules/save/update/{$_GET['form']}", "json");
+            }else{
+                if( !User::check("backend/forms/save/insert", "bool") )
+                    User::check("backend/modules/save/insert/{$_GET['form']}", "json");
+            }
+               
             $form = new Form();
             echo json_encode( $form->saveForm( $_GET['form'], $_POST) );
             break;
