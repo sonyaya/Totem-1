@@ -13,17 +13,31 @@
         /**
          *
          */
-        public static function check($context="backend", $identifier="", $returnType="html"){
+        public static function check($context="backend", $returnType="html"){
             global $_M_CONF;
             global $_M_THIS_CONFIG;
 
             if( !empty($_SESSION['user']) ){
-                if( isset($_SESSION['user']['permissions'][$context]) ){
-                    $array_permission = $_SESSION['user']['permissions'][$context];
-                    if( isset($array_permission[$identifier]) && $array_permission[$identifier]===true ){
+                    // busca variaveis
+                    $contextArray = explode("/", $context);
+                    $user_permission = $_SESSION['user']['permissions'];
+                    
+                    // pega permissão para o contexto
+                    $user_actual_context_permission = $user_permission;
+                    foreach( $contextArray as $val ){
+                        if( isset($user_actual_context_permission[ $val ]) ){
+                            $user_actual_context_permission = $user_actual_context_permission[ $val ];
+                        }else{
+                            break;
+                        }
+                    }
+                    $user_actual_context_permission = is_array($user_actual_context_permission) ? false : $user_actual_context_permission;
+
+                    // executa ação conforme permissão para o contexto
+                    if( $user_actual_context_permission ){
                         return true;
                     }else{
-                        $message = "Você não possui permissão para executar '$identifier' no contexto '$context'.";
+                        $message = "Você não possui permissão para executar o contexto '$context'.";
 
                         $return = Array(
                             "error"     => true,
@@ -54,37 +68,6 @@
                         exit;
                             
                     }
-                }else{
-                    $message = "Você não possui permissão definidas para o contexto $context, verifique ou contate se administrador.";
-
-                    $return = Array(
-                        "error"     => true,
-                        "errorCode" => "check-1",
-                        "message"   => $message
-                    );
-
-                    switch ($returnType) {
-                        case "print_r":
-                            print_r($return);
-                            break;
-                            
-                        case "json":
-                            echo json_encode($return);
-                            break;
-
-                        case 'html':
-                        default:
-                            echo new Frontend(
-                                $_M_THIS_CONFIG['template']."login-blocked.html",
-                                array_merge(
-                                    $_M_THIS_CONFIG,
-                                    Array( "error" => $message )
-                                )
-                            );
-                            break;
-                    }
-                    exit;
-                }
             }else{
                 echo new Frontend(
                     $_M_THIS_CONFIG['template']."login.html",
