@@ -2,29 +2,29 @@
   link: "?action=view-dashboard&dashboard=fashionSite/dashboards/dashboard"
  
 - label: "Textos"
-  link: "?action=view-listAndInsert-form&form=fashionsite/forms/text"
+  link: "?action=view-inTabs-form&form=fashionsite/forms/text"
  
 - label: "Clippings"
-  link: "?action=view-listAndInsert-form&form=fashionsite/forms/clipping"
+  link: "?action=view-inTabs-form&form=fashionsite/forms/clipping"
   
 - label: "Coleções"
-  link: "?action=view-listAndInsert-form&form=fashionsite/forms/collection"
+  link: "?action=view-inTabs-form&form=fashionsite/forms/collection"
   
 - label: "Entidades"
   submenu:
     - label: Representantes
-      link: "?action=view-listAndInsert-form&form=fashionsite/forms/representante"
+      link: "?action=view-inTabs-form&form=fashionsite/forms/representante"
       
     - label: Lojas
-      link: "?action=view-listAndInsert-form&form=fashionsite/forms/store"
+      link: "?action=view-inTabs-form&form=fashionsite/forms/store"
   
 - label: artigos
   submenu:
     - label: "Postagens"
-      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post"
+      link: "?action=view-inTabs-form&form=fashionsite/forms/post"
 
     - label: "Categorias"
-      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post-category"
+      link: "?action=view-inTabs-form&form=fashionsite/forms/post-category"
 
     - label: "Tipos"
-      link: "?action=view-listAndInsert-form&form=fashionsite/forms/post-type"
+      link: "?action=view-inTabs-form&form=fashionsite/forms/post-type"
