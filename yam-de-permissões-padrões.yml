@@ -1,10 +1,48 @@
 #
-# PERMISSÕES NO BACKEND
+# PERMISSÕES NO BACKEND - ADMIN
 #
 backend:
-    view-update-form : true
-    view-insert-form : true
-    view-list-form   : true
-    view-dashboard   : true
-    save-form        : true
-    delete-form      : true
+    forms:
+        view: true
+        save: true
+    types:
+      ajax: true
+          
+          
+          
+          
+          
+#
+# PERMISSÕES NO BACKEND - INSERT ONLY
+#
+backend:
+    forms:
+        view:
+          update   : false
+          insert   : true
+          list     : false
+          dashboard: false
+        save:
+          insert: true
+          update: false
+          delete: false
+    types:
+      ajax: true
+          
+          
+          
+          
+          
+#
+# PERMISSÕES NO BACKEND - CANT SEE DASHBOARD AND CANT INSERT, UPDATE OR DELETE
+#
+backend:
+    forms:
+        view:
+          update   : true
+          insert   : true
+          list     : true
+          dashboard: false
+        save: false
+    types:
+      ajax: true
