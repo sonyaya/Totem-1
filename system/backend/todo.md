@@ -1,6 +1,7 @@
 TO-DO
 =====
 - Alter dashboard e form do GET para path
+- Assim como é possivel esconder um módulo inteiro no menu, deve ser criado uma maneira de esconder um link especifico do menu
 - Criar sistema de log de alterações e permissões por módulos.
 
 Forms
