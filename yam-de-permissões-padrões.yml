@@ -7,10 +7,10 @@ backend:
         view: true
         save: true
         
-    # bloqueios de tipos
-    types:
-      ajax: true
-      
+#    # bloqueios de tipos
+#    types:
+#      ajax: true
+#      
 #    # hide menu of a module
 #    hide-module:
 #      user: true
@@ -20,7 +20,7 @@ backend:
 #        view:
 #          insert:
 #            - {user:{forms:{group: false}}}
-#            
+#
 #          update: 
 #            - ""
 #            
@@ -35,7 +35,7 @@ backend:
 #            - ""
 #            
 #          delete: 
-            - ""
+#            - ""
           
           
 #
