@@ -142,7 +142,7 @@
         // MOSTRA A INTERFACE GRÁFICA DO
         // DASHBOARD ESPECIFÍCO
         case "view-dashboard":{
-            User::check("backend", "view-dashboard", "html");
+            User::check("backend/forms/view/dashboard", "html");
             $dashboard = new DashboardComposer();
             $dashboard->viewDashboard( $_GET['dashboard'], "dashboard.html" );
             break;
@@ -151,7 +151,7 @@
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE INSERÇÃO
         case "view-insert-form":{
-            User::check("backend", "view-insert-form", "html");
+            User::check("backend/forms/view/insert", "html");
             backendIndex::viewFormInsert("form.html");
             break;
         }
@@ -159,7 +159,7 @@
         // MOSTRA A INTERFACE GRÁFICA DA
         // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
         case "view-update-form":{
-            User::check("backend", "view-update-form", "html");
+            User::check("backend/forms/view/update", "html");
             backendIndex::viewFormUpdate("form.html");
             break;
         }
@@ -167,7 +167,7 @@
         // BUSCA LISTA DE DADOS REFERENTE 
         // AO FORMULÁRIO NO BANCO DE DADOS
         case "view-list-form":{
-            User::check("backend", "view-list-form", "html");
+            User::check("backend/forms/view/list", "html");
             backendIndex::viewFormList("list.html");
             break;
         }
@@ -176,8 +176,8 @@
         // AO FORMULÁRIO NO BANCO DE DADOS
         // E O FORMULÁRIO DE INSERÇÃO
         case "view-listAndInsert-form":{
-            User::check("backend", "view-insert-form", "html");
-            User::check("backend", "view-list-form", "html");
+            User::check("backend/forms/view/insert", "html");
+            User::check("backend/forms/view/list", "html");
             backendIndex::viewFormListAndInsert("listAndInsert.html");
             break;
         }
@@ -186,7 +186,7 @@
         // TELA DE FORMULÁRIO DE INSERÇÃO
         // EM JANELA
         case "view-insert-window-form":{
-            User::check("backend", "view-insert-form", "html");
+            User::check("backend/forms/view/insert", "html");
             backendIndex::viewFormInsert("form-window.html");
             break;
         }
@@ -195,7 +195,7 @@
         // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
         // EM JANELA
         case "view-update-window-form":{
-            User::check("backend", "view-update-form", "html");
+            User::check("backend/forms/view/update", "html");
             backendIndex::viewFormUpdate("form-window.html");
             break;
         }
@@ -204,7 +204,7 @@
         // AO FORMULÁRIO NO BANCO DE DADOS
         // EM JANELA
         case "view-list-window-form":{
-            User::check("backend", "view-list-form", "html");
+            User::check("backend/forms/view/list", "html");
             backendIndex::viewFormList("list-window.html");
             break;
         }
@@ -227,7 +227,8 @@
         // INSERE OU ATUALIZA DADOS 
         // NO BANCO DE DADOS
         case "save-form":{
-            User::check("backend", "save-form", "json");
+            User::check("backend/forms/save/insert", "json");
+            User::check("backend/forms/save/update", "json");
             $form = new Form();
             echo json_encode( $form->saveForm( $_GET['form'], $_POST) );
             break;
@@ -235,6 +236,7 @@
 
         // EXECUTA AJAX DE ALGUM TYPE ESPECIFICO
         case "type-ajax":{
+            User::check("backend/types/ajax", "json");
             $type = $_GET['type'];
             if( file_exists($fileType = "types/$type/$type.php") ){
                 require_once $fileType;
