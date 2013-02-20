@@ -46,6 +46,10 @@
                         );
 
                         switch ($returnType) {
+                            case 'bool':
+                                return false;
+                                break;
+                            
                             case "print_r":
                                 print_r($return);
                                 break;
