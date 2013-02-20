@@ -4,11 +4,11 @@
 
 - label: Blog
   load-from-module: blog
-  module-start-url: ?action=view-listAndInsert-form&form=blog/forms/post
+  module-start-url: ?action=view-inTabs-form&form=blog/forms/post
 
 - label: Disc. do Rock
   load-from-module: ddr
-  module-start-url: ?action=view-listAndInsert-form&form=ddr/forms/artist
+  module-start-url: ?action=view-inTabs-form&form=ddr/forms/artist
   
 - label: Fashion Site
   load-from-module: fashionsite
