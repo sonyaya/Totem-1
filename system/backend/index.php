@@ -182,7 +182,7 @@
         case "view-inTabs-form":{
             if( !User::check("backend/forms/view/inTabs", "bool") )
                 User::check("backend/modules/view/inTabs/{$_GET['form']}", "html");
-            backendIndex::viewFormListAndInsert("listAndInsert.html");
+            backendIndex::viewFormInTabs("listAndInsert.html");
             break;
         }
 
