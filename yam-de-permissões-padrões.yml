@@ -11,7 +11,11 @@ backend:
     types:
       ajax: true
       
-    # bloqueio por módulo ou arquivo
+#    # hide menu of a module
+#    hide-module:
+#      user: true
+#      
+#    # bloqueio por módulo ou arquivo
 #    modules:
 #        view:
 #          insert:
@@ -31,7 +35,7 @@ backend:
 #            - ""
 #            
 #          delete: 
-#            - ""
+            - ""
           
           
 #
