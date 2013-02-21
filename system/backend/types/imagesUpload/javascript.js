@@ -59,15 +59,8 @@ $(function(){
 
     // SAVE EDIT IMAGE DATA
     $('div.imagesUpload div.inner-holder').on("keyup", "textarea,input", function(){ 
-        imagesUpload_changeDataImage($(this)); 
-    });
-
-    $('div.imagesUpload div.inner-holder').on("change", "select", function(){ 
-        imagesUpload_changeDataImage($(this)); 
-    });
-
-    function imagesUpload_changeDataImage($this){
         // doms
+        $this = $(this);
         $windowFiles = $this.closest(".window");
         $editImageWindow = $windowFiles.find(".edit-image-window");
         $imagesData = $windowFiles.find(".imagesUpload_images-data");
@@ -99,7 +92,8 @@ $(function(){
 
         // prevent default
         return false;
-    }
+    });
+
 
     // CLOSE EDIT IMAGE DATA
     $('div.imagesUpload div.inner-holder').on("click", ".bt_imageDataForm_close", function(){
