@@ -34,7 +34,7 @@
   path          = "backend/"
   template      = "templates/default/"
   max-page-list = 10
-  start-place   = "?action=view-dashboard&dashboard=user/dashboards/dashboard"
+  start-place   = "?action=view-dashboard&path=user/dashboards/dashboard"
   bootstrap     = '
     "userBootstrap" : "modules/user/extra/bootstrap.php"
   '
