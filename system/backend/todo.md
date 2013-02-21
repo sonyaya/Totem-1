@@ -2,6 +2,7 @@ TO-DO
 =====
 - Assim como é possivel esconder um módulo inteiro no menu, deve ser criado uma maneira de esconder um link especifico do menu
 - Criar sistema de log de alterações e permissões por módulos.
+- Adicionar imagem ao login de usuário
 
 Forms
 -----
