@@ -5,7 +5,7 @@ $(function(){
     });
 
     // IMAGE EDIT DATA
-    $('div.imagesUpload div.inner-holder ul').on("dblclick", "li", function(){
+    $('div.imagesUpload div.inner-holder ul').on("dblclick taphold", "li", function(){
         $this = $(this);
         $inputHolder = $this.closest(".input-holder");
         $windowFiles = $this.closest(".window");
