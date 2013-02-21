@@ -1,6 +1,8 @@
 <div class="dash">
     
-    <h2>Mensagens Recebidas</h2>
+    <m.if cond="&m.var:bool:data.messages.0.send_at; || &m.var:bool:data.messages.0.send_at;">
+      <h2>Mensagens Recebidas</h2>
+    </m.if>
     
     <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- true">
       <div class="messages">
