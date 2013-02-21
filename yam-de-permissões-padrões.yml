@@ -6,11 +6,14 @@ backend:
     forms:
         view: true
         save: true
-        
-#      
+       
+#    # hide specific menu by path
+#    hide-menu-by-path:
+#      - user/forms/group
+#       
 #    # show menu of a module
 #    show-module:
-#      user: true
+#      - user
 #      
 #    # bloqueio por módulo ou arquivo
 #    modules:
@@ -50,8 +53,8 @@ backend:
           insert: true
           update: false
           delete: false
-    types:
-      ajax: true
+    show-module:
+      - all
           
           
           
@@ -69,5 +72,5 @@ backend:
           list     : true
           dashboard: false
         save: false
-    types:
-      ajax: true
+    show-module:
+      - all
