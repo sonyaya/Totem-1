@@ -2,6 +2,16 @@
 
     namespace backend;
 
+    use backend\Form;
+    use backend\DashboardComposer;
+    use backend\Frontend;
+    use backend\User;
+    
+    use vendor\Symfony\Component\Yaml\Yaml;
+    
+    /**
+     * 
+     */
     class backendIndex{
 
         /**
@@ -23,11 +33,11 @@
          * 
          * @param type $formLayout
          */
-        static public function viewFormUpdate($formLayout, $path){
+        static public function viewFormUpdate($formLayout, $path, $id){
             $Form = new Form();
             $Form
                 ->setLayout($formLayout)
-                ->viewForm($path, $_GET['id'])
+                ->viewForm($path, $id)
                 ->writeHTML()
             ; 
         }
@@ -37,11 +47,11 @@
          * 
          * @param type $listLayout
          */
-        static public function viewFormList($listLayout, $path){
-            $orderBy = self::prepareOrderBy();
-            $paginator = self::preparePaginator();
-            $cond = self::prepareCondition();
-            $page = $paginator['page'];
+        static public function viewFormList($listLayout, $path, $orderBy='', $page='1', $rowsPerPage='', $cond=""){
+            $orderBy     = self::prepareOrderBy($orderBy);
+            $paginator   = self::preparePaginator($page, $rowsPerPage);
+            $cond        = self::prepareCondition($cond);
+            $page        = $paginator['page'];
             $rowsPerPage = $paginator['rowsPerPage'];  
             
             $form = new Form();
@@ -57,11 +67,11 @@
          * 
          * @param type $listLayout
          */
-        static function viewFormInTabs($listLayout, $path){
-            $orderBy = self::prepareOrderBy();
-            $paginator = self::preparePaginator();
-            $cond = self::prepareCondition();
-            $page = $paginator['page'];
+        static function viewFormInTabs($listLayout, $path, $orderBy="", $page='1', $rowsPerPage='', $cond=""){
+            $orderBy     = self::prepareOrderBy($orderBy);
+            $paginator   = self::preparePaginator($page, $rowsPerPage);
+            $cond        = self::prepareCondition($cond);
+            $page        = $paginator['page'];
             $rowsPerPage = $paginator['rowsPerPage']; 
             
             $form = new Form();
@@ -78,9 +88,8 @@
          * 
          * @return Array
          */
-        static private function prepareOrderBy(){
-             if( isset($_GET['orderBy']) && !empty($_GET['orderBy']) ){
-                $orderBy = $_GET['orderBy'];
+        static private function prepareOrderBy($orderBy=""){
+             if( !empty($orderBy) ){
 
                 // ORDER BY Valor!/ID
                 $orderBy = explode('/', $orderBy);
@@ -103,9 +112,7 @@
          * 
          * @return array
          */
-        static private function preparePaginator(){
-            $page = (isset($_GET['page']))? $_GET['page'] : '1';
-            $rowsPerPage = (isset($_GET['rowsPerPage']))?  $_GET['rowsPerPage'] : '';
+        static private function preparePaginator($page='1', $rowsPerPage=''){
             return Array("page" => $page, "rowsPerPage" => $rowsPerPage);
         }
 
@@ -115,9 +122,9 @@
          * 
          * @return string
          */
-        static private function prepareCondition(){
-            if( isset($_GET['cond']) ){
-                $cond = json_decode($_GET['cond']);
+        static private function prepareCondition($cond=""){
+            if( !empty($cond) ){
+                $cond = json_decode($cond);
 
                 if(is_array($cond) ){
                     $andOr[" "] = "";
@@ -171,8 +178,24 @@
         }
         
         
-        static public function execAction($action="", $path=""){
-
+        static public function execAction($action="", $path="", $get, $post){
+            
+            // TRATA O GET
+            $get = 
+                array_replace(
+                    array(
+                        "id"=>"",
+                        "page"=>"1",
+                        "rowsPerPage"=>"",
+                        "cond"=>"1",
+                        "orderBy"=>"",
+                        "hash"=>""
+                    )
+                    , $get
+                )
+            ;
+            
+            // ESCOLHE A AÇÃO A SER EXECUTADA
             switch( $action ) {
                 // MOSTRA A INTERFACE GRÁFICA DO
                 // DASHBOARD ESPECIFÍCO
@@ -198,7 +221,7 @@
                 case "view-update-form":{
                     if( !User::check("backend/forms/view/update", "bool") )
                         User::check("backend/modules/view/update/{$path}", "html");
-                    self::viewFormUpdate("form.html", $path);
+                    self::viewFormUpdate("form.html", $path, $get['id']);
                     break;
                 }
 
@@ -207,7 +230,7 @@
                 case "view-list-form":{
                     if( !User::check("backend/forms/view/list", "bool") )
                         User::check("backend/modules/view/list/{$path}", "html");
-                    self::viewFormList("list.html", $path);
+                    self::viewFormList("list.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
 
@@ -217,7 +240,7 @@
                 case "view-inTabs-form":{
                     if( !User::check("backend/forms/view/inTabs", "bool") )
                         User::check("backend/modules/view/inTabs/{$path}", "html");
-                    self::viewFormInTabs("listAndInsert.html", $path);
+                    self::viewFormInTabs("listAndInsert.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
 
@@ -237,7 +260,7 @@
                 case "view-update-window-form":{
                     if( !User::check("backend/forms/view/update", "bool") )
                         User::check("backend/modules/save/update/{$path}", "html");
-                    self::viewFormUpdate("form-window.html", $path);
+                    self::viewFormUpdate("form-window.html", $path, $get['id']);
                     break;
                 }
 
@@ -247,14 +270,14 @@
                 case "view-list-window-form":{
                     if( !User::check("backend/forms/view/list", "bool") )
                         User::check("backend/modules/save/list/{$path}", "html");
-                    self::viewFormList("list-window.html", $path);
+                    self::viewFormList("list-window.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
 
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE SOLICITAÇÃO DE RECUPERAÇÃO DE SENHA
                 case "view-change-password":{
-                    self::viewrecoverPassword($_GET['hash']);
+                    self::viewrecoverPassword($get['hash']);
                     break;
                 }
 
@@ -263,14 +286,14 @@
                     if( !User::check("backend/forms/save/delete", "bool") )
                         User::check("backend/modules/save/delete/{$path}", "json");
                     $form = new Form();
-                    echo json_encode( $form->deleteForm( $path, $_GET['id']) );
+                    echo json_encode( $form->deleteForm( $path, $get['id']) );
                     break;
                 }
 
                 // INSERE OU ATUALIZA DADOS 
                 // NO BANCO DE DADOS
                 case "save-form":{
-                    if( preg_match("/update\:.*/i", $_POST['_M_ACTION']) ){
+                    if( preg_match("/update\:.*/i", $post['_M_ACTION']) ){
                         if( !User::check("backend/forms/save/update", "bool") )
                             User::check("backend/modules/save/update/{$path}", "json");
                     }else{
@@ -279,13 +302,13 @@
                     }
 
                     $form = new Form();
-                    echo json_encode( $form->saveForm( $path, $_POST) );
+                    echo json_encode( $form->saveForm( $path, $post) );
                     break;
                 }
 
                 // EXECUTA AJAX DE ALGUM TYPE ESPECIFICO
                 case "type-ajax":{
-                    $type = $_GET['type'];
+                    $type = $get['type'];
                     if( file_exists($fileType = "types/$type/$type.php") ){
                         require_once $fileType;
                         $obj = new $type();
@@ -302,7 +325,7 @@
 
                 // EFETUA LOGIN DE USUÁRIO
                 case "login":{
-                    echo json_encode( User::login( $_POST['login'], $_POST['password']) );
+                    echo json_encode( User::login( $post['login'], $post['password']) );
                     break;
                 }
 
@@ -315,14 +338,14 @@
 
                 // SOLICITA RECUPERAÇÃO DE SENHAS
                 case "recover-password":{
-                    echo json_encode( User::recoverPassword($_POST['login']) );
+                    echo json_encode( User::recoverPassword($post['login']) );
                     break;
                 }
 
                 // ALTERA A SENHA COM BASE
                 // NA SOLICITAÇÃO DE RECUPERAÇÃO DE SENHA
                 case "change-password":{
-                    echo json_encode( User::recoverPasswordChangePassword($_POST['recovery_hash'], $_POST['password'], $_POST['password-1']) );
+                    echo json_encode( User::recoverPasswordChangePassword($post['recovery_hash'], $post['password'], $post['password-1']) );
                     break;
                 }
 
@@ -332,6 +355,138 @@
                     break;
                 } 
             } # switch
+        }
+        
+        /**
+         * 
+         * @global type $_M_MENU
+         * @global type $_M_MENU_MODULE
+         * @global type $_M_MENU_PARTS
+         */
+        static public function createMenu(){
+            global $_M_MENU;
+            global $_M_MENU_MODULE;
+            global $_M_MENU_PARTS;
+            
+            $_M_MENU = self::createMenuRecursive($_M_MENU);
+            $_M_MENU_MODULE = "<ul>$_M_MENU_MODULE</ul>";
+            $_M_MENU_PARTS = $_M_MENU_PARTS;
+        }
+        
+        /**
+         * 
+         * @global \backend\type $_M_MENU_PARTS
+         * @global \backend\type $_M_MENU_MODULE
+         * @param type $array
+         * @param type $deep
+         * @param type $deepClass
+         * @return string
+         */
+        static private function createMenuRecursive($array, $deep=0, $deepClass=1){
+            $indent = 4;
+            $pad0 = str_pad("", $deep);
+            $pad1 = str_pad("", $deep+($indent) );
+            $pad2 = str_pad("", $deep+($indent*2) );
+
+            $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
+            foreach ($array as $key => $val) {
+                
+                if(isset($val['link'])){
+                    //
+                    parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
+                    
+                    //
+                    $hideMenuPath = 
+                        isset($_SESSION['user']['permissions']['backend']['hide-menu-by-path']) 
+                            ? $_SESSION['user']['permissions']['backend']['hide-menu-by-path'] 
+                            : Array()
+                        
+                        ;
+                    
+                    //
+                    if( !in_array($mLnk['path'], $hideMenuPath) ){
+                        $ret .= $pad1 . "<li>\r\n";
+                        // os arrays de comparação devem 
+                        // ter no minimo estas chaves
+                        $arrCompare['path'] = "";
+                        $arrCompare['module'] = "";
+                        $arrCompare['action'] = "";
+                        $arrCompare['module'] = "";
+
+                        // array do menu atual
+                        $mLnk = array_replace($arrCompare, $mLnk);
+                        $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['path']);
+
+                        // array da pagina/url atual (paginaa que esta sendo mostrada no browser)
+                        $pLnk = array_replace($arrCompare, $_GET);
+                        $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['path']);
+
+                        // comparações para adicionar classes
+                        if($pLnk['module'] == $mLnk['module']){
+                            $cssClassByModule = "active-by-module";
+                            $cssClassByForm   = ( $pLnk['path']   == $mLnk['path']   ) ? "active-by-form"   : "";
+                            $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
+                            $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
+                        }else{
+                            $cssClassByModule = "";
+                            $cssClassByForm   = "";
+                            $cssClassByAction = "";
+                            $cssClass         = "";
+                        }
+                        $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
+
+                        // 
+                        $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
+                        $ret .= $pad1 . "</li>\r\n";
+                    }
+                  
+                }else{
+                    // Recursividade de modulo
+                    if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
+                        // verifica se o usuário pode ver este módulo
+                        if( 
+                            !isset( $_SESSION['user']['permissions']['backend']['show-module'] ) ||
+                            $_SESSION['user']['permissions']['backend']['show-module'] === true ||
+                            in_array('all', $_SESSION['user']['permissions']['backend']['show-module'] ) ||
+                            in_array($val['load-from-module'], $_SESSION['user']['permissions']['backend']['show-module'] )
+                        ){
+                            $ret .= $pad1 . "<li>\r\n";
+                            $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                            
+                            // variaveis comuns
+                            global $_M_MENU_PARTS;
+                            global $_M_MENU_MODULE;
+
+                            // verifica se o menu do modulo é ativo
+                            $cssClass = (isset($_GET['path']))? $_GET['path'] : "";
+                            $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
+
+                            // cria item do menu de modulo
+                            $_M_MENU_MODULE .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+
+                            // cria o itens filhos a partir do menu de formulário no main-menu
+                            $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );
+                            $_M_MENU_PARTS[ $val['load-from-module'] ] =  self::createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
+
+                            // retorna o menu
+                            $ret .= $_M_MENU_PARTS[ $val['load-from-module'] ];
+                            $ret .= $pad1 . "</li>\r\n";
+                        }
+                    }
+
+                    // Recursividade de menu
+                    elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                        $ret .= $pad1 . "<li>\r\n";
+                        $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
+                        $ret .= self::createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
+                        $ret .= $pad1 . "</li>\r\n";
+                    }
+                }
+
+
+            }
+            $ret .= $pad0 . "</ul>\r\n";
+            return $ret;
         }
         
     } # class
