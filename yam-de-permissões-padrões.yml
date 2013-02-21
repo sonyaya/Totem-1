@@ -8,8 +8,8 @@ backend:
         save: true
         
 #      
-#    # hide menu of a module
-#    hide-module:
+#    # show menu of a module
+#    show-module:
 #      user: true
 #      
 #    # bloqueio por módulo ou arquivo

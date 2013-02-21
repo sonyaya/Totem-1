@@ -94,7 +94,7 @@
                     // Recursividade de modulo
                     if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
                         // verifica se o usuário pode ver este módulo
-                        if( !User::check("backend/hide-module/{$val['load-from-module']}", "bool") ){
+                        if( User::check("backend/show-module/{$val['load-from-module']}", "bool") ){
                             $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
                             
                             // variaveis comuns
