@@ -140,7 +140,7 @@ $(function(){
             function(){
                 if( typeof layout == 'object' ){
                     if( typeof layout.popup == 'function' ){
-                        layout.popup("?action=view-insert-window-form&form=" + $(this).attr('rel'), "Inserindo");
+                        layout.popup("?action=view-insert-window-form&path=" + $(this).attr('rel'), "Inserindo");
                     }else{
                          alert("O layout que você esta utilizando não possui o método popup. \r\nTenha como exemplo o arquivo do template default 'script/default.js'.");
                     }
