@@ -117,7 +117,7 @@ $(function(){
         if( confirm(msg) ){
             var delId = $(this).attr('href');
             $.post(
-                "?action=delete-form&path="+ layout.uri("form") +"&id=" + delId,
+                "?action=delete-form&path="+ layout.uri("path") +"&id=" + delId,
                 function(data){
                     if(data.error){
                         alert(data.message);
