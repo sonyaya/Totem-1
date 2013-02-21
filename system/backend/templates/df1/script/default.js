@@ -50,7 +50,7 @@ var layout = new Object();
 layout.popup = (function(url, title){
     
     // abrir em uma nova aba
-    if( layout.uri("form") == layout.uri("form", url) ){
+    if( layout.uri("path") == layout.uri("path", url) ){
         // Abre tela de load
         layout.ajax.showLoader();
         
