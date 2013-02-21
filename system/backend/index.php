@@ -56,45 +56,53 @@
             foreach ($array as $key => $val) {
                 $ret .= $pad1 . "<li>\r\n";
                 
-                
                 if(isset($val['link'])){
-                    // os arrays de comparação devem 
-                    // ter no minimo estas chaves
-                    $arrCompare['path'] = "";
-                    $arrCompare['module'] = "";
-                    $arrCompare['action'] = "";
-                    $arrCompare['module'] = "";
-
-                    // array do menu atual
+                    //
                     parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
-                    $mLnk = array_replace($arrCompare, $mLnk);
-                    $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['path']);
+                    
+                    //                    
+                    if( !in_array($mLnk['path'], $_SESSION['user']['permissions']['backend']['hide-menu-by-path']) ){
+                        // os arrays de comparação devem 
+                        // ter no minimo estas chaves
+                        $arrCompare['path'] = "";
+                        $arrCompare['module'] = "";
+                        $arrCompare['action'] = "";
+                        $arrCompare['module'] = "";
 
-                    // array da pagina atual
-                    $pLnk = array_replace($arrCompare, $_GET);
-                    $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['path']);
+                        // array do menu atual
+                        $mLnk = array_replace($arrCompare, $mLnk);
+                        $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['path']);
 
-                    // comparações para adicionar classes
-                    if($pLnk['module'] == $mLnk['module']){
-                        $cssClassByModule = "active-by-module";
-                        $cssClassByForm   = ( $pLnk['path']   == $mLnk['path']   ) ? "active-by-form"   : "";
-                        $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
-                        $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
-                    }else{
-                        $cssClassByModule = "";
-                        $cssClassByForm   = "";
-                        $cssClassByAction = "";
-                        $cssClass         = "";
+                        // array da pagina/url atual (paginaa que esta sendo mostrada no browser)
+                        $pLnk = array_replace($arrCompare, $_GET);
+                        $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['path']);
+
+                        // comparações para adicionar classes
+                        if($pLnk['module'] == $mLnk['module']){
+                            $cssClassByModule = "active-by-module";
+                            $cssClassByForm   = ( $pLnk['path']   == $mLnk['path']   ) ? "active-by-form"   : "";
+                            $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
+                            $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
+                        }else{
+                            $cssClassByModule = "";
+                            $cssClassByForm   = "";
+                            $cssClassByAction = "";
+                            $cssClass         = "";
+                        }
+                        $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
+
+                        // 
+                        $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
                     }
-                    $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
-
-                    // 
-                    $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
+                  
                 }else{
                     // Recursividade de modulo
                     if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
                         // verifica se o usuário pode ver este módulo
-                        if( User::check("backend/show-module/{$val['load-from-module']}", "bool") ){
+                        if( 
+                            @in_array('all', $_SESSION['user']['permissions']['backend']['show-module'] ) ||
+                            @in_array($val['load-from-module'], $_SESSION['user']['permissions']['backend']['show-module'] ) 
+                        ){
                             $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
                             
                             // variaveis comuns
