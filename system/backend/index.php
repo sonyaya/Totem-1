@@ -60,8 +60,7 @@
                 if(isset($val['link'])){
                     // os arrays de comparação devem 
                     // ter no minimo estas chaves
-                    $arrCompare['form'] = "";
-                    $arrCompare['dashboard'] = "";
+                    $arrCompare['path'] = "";
                     $arrCompare['module'] = "";
                     $arrCompare['action'] = "";
                     $arrCompare['module'] = "";
@@ -69,16 +68,16 @@
                     // array do menu atual
                     parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
                     $mLnk = array_replace($arrCompare, $mLnk);
-                    $mLnk['module'] = preg_replace("/\/.*$/", "", ($mLnk['form'])? $mLnk['form'] : $mLnk['dashboard'] );
+                    $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['path']);
 
                     // array da pagina atual
                     $pLnk = array_replace($arrCompare, $_GET);
-                    $pLnk['module'] = preg_replace("/\/.*$/", "", ($pLnk['form'])? $pLnk['form'] : $pLnk['dashboard'] );
+                    $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['path']);
 
                     // comparações para adicionar classes
                     if($pLnk['module'] == $mLnk['module']){
                         $cssClassByModule = "active-by-module";
-                        $cssClassByForm   = ( $pLnk['form']   == $mLnk['form']   ) ? "active-by-form"   : "";
+                        $cssClassByForm   = ( $pLnk['path']   == $mLnk['path']   ) ? "active-by-form"   : "";
                         $cssClassByAction = ( $pLnk['action'] == $mLnk['action'] ) ? "active-by-action" : "";
                         $cssClass         = ( $pLnk == $mLnk ) ? "active" : "" ;
                     }else{
