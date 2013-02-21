@@ -9,11 +9,11 @@
          * 
          * @param type $formLayout
          */
-        static public function viewFormInsert($formLayout){
+        static public function viewFormInsert($formLayout, $path){
             $Form = new Form();
             $Form
                 ->setLayout($formLayout)
-                ->viewForm($_GET['path'])
+                ->viewForm($path)
                 ->writeHTML()
             ;
         }
@@ -23,11 +23,11 @@
          * 
          * @param type $formLayout
          */
-        static public function viewFormUpdate($formLayout){
+        static public function viewFormUpdate($formLayout, $path){
             $Form = new Form();
             $Form
                 ->setLayout($formLayout)
-                ->viewForm($_GET['path'], $_GET['id'])
+                ->viewForm($path, $_GET['id'])
                 ->writeHTML()
             ; 
         }
@@ -37,7 +37,7 @@
          * 
          * @param type $listLayout
          */
-        static public function viewFormList($listLayout){
+        static public function viewFormList($listLayout, $path){
             $orderBy = self::prepareOrderBy();
             $paginator = self::preparePaginator();
             $cond = self::prepareCondition();
@@ -47,7 +47,7 @@
             $form = new Form();
             $form
                 ->setLayout($listLayout)
-                ->viewList($_GET['path'], $page, $rowsPerPage, $orderBy, $cond)
+                ->viewList($path, $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;
         }
@@ -57,7 +57,7 @@
          * 
          * @param type $listLayout
          */
-        static function viewFormInTabs($listLayout){
+        static function viewFormInTabs($listLayout, $path){
             $orderBy = self::prepareOrderBy();
             $paginator = self::preparePaginator();
             $cond = self::prepareCondition();
@@ -67,8 +67,8 @@
             $form = new Form();
             $form
                 ->setLayout($listLayout)
-                ->viewForm($_GET['path'])
-                ->viewList($_GET['path'], $page, $rowsPerPage, $orderBy, $cond)
+                ->viewForm($path)
+                ->viewList($path, $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;            
         }
@@ -169,4 +169,169 @@
                 )
             ;
         }
-    }
+        
+        
+        static public function execAction($action="", $path=""){
+
+            switch( $action ) {
+                // MOSTRA A INTERFACE GRÁFICA DO
+                // DASHBOARD ESPECIFÍCO
+                case "view-dashboard":{
+                    if( !User::check("backend/forms/view/dashboard", "bool") )
+                        User::check("backend/modules/view/dashboard/{$path}", "html");
+                    $dashboard = new DashboardComposer();
+                    $dashboard->viewDashboard( $path, "dashboard.html" );
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO DE INSERÇÃO
+                case "view-insert-form":{
+                    if( !User::check("backend/forms/view/insert", "bool") )
+                        User::check("backend/modules/view/insert/{$path}", "html");
+                    self::viewFormInsert("form.html", $path);
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
+                case "view-update-form":{
+                    if( !User::check("backend/forms/view/update", "bool") )
+                        User::check("backend/modules/view/update/{$path}", "html");
+                    self::viewFormUpdate("form.html", $path);
+                    break;
+                }
+
+                // BUSCA LISTA DE DADOS REFERENTE 
+                // AO FORMULÁRIO NO BANCO DE DADOS
+                case "view-list-form":{
+                    if( !User::check("backend/forms/view/list", "bool") )
+                        User::check("backend/modules/view/list/{$path}", "html");
+                    self::viewFormList("list.html", $path);
+                    break;
+                }
+
+                // BUSCA LISTA DE DADOS REFERENTE 
+                // AO FORMULÁRIO NO BANCO DE DADOS
+                // E O FORMULÁRIO DE INSERÇÃO
+                case "view-inTabs-form":{
+                    if( !User::check("backend/forms/view/inTabs", "bool") )
+                        User::check("backend/modules/view/inTabs/{$path}", "html");
+                    self::viewFormInTabs("listAndInsert.html", $path);
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO DE INSERÇÃO
+                // EM JANELA
+                case "view-insert-window-form":{
+                    if( !User::check("backend/forms/view/insert", "bool") )
+                        User::check("backend/modules/save/insert/{$path}", "html");
+                    self::viewFormInsert("form-window.html", $path);
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
+                // EM JANELA
+                case "view-update-window-form":{
+                    if( !User::check("backend/forms/view/update", "bool") )
+                        User::check("backend/modules/save/update/{$path}", "html");
+                    self::viewFormUpdate("form-window.html", $path);
+                    break;
+                }
+
+                // BUSCA LISTA DE DADOS REFERENTE 
+                // AO FORMULÁRIO NO BANCO DE DADOS
+                // EM JANELA
+                case "view-list-window-form":{
+                    if( !User::check("backend/forms/view/list", "bool") )
+                        User::check("backend/modules/save/list/{$path}", "html");
+                    self::viewFormList("list-window.html", $path);
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE SOLICITAÇÃO DE RECUPERAÇÃO DE SENHA
+                case "view-change-password":{
+                    self::viewrecoverPassword($_GET['hash']);
+                    break;
+                }
+
+                // DELETA UM FORMULÁRIO
+                case "delete-form":{
+                    if( !User::check("backend/forms/save/delete", "bool") )
+                        User::check("backend/modules/save/delete/{$path}", "json");
+                    $form = new Form();
+                    echo json_encode( $form->deleteForm( $path, $_GET['id']) );
+                    break;
+                }
+
+                // INSERE OU ATUALIZA DADOS 
+                // NO BANCO DE DADOS
+                case "save-form":{
+                    if( preg_match("/update\:.*/i", $_POST['_M_ACTION']) ){
+                        if( !User::check("backend/forms/save/update", "bool") )
+                            User::check("backend/modules/save/update/{$path}", "json");
+                    }else{
+                        if( !User::check("backend/forms/save/insert", "bool") )
+                            User::check("backend/modules/save/insert/{$path}", "json");
+                    }
+
+                    $form = new Form();
+                    echo json_encode( $form->saveForm( $path, $_POST) );
+                    break;
+                }
+
+                // EXECUTA AJAX DE ALGUM TYPE ESPECIFICO
+                case "type-ajax":{
+                    $type = $_GET['type'];
+                    if( file_exists($fileType = "types/$type/$type.php") ){
+                        require_once $fileType;
+                        $obj = new $type();
+                        if( method_exists ( $obj , "ajax" ) ){
+                            $obj->ajax();
+                        }else{
+                            echo "Metodo ajax não foi encontrado em '$fileType'.";
+                        }
+                    }else{
+                        echo "Erro ao carregar ajax do type '$fileType'.";
+                    }
+                    break;
+                }
+
+                // EFETUA LOGIN DE USUÁRIO
+                case "login":{
+                    echo json_encode( User::login( $_POST['login'], $_POST['password']) );
+                    break;
+                }
+
+                // EFETUA LOGOUT DE USUÁRIO
+                case "logout":{
+                    User::logout();
+                    header("Location: . ");
+                    break;
+                }
+
+                // SOLICITA RECUPERAÇÃO DE SENHAS
+                case "recover-password":{
+                    echo json_encode( User::recoverPassword($_POST['login']) );
+                    break;
+                }
+
+                // ALTERA A SENHA COM BASE
+                // NA SOLICITAÇÃO DE RECUPERAÇÃO DE SENHA
+                case "change-password":{
+                    echo json_encode( User::recoverPasswordChangePassword($_POST['recovery_hash'], $_POST['password'], $_POST['password-1']) );
+                    break;
+                }
+
+                // AÇÃO PADRÃO
+                default:{
+                    header("Location: {$_M_THIS_CONFIG['start-place']}");
+                    break;
+                } 
+            } # switch
+        }
+        
+    } # class
