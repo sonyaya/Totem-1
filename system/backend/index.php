@@ -103,8 +103,7 @@
                             global $menuModule;
 
                             // verifica se o menu do modulo é ativo
-                            $cssClass = (isset($_GET['form']))? $_GET['form'] : "";
-                            $cssClass = (empty($cssClass) && isset($_GET['dashboard']))? $_GET['dashboard'] : $cssClass;
+                            $cssClass = (isset($_GET['path']))? $_GET['path'] : "";
                             $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
 
                             // cria item do menu de modulo
@@ -151,9 +150,9 @@
         // DASHBOARD ESPECIFÍCO
         case "view-dashboard":{
             if( !User::check("backend/forms/view/dashboard", "bool") )
-                User::check("backend/modules/view/dashboard/{$_GET['dashboard']}", "html");
+                User::check("backend/modules/view/dashboard/{$_GET['path']}", "html");
             $dashboard = new DashboardComposer();
-            $dashboard->viewDashboard( $_GET['dashboard'], "dashboard.html" );
+            $dashboard->viewDashboard( $_GET['path'], "dashboard.html" );
             break;
         }
         
@@ -161,7 +160,7 @@
         // TELA DE FORMULÁRIO DE INSERÇÃO
         case "view-insert-form":{
             if( !User::check("backend/forms/view/insert", "bool") )
-                User::check("backend/modules/view/insert/{$_GET['form']}", "html");
+                User::check("backend/modules/view/insert/{$_GET['path']}", "html");
             backendIndex::viewFormInsert("form.html");
             break;
         }
@@ -170,7 +169,7 @@
         // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
         case "view-update-form":{
             if( !User::check("backend/forms/view/update", "bool") )
-                User::check("backend/modules/view/update/{$_GET['form']}", "html");
+                User::check("backend/modules/view/update/{$_GET['path']}", "html");
             backendIndex::viewFormUpdate("form.html");
             break;
         }
@@ -179,7 +178,7 @@
         // AO FORMULÁRIO NO BANCO DE DADOS
         case "view-list-form":{
             if( !User::check("backend/forms/view/list", "bool") )
-                User::check("backend/modules/view/list/{$_GET['form']}", "html");
+                User::check("backend/modules/view/list/{$_GET['path']}", "html");
             backendIndex::viewFormList("list.html");
             break;
         }
@@ -189,7 +188,7 @@
         // E O FORMULÁRIO DE INSERÇÃO
         case "view-inTabs-form":{
             if( !User::check("backend/forms/view/inTabs", "bool") )
-                User::check("backend/modules/view/inTabs/{$_GET['form']}", "html");
+                User::check("backend/modules/view/inTabs/{$_GET['path']}", "html");
             backendIndex::viewFormInTabs("listAndInsert.html");
             break;
         }
@@ -199,7 +198,7 @@
         // EM JANELA
         case "view-insert-window-form":{
             if( !User::check("backend/forms/view/insert", "bool") )
-                User::check("backend/modules/save/insert/{$_GET['form']}", "html");
+                User::check("backend/modules/save/insert/{$_GET['path']}", "html");
             backendIndex::viewFormInsert("form-window.html");
             break;
         }
@@ -209,7 +208,7 @@
         // EM JANELA
         case "view-update-window-form":{
             if( !User::check("backend/forms/view/update", "bool") )
-                User::check("backend/modules/save/update/{$_GET['form']}", "html");
+                User::check("backend/modules/save/update/{$_GET['path']}", "html");
             backendIndex::viewFormUpdate("form-window.html");
             break;
         }
@@ -219,7 +218,7 @@
         // EM JANELA
         case "view-list-window-form":{
             if( !User::check("backend/forms/view/list", "bool") )
-                User::check("backend/modules/save/list/{$_GET['form']}", "html");
+                User::check("backend/modules/save/list/{$_GET['path']}", "html");
             backendIndex::viewFormList("list-window.html");
             break;
         }
@@ -234,9 +233,9 @@
         // DELETA UM FORMULÁRIO
         case "delete-form":{
             if( !User::check("backend/forms/save/delete", "bool") )
-                User::check("backend/modules/save/delete/{$_GET['form']}", "json");
+                User::check("backend/modules/save/delete/{$_GET['path']}", "json");
             $form = new Form();
-            echo json_encode( $form->deleteForm( $_GET['form'], $_GET['id']) );
+            echo json_encode( $form->deleteForm( $_GET['path'], $_GET['id']) );
             break;
         }
 
@@ -245,14 +244,14 @@
         case "save-form":{
             if( preg_match("/update\:.*/i", $_POST['_M_ACTION']) ){
                 if( !User::check("backend/forms/save/update", "bool") )
-                    User::check("backend/modules/save/update/{$_GET['form']}", "json");
+                    User::check("backend/modules/save/update/{$_GET['path']}", "json");
             }else{
                 if( !User::check("backend/forms/save/insert", "bool") )
-                    User::check("backend/modules/save/insert/{$_GET['form']}", "json");
+                    User::check("backend/modules/save/insert/{$_GET['path']}", "json");
             }
                
             $form = new Form();
-            echo json_encode( $form->saveForm( $_GET['form'], $_POST) );
+            echo json_encode( $form->saveForm( $_GET['path'], $_POST) );
             break;
         }
 

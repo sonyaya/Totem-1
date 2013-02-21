@@ -13,7 +13,7 @@
             $Form = new Form();
             $Form
                 ->setLayout($formLayout)
-                ->viewForm($_GET['form'])
+                ->viewForm($_GET['path'])
                 ->writeHTML()
             ;
         }
@@ -27,7 +27,7 @@
             $Form = new Form();
             $Form
                 ->setLayout($formLayout)
-                ->viewForm($_GET['form'], $_GET['id'])
+                ->viewForm($_GET['path'], $_GET['id'])
                 ->writeHTML()
             ; 
         }
@@ -47,7 +47,7 @@
             $form = new Form();
             $form
                 ->setLayout($listLayout)
-                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy, $cond)
+                ->viewList($_GET['path'], $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;
         }
@@ -67,8 +67,8 @@
             $form = new Form();
             $form
                 ->setLayout($listLayout)
-                ->viewForm($_GET['form'])
-                ->viewList($_GET['form'], $page, $rowsPerPage, $orderBy, $cond)
+                ->viewForm($_GET['path'])
+                ->viewList($_GET['path'], $page, $rowsPerPage, $orderBy, $cond)
                 ->writeHTML()
             ;            
         }

@@ -1,11 +1,11 @@
 - label: "Dashboard"
-  link: "?action=view-dashboard&dashboard=user/dashboards/dashboard"
+  link: "?action=view-dashboard&path=user/dashboards/dashboard"
   
 - label: "Usuários"
-  link: "?action=view-inTabs-form&form=user/forms/user"
+  link: "?action=view-inTabs-form&path=user/forms/user"
 
 - label: "Grupos de Usuários"
-  link: "?action=view-inTabs-form&form=user/forms/group"
+  link: "?action=view-inTabs-form&path=user/forms/group"
   
 - label: "Mensagens"
-  link: "?action=view-inTabs-form&form=user/forms/message"
+  link: "?action=view-inTabs-form&path=user/forms/message"
