@@ -45,7 +45,7 @@ forms:
                 column: id
                 table: _m_group
                 label: name 
-                insert-form  : "user/group" 
+                insert-form  : "user/forms/group" 
               
             - type: meioMask
               label: 'Primeiro Nome'
