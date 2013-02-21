@@ -122,11 +122,7 @@ $(function(){
                     if(data.error){
                         alert(data.message);
                     }else{
-                        if( $("table tbody tr").length == 1 ){
-                            location.reload(true);
-                        }else{
-                            $("tr[rel="+ delId +"]").remove();
-                        }
+                        $("button.bt-reload-list").click();
                     }
                 },
                 "json"
