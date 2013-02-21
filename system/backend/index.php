@@ -54,14 +54,22 @@
 
             $ret = $pad0 . "<ul class='deep_$deepClass'>\r\n";
             foreach ($array as $key => $val) {
-                $ret .= $pad1 . "<li>\r\n";
                 
                 if(isset($val['link'])){
                     //
                     parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
                     
-                    //                    
-                    if( !in_array($mLnk['path'], $_SESSION['user']['permissions']['backend']['hide-menu-by-path']) ){
+                    //
+                    $hideMenuPath = 
+                        isset($_SESSION['user']['permissions']['backend']['hide-menu-by-path']) 
+                            ? $_SESSION['user']['permissions']['backend']['hide-menu-by-path'] 
+                            : Array()
+                        
+                        ;
+                    
+                    //
+                    if( !in_array($mLnk['path'], $hideMenuPath) ){
+                        $ret .= $pad1 . "<li>\r\n";
                         // os arrays de comparação devem 
                         // ter no minimo estas chaves
                         $arrCompare['path'] = "";
@@ -93,6 +101,7 @@
 
                         // 
                         $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
+                        $ret .= $pad1 . "</li>\r\n";
                     }
                   
                 }else{
@@ -100,9 +109,12 @@
                     if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
                         // verifica se o usuário pode ver este módulo
                         if( 
-                            @in_array('all', $_SESSION['user']['permissions']['backend']['show-module'] ) ||
-                            @in_array($val['load-from-module'], $_SESSION['user']['permissions']['backend']['show-module'] ) 
+                            !isset( $_SESSION['user']['permissions']['backend']['show-module'] ) ||
+                            $_SESSION['user']['permissions']['backend']['show-module'] === true ||
+                            in_array('all', $_SESSION['user']['permissions']['backend']['show-module'] ) ||
+                            in_array($val['load-from-module'], $_SESSION['user']['permissions']['backend']['show-module'] )
                         ){
+                            $ret .= $pad1 . "<li>\r\n";
                             $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
                             
                             // variaveis comuns
@@ -122,18 +134,20 @@
 
                             // retorna o menu
                             $ret .= $menuParts[ $val['load-from-module'] ];
+                            $ret .= $pad1 . "</li>\r\n";
                         }
                     }
 
                     // Recursividade de menu
                     elseif( isset($val['submenu']) && is_array($val['submenu']) ){
+                        $ret .= $pad1 . "<li>\r\n";
                         $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
                         $ret .= createMenuRecursive($val['submenu'], $deep+($indent*2), $deepClass+1);    
+                        $ret .= $pad1 . "</li>\r\n";
                     }
                 }
 
 
-                $ret .= $pad1 . "</li>\r\n";
             }
             $ret .= $pad0 . "</ul>\r\n";
             return $ret;
