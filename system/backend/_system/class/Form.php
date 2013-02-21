@@ -962,53 +962,55 @@
             $selectColumns = Array();
             
             // PERCORRE TODOS OS TYPES
-            foreach ( $formArray['forms']['delete']['input'] as $key => $val) {
-                // verifica se o arquivo de 
-                // configuração do type existe
-                if(file_exists($confTypePath = "types/{$val['type']}/config.yml")){
-                    // carrega arquivo de configuração do type
-                    $confTypeArray = Yaml::parse($confTypePath);
+            if( isset($formArray['forms']['delete']['input']) ){
+                foreach ( $formArray['forms']['delete']['input'] as $key => $val) {
+                    // verifica se o arquivo de 
+                    // configuração do type existe
+                    if(file_exists($confTypePath = "types/{$val['type']}/config.yml")){
+                        // carrega arquivo de configuração do type
+                        $confTypeArray = Yaml::parse($confTypePath);
 
-                    // caminho do type
-                    $path = "types/{$val['type']}";
-                    
-                    // importa classe de type
-                    if(file_exists($classPath = "$path/{$val['type']}.php")){
-                        require_once $classPath;
-                    }else{
-                        return Array(
-                            "error"     => true,
-                            "errorCode" => "insertUpdate-loadType-3",
-                            "message"   => "Arquivo de classe do tipo '{$val['type']}' não encontrado em '$classPath'."
+                        // caminho do type
+                        $path = "types/{$val['type']}";
+
+                        // importa classe de type
+                        if(file_exists($classPath = "$path/{$val['type']}.php")){
+                            require_once $classPath;
+                        }else{
+                            return Array(
+                                "error"     => true,
+                                "errorCode" => "insertUpdate-loadType-3",
+                                "message"   => "Arquivo de classe do tipo '{$val['type']}' não encontrado em '$classPath'."
+                            );
+                        }                    
+
+                        // verifica parametros de type
+                        $val['parameter'] = array_merge( 
+                            ( isset($confTypeArray['default']['parameter']) && is_array($confTypeArray['default']['parameter']) ) ? $confTypeArray['default']['parameter'] : Array() ,
+                            ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
                         );
-                    }                    
 
-                    // verifica parametros de type
-                    $val['parameter'] = array_merge( 
-                        ( isset($confTypeArray['default']['parameter']) && is_array($confTypeArray['default']['parameter']) ) ? $confTypeArray['default']['parameter'] : Array() ,
-                        ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
-                    );
-                    
-                    // preloaded types
-                    $preLoadedColumnsTypes[ $val['label'] ]['parameter']  = $val['parameter'];
-                    $preLoadedColumnsTypes[ $val['label'] ]['columns']    = $val['column'];
-                    $preLoadedColumnsTypes[ $val['label'] ]['type']       = $val['type'];
-                    $preLoadedColumnsTypes[ $val['label'] ]['class-path'] = $classPath;
-                    
-                    // carrega objeto do type
-                    if( file_exists($classPath) ){
-                        require_once $classPath;
-                        $preLoadedColumnsTypes[ $val['label'] ]['object'] = new $val['type'];
-                    }else{
-                        $preLoadedColumnsTypes[ $val['label'] ]['object'] = null;
+                        // preloaded types
+                        $preLoadedColumnsTypes[ $val['label'] ]['parameter']  = $val['parameter'];
+                        $preLoadedColumnsTypes[ $val['label'] ]['columns']    = $val['column'];
+                        $preLoadedColumnsTypes[ $val['label'] ]['type']       = $val['type'];
+                        $preLoadedColumnsTypes[ $val['label'] ]['class-path'] = $classPath;
+
+                        // carrega objeto do type
+                        if( file_exists($classPath) ){
+                            require_once $classPath;
+                            $preLoadedColumnsTypes[ $val['label'] ]['object'] = new $val['type'];
+                        }else{
+                            $preLoadedColumnsTypes[ $val['label'] ]['object'] = null;
+                        }
+
+                        // adiciona colua apara a lista de colunas do select
+                        if( !isset($val['ignore-select']) || ($val['ignore-select']==false) ){
+                            $selectColumns[ $val['label'] ] = $val['column'];
+                        }
                     }
-                    
-                    // adiciona colua apara a lista de colunas do select
-                    if( !isset($val['ignore-select']) || ($val['ignore-select']==false) ){
-                        $selectColumns[ $val['label'] ] = $val['column'];
-                    }
-                }
-            }            
+                }      
+            }
             
             // BUSCA DADOS NO BANCO
             $db = new MySQL();
@@ -1030,10 +1032,12 @@
             }
                     
             // BEFORE DELETE
-            foreach($preLoadedColumnsTypes as $key => $type){
-                $typeObject = $type['object'];
-                if( method_exists($typeObject, "beforeDelete")){
-                    $typeObject->beforeDelete($loadedData[$key], $key, $loadedData, $type['parameter'], Array("column"=>$formArray['header']['p-key'], "value"=>$deleteId) );
+            if(isset($preLoadedColumnsTypes)){
+                foreach($preLoadedColumnsTypes as $key => $type){
+                    $typeObject = $type['object'];
+                    if( method_exists($typeObject, "beforeDelete")){
+                        $typeObject->beforeDelete($loadedData[$key], $key, $loadedData, $type['parameter'], Array("column"=>$formArray['header']['p-key'], "value"=>$deleteId) );
+                    }
                 }
             }
             
@@ -1045,10 +1049,12 @@
             }
             
             // AFTER DELETE
-            foreach($preLoadedColumnsTypes as $key => $type){
-                $typeObject = $type['object'];
-                if( method_exists($typeObject, "afterDelete")){
-                    $typeObject->afterDelete($loadedData[$key], $key, $loadedData, $type['parameter'], Array("column"=>$formArray['header']['p-key'], "value"=>$deleteId) );
+            if(isset($preLoadedColumnsTypes)){
+                foreach($preLoadedColumnsTypes as $key => $type){
+                    $typeObject = $type['object'];
+                    if( method_exists($typeObject, "afterDelete")){
+                        $typeObject->afterDelete($loadedData[$key], $key, $loadedData, $type['parameter'], Array("column"=>$formArray['header']['p-key'], "value"=>$deleteId) );
+                    }
                 }
             }
             
