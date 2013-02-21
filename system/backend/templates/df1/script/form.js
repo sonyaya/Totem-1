@@ -13,7 +13,7 @@ $(function(){
         
         layout.ajax.showLoader();
         $.post(
-            "?action=save-form&form=" + layout.uri("form"),
+            "?action=save-form&path=" + layout.uri("path"),
             $(this).serialize(),
             function(data){
                 if( data.error ){

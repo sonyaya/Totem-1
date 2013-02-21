@@ -4,7 +4,7 @@ $(function(){
     // 
     list.updateAttributes = function(){
         list.action  = layout.uri("action"); 
-        list.form    = layout.uri("form");
+        list.form    = layout.uri("path");
         list.cond    = ($.trim(list.cond = layout.uri("cond")) == "") ? [] : $.parseJSON(list.cond);
         list.page    = layout.uri("page");
         list.orderBy = layout.uri("orderBy");
@@ -40,7 +40,7 @@ $(function(){
         order = encodeURIComponent(order);
         
         list.updateAttributes();
-        url = "&form=" + list.form
+        url = "&path=" + list.form
             + "&page=" + list.page
             + "&orderBy=" + order
             + "&cond=" + JSON.stringify(list.cond)
@@ -59,7 +59,7 @@ $(function(){
     // ATUALIZAR TELA DE LISTAGEM NO DF1
     $(".window.list").on("click", ".bt-reload-list", function(){
         list.updateAttributes();
-        url = "&form="+ list.form
+        url = "&path="+ list.form
             + "&page=" + list.page
             + "&orderBy="+ list.orderBy
             + "&cond="+ JSON.stringify(list.cond)
@@ -75,7 +75,7 @@ $(function(){
     // PAGINAÇÃO
     $(".window.list").on("click", ".bt-page", function(){
         list.updateAttributes();
-        url = "&form=" + list.form
+        url = "&path=" + list.form
             + "&" + $(this).attr("rel")
             + "&orderBy=" + list.orderBy
             + "&cond=" + JSON.stringify(list.cond)
@@ -105,7 +105,7 @@ $(function(){
 
     // ACTIONS
     $(".window.list").on("click", ".edit", function(){
-        layout.popup("?action=view-update-window-form&form=" + list.form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
+        layout.popup("?action=view-update-window-form&path=" + list.form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
         return false;
     });
 
@@ -117,7 +117,7 @@ $(function(){
         if( confirm(msg) ){
             var delId = $(this).attr('href');
             $.post(
-                "?action=delete-form&form="+ layout.uri("form") +"&id=" + delId,
+                "?action=delete-form&path="+ layout.uri("form") +"&id=" + delId,
                 function(data){
                     if(data.error){
                         alert(data.message);
@@ -159,7 +159,7 @@ $(function(){
 
         window.location = 
             "?action=" + list.action
-            + "&form=" + list.form
+            + "&path=" + list.form
             + "&page=" + list.page
             + "&orderBy=" + list.orderBy
             + "&cond=" + JSON.stringify(list.search)

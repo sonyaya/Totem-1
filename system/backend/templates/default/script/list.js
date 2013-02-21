@@ -1,7 +1,7 @@
 $(function(){
     // 
     action  = layout.uri("action"); 
-    form    = layout.uri("form");
+    form    = layout.uri("path");
     cond    = ($.trim(cond = layout.uri("cond")) == "") ? [] : $.parseJSON(cond);
     page    = layout.uri("page");
     orderBy = layout.uri("orderBy");
@@ -32,7 +32,7 @@ $(function(){
 
         window.location = 
               "?action=" + action
-            + "&form=" + form
+            + "&path=" + form
             + "&page=" + page
             + "&orderBy=" + order
             + "&cond=" + JSON.stringify(cond)
@@ -43,7 +43,7 @@ $(function(){
     $(".list").on("click", ".bt-page", function(){
         window.location = 
              "?action=" + action
-            + "&form=" + form
+            + "&path=" + form
             + "&" + $(this).attr("rel")
             + "&orderBy=" + orderBy
             + "&cond=" + JSON.stringify(cond)
@@ -60,7 +60,7 @@ $(function(){
 
     // ACTIONS
     $("table").on("click", ".edit", function(){
-        layout.popup("?action=view-update-window-form&form=" + form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
+        layout.popup("?action=view-update-window-form&path=" + form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
         return false;
     });
 
@@ -72,7 +72,7 @@ $(function(){
         if( confirm(msg) ){
             var delId = $(this).attr('href');
             $.post(
-                "?action=delete-form&form="+ layout.uri("form") +"&id=" + delId,
+                "?action=delete-form&path="+ layout.uri("form") +"&id=" + delId,
                 function(data){
                     if(data.error){
                         alert(data.message);
@@ -114,7 +114,7 @@ $(function(){
 
         window.location = 
             "?action=" + action
-            + "&form=" + form
+            + "&path=" + form
             + "&page=" + page
             + "&orderBy=" + orderBy
             + "&cond=" + JSON.stringify(search)
