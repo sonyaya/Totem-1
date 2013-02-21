@@ -42,4 +42,6 @@
     }
     
     # DECIDE QUAL AÇÃO EXECUTAR 
-    backendIndex::execAction($_GET['action'], $_GET['path'], $_GET, $_POST);
+    $action = (isset($_GET['action']))? $_GET['action'] : "";
+    $path = (isset($_GET['path']))? $_GET['path'] : "";
+    backendIndex::execAction($action, $path, $_GET, $_POST);

@@ -177,8 +177,17 @@
             ;
         }
         
-        
+        /**
+         * 
+         * @global \backend\type $_M_THIS_CONFIG
+         * @param type $action
+         * @param type $path
+         * @param type $get
+         * @param type $post
+         */
         static public function execAction($action="", $path="", $get, $post){
+            //
+            global $_M_THIS_CONFIG;
             
             // TRATA O GET
             $get = 
