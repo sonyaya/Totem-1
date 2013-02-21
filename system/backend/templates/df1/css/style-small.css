@@ -105,3 +105,35 @@
     div.list table thead tr th{
         font-size: 0.8em;
         }
+        
+        
+/* --- BUTTONS ---------------------------------------------------------------- */ 
+      
+
+    button,
+    .button{
+        padding: 1.5%;
+    }
+          
+        
+/* --- TOP TABS --------------------------------------------------------------- */
+
+    nav.top-tabs ul li{
+        padding: 2%;
+        position: relative;
+    }
+          
+    nav.top-tabs ul li.popup-tab{
+        padding-left: 30px;
+        }
+        
+    nav.top-tabs ul li span{
+        float: left;
+        height: 18px;
+        left: 6px;
+        position: absolute;
+        top: -webkit-calc(50% - 9px);
+        top: -moz-calc(50% - 9px);
+        top: calc(50% - 9px);
+        width: 18px
+        }

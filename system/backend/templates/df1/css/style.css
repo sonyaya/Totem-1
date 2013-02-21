@@ -172,7 +172,7 @@ iframe{
         
     header div.modules a span.count{
         background: #4E4E50;
-        border-radius: 15px 15px 15px 15px;
+        border-radius: 15px;
         font-size: 11px;
         height: 12px;
         line-height: 11px;
@@ -351,7 +351,6 @@ iframe{
         display: block;
         }
         
-
         
 /* --- TOP TABS --------------------------------------------------------------- */
 
@@ -389,6 +388,7 @@ iframe{
         margin-bottom: -1px;
         background: #F9F9F9;
         cursor: pointer;
+        position: relative;
         }
         
     nav.top-tabs ul li a{
@@ -401,7 +401,17 @@ iframe{
         }
         
     nav.top-tabs ul li.active{
-        border-bottom: 1px #F9F9F9 solid;
+        border-bottom: 1px solid #F9F9F9;
+        }
+        
+    nav.top-tabs ul li span{
+        width: 12px;
+        height: 12px;
+        text-indent: -1000px;
+        vertical-align: sub;
+        background: url("../img/iconic/x_alt.svg") no-repeat center center;
+        background-size: 100%;
+        display: inline-block;
         }
         
     
