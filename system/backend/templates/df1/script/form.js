@@ -26,10 +26,11 @@ $(function(){
                     }else{
                         alert(data.message);
                     }
-                    layout.ajax.hideLoader();
                 }else{
-                    layout.ajax.hideLoader();
+                    // Fecha se for um popup
+                    window.close();
                 }
+                layout.ajax.hideLoader();
             },
             "json"
         );
