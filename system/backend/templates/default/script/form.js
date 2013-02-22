@@ -48,7 +48,8 @@ $(function(){
                     if(data.error){
                         alert(data.message);
                     }else{
-                        window.location = "?action=view-list-form&path=&m.var:form;";
+                        if( window.opener !== null )
+                            window.location = "?action=view-list-form&path=&m.var:form;";
                     }
                 },
                 "json"
