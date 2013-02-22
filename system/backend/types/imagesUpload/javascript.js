@@ -141,20 +141,10 @@ $(function(){
         
         // verifica se existe algo na lista de upload ainda não enviado
         // caso axista, impede de que o pupload seja recriado
-        recreate = true;
-        if( typeof $(".uploaderOfImages").pluploadQueue() == "object" ){
-            total = $(".uploaderOfImages").pluploadQueue().total;
-            if( total.size !== total.loaded ){
-                recreate = false;
-            }else{
-                recreate = true;
-            }
-            return false;
-        }
-        
-        // recria o pupload caso não exista nada 
-        // na fila de upload ainda não enviado
-        if( recreate ){
+        total = (typeof $uploadOfImages.pluploadQueue() == "undefined") ? {size:0, loaded:0} : $uploadOfImages.pluploadQueue().total ;
+        if( total.size == total.loaded ){
+            // recria o pupload caso não exista nada 
+            // na fila de upload ainda não enviado
             $uploadOfImages.pluploadQueue({
                 runtimes : 'flash,silverlight,browserplus,html5',
                 url : '?action=type-ajax&ajax=upload&type=imagesUpload&folder=' + $inputHolder.attr("data-folder"),
