@@ -16,7 +16,7 @@
           <tbody>
             <m.foreach var="data.messages" key="KEY">
               <tr>
-                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.messages.#KEY#.id;')"></a></td>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.messages.#KEY#.id;')"></a></td>
                 <td>
                     &m.var:data.messages.#KEY#.from_user_name;<br>
                     <strong>&m.var:data.messages.#KEY#.title;</strong><br>
@@ -41,7 +41,7 @@
           <tbody>
             <m.foreach var="data.old-messages" key="KEY">
               <tr>
-                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.old-messages.#KEY#.id;')"></a></td>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.old-messages.#KEY#.id;')"></a></td>
                 <td>
                     &m.var:data.old-messages.#KEY#.from_user_name;<br>
                     <strong>&m.var:data.old-messages.#KEY#.title;</strong><br>
@@ -72,7 +72,7 @@
           <tbody>
             <m.foreach var="data.unread-send-messages" key="KEY">
               <tr>
-                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.unread-send-messages.#KEY#.id;')"></a></td>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.unread-send-messages.#KEY#.id;')"></a></td>
                 <td>
                     &m.var:data.unread-send-messages.#KEY#.to_user_name;<br>
                     <strong>&m.var:data.unread-send-messages.#KEY#.title;</strong><br>
@@ -97,7 +97,7 @@
           <tbody>
             <m.foreach var="data.read-send-messages" key="KEY">
               <tr>
-                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&form=user/forms/message&id=&m.var:data.read-send-messages.#KEY#.id;')"></a></td>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.read-send-messages.#KEY#.id;')"></a></td>
                 <td>
                     &m.var:data.read-send-messages.#KEY#.to_user_name;<br>
                     <strong>&m.var:data.read-send-messages.#KEY#.title;</strong><br>
