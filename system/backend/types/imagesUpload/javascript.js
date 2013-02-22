@@ -58,7 +58,7 @@ $(function(){
     });
 
     // SAVE EDIT IMAGE DATA
-    $('div.imagesUpload div.inner-holder').on("keyup", "textarea,input", function(){ 
+    $('div.imagesUpload div.inner-holder').on("input paste", "textarea,input", function(){ 
         // doms
         $this = $(this);
         $windowFiles = $this.closest(".window");
