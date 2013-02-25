@@ -1,10 +1,76 @@
 #
-# PERMISSÕES NO BACKEND
+# PERMISSÕES NO BACKEND - ADMIN
 #
 backend:
-    view-update-form : true
-    view-insert-form : true
-    view-list-form   : true
-    view-dashboard   : true
-    save-form        : true
-    delete-form      : true
+    # bloqueio padrão de formulários
+    forms:
+        view: true
+        save: true
+       
+#    # hide specific menu by path
+#    hide-menu-by-path:
+#      - user/forms/group
+#       
+#    # show menu of a module
+#    show-module:
+#      - user
+#      
+#    # bloqueio por módulo ou arquivo
+#    modules:
+#        view:
+#          insert:
+#            - {user:{forms:{group: false}}}
+#
+#          update: 
+#            - ""
+#            
+#          dashboard: 
+#            - ""
+#            
+#        save:
+#          insert: 
+#            - {user: {forms: {group: false}}}
+#            
+#          update: 
+#            - ""
+#            
+#          delete: 
+#            - ""
+          
+          
+#
+# PERMISSÕES NO BACKEND - INSERT ONLY
+#
+backend:
+    forms:
+        view:
+          inTab    : false
+          update   : false
+          insert   : true
+          list     : false
+          dashboard: false
+        save:
+          insert: true
+          update: false
+          delete: false
+    show-module:
+      - all
+          
+          
+          
+          
+          
+#
+# PERMISSÕES NO BACKEND - CANT SEE DASHBOARD AND CANT INSERT, UPDATE OR DELETE
+#
+backend:
+    forms:
+        view:
+          inTab    : true
+          update   : true
+          insert   : true
+          list     : true
+          dashboard: false
+        save: false
+    show-module:
+      - all
