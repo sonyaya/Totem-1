@@ -1,4 +1,16 @@
 $(function(){
+
+    // ADICIONA BEFORE EM TODOS OS TD DO 
+    // BODY CONFORME OS VALORES DE THEAD
+    $("thead tr th").each(function(){
+        $this = $(this);
+        index = $this.index();
+        if( index > 0 ){
+            title = $this.text();
+            $td = $("tbody tr").find("td:eq("+index+") a").before("<span class='inline-title'>"+title+": </span>");
+        }
+    });
+
     // 
     action  = layout.uri("action"); 
     form    = layout.uri("path");

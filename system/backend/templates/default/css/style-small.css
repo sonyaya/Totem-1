@@ -35,7 +35,7 @@
         margin-top: 9px;
         }
         
-    header div.user div.info aspan,
+    header div.user div.info span,
     header div.user div.info a{
         display: inline;
         }
@@ -43,7 +43,6 @@
     header div.user div.info span.login{
         display: none; 
         }
-        
         
 /* --- MAIN ------------------------------------------------------------------- */
 
@@ -95,7 +94,7 @@
         
 /* --- TABLE ------------------------------------------------------------------ */
 
-
+    
     div.list table .action{
         width: auto !important;
         display: none;
@@ -125,6 +124,11 @@
         font-size: 1.2em;
         border: 0 none !important;
         }
+        
+    div.list table tbody tr td span.inline-title{
+        display: inline;
+        }
+        
     div.list table tbody tr:hover td{
         background: #E4E4E4 !important;
         color: #000000 !important;
@@ -133,4 +137,36 @@
     div.list table tbody tr:hover .action{
         display: block;
         background: #C7C7C7 !important;
+        }
+      
+        
+/* --- BUTTONS ---------------------------------------------------------------- */ 
+      
+
+    button,
+    .button{
+        padding: 1.5%;
+    }
+          
+        
+/* --- TOP TABS --------------------------------------------------------------- */
+
+    nav.top-tabs ul li{
+        padding: 2%;
+        position: relative;
+    }
+          
+    nav.top-tabs ul li.popup-tab{
+        padding-left: 30px;
+        }
+        
+    nav.top-tabs ul li span{
+        float: left;
+        height: 18px;
+        left: 6px;
+        position: absolute;
+        top: -webkit-calc(50% - 9px);
+        top: -moz-calc(50% - 9px);
+        top: calc(50% - 9px);
+        width: 18px
         }

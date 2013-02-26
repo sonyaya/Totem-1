@@ -1,6 +1,20 @@
 $(function(){
     list = {};
     
+    // ADICIONA BEFORE EM TODOS OS TD DO 
+    // BODY CONFORME OS VALORES DE THEAD
+    function addInlineTitles(){
+        $("thead tr th").each(function(){
+            $this = $(this);
+            index = $this.index();
+            if( index > 0 ){
+                title = $this.text();
+                $td = $("tbody tr").find("td:eq("+index+") a").before("<span class='inline-title'>"+title+": </span>");
+            }
+        });
+    }
+    addInlineTitles();
+    
     // 
     list.updateAttributes = function(){
         list.action  = layout.uri("action"); 
@@ -68,7 +82,9 @@ $(function(){
         layout.ajax.showLoader();
         $(".list-content").load("?action=view-list-window-form" + url, function(){ 
             list.addOrderClass();
+            addInlineTitles();
         });
+        
         layout.ajax.hideLoader();
     });
 

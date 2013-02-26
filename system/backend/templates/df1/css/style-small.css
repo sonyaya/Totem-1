@@ -124,6 +124,11 @@
         font-size: 1.2em;
         border: 0 none !important;
         }
+        
+    div.list table tbody tr td span.inline-title{
+        display: inline;
+        }
+        
     div.list table tbody tr:hover td{
         background: #E4E4E4 !important;
         color: #000000 !important;
