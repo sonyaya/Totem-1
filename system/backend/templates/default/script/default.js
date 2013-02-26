@@ -12,7 +12,7 @@ layout.popup = function(url, title){
         var barSize = 70;
         newWindow = window.open(
             url,
-            title,
+            title + Math.random(),
             'toolbar=no,'
             +'scrollbars=yes,'
             +'location=no,'
