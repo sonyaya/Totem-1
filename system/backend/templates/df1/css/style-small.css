@@ -94,18 +94,46 @@
         
 /* --- TABLE ------------------------------------------------------------------ */
 
-
+    
     div.list table .action{
+        width: auto !important;
+        display: none;
+        border-bottom: 1px solid #C7C7C7 !important;
         }
         
-   div.list table tbody tr td{
-        font-size: 0.9em;
+    div.list td.action a{
+        width: 25px !important;
+        height: 25px !important;
+        vertical-align: middle
         }
         
-    div.list table thead tr th{
-        font-size: 0.8em;
+     div.list td.action a.edit{
+        margin: 5px 30px;
         }
         
+    div.list table thead{
+        display: none;
+        }
+        
+    div.list table tbody tr{
+        border-top: 1px solid #CDCDCD; 
+        }
+        
+    div.list table tbody tr td{
+        display: block;
+        font-size: 1.2em;
+        border: 0 none !important;
+        }
+    div.list table tbody tr:hover td{
+        background: #E4E4E4 !important;
+        color: #000000 !important;
+        }
+        
+    div.list table tbody tr:hover .action{
+        display: block;
+        background: #C7C7C7 !important;
+        }
+      
         
 /* --- BUTTONS ---------------------------------------------------------------- */ 
       
