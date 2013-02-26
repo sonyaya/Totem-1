@@ -123,10 +123,14 @@
         display: block;
         font-size: 1.2em;
         border: 0 none !important;
+        clear: both;
         }
         
     div.list table tbody tr td span.inline-title{
-        display: inline;
+        display: inline-block;
+        font-weight: 700;
+        font-size: 0.7em;
+        margin-right: 5px;
         }
         
     div.list table tbody tr:hover td{
