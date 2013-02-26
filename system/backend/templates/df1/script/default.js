@@ -81,7 +81,7 @@ layout.popup = (function(url, title){
         var popup = 
             window.open(
                 url + "&popup=1",
-                title,
+                title + Math.random(),
                 'toolbar=no,'
                 +'scrollbars=yes,'
                 +'location=no,'
