@@ -6,7 +6,6 @@ TO-DO
 Forms
 -----
 
-
 List
 ----
 - Adicionar ajax para pesquisas no template DF1
