@@ -26,7 +26,7 @@ $(function(){
                     if( window.opener ){
                         window.close();
                     }else{
-                        window.location = "?action=view-update-form&path=&m.var:form;&id=" + data.result._M_PRIMARY_KEY_VALUE_;
+                        window.location = "?action=view-update-form&path="+ layout.uri("path") +"&id=" + data.result._M_PRIMARY_KEY_VALUE_;
                     }
                 }
             },
@@ -43,13 +43,13 @@ $(function(){
         msg += "para impedir a exclusão destes dados.";
         if( confirm(msg) ){
             $.post(
-                "?action=delete-form&path=&m.var:form;&id=&m.var:_GET.id;",
+                "?action=delete-form&path="+ layout.uri("path") +"&id="+ layout.uri("id"),
                 function(data){
                     if(data.error){
                         alert(data.message);
                     }else{
-                        if( window.opener !== null )
-                            window.location = "?action=view-list-form&path=&m.var:form;";
+                        window.opener.location.reload(true);
+                        window.close();
                     }
                 },
                 "json"
