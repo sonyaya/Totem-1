@@ -1,27 +1,25 @@
-# CONFIGIRA INTERFACE GRÁFICA
-# E INTERFACE COM BANCO DE DADOS 
 interface:
   html:
-   #list   : list.html  
+    #list   : []
     insert : updateInsert.html
     update : updateInsert.html
-
+    dummy  : updateInsert.html
   css:
     list   : []
     insert : []
     update : []
-    
+    dummy  : []
   javascript:
     head:
       list   : []
       insert : []
       update : []
-
+      dummy  : []
     body:
       list   : []
       insert : []
       update : []
-     
+      dummy  : []
 default:
   parameter : 
       nullable : false

@@ -3,24 +3,22 @@ interface:
    #list   : list.html   
     insert : 'insertAndUpdate.html'
     update : 'insertAndUpdate.html'
-
+    dummy  : 'insertAndUpdate.html'
   css:
     list   : []   
     insert : [ 'style.css' ]   
     update : [ 'style.css' ]   
-    
+    dummy  : [ 'style.css' ]   
   javascript:
     head:
-      list   : [] 
-      insert : [] 
-      update : [] 
-
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
     body:
-      list   : [] 
-      insert : [] 
-      update : [] 
-     
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
 default:
-  parameter : 
-      attr1 : att-1
-      attr2 : att-2
+  parameter : []

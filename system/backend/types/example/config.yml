@@ -5,22 +5,26 @@ interface:
    #list   : list.html   # escreve o arquivo .html literalmente na tela de listagem - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos (* diminui substancialmente a performace da tela de listagem) 
     insert : insert.html # escreve o arquivo .html literalmente na tela de inserção - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos    
     update : update.html # escreve o arquivo .html literalmente na tela de atualização - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
+    dummy  : dummy.html  # escreve o arquivo .html literalmente na tela de formulário falso - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
 
   css:
     list   : [file1.css, file2.css] # importa arquivos .css no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes   
     insert : [file1.css, file2.css] # importa arquivos .css no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes   
     update : [file1.css, file2.css] # importa arquivos .css no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
+    dummy  : [file1.css, file2.css] # importa arquivos .css no cabeçãlho na tela de formulário falso - não importa o mesmo arquivo duas vezes
     
   javascript:
     head:
       list   : [list.js, file2.js] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
       insert : [file1.js, file2.js] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
       update : [file1.js, file2.js] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
+      dummy  : [file1.js, file2.js] # importa arquivos .js no cabeçãlho na tela de formulário falso - não importa o mesmo arquivo duas vezes
 
     body:
       list   : [file1.js, file2.js] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes
       insert : [file1.js, file2.js] # escreve o arquivo .js literalmente na tela de inserção - pode importar o mesmo arquivo varias vezes
       update : [file1.js, file2.js] # escreve o arquivo .js literalmente na tela de atualização - pode importar o mesmo arquivo varias vezes
+      dummy  : [file1.js, file2.js] # escreve o arquivo .js literalmente na tela de formulário falso - pode importar o mesmo arquivo varias vezes
      
 # CONFIGURA PADRÕES DO TYPE
 default:

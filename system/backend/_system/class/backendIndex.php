@@ -233,6 +233,15 @@
                     self::viewFormUpdate("form.html", $path, $get['id']);
                     break;
                 }
+                
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO FALSO
+                case "view-dummy-form":{
+                    if( !User::check("backend/forms/view/dummy", "bool") )
+                        User::check("backend/modules/view/dummy/{$path}", "html");
+                    self::viewFormUpdate("dummy-form.html", $path, "dummy");
+                    break;
+                }
 
                 // BUSCA LISTA DE DADOS REFERENTE 
                 // AO FORMULÁRIO NO BANCO DE DADOS
@@ -270,6 +279,16 @@
                     if( !User::check("backend/forms/view/update", "bool") )
                         User::check("backend/modules/save/update/{$path}", "html");
                     self::viewFormUpdate("form-window.html", $path, $get['id']);
+                    break;
+                }
+
+                // MOSTRA A INTERFACE GRÁFICA DA
+                // TELA DE FORMULÁRIO FALSO
+                // EM JANELA
+                case "view-dummy-window-form":{
+                    if( !User::check("backend/forms/view/dummy", "bool") )
+                        User::check("backend/modules/save/dummy/{$path}", "html");
+                    self::viewFormUpdate("dummy-form-window.html", $path, "dummy");
                     break;
                 }
 

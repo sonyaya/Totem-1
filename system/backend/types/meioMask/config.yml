@@ -1,31 +1,26 @@
-# CONFIGIRA INTERFACE GRÁFICA
-# E INTERFACE COM BANCO DE DADOS 
 interface:
   html:
-   #list   : list.html   # escreve o arquivo .html literalmente na tela de listagem - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos (* diminui substancialmente a performace da tela de listagem) 
-    insert : updateInsert.html # escreve o arquivo .html literalmente na tela de inserção - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos    
-    update : updateInsert.html # escreve o arquivo .html literalmente na tela de atualização - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
-
+    #list   : []
+    insert : updateInsert.html 
+    update : updateInsert.html 
+    dummy  : updateInsert.html 
   css:
-    list   : [] # importa arquivos .css no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes   
-    insert : [] # importa arquivos .css no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes   
-    update : [] # importa arquivos .css no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-    
+    list   : []
+    insert : []
+    update : []
+    dummy  : [] 
   javascript:
     head:
-      list   : [] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
-      insert : [ 'jquery.meio.mask.min.js' , 'javascript.js' ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
-      update : [ 'jquery.meio.mask.min.js' , 'javascript.js' ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-
+      list   : [] 
+      insert : [ 'jquery.meio.mask.min.js' , 'javascript.js' ]
+      update : [ 'jquery.meio.mask.min.js' , 'javascript.js' ]
+      dummy  : [ 'jquery.meio.mask.min.js' , 'javascript.js' ] 
     body:
-      list   : [] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes
-      insert : [] # escreve o arquivo .js literalmente na tela de inserção - pode importar o mesmo arquivo varias vezes
-      update : [] # escreve o arquivo .js literalmente na tela de atualização - pode importar o mesmo arquivo varias vezes
-     
-# CONFIGURA PADRÕES DO TYPE
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
 default:
-
-  # parametros padrões
   parameter : 
       placeholder : "..."
       size        : 255

@@ -3,23 +3,23 @@ interface:
    #list   : list.html    
     insert : insert.html 
     update : update.html 
-
+    dummy  : insert.html 
   css:
     list   : [] 
-    insert : [ 'style.css' ] 
-    update : [ 'style.css' ] 
-    
+    insert : []
+    update : []
+    dummy  : [ 'style.css' ] 
   javascript:
     head:
       list   : []  
       insert : [ 'javascript.js' ] 
       update : [ 'javascript.js' ] 
-
+      dummy  : [ 'javascript.js' ] 
     body:
       list   : [] 
       insert : [] 
       update : [] 
-     
+      dummy  : [] 
 default:
   parameter : 
     table : table

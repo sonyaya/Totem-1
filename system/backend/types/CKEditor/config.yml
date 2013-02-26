@@ -1,42 +1,33 @@
-# CONFIGIRA INTERFACE GRÁFICA
-# E INTERFACE COM BANCO DE DADOS 
 interface:
   html:
-   #list   : list.html   # escreve o arquivo .html literalmente na tela de listagem - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos (* diminui substancialmente a performace da tela de listagem) 
-    insert : insertUpdate.html # escreve o arquivo .html literalmente na tela de inserção - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos    
-    update : insertUpdate.html # escreve o arquivo .html literalmente na tela de atualização - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
-
+    #list   : []
+    insert : 
+    update : 
+    dummy  : insertUpdate.html 
   css:
-    list   : [] # importa arquivos .css no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes   
-    insert : [] # importa arquivos .css no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes   
-    update : [] # importa arquivos .css no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-    
+    list   : [] 
+    insert : [] 
+    update : [] 
+    dummy  : [] 
   javascript:
     head:
-      list   : [] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
-      insert : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
-      update : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-
+      list   : [] 
+      insert : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] 
+      update : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] 
+      dummy  : [ "ckeditor/ckeditor.js", "insertUpdate.js" ] 
     body:
-      list   : [] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes
-      insert : [ "javascript.js" ] # escreve o arquivo .js literalmente na tela de inserção - pode importar o mesmo arquivo varias vezes
-      update : [ "javascript.js" ] # escreve o arquivo .js literalmente na tela de atualização - pode importar o mesmo arquivo varias vezes
-     
-# CONFIGURA PADRÕES DO TYPE
+      list   : [] 
+      insert : [ "javascript.js" ]  
+      update : [ "javascript.js" ]  
+      dummy  : [ "javascript.js" ] 
 default:
-
-  # parametros padrões
   parameter : 
     extraPlugins          : 'autogrow'
     autoGrow_maxHeight    : 800
     removePlugins         : 'resize'
     toolbarCanCollapse    : true
     toolbarStartupExpanded: false
-    
     toolbar: 
-      #- name: 'document'
-      #  items: [ 'Source', '-', 'NewPage', 'Preview', '-', 'Templates' ]
-        
       - name: 'document'
         items: [ 'Source' ]
         

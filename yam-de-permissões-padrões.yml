@@ -48,6 +48,7 @@ backend:
           update   : false
           insert   : true
           list     : false
+          dummy    : false
           dashboard: false
         save:
           insert: true
@@ -70,6 +71,7 @@ backend:
           update   : true
           insert   : true
           list     : true
+          dummy    : true
           dashboard: false
         save: false
     show-module:

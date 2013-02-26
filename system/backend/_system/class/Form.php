@@ -53,20 +53,32 @@
                 $formEvents = Array();
             }
             
-            // INSERT OR UPDATE
-            $insertOrUpdate = is_null($updateId) ? "insert" : "update";
+            // TYPE OF FORM: INSERT OR UPDATE OR DUMMY
+            switch (true){
+                case is_null($updateId):
+                    $formType = "insert"; 
+                    break;
+                
+                case is_numeric($updateId):
+                    $formType = "update"; 
+                    break;
+                
+                case $updateId == "dummy":
+                    $formType = "dummy"; 
+                    break;
+            }
             
             // MESCLA FORULÁRIOS SE NECESSÁRIO
-            if( isset($formArray['forms'][ $insertOrUpdate ]['merge-form']) && is_array($formArray['forms'][ $insertOrUpdate ]['merge-form']) ){
+            if( isset($formArray['forms'][ $formType ]['merge-form']) && is_array($formArray['forms'][ $formType ]['merge-form']) ){
                 $formA = Array();
                 $formB = Array();
-                foreach($formArray['forms'][ $insertOrUpdate ]['merge-form'] as $formKey){
+                foreach($formArray['forms'][ $formType ]['merge-form'] as $formKey){
                     if( isset($formArray['forms'][ $formKey]) && is_array($formArray['forms'][ $formKey]) ){
                         $formA = $formArray['forms'][$formKey];
                     }
                     $formB = array_replace_recursive($formA, $formB);
                 }
-                $formArray['forms'][ $insertOrUpdate ] = $formB;
+                $formArray['forms'][ $formType ] = $formB;
             }
             
             // VARIAVEIS QUE SERÃO ENVIADAS PARA A TELA
@@ -75,50 +87,55 @@
             $bodyJS  = Array();
             $headCSS = Array();
 
-            // BUSCA DADOS NO BANCO DE DADOS 
-            // CASO SEJA INFORMADO $id
-            if(is_null($updateId)){
-                // define input de ação para inserção
-                $inputs[] = "<input name='_M_ACTION' type='hidden' value='insert'>";
-            }else{
-                // define input de ação para atualização
-                $inputs[] = "<input name='_M_ACTION' type='hidden' value='update:$updateId'>";
+            // SETA ACTION CONFORME O TIPO DE FORMULÁRIO
+            
+            switch ($formType){
+                case "insert":
+                    $inputs[] = "<input name='_M_ACTION' type='hidden' value='insert'>";
+                    break;
+                
+                case "dummy":
+                    $inputs[] = "<input name='_M_ACTION' type='hidden' value='dummy-form'>";
+                    break;
+                
+                case "update":
+                    $inputs[] = "<input name='_M_ACTION' type='hidden' value='update:$updateId'>";
 
-                // busca colunas para a busca de dados
-                foreach ( $formArray['forms'][ $insertOrUpdate ]['input'] as $key => $val) {
-                    $columns[] = $val['column'];
+                    // busca colunas para a busca de dados
+                    foreach ( $formArray['forms'][ $formType ]['input'] as $key => $val) {
+                        $columns[] = $val['column'];
 
-                    if( !isset($val['ignore-select']) || ($val['ignore-select']==false) ){
-                        $selectColumns[] = $val['column'];
+                        if( !isset($val['ignore-select']) || ($val['ignore-select']==false) ){
+                            $selectColumns[] = $val['column'];
+                        }
                     }
-                }
-                
-                // executa FormEvents::beforeLoadData
-                if(method_exists($formEvents, "beforeLoadData")){
-                    $formEvents->beforeLoadData(Array($formArray['header']['p-key']=>null), $formArray['header']);
-                }
 
-                // busca dados no banco
-                $db = new MySQL();
-                $loadedData = 
-                    $db
-                      ->setTable($formArray['header']['table'])
-                      ->select(
-                        $selectColumns,
-                        "`{$formArray['header']['p-key']}` = '$updateId'"
-                      )
-                ;
-                
-                // executa FormEvents::afterLoadData
-                if(method_exists($formEvents, "afterLoadData")){
-                    $formEvents->afterLoadData($loadedData[0], Array($formArray['header']['p-key']=>$updateId), $formArray['header']);
-                }
-                
+                    // executa FormEvents::beforeLoadData
+                    if(method_exists($formEvents, "beforeLoadData")){
+                        $formEvents->beforeLoadData(Array($formArray['header']['p-key']=>null), $formArray['header']);
+                    }
+
+                    // busca dados no banco
+                    $db = new MySQL();
+                    $loadedData = 
+                        $db
+                          ->setTable($formArray['header']['table'])
+                          ->select(
+                            $selectColumns,
+                            "`{$formArray['header']['p-key']}` = '$updateId'"
+                          )
+                    ;
+
+                    // executa FormEvents::afterLoadData
+                    if(method_exists($formEvents, "afterLoadData")){
+                        $formEvents->afterLoadData($loadedData[0], Array($formArray['header']['p-key']=>$updateId), $formArray['header']);
+                    }
+                    break;
             }
 
             // PERCORRE TODOS OS TYPES
             $counter = 0;
-            foreach ( $formArray['forms'][ $insertOrUpdate ]['input'] as $key => $val) {
+            foreach ( $formArray['forms'][ $formType ]['input'] as $key => $val) {
 
                 // verifica se o arquivo de 
                 // configuração do type existe
@@ -168,13 +185,13 @@
                             "column"    => $val['column'] ,
                             "name"      => $val['column'] ,
                             "toLayout"  => $toTypeLayout,
-                            "value"     => ( is_null($updateId)? "" : $loadedData[0][ $val['column'] ] ) ,
+                            "value"     => ( ($formType == "update")? $loadedData[0][ $val['column'] ] : "") ,
                             "parameter" => $val['parameter']
                         )
                     ;
 
                     // importa js do head
-                    if(is_array($headJSPaths = $confTypeArray['interface']['javascript']['head'][ $insertOrUpdate ])){
+                    if(is_array($headJSPaths = $confTypeArray['interface']['javascript']['head'][ $formType ])){
                         foreach ($headJSPaths as $headJSPath) {
                             $headJS[] = "$path/$headJSPath";
                         }
@@ -183,7 +200,7 @@
                     }
 
                     // importa js do body
-                    if(is_array($bodyJSPaths = $confTypeArray['interface']['javascript']['body'][ $insertOrUpdate ])){
+                    if(is_array($bodyJSPaths = $confTypeArray['interface']['javascript']['body'][ $formType ])){
                         foreach ($bodyJSPaths as $bodyJSPath) {
                             $bodyJS[] = (string)new Frontend("$path/$bodyJSPath", $variables);
                         }
@@ -192,7 +209,7 @@
                     }
 
                     // importa css
-                    if(is_array($headCSSPaths = $confTypeArray['interface']['css'][ $insertOrUpdate ])){
+                    if(is_array($headCSSPaths = $confTypeArray['interface']['css'][ $formType ])){
                         foreach ($headCSSPaths as $headCSSPath) {
                             $headCSS[] = "$path/$headCSSPath";
                         }
@@ -208,7 +225,7 @@
                     $preLoadedColumnsTypes['classes'][ $val['label'] ]    = $typeObject;
 
                     // importa html de formulário
-                    if( file_exists($htmlPath = "$path/". $confTypeArray['interface']['html'][ $insertOrUpdate ]) ){
+                    if( file_exists($htmlPath = "$path/". $confTypeArray['interface']['html'][ $formType ]) ){
                         $inputs[ $val['label'] ] = (string)new Frontend($htmlPath, $variables);
                     }else{
                         $inputs[ $val['label'] ] = "<div class='input-holder error {$val['type']}'>{$val['label']}: arquivo html '$htmlPath' não encontrado.</div>";
@@ -225,11 +242,11 @@
             $this->addToArrayLayout(
                     Array(
                         "main-title" => $formArray['header']['title'] ,
-                        "title"      => $formArray['forms'][$insertOrUpdate]['title'] ,
+                        "title"      => $formArray['forms'][$formType]['title'] ,
                         "form"       => $formFilename ,
                         "inputs"     => implode("\r\n\r\n", $inputs) ,
                         "css"        => array_unique($headCSS) ,
-                        "method"     => $insertOrUpdate ,
+                        "method"     => $formType ,
                         "javascript" => Array(
                             "head" => array_unique($headJS),
                             "body" => $bodyJS
@@ -903,6 +920,19 @@
 
                     return $finalReturn;
                   break;
+                  
+                  case $action == "dummy-form":
+                      $file = "modules/". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
+                      if(file_exists($file)){
+                          return include $file;
+                      }else{
+                        return Array(
+                            "error"     => true,
+                            "errorCode" => "dummy-form-exec",
+                            "message"   => "Arquivo '$file' de execução do formulário dummy não foi encontrado, verfique se foi setado um php para este formulário dummy."
+                        );
+                      }
+                      break;
 
                 default:
                     trigger_error("Ação '$action' desconhecida.", E_USER_ERROR);

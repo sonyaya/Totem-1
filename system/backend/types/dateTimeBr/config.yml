@@ -1,33 +1,28 @@
-# CONFIGIRA INTERFACE GRÁFICA
-# E INTERFACE COM BANCO DE DADOS 
 interface:
   html:
-   #list   : list.html   # escreve o arquivo .html literalmente na tela de listagem - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos (* diminui substancialmente a performace da tela de listagem) 
-    insert : updateInsert.html # escreve o arquivo .html literalmente na tela de inserção - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos    
-    update : updateInsert.html # escreve o arquivo .html literalmente na tela de atualização - não importa o mesmo arquivo duas vezes - nem é permitido passa um array de arquivos
-
+    #list   : []
+    insert : updateInsert.html 
+    update : updateInsert.html 
+    dummy  : updateInsert.html 
   css:
-    list   : [] # importa arquivos .css no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes   
-    insert : [ 'style.css' ] # importa arquivos .css no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes   
-    update : [ 'style.css' ] # importa arquivos .css no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-    
+    list   : [] 
+    insert : [ 'style.css' ] 
+    update : [ 'style.css' ] 
+    dummy  : [ 'style.css' ] 
   javascript:
     head:
-      list   : [] # importa arquivos .js no cabeçãlho na tela de listagem - não importa o mesmo arquivo duas vezes
-      insert : [ 'javascript.js' ] # importa arquivos .js no cabeçãlho na tela de inserção - não importa o mesmo arquivo duas vezes
-      update : [ 'javascript.js'  ] # importa arquivos .js no cabeçãlho na tela de atualização - não importa o mesmo arquivo duas vezes
-
+      list   : [] 
+      insert : [' javascript.js' ] 
+      update : [' javascript.js' ]  
+      update : [' javascript.js' ] 
     body:
-      list   : [] # escreve o arquivo .js literalmente na tela de listagem - pode importar o mesmo arquivo varias vezes
-      insert : [ 'javascript-loadData.js' ] # escreve o arquivo .js literalmente na tela de inserção - pode importar o mesmo arquivo varias vezes
-      update : [ 'javascript-loadData.js' ] # escreve o arquivo .js literalmente na tela de atualização - pode importar o mesmo arquivo varias vezes
-     
-# CONFIGURA PADRÕES DO TYPE
+      list   : [] 
+      insert : [ 'javascript-loadData.js' ]
+      update : [ 'javascript-loadData.js' ]
+      dummy  : [ 'javascript-loadData.js' ]
 default:
-
-  # parametros padrões
   parameter : 
     nullable : false
     year : 
-      start : 'now'    # aceita um número inteiro ou 'now-[09]', 'now+[09]' ou apenas 'now'
-      stop  : 'now-18' # aceita um número inteiro ou 'now-[09]', 'now+[09]' ou apenas 'now'
+      start : 'now'    
+      stop  : 'now-18' 

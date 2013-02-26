@@ -1,25 +1,25 @@
 interface:
   html:
    #list   : list.html   
-    insert : updateAndInsert.html 
-    update : updateAndInsert.html 
-
+    insert : updateAndInsert.html
+    update : updateAndInsert.html
+    dummy  : updateAndInsert.html 
   css:
     list   : []   
     insert : [ 'plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css' , 'style.css' ]
     update : [ 'plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css' , 'style.css' ]
-    
+    dummy  : [ 'plupload/js/jquery.plupload.queue/css/jquery.plupload.queue.css' , 'style.css' ]
   javascript:
     head:
       list   : [] 
-      insert : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ] 
-      update : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ] 
-
+      insert : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ]
+      update : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ]
+      dummy  : [ 'html5sortable/jquery.sortable.min.js' , 'plupload/js/plupload.full.js' , 'plupload/js/jquery.plupload.queue/jquery.plupload.queue.js' , 'javascript.js' ] 
     body:
       list   : [] 
-      insert : [ 'insert.js' ] 
+      insert : [ 'update.js' ] 
       update : [ 'update.js' ] 
-     
+      dummy  : [ 'update.js' ] 
 default:
   parameter :
     folder : "change_this_folder"

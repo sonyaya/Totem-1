@@ -1,120 +1,97 @@
 header:
-    title: 'título principal do formulário'
-    table: nome_da_tabela
-    p-key: nome_da_coluna_de_chave_primaria
-    
+    title: 'Cadastro de Usuários'
+    table: _m_user
+    p-key: id
 forms:
     list:
-        title: 'Listagm de FOOLs'
-        rows-per-page: '10'
-        max-page-list: '11'
+        title: 'Listagm de Usuários'
+        rows-per-page: 200
         input:
+            - type: example
+              label: Cod.
+              column: id
+
+            - type: example
+              label: 'Nome'
+              column: first_name
               
             - type: example
-              label: Valor
-              column: valor
-              parameter:
-                  attr1: attttttt-1
-                  attr2: attttttt-2
+              label: 'Nome do Meio'
+              column: middle_name
               
             - type: example
-              label: Id
-              column: nome_da_coluna_de_chave_primaria
-              parameter:
-                  attr1: attaaaaaa-1
-                  attr2: attaaaaaa-2
+              label: Sobrenome
+              column: last_name
               
             - type: example
-              label: Id2
-              column: nome_da_coluna_de_chave_primaria
-              parameter:
-                  attr1: attaaaaaa-1
-                  attr2: attaaaaaa-2
+              label: Login
+              column: login
               
             - type: example
-              label: Id3
-              column: nome_da_coluna_de_chave_primaria
-              parameter:
-                  attr1: attaaaaaa-1
-                  attr2: attaaaaaa-2
+              label: Email
+              column: Email
               
             - type: example
-              label: Id4
-              column: nome_da_coluna_de_chave_primaria
-              parameter:
-                  attr1: attaaaaaa-1
-                  attr2: attaaaaaa-2
-              
-        custom-query: | 
-            SELECT * FROM &table;
-            
+              label: Grupo
+              column: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
+
     update:
-        title: 'Atualizando FOOls'
-        
+        title: 'Atualizando Usuário'
         input:
-            - type: example
-              label: Valor
-              column: valor
+            - type: fk
+              label: Grupo
+              column: group_id
               parameter:
-                  attr1: att-1
-                  attr2: att-2
-               
-        custom-query: | 
-            UPDATE TABLE &table; SET column=value
-            
-    insert:
-        title: 'Inserindo FOOLs'
-        
-        input:
-            - type: example
-              label: Valor
-              column: valor
-              parameter:
-                  attr1: att-1
-                  attr2: att-2
-         
-        custom-query: ''
-        
-    delete:
-        custom-query: | 
-            DELETE FROM &table WHERE
-            
-install:
-    filename: daniel
-    
-    create-table: | 
-        CREATE TABLE `&table;`( 
-          `&pk;` int(11) NOT NULL AUTO_INCREMENT, 
-          `valor` meioMask(45) DEFAULT NULL,
-          PRIMARY KEY (`&pk;`)
-        ) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8
-        
-    default-insert: | 
-        INSERT INTO &table;(valor) VALUES('Daniel 0');
-        INSERT INTO &table;(valor) VALUES('Daniel 1');
-        INSERT INTO &table;(valor) VALUES('Daniel 2');
-        INSERT INTO &table;(valor) VALUES('Daniel 3');
-        INSERT INTO &table;(valor) VALUES('Daniel 4');
-        INSERT INTO &table;(valor) VALUES('Daniel 5');
-        
-    drop-table: | 
-        DROP TABLE IF EXISTS &table;
-        
-    api-json-php: | 
-        <?php
-          $query = "SELECT * FROM &table; WHERE 1=1";  
-          $ret = array();  
-          
-          if (!$result = mysql_query($query))
-          die( 'Invalid query: ' . mysql_error() );  
-          
-          while ( $row = mysql_fetch_assoc($result) )  
-          $ret[] = $row;   echo json_encode($ret);
-          
-    class-php: | 
-        <?php
-          class &form-name;{
-            public function beforeInsert(){
+                column: id
+                table: _m_group
+                label: name 
+                insert-form  : "user/forms/group" 
               
-            }
-          }
+            - type: meioMask
+              label: 'Primeiro Nome'
+              column: first_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: 'Nome do Meio'
+              column: middle_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Sobrenome
+              column: last_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Login
+              column: login
+              parameter:
+                size: 20
+              
+            - type: password
+              label: Senha
+              column: password
+              
+            - type: textarea
+              label: Permissões
+              column: permissions
+              
+            - type: meioMask
+              label: email
+              column: Email
+              parameter:
+                size: 100
+                
+    insert:
+        title: 'Inserindo Usuário'
+        merge-form: [ insert, update ]
+        input: []
+        
+    dummy:
+        title: 'Dummy Clipping'
+        php: 'example-dummy.php'
+        merge-form: [ dummy, update ]
+        input: []
