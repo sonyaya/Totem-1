@@ -7,7 +7,7 @@ $(function(){
         if( typeof($this.find('input')[0]) == 'undefined' ){
             // TEXT e HTML ORIGINAL
             oldHtml = $td.html();
-            oldText = $.trim($td.text());
+            oldText = $.trim($td.find("a").text());
 
             // MOSTRA INPUT
             $this.html("<input class='azimute' value='"+oldText+"'>");
