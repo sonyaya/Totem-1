@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+        
+        &m.include:#template#/_head.html;
+        
+        
+        <!-- FORM SCRIPTS -->
+        <script src="&m.var:template;/script/form.js"></script>
+    </head>
+    <body>
+        <div id="loader">
+            <div class="inner-loader">
+                <div id="canvasloader-container"></div>
+                <span>Carregando...</span>
+            </div>
+        </div>
+        
+        <header>
+            &m.include:#template#/_header.html;
+        </header>
+        
+        <nav class="side">
+            &m.var:main-menu;
+        </nav>
+        
+        <div class="window-holder main list">
+            <nav class="top-tabs">
+                <ul>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-list'" id="tab-list">Listar</li>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-search'" id="tab-search">Pesquisar</li>
+                    <li onclick="javascript:location='?action=view-listAndInsert-form&form=&m.var:_GET.form;#tab-insert'" id="tab-insert">Inserir</li>
+                    <li id="tab-update" class="active">Atualizar</li>
+                    <div class="clear"></div>
+                </ul>
+            </nav>
+            
+            <div class="content">
+                <div class="window for-tab-update">
+                    &m.include:#template#/form-content.html;
+                </div>
+               <div class="window for-tab-list for-tab-search for-tab-insert">
+                    Aguarde...
+                </div>
+            </div>
+        </div>
+
+        
+        <div class="clear"></div>
+        
+        <footer>
+            asdsad
+        </footer>
+        <script>
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>    
