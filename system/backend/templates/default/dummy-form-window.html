@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>&m.var:main-title; - &m.var:title;</title>
+
+        &m.include:#template#/_head.html;  
+
+        <!-- FORM SCRIPTS -->
+        <script src="&m.var:template;/script/form.js"></script>
+    </head>
+    <body class="popup-window">
+        <h1>&m.var:title;</h1>
+
+        <div class="content">
+            &m.include:#template#/form-content.html;
+        </div>
+
+        <script
+            &m.include:#template#/script/bodyJs.inc.js;
+        </script>
+    </body>
+</html>
