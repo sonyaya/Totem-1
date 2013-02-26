@@ -4,23 +4,28 @@ var layout = new Object();
  * SE ENCARREGA DE ABRIR POPUPS
  */
 layout.popup = function(url, title){
-    var w = screen.width / 1.2;
-    var barSize = 70;
-    newWindow = window.open(
-        url,
-        title,
-        'toolbar=no,'
-        +'scrollbars=yes,'
-        +'location=no,'
-        +'resizable=yes,'
-        +'width='+w+','
-        +'height=0'
-    );
+    if( layout.uri("path") == layout.uri("path", url) ){
+        newWindow = window.open(url, title);        
+    }else{
+        var w = screen.width / 1.2;
+        var w = 650;
+        var barSize = 70;
+        newWindow = window.open(
+            url,
+            title,
+            'toolbar=no,'
+            +'scrollbars=yes,'
+            +'location=no,'
+            +'resizable=yes,'
+            +'width='+w+','
+            +'height=0'
+        );
 
-    newWindow.onload = function(){
-        $popBody = newWindow.$('body');
-        var h = $popBody.outerHeight() + barSize;
-        newWindow.resizeTo( w, h );
+        newWindow.onload = function(){
+            $popBody = newWindow.$('body');
+            var h = $popBody.outerHeight() + barSize;
+            newWindow.resizeTo( w, h );
+        }        
     }
 }
 
