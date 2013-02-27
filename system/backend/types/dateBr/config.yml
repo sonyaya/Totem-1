@@ -12,8 +12,8 @@ interface:
   javascript:
     head:
       list   : [] 
-      insert : []
-      update : []
+      insert : [ 'javascript.js' ]
+      update : [ 'javascript.js' ]
       dummy  : [ 'javascript.js' ] 
     body:
       list   : [] 

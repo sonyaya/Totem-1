@@ -14,12 +14,12 @@ interface:
       list   : [] 
       insert : [' javascript.js' ] 
       update : [' javascript.js' ]  
-      update : [' javascript.js' ] 
+      dummy  : [' javascript.js' ] 
     body:
       list   : [] 
-      insert : [ 'javascript-loadData.js' ]
+      insert : []
       update : [ 'javascript-loadData.js' ]
-      dummy  : [ 'javascript-loadData.js' ]
+      dummy  : []
 default:
   parameter : 
     nullable : false
