@@ -9,7 +9,6 @@
     
     # EXECUTA SOMENTE SE EXISTIR USUÁRIO LOGADO 
     if( isset($_SESSION['user']) && !empty($_SESSION['user']) ){
-            
         # VARIAVEIS GLOBAIS
         // Menus
         $_M_MENU        = Yaml::parse( file_get_contents("menu.yml") );;
@@ -38,10 +37,9 @@
         
         # MONTA O MENU 
         backendIndex::createMenu();
- 
     }
 
     # DECIDE QUAL AÇÃO EXECUTAR 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
-    $path = (isset($_GET['path']))? $_GET['path'] : "";
+    $path   = (isset($_GET['path'])  )? $_GET['path']   : "";
     backendIndex::execAction($action, $path, $_GET, $_POST);
