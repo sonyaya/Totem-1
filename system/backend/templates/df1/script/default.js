@@ -66,6 +66,40 @@ $(function(){
         });
     });
     
+    // -- CLASSE ESPECIFICA DA TELA FORMULÁRIO --------------------------------
+    
+    form = {};
+    
+    //
+    form.save = (function(e, $form){
+        if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
+
+        layout.ajax.showLoader();
+        $.post(
+            "?action=save-form&path=" + layout.uri("path"),
+            $form.serialize(),
+            function(data){
+                if( data.error ){
+                    if( typeof data.message !== "string"){
+                        mesageConcat = 'Os seguintes erros ocorreram: \r\n' ;
+                        $.each(data.message, function(key, val){
+                            mesageConcat += "- "+val+"\r\n";
+                        });
+                        alert(mesageConcat);
+                    }else{
+                        alert(data.message);
+                    }
+                }else{
+                    // Fecha se for um popup
+                    window.close();
+                }
+                layout.ajax.hideLoader();
+            },
+            "json"
+        );
+
+        return false;
+    });
 });
    
    
@@ -379,12 +413,26 @@ layout.form = {};
  * 
  */
 layout.form.insert = (function(e){
+    form.save(e, $(this));
+});
+
+/**
+ * 
+ */
+layout.form.update = (function(e){
+    form.save(e, $(this));
+});
+
+/**
+ * 
+ */
+layout.form.runDummyForm = (function(e){
     if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
 
     layout.ajax.showLoader();
     $.post(
         "?action=save-form&path=" + layout.uri("path"),
-        $(this).serialize(),
+        $form.serialize(),
         function(data){
             if( data.error ){
                 if( typeof data.message !== "string"){
@@ -397,30 +445,20 @@ layout.form.insert = (function(e){
                     alert(data.message);
                 }
             }else{
-                // Fecha se for um popup
-                window.close();
+//                var blob = new Blob([ data ]); // cria blob do retorno
+//                nwin = window.open( URL.createObjectURL(blob)); // cria nova janela 
+
+                Win = window.open('', 'newwin');
+                Win.document.open();
+                Win.document.write(data);
+                Win.document.close();
             }
             layout.ajax.hideLoader();
         },
-        "json"
+        "html"
     );
 
     return false;
-});
-
-/**
- * 
- */
-layout.form.update = (function(e){
-    layout.form.insert(e);
-});
-
-/**
- * 
- */
-layout.form.runDummyForm = (function(e){
-    alert("fazer este negocio abrir em uma novajanela.");
-    layout.form.insert(e);
 });
 
 

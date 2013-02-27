@@ -755,9 +755,26 @@
 
             // executa ações
             switch (true) {
+                
+
+                  /*
+                   * DUMMY FORM 
+                   */
+                  case $action == "dummy-form":
+                      $file = "modules/". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
+                      if(file_exists($file)){
+                          return include $file;
+                      }else{
+                        return Array(
+                            "error"     => true,
+                            "errorCode" => "dummy-form-exec",
+                            "message"   => "Arquivo '$file' de execução do formulário dummy não foi encontrado, verfique se foi setado um php para este formulário dummy."
+                        );
+                      }
+                      break;
   
                 /*
-                 * INSERIR
+                 * INSERIR OU ATUALIZAR
                  */
                 case preg_match("/(insert)/i", $action, $matches):
                 case preg_match("/(update)\:([0-9]+?)$/i", $action, $matches):
@@ -921,19 +938,6 @@
 
                     return $finalReturn;
                   break;
-                  
-                  case $action == "dummy-form":
-                      $file = "modules/". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
-                      if(file_exists($file)){
-                          return include $file;
-                      }else{
-                        return Array(
-                            "error"     => true,
-                            "errorCode" => "dummy-form-exec",
-                            "message"   => "Arquivo '$file' de execução do formulário dummy não foi encontrado, verfique se foi setado um php para este formulário dummy."
-                        );
-                      }
-                      break;
 
                 default:
                     trigger_error("Ação '$action' desconhecida.", E_USER_ERROR);

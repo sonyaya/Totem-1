@@ -5,6 +5,37 @@ $(function(){
     list.cond    = ($.trim(cond = layout.uri("cond")) == "") ? [] : $.parseJSON(cond);
     list.page    = layout.uri("page");
     list.orderBy = layout.uri("orderBy");
+    
+    form = {};
+    form.save = (function(e, $form){
+        if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
+
+        layout.ajax.showLoader();
+        $.post(
+            "?action=save-form&path=" + layout.uri("path"),
+            $form.serialize(),
+            function(data){
+                if( data.error ){
+                    if( typeof data.message !== "string"){
+                        mesageConcat = 'Os seguintes erros ocorreram: \r\n' ;
+                        $.each(data.message, function(key, val){
+                            mesageConcat += "- "+val+"\r\n";
+                        });
+                        alert(mesageConcat);
+                    }else{
+                        alert(data.message);
+                    }
+                }else{
+                    // Fecha se for um popup
+                    window.close();
+                }
+                layout.ajax.hideLoader();
+            },
+            "json"
+        );
+
+        return false;
+    });
 });
 
 
@@ -230,42 +261,14 @@ layout.form = {};
  * 
  */
 layout.form.insert = (function(e){
-    console.log( $(this) );
-    
-    if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
-
-    layout.ajax.showLoader();
-    $.post(
-        "?action=save-form&path=" + layout.uri("path"),
-        $(this).serialize(),
-        function(data){
-            if( data.error ){
-                if( typeof data.message !== "string"){
-                    mesageConcat = 'Os seguintes erros ocorreram: \r\n' ;
-                    $.each(data.message, function(key, val){
-                        mesageConcat += "- "+val+"\r\n";
-                    });
-                    alert(mesageConcat);
-                }else{
-                    alert(data.message);
-                }
-            }else{
-                // Fecha se for um popup
-                window.close();
-            }
-            layout.ajax.hideLoader();
-        },
-        "json"
-    );
-
-    return false;
+    form.save(e, $(this));
 });
 
 /**
  * 
  */
 layout.form.update = (function(e){
-    layout.form.insert(e);
+    form.save(e, $(this));
 });
 
 /**
