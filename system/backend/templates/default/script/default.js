@@ -230,6 +230,8 @@ layout.form = {};
  * 
  */
 layout.form.insert = (function(e){
+    console.log( $(this) );
+    
     if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
 
     layout.ajax.showLoader();
