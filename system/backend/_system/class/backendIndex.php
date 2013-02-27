@@ -321,8 +321,6 @@
                 // INSERE OU ATUALIZA DADOS 
                 // NO BANCO DE DADOS
                 case "save-form":{
-                    print_r($_POST); die;
-                    
                     if( preg_match("/update\:.*/i", $post['_M_ACTION']) ){
                         if( !User::check("backend/forms/save/update", "bool") )
                             User::check("backend/modules/save/update/{$path}", "json");
