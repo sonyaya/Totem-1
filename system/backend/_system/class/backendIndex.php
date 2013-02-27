@@ -267,7 +267,7 @@
                 // EM JANELA
                 case "view-insert-window-form":{
                     if( !User::check("backend/forms/view/insert", "bool") )
-                        User::check("backend/modules/save/insert/{$path}", "html");
+                        User::check("backend/modules/view/insert/{$path}", "html");
                     self::viewFormInsert("form-window.html", $path);
                     break;
                 }
@@ -277,7 +277,7 @@
                 // EM JANELA
                 case "view-update-window-form":{
                     if( !User::check("backend/forms/view/update", "bool") )
-                        User::check("backend/modules/save/update/{$path}", "html");
+                        User::check("backend/modules/view/update/{$path}", "html");
                     self::viewFormUpdate("form-window.html", $path, $get['id']);
                     break;
                 }
@@ -287,7 +287,7 @@
                 // EM JANELA
                 case "view-dummy-window-form":{
                     if( !User::check("backend/forms/view/dummy", "bool") )
-                        User::check("backend/modules/save/dummy/{$path}", "html");
+                        User::check("backend/modules/view/dummy/{$path}", "html");
                     self::viewFormUpdate("dummy-form-window.html", $path, "dummy");
                     break;
                 }
@@ -297,7 +297,7 @@
                 // EM JANELA
                 case "view-list-window-form":{
                     if( !User::check("backend/forms/view/list", "bool") )
-                        User::check("backend/modules/save/list/{$path}", "html");
+                        User::check("backend/modules/view/list/{$path}", "html");
                     self::viewFormList("list-window.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -321,6 +321,8 @@
                 // INSERE OU ATUALIZA DADOS 
                 // NO BANCO DE DADOS
                 case "save-form":{
+                    print_r($_POST); die;
+                    
                     if( preg_match("/update\:.*/i", $post['_M_ACTION']) ){
                         if( !User::check("backend/forms/save/update", "bool") )
                             User::check("backend/modules/save/update/{$path}", "json");
