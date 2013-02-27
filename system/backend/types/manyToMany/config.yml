@@ -6,8 +6,8 @@ interface:
     dummy  : insert.html 
   css:
     list   : []   
-    insert : []
-    update : []
+    insert : [ 'style.css' ]
+    update : [ 'style.css' ]
     dummy  : [ 'style.css' ]   
   javascript:
     head:
@@ -19,7 +19,7 @@ interface:
       list   : []
       insert : []
       update : []
-      update : [] 
+      dummy  : [] 
 default:
   parameter : 
       # tableA.id = tA_x_tB.tA_id
