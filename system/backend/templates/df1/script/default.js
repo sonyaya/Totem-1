@@ -271,13 +271,6 @@ layout.list.button.prevPage = (function(){
     }
 });
 
-/**
- *
- */
-layout.list.button.select = (function(){
-    alert("do something");
-    return false;
-});
 
 /**
  * 
@@ -309,12 +302,12 @@ layout.list.button.search = (function(){
 /**
  * 
  */
-layout.list.button.action = {};
+layout.list.action = {};
 
 /**
  * 
  */
-layout.list.button.action.edit = (function(){
+layout.list.action.edit = (function(){
     layout.popup("?action=view-update-window-form&path=" + list.form + "&id=" + $(this).attr('href'), "Atualizando - cod. "+$(this).attr("href"));
     return false;
 });
@@ -322,7 +315,7 @@ layout.list.button.action.edit = (function(){
 /**
  * 
  */
-layout.list.button.action.delete = (function(){
+layout.list.action.delete = (function(){
     msg  = "iiiii ATENÇÃO!\r\n\r\n"
     msg += "- Você esta prestes a deletar um registro do banco de dados, \r\n"
     msg += "esta ação não poderá ser desfeita, clique em OK se realmente \r\n"
@@ -341,6 +334,14 @@ layout.list.button.action.delete = (function(){
             "json"
         );
     }
+    return false;
+});
+
+/**
+ *
+ */
+layout.list.action.select = (function(){
+    alert("do something");
     return false;
 });
 
@@ -420,4 +421,30 @@ layout.form.update = (function(e){
 layout.form.runDummyForm = (function(e){
     alert("fazer este negocio abrir em uma novajanela.");
     layout.form.insert(e);
+});
+
+
+/**
+ * 
+ */
+layout.form.delete = (function(){
+    msg  = "ATENÇÃO!\r\n\r\n"
+    msg += "- Você esta prestes a deletar este formulário, esta ação não pode ser desfeita, clique \r\n";
+    msg += "em OK caso realmente deseja excluir estas informações ou clique em CANCELAR \r\n";
+    msg += "para impedir a exclusão destes dados.";
+    if( confirm(msg) ){
+        $.post(
+            "?action=delete-form&path="+ layout.uri("path") +"&id="+ layout.uri("id"),
+            function(data){
+                if(data.error){
+                    alert(data.message);
+                }else{
+                    window.opener.location.reload(true);
+                    window.close();
+                }
+            },
+            "json"
+        );
+    }
+    return false;
 });

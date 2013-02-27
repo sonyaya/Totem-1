@@ -8,5 +8,6 @@ $(function(){
 
     //
     $("body").on("submit", "form.insert", layout.form.insert);
-    $("body").on("submit", "form.update", layout.form.insert);
+    $("body").on("submit", "form.update", layout.form.update);
+    $("body").on("submit", "form.dummy" , layout.form.runDummyForm);
 });

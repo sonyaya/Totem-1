@@ -9,9 +9,9 @@ $(function(){
     $(".window.list").on("click", ".prev-page"     , layout.list.button.prevPage);
 
     // ACTIONS
-    $(".window.list").on("click", ".edit"  , layout.list.button.action.edit);
-    $(".window.list").on("click", ".delete", layout.list.button.action.delete);
-    $(".window.list").on("click", ".select", layout.list.button.select);
+    $(".window.list").on("click", ".edit"  , layout.list.action.edit);
+    $(".window.list").on("click", ".delete", layout.list.action.delete);
+    $(".window.list").on("click", ".select", layout.list.select);
 
     // PESQUISA / SEARCH
     $("#bt-search").click(function(){ $("div.for-tab-search form").submit(); });
