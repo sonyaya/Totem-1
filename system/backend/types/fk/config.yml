@@ -6,8 +6,8 @@ interface:
     dummy  : insert.html 
   css:
     list   : [] 
-    insert : []
-    update : []
+    insert : [ 'style.css' ] 
+    update : [ 'style.css' ] 
     dummy  : [ 'style.css' ] 
   javascript:
     head:
