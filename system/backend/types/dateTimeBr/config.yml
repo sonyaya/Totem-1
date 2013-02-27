@@ -12,9 +12,9 @@ interface:
   javascript:
     head:
       list   : [] 
-      insert : [' javascript.js' ] 
-      update : [' javascript.js' ]  
-      dummy  : [' javascript.js' ] 
+      insert : [ 'javascript.js' ] 
+      update : [ 'javascript.js' ]  
+      dummy  : [ 'javascript.js' ] 
     body:
       list   : [] 
       insert : []
