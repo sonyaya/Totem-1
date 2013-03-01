@@ -80,6 +80,7 @@
             while(count($this->DOM->findEComma("m.include")) > 0){ 
                 $TAGS = $this->DOM->findEComma("m.include");
                 foreach($TAGS as $TAG){
+                    $file_path = $TAG['value'];
                     // variaveis
                     preg_match_all("/#(.*?)#/i", $TAG['value'], $vars, PREG_SET_ORDER);
                     foreach ($vars as $var) {
