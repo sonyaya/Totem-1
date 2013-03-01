@@ -445,17 +445,15 @@ layout.form.runDummyForm = (function(e){
                     alert(data.message);
                 }
             }else{
-//                var blob = new Blob([ data ]); // cria blob do retorno
-//                nwin = window.open( URL.createObjectURL(blob)); // cria nova janela 
-
-                Win = window.open('', 'newwin');
-                Win.document.open();
-                Win.document.write(data);
-                Win.document.close();
+                var newtab = window.open();
+                newtab.location = 'data:'+data.mime+';base64,'+data.file;
+                newtab.onload = function(){
+                    newtab.document.title = data.title;
+                }
             }
             layout.ajax.hideLoader();
         },
-        "html"
+        "json"
     );
 
     return false;
