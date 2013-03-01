@@ -68,7 +68,16 @@
             
             preg_match_all($regex, $imports, $matches, PREG_SET_ORDER);
             foreach($matches as $match){
-                $this->mVARS[$match['var']] = json_decode( @file_get_contents($match['link']), true);
+                $file_path = $match['link'];
+                
+                // variaveis
+                preg_match_all("/#(.*?)#/i", $match['link'], $vars, PREG_SET_ORDER);
+                foreach ($vars as $var) {
+                    $file_path = str_replace($var[0], $this->getMVar($var[1]), $match['link']);
+                }
+                
+                // import
+                $this->mVARS[$match['var']] = json_decode( file_get_contents($file_path), true);
             }
         }
 
@@ -81,6 +90,7 @@
                 $TAGS = $this->DOM->findEComma("m.include");
                 foreach($TAGS as $TAG){
                     $file_path = $TAG['value'];
+                    
                     // variaveis
                     preg_match_all("/#(.*?)#/i", $TAG['value'], $vars, PREG_SET_ORDER);
                     foreach ($vars as $var) {
