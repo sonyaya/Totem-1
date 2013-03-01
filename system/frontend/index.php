@@ -16,7 +16,6 @@
        )
     );
     
-    
     # LAYOUT
     if(  isset($_GET['_m_html']) &&  !empty($_GET['_m_html']) ){
         if( file_exists($file = "{$sys['config']['html-folder']}/{$_GET['_m_html']}") ){
