@@ -79,7 +79,7 @@
         $_M_CONFIG = (object)parse_ini_file("../config.ini.php", true);
 
         // CONFIGURAÇÕES PARA ESTA APLICAÇÃO
-        $_M_THIS_CONFIG = $_M_CONFIG->frontend;
+        $_M_THIS_CONFIG = $_M_CONFIG->backend;
     }else{
         die("Configuration file ../config.ini.php not found!");
     }
