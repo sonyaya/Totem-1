@@ -11,38 +11,34 @@
   username           = "example@gmail.com"
   password           = "example"
   port               = 465
-  SMTPSecure         = "ssl";
+  SMTPSecure         = "ssl"
   default-from-name  = "noreply"
   default-from-email = "noreply@noreply.com"
 
-[mysql] 
+[mysql]
   host     = "127.0.0.1"
   port     = "3306"
   username = "root"
   password = "thepassword"
   database = "example"
-        
+
 [users]
   table-users  = "_m_user"
   table-groups = "_m_group"
 
 [frontend]
-  path     = "frontend/"
-  template = "templates/default/"
-        
-[backend]        
-  path          = "backend/"
-  template      = "templates/default/"
+  bridge-path = "../bridge/json"
+  bridge-http = "http://127.0.0.1/totem/system/bridge"
+
+[backend]
+  template      = "templates/df1/"
   max-page-list = 10
   start-place   = "?action=view-dashboard&path=user/dashboards/dashboard"
   bootstrap     = '
     "userBootstrap" : "modules/user/extra/bootstrap.php"
   '
-        
+
 [console]
-  site-url = "http://127.0.0.1/!/system/"
-  path     = "console/"
   template = "templates/default/"
-    
+
 [bridge]
-  path = "bridge/"
