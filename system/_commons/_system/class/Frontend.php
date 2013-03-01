@@ -215,7 +215,7 @@
                     // busca a tags
                     $start = @$TAG['attr']['start'];
                     $stop  = @$TAG['attr']['stop' ];
-                    $aKEY  = @$TAG['attr']['alias'];
+                    $aKEY  = @$TAG['attr']['key'];
                     
                     // busca mvar caso start e stop não sejam valores numéricos
                     $start = (!is_numeric($start)) ? $this->getMVar("int:$start") : $start;
