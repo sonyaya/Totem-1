@@ -8,7 +8,7 @@
           <m.if cond="&m.var:bool:parameter.nullable;">
             <option val="--">--</option>
           </m.if>  
-          <m.repeat start="toLayout.year.start" stop="toLayout.year.stop" alias="YEAR">
+          <m.repeat start="toLayout.year.start" stop="toLayout.year.stop" key="YEAR">
             <option>#YEAR#</option>
           </m.repeat>
       </select>
@@ -20,7 +20,7 @@
         <m.if cond="&m.var:bool:parameter.nullable;">
           <option val="--">--</option>
         </m.if> 
-        <m.repeat start="01" stop="12" alias="MONTH">
+        <m.repeat start="01" stop="12" key="MONTH">
           <option>#MONTH#</option>
         </m.repeat>
       </select>
@@ -39,7 +39,7 @@
         <m.if cond="&m.var:bool:parameter.nullable;">
           <option val="--">--</option>
         </m.if>
-        <m.repeat start="01" stop="24" alias="HOUR">
+        <m.repeat start="01" stop="24" key="HOUR">
           <option>#HOUR#</option>
         </m.repeat>
       </select>
@@ -51,7 +51,7 @@
         <m.if cond="&m.var:bool:parameter.nullable;">
           <option val="--">--</option>
         </m.if>
-        <m.repeat start="00" stop="59" alias="MINUTE">
+        <m.repeat start="00" stop="59" key="MINUTE">
           <option>#MINUTE#</option>
         </m.repeat>
       </select>
@@ -64,7 +64,7 @@
         <m.if cond="&m.var:bool:parameter.nullable;">
           <option val="--">--</option>
         </m.if>
-        <m.repeat start="00" stop="59" alias="SENCONDS">
+        <m.repeat start="00" stop="59" key="SENCONDS">
           <option>#SENCONDS#</option>
         </m.repeat>
       </select>
