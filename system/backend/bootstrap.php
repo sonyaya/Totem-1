@@ -10,8 +10,6 @@
 
     # -- VERIFICAÇÃO DE DEPENDENCIAS PHP ---------------------------------------
 
-    $_SESSION['php_check'] = false;
-
     if( !isset($_SESSION['php_check']) || !$_SESSION['php_check'] ){
         // Extensões Carregadas
         $ext = get_loaded_extensions();
@@ -25,13 +23,12 @@
         );
 
         // Versão minima do php
-        $PHPVersion    = (int)str_replace(".", "", phpversion());
-        $minPHPVersion = (int)str_replace(".", "", "5.3.0");
+        $minPHPVersion = "5.3.0";
 
         // Validação de requisitos minimos
         if( 
             $extNeeded == array_intersect($extNeeded , $ext) &&
-            $PHPVersion >= $minPHPVersion
+            version_compare(phpversion(), $minPHPVersion, ">=") 
         ){
             $_SESSION['php_check'] = true;
         }else{
