@@ -42,9 +42,9 @@
     # -- SAVE PHP ERROS IN A FILE ----------------------------------------------
 
     error_reporting(E_ALL);
-    //ini_set ("display_errors" , "off");
-    //ini_set ("log_errors"     , "On");
-    //ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
+    ini_set ("display_errors" , "off");
+    ini_set ("log_errors"     , "On");
+    ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
 
     # -- AUTOLOAD --------------------------------------------------------------
 
@@ -82,7 +82,7 @@
         $_M_CONFIG = (object)parse_ini_file("../config.ini.php", true);
 
         // CONFIGURAÇÕES PARA ESTA APLICAÇÃO
-        $_M_THIS_CONFIG = $_M_CONFIG->backend;
+        $_M_THIS_CONFIG = $_M_CONFIG->frontend;
     }else{
         die("Configuration file ../config.ini.php not found!");
     }
