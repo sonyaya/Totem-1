@@ -27,8 +27,9 @@
   table-groups = "_m_group"
 
 [frontend]
-  bridge-path = "../bridge/json"
-  bridge-http = "http://127.0.0.1/totem/system/bridge"
+  html-folder = "site/html/"
+  html-start  = "index.html"
+  bridge-path = "http://127.0.0.1/totem/system/bridge"
 
 [backend]
   template      = "templates/df1/"
