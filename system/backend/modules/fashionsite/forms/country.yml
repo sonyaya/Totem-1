@@ -2,7 +2,7 @@
 
 header:
   title: 'País'
-  table: ddr_cowntry
+  table: fashionsite_country
   p-key: id
   
 # -- FORMS ---------------------------------------------------------------------

@@ -1,8 +1,11 @@
 - label: "Dashboard"
-  link: "?action=view-dashboard&path=fashionSite/dashboards/dashboard"
+  link: "?action=view-dashboard&path=fashionsite/dashboards/dashboard"
  
 - label: "Textos"
   link: "?action=view-inTabs-form&path=fashionsite/forms/text"
+  
+- label: "Banners"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/banner"
  
 - label: "Clippings"
   link: "?action=view-inTabs-form&path=fashionsite/forms/clipping"

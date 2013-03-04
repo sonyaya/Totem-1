@@ -1,8 +1,8 @@
 # -- HEADER --------------------------------------------------------------------
 
 header:
-  title: 'Estado'
-  table: ddr_state
+  title: 'País'
+  table: ddr_country
   p-key: id
   
 # -- FORMS ---------------------------------------------------------------------
@@ -11,7 +11,7 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagem de Estados'
+    title: 'Listagem de Paises'
     rows-per-page: 15
     input:
       - type: number
@@ -25,7 +25,7 @@ forms:
   # -- INSERT ------------------------------------------------------------------
   
   insert:
-    title: 'Inserindo Estado'
+    title: 'Inserindo Paises'
     input:
       name:
         type: meioMask
@@ -33,16 +33,13 @@ forms:
         column: name
         parameter : 
           size : 45
-            
-      born_city:
-        type: fk
-        label: Cidade de Nascimento
-        column: country_id
+          
+      isoCode:
+        type: meioMask
+        label: "ISO Code"
+        column: "iso-code"
         parameter : 
-          table : ddr_country
-          column : id
-          label : name
-          insert-form : "ddr/forms/country" 
+          size : 3
             
   # -- UPDATE ------------------------------------------------------------------
   

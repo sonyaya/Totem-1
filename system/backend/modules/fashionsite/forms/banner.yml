@@ -1,8 +1,6 @@
-# -- HEADER --------------------------------------------------------------------
-
 header:
-  title: 'País'
-  table: fashionsite_cowntry
+  title: 'Banner'
+  table: fashionsite_banner
   p-key: id
   
 # -- FORMS ---------------------------------------------------------------------
@@ -11,7 +9,7 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagem de Paises'
+    title: 'Listagem de Banners'
     rows-per-page: 15
     input:
       - type: number
@@ -19,32 +17,37 @@ forms:
         column: id
         
       - type: example
-        label: Nome
-        column: name
+        label: Link
+        column: link
 
   # -- INSERT ------------------------------------------------------------------
   
   insert:
-    title: 'Inserindo Paises'
+    title: 'Inserindo Link'
     input:
       name:
         type: meioMask
-        label: Name
-        column: name
+        label: Link
+        column: link
         parameter : 
           size : 45
-          
-      isoCode:
-        type: meioMask
-        label: "ISO Code"
-        column: "iso-code"
-        parameter : 
-          size : 3
+      
+      ativo:
+        type: combobox
+        label: Ativo?
+        column: active
+
+      images:
+        type: imagesUpload
+        label: Banner (o primeiro)
+        column: 'images'
+        parameter :
+          folder : "fashionsite/banner"
             
   # -- UPDATE ------------------------------------------------------------------
   
   update:
-    title: 'Atualizando Cidade'
+    title: 'Atualizando Banner'
     merge-form: [ update, insert ]
     input: []
           

@@ -37,12 +37,12 @@ forms:
       born_city:
         type: fk
         label: País
-        column: cowntry_id
+        column: country_id
         parameter : 
-          table : fashionsite_cowntry
+          table : fashionsite_country
           column : id
           label : name
-          insert-form : "fashionsite/forms/cowntry" 
+          insert-form : "fashionsite/forms/country" 
             
   # -- UPDATE ------------------------------------------------------------------
   
