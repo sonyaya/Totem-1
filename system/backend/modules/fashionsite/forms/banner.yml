@@ -25,11 +25,25 @@ forms:
   insert:
     title: 'Inserindo Link'
     input:
-      name:
+      title:
+        type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          nullable: true
+          size : 45
+          
+      text:
+        type: textarea
+        label: Texto
+        column: text
+          
+      link:
         type: meioMask
         label: Link
         column: link
         parameter : 
+          nullable: true
           size : 45
       
       ativo:

@@ -31,6 +31,6 @@ default:
 
   # parametros padrões
   parameter : 
-    sim : 0
+    sim : 1
     não : 0
     

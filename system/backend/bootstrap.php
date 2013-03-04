@@ -39,9 +39,9 @@
     # -- SAVE PHP ERROS IN A FILE ----------------------------------------------
 
     error_reporting(E_ALL);
-    ini_set ("display_errors" , "off");
-    ini_set ("log_errors"     , "On");
-    ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
+//    ini_set ("display_errors" , "off");
+//    ini_set ("log_errors"     , "On");
+//    ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
 
     # -- AUTOLOAD --------------------------------------------------------------
 
