@@ -1,0 +1,36 @@
+# CONFIGIRA INTERFACE GRÁFICA
+# E INTERFACE COM BANCO DE DADOS 
+interface:
+  html:
+   #list   : list.html   
+    insert : insertUpdate.html
+    update : insertUpdate.html
+    dummy  : insertUpdate.html
+
+  css:
+    list   : [] 
+    insert : [] 
+    update : [] 
+    dummy  : [] 
+    
+  javascript:
+    head:
+      list   : []
+      insert : [] 
+      update : [] 
+      dummy  : [] 
+
+    body:
+      list   : [] 
+      insert : [] 
+      update : [ '.javascript-loadData.js' ] 
+      dummy  : [] 
+     
+# CONFIGURA PADRÕES DO TYPE
+default:
+
+  # parametros padrões
+  parameter : 
+    sim : 0
+    não : 0
+    
