@@ -1,8 +1,8 @@
 interface:
   html:
     #list   : []
-    insert : 
-    update : 
+    insert : insertUpdate.html 
+    update : insertUpdate.html 
     dummy  : insertUpdate.html 
   css:
     list   : [] 
