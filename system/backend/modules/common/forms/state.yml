@@ -39,7 +39,7 @@ forms:
         label: País
         column: country_id
         parameter : 
-          table : fashionsite_country
+          table : common_country
           column : id
           label : name
           insert-form : "common/forms/country" 

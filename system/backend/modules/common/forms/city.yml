@@ -39,7 +39,7 @@ forms:
         label: Estado
         column: state_id
         parameter : 
-          table : fashionsite_state
+          table : common_state
           column : id
           label : name
           insert-form : "common/forms/state" 

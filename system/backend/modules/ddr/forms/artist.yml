@@ -76,10 +76,10 @@ forms:
         label: Cidade de Nascimento
         column: born_city
         parameter : 
-          table : ddr_city
+          table : common_city
           column : id
           label : name
-          insert-form : "ddr/forms/city" 
+          insert-form : "common/forms/city" 
           
       type:
         type: manyToMany

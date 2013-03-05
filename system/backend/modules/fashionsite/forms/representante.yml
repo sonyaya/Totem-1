@@ -51,10 +51,10 @@ forms:
         label: Cidade
         column: city_id
         parameter : 
-          table : fashionsite_city
+          table : common_city
           column : id
           label : name
-          insert-form : "fashionsite/forms/city" 
+          insert-form : "common/forms/city" 
           
       - type: textarea
         label: Endereço

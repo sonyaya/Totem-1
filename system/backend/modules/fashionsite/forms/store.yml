@@ -58,7 +58,7 @@ forms:
           table : fashionsite_city
           column : id
           label : name
-          insert-form : "fashionsite/forms/city" 
+          insert-form : "common/forms/city" 
           
       - type: textarea
         label: Endereço
