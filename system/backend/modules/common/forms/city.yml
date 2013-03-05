@@ -1,0 +1,58 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Cidade'
+  table: common_city
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Cidades'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Nome
+        column: name
+
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Cidade'
+    input:
+      name:
+        type: meioMask
+        label: Name
+        column: name
+        parameter : 
+          size : 45
+            
+      born_city:
+        type: fk
+        label: Estado
+        column: state_id
+        parameter : 
+          table : fashionsite_state
+          column : id
+          label : name
+          insert-form : "common/forms/state" 
+            
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Cidade'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []
