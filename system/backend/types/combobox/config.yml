@@ -23,7 +23,7 @@ interface:
     body:
       list   : [] 
       insert : [] 
-      update : [ '.javascript-loadData.js' ] 
+      update : [ 'javascript-loadData.js' ] 
       dummy  : [] 
      
 # CONFIGURA PADRÕES DO TYPE
