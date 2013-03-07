@@ -1,4 +1,36 @@
-    div.dash div.box{
+div.dash div.box{
+    float: left;
+    width: 49%;
+    margin-right: 1%; 
+    }
+
+#printButton,
+#exportButton{
+    alpha: 0 !important
+    }
+    
+/* -- -- */
+@media screen and (max-width: 900px){
+        div.dash div.box{
+            float: none;
+            width: 100%;
+            margin-right: 0; 
+            }
+    }
+
+/* -- -- */
+@media screen and (min-width: 1500px){
+        div.dash div.box{
+            float: left;
+            width: calc(33.333% - 10px);
+            margin-right: 10px; 
+            }
+    }
+    
+/* ---------------------------------------------------------------------------- *\
+
+
+div.dash div.box{
         float: left;
         width: 49%;
         margin-right: 1%; 
@@ -41,7 +73,6 @@
         }
     
 
-        
 /* --- TABLE ------------------------------------------------------------------ */
 
 
@@ -146,3 +177,49 @@
         background: url("img/mail.svg") no-repeat center center;
         background-size: contain;
         }
+
+    
+/* --- INFO-BOX  -------------------------------------------------------------- */
+
+    
+    div.info-box{
+        margin-bottom: 1%; 
+        box-shadow: 0 0 0 #000;
+        text-shadow: 1px 1px 1px #000;
+        overflow: hidden;
+        }
+    
+    div.info-box div.main{
+        background: rgba(0,0,0,0.8);
+        font-size: 1.8em;
+        color: #FFF;
+        width: 96%;
+        padding: 2%;
+        font-weight: 700;
+        text-align: center;
+        box-shadow: 0 0 0 #000;
+        float: left
+        }
+        
+    div.info-box div.label{
+        background: rgba(0,0,0,0.7);
+        font-size: 0.8em;
+        color: #FFF;
+        width: 98%;
+        padding: 1%;
+        text-align: center;
+        box-shadow: 0 0 0 #000;
+        float: left
+        }
+        
+    div.info-box.color1 div.main { background: rgba(187, 187, 136 ,0.8 ) }
+    div.info-box.color1 div.label{ background: rgba(187, 187, 136 ,0.75) }
+    
+    div.info-box.color2 div.main { background: rgba(238, 170, 136, 0.8 ) }
+    div.info-box.color2 div.label{ background: rgba(238, 170, 136, 0.75) }
+    
+    div.info-box.color3 div.main { background: rgba(238, 221, 153, 0.8 ) }
+    div.info-box.color3 div.label{ background: rgba(238, 221, 153, 0.75) }
+    
+    div.info-box.color4 div.main { background: rgba(164, 203, 172, 0.8 ) }
+    div.info-box.color4 div.label{ background: rgba(164, 203, 172, 0.75) }
