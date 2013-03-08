@@ -213,13 +213,13 @@ div.dash div.box{
         }
         
     div.info-box.color1 div.main { background: rgba(187, 187, 136 ,0.8 ) }
-    div.info-box.color1 div.label{ background: rgba(187, 187, 136 ,0.75) }
+    div.info-box.color1 div.label{ background: rgba(187, 187, 136 ,0.65) }
     
     div.info-box.color2 div.main { background: rgba(238, 170, 136, 0.8 ) }
-    div.info-box.color2 div.label{ background: rgba(238, 170, 136, 0.75) }
+    div.info-box.color2 div.label{ background: rgba(238, 170, 136, 0.65) }
     
     div.info-box.color3 div.main { background: rgba(238, 221, 153, 0.8 ) }
-    div.info-box.color3 div.label{ background: rgba(238, 221, 153, 0.75) }
+    div.info-box.color3 div.label{ background: rgba(238, 221, 153, 0.65) }
     
     div.info-box.color4 div.main { background: rgba(164, 203, 172, 0.8 ) }
-    div.info-box.color4 div.label{ background: rgba(164, 203, 172, 0.75) }
+    div.info-box.color4 div.label{ background: rgba(164, 203, 172, 0.65) }
