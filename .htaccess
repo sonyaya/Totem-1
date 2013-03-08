@@ -8,6 +8,10 @@
     RewriteRule ^admin$   system/backend/index.php [QSA,L]
     RewriteRule ^backend$ system/backend/index.php [QSA,L]
 
+# BRIDGE
+
+    RewriteRule ^bridge/(.*?)$ system/bridge/index.php?_m_action=$1 [QSA,L]
+
 # FRONT-END
 
     RewriteRule ^$ system/frontend/index.php [QSA,L]
