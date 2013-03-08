@@ -403,6 +403,7 @@
         
         /**
          * 
+         * @global \backend\type $_M_CONFIG
          * @global \backend\type $_M_MENU_PARTS
          * @global \backend\type $_M_MENU_MODULE
          * @param type $array
@@ -411,6 +412,8 @@
          * @return string
          */
         static private function createMenuRecursive($array, $deep=0, $deepClass=1){
+            global $_M_CONFIG;
+
             $indent = 4;
             $pad0 = str_pad("", $deep);
             $pad1 = str_pad("", $deep+($indent) );
@@ -464,7 +467,7 @@
                         $cssClass = trim(preg_replace("/[ ]+/", " ", "$cssClassByModule $cssClassByAction $cssClassByForm $cssClass"));
 
                         // 
-                        $ret .= $pad2 . "<a class='$cssClass' href='{$val['link']}'>{$val['label']}</a>\r\n";
+                        $ret .= $pad2 . "<a class='$cssClass' href='{$_M_CONFIG->system['root-path']}backend{$val['link']}'>{$val['label']}</a>\r\n";
                         $ret .= $pad1 . "</li>\r\n";
                     }
                   
@@ -490,7 +493,7 @@
                             $cssClass = ( preg_replace("/\/.*$/", "", $cssClass) == $val['load-from-module'] )? "active" : "deactive";
 
                             // cria item do menu de modulo
-                            $_M_MENU_MODULE .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
+                            $_M_MENU_MODULE .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$_M_CONFIG->system['root-path']}backend{$val['module-start-url']}'>{$val['label']}</a></li>";
 
                             // cria o itens filhos a partir do menu de formulário no main-menu
                             $smenu = Yaml::parse( file_get_contents("modules/{$val['load-from-module']}/menu.yml") );

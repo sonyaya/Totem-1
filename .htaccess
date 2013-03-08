@@ -1,12 +1,20 @@
 # REWRITE
-RewriteEngine On
-RewriteBase /totem/
+
+    RewriteEngine On
+    # RewriteBase /
 
 # BACK-END
-RewriteRule ^admin$ system/backend/index.php [QSA,L]
+
+    RewriteRule ^admin$   system/backend/index.php [QSA,L]
+    RewriteRule ^backend$ system/backend/index.php [QSA,L]
 
 # FRONT-END
-RewriteRule ^$ system/frontend/index.php [QSA,L]
-RewriteCond %{REQUEST_FILENAME} !-f
-RewriteCond %{REQUEST_FILENAME} !-d
-RewriteRule ^(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
+
+    RewriteRule ^$ system/frontend/index.php [QSA,L]
+    RewriteRule ^frontend/(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
+
+# FRONT-END (ações na url raiz)
+
+    RewriteCond %{REQUEST_FILENAME} !-f
+    RewriteCond %{REQUEST_FILENAME} !-d
+    RewriteRule ^(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
