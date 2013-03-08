@@ -1,6 +1,7 @@
 ;<?php exit(); ?>
 
 [system]
+  root-path   = "totem/"
   salt        = "your salt phrase, change this phrase only once before installing the system, and never touch it again!"
   pepper      = "your pepper phrase, change this phrase only once before installing the system, and never touch it again!"
   upload-path = "../uploads"
@@ -11,11 +12,11 @@
   username           = "example@gmail.com"
   password           = "example"
   port               = 465
-  SMTPSecure         = "ssl"
+  SMTPSecure         = "ssl";
   default-from-name  = "noreply"
   default-from-email = "noreply@noreply.com"
 
-[mysql]
+[mysql] 
   host     = "127.0.0.1"
   port     = "3306"
   username = "root"
@@ -27,11 +28,13 @@
   table-groups = "_m_group"
 
 [frontend]
-  html-folder = "site/html/"
+  root-path     = "system/front/"
+  bridge-path = "http://127.0.0.1/totem/system/bridge/"
+  html-folder = "site/"
   html-start  = "index.html"
-  bridge-path = "http://127.0.0.1/totem/system/bridge"
 
 [backend]
+  root-path     = "system/backend/"
   template      = "templates/df1/"
   max-page-list = 10
   start-place   = "?action=view-dashboard&path=user/dashboards/dashboard"

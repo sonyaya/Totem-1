@@ -1,0 +1,12 @@
+# REWRITE
+RewriteEngine On
+RewriteBase /totem/
+
+# BACK-END
+RewriteRule ^admin$ system/backend/index.php [QSA,L]
+
+# FRONT-END
+RewriteRule ^$ system/frontend/index.php [QSA,L]
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
