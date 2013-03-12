@@ -19,4 +19,4 @@
     # RUN
     require_once("modules/{$_GET['_m_action']}.php");
     $rest = new rest();
-    echo json_encode($rest->get());
+    echo json_encode( $rest->$_SERVER['REQUEST_METHOD']() );
