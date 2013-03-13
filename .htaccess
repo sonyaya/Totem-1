@@ -11,6 +11,7 @@
 # BRIDGE
 
     RewriteRule ^bridge/(.*?)$ system/bridge/index.php?_m_action=$1 [QSA,L]
+    RewriteRule ^bridge/(.*?)/(.*?)$ system/bridge/index.php?_m_action=$1&id=$2 [QSA,L]
 
 # FRONT-END
 
