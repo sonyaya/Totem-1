@@ -35,7 +35,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -46,7 +46,7 @@
 
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
-            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
                 require_once $filePath;
                 $formEvents = new \FormEvents();
             }else{
@@ -280,7 +280,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -291,7 +291,7 @@
 
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
-            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
                 require_once $filePath;
                 $formEvents = new \FormEvents();
             }else{
@@ -711,7 +711,7 @@
 
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -722,7 +722,7 @@
             
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
-            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
                 require_once $filePath;
                 $formEvents = new \FormEvents();
             }else{
@@ -761,7 +761,7 @@
                    * DUMMY FORM 
                    */
                   case $action == "dummy-form":
-                      $file = "modules/". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
+                      $file = "". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
                       if(file_exists($file)){
                           return include $file;
                       }else{
@@ -962,7 +962,7 @@
             
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
-            if( file_exists($filePath = "modules/$formFilename.yml") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
                 $formArray = Yaml::parse(file_get_contents($filePath));
             }else{
@@ -973,7 +973,7 @@
             
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
-            if( file_exists($filePath = "modules/$formFilename.php") && !empty($formFilename) ){
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
                 require_once $filePath;
                 $formEvents = new \FormEvents();
             }else{

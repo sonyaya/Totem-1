@@ -189,6 +189,9 @@
             //
             global $_M_THIS_CONFIG;
             
+            //
+            $path = "modules/$path";
+            
             // TRATA O GET
             $get = 
                 array_replace(
