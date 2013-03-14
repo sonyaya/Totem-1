@@ -1,0 +1,26 @@
+interface:
+  html:
+    insert : updateInsert.html
+    update : updateInsert.html
+    dummy  : updateInsert.html
+  css:
+    list   : []
+    insert : []
+    update : []
+    dummy  : [] 
+  javascript:
+    head:
+      list   : [] 
+      insert : [ 'javascript.js' ] 
+      update : [ 'javascript.js' ] 
+      dummy  : [ 'javascript.js' ] 
+    body:
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
+default:
+  parameter : 
+      min  : 0
+      max  : 9999
+      step : 1

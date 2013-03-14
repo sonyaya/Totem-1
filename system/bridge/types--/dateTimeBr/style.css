@@ -1,0 +1,13 @@
+.dateTimeBr{
+    }
+
+.dateTimeBr .box label{
+    display: block;
+    font-size: 0.8em;
+    }
+
+.dateTimeBr .box{
+    width: 16.66% !important;
+    display: inline-block;
+    float: left;
+    }

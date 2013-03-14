@@ -1,0 +1,150 @@
+/* */
+.imagesUpload .inner-holder{
+    width: 100%;
+    }
+
+/*  */
+.imagesUpload .inner-holder .window{
+    padding: 0;
+    border: 1px solid #D0D0D0;
+    border-top: 0 none;
+    margin: 0;
+    }
+
+/*  */
+.imagesUpload .menu ul{
+    border: 1px solid #D0D0D0;
+    }
+
+/* */
+.imagesUpload .window{
+    }
+    
+.imagesUpload .window.files{
+    display: block;
+    }
+
+
+.imagesUpload .window .input-holder{
+    }
+
+.imagesUpload .window .input-holder input,
+.imagesUpload .window .input-holder select,
+.imagesUpload .window .input-holder textarea{
+    width: 98%;
+    }
+
+/* LISTA DE ARQUIVOS */
+.imagesUpload .window.files ul{
+    display: block;
+    list-style: none;
+    padding: 0;
+    height: 300px;
+    overflow: auto;    
+    float: left;
+    }
+
+.imagesUpload .window.files ul li{
+    list-style: none;
+    float: left;
+    width: 140px;
+    height: 105px;
+    margin: 10px;
+    cursor: move;
+    border: 1px solid #D0D0D0;
+    overflow: hidden;
+    position: relative;
+    }
+
+.imagesUpload .window.files ul li.selected{
+    border: 1px solid #009900;
+    background: rgba(0, 155, 0, 0.2);
+    }
+
+.imagesUpload .window.files ul li.edit{
+    border: 1px solid #009900;
+    background: rgba(0, 155, 0, 0.5);
+    }
+
+.imagesUpload .window.files ul li img{
+    margin: 5px;
+    }
+
+.imagesUpload .window.files ul li input{
+    margin: 5px;
+    position: absolute;
+    /*margin-top: -15px*/
+    }
+
+.imagesUpload .window.files ul li.sortable-placeholder{
+    border: 1px dashed #CCC;
+    background: none;
+    }
+
+/* */
+.imagesUpload .edit-image-window{
+    float: right;
+    border: 1px solid #D0D0D0;
+    border-right: 0 none;
+    width: 48.5%;
+    margin-right: 1%;
+    margin-bottom: 1em;
+    height: 300px;
+    display: none;
+    overflow: auto;
+    }
+
+.imagesUpload .edit-image-window .imageDataForm{
+    padding: 1%;
+    position: relative;
+    }
+
+/* */
+.imagesUpload  nav.small-tabs{
+    border-bottom: 1px solid #A2AFAF;
+    padding-left: 1.5%;
+}
+
+.imagesUpload  nav.small-tabs ul,
+.imagesUpload  nav.small-tabs ul li{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border: 0 none;
+    }    
+
+.imagesUpload  nav.small-tabs ul li{
+    float: left;
+    margin: 1% 0 0 0;
+    padding: 0.5%;
+    border: 1px solid #A2AFAF;
+    border-bottom: 0 none;
+    border-left: 0 none;
+    margin-bottom: -1px;
+    background: #F9F9F9;
+    }
+
+.imagesUpload  nav.small-tabs ul li:first-child{
+    border-left: 1px solid #A2AFAF;
+    }
+
+.imagesUpload  nav.small-tabs ul li.active{
+    border-bottom: 1px #F9F9F9 solid;
+    }
+
+.imagesUpload .bt{
+    width: 20px;
+    height: 20px;
+    background: black;
+    overflow: hidden;    
+    float: right;
+    margin-left: 2px;
+    }
+
+.imagesUpload .bt_imageDataForm_close{
+    background: red;
+    }
+
+.imagesUpload .bt_imageDataForm_open{
+    background: green;
+    }

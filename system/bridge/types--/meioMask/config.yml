@@ -1,0 +1,28 @@
+interface:
+  html:
+    #list   : []
+    insert : updateInsert.html 
+    update : updateInsert.html 
+    dummy  : updateInsert.html 
+  css:
+    list   : []
+    insert : []
+    update : []
+    dummy  : [] 
+  javascript:
+    head:
+      list   : [] 
+      insert : [ 'jquery.meio.mask.min.js' , 'javascript.js' ]
+      update : [ 'jquery.meio.mask.min.js' , 'javascript.js' ]
+      dummy  : [ 'jquery.meio.mask.min.js' , 'javascript.js' ] 
+    body:
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
+default:
+  parameter : 
+      placeholder : "..."
+      size        : 255
+      nullable    : false
+      mask        : ''

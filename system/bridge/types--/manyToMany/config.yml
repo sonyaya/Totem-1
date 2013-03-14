@@ -1,0 +1,37 @@
+interface:
+  html:
+   #list   : list.html   
+    insert : insert.html 
+    update : update.html 
+    dummy  : insert.html 
+  css:
+    list   : []   
+    insert : [ 'style.css' ]
+    update : [ 'style.css' ]
+    dummy  : [ 'style.css' ]   
+  javascript:
+    head:
+      list   : [] 
+      insert : [ 'javascript.js' ] 
+      update : [ 'javascript.js' ] 
+      dummy  : [ 'javascript.js' ] 
+    body:
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
+default:
+  parameter : 
+      # tableA.id = tA_x_tB.tA_id
+      # tableB.id = tA_x_tB.tB_id
+      nullable : false
+
+      middle-table : tA_x_tB
+      middle-fk    : tA_id
+      middle-pk    : tB_id
+
+      right-table  : tB
+      right-fk     : id
+      right-label  : nome
+      
+      insert-form  : "" 

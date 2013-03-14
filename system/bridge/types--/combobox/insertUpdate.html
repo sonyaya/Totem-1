@@ -1,0 +1,8 @@
+<div class="input-holder">
+  <label>&m.var:label;</label>
+  <select name="&m.var:name;" class="&m.var:type;" id="&m.var:id;">
+    <m.foreach var="parameter" key="KEY">
+      <option value="&m.var:parameter.#KEY#;">#KEY#</option>
+    </m.foreach>
+  </select>
+</div>

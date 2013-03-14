@@ -21,6 +21,18 @@ forms:
       - type: example
         label: Nome
         column: name
+        
+      - type: example
+        label: ISO Alfa 2
+        column: iso-code-alfa2
+        
+      - type: example
+        label: ISO Alfa 3
+        column: iso-code-alfa3
+        
+      - type: example
+        label: ISO Num.
+        column: iso-code-num
 
   # -- INSERT ------------------------------------------------------------------
   
@@ -36,8 +48,22 @@ forms:
           
       isoCode:
         type: meioMask
-        label: "ISO Code"
-        column: "iso-code"
+        label: "ISO Code (alfa2)"
+        column: "iso-code-alfa2"
+        parameter : 
+          size : 2
+          
+      isoCode:
+        type: meioMask
+        label: "ISO Code (alfa3)"
+        column: "iso-code-alfa3"
+        parameter : 
+          size : 3
+          
+      isoCode:
+        type: meioMask
+        label: "ISO Code (numeric)"
+        column: "iso-code-num"
         parameter : 
           size : 3
             

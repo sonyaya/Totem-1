@@ -1,0 +1,28 @@
+interface:
+  html:
+    #list   : []
+    insert : updateInsert.html 
+    update : updateInsert.html  
+    dummy  : updateInsert.html 
+  css:
+    list   : [] 
+    insert : [ 'style.css' ]
+    update : [ 'style.css' ]
+    dummy  : [ 'style.css' ] 
+  javascript:
+    head:
+      list   : [] 
+      insert : [ 'javascript.js' ]
+      update : [ 'javascript.js' ]
+      dummy  : [ 'javascript.js' ] 
+    body:
+      list   : [] 
+      insert : []
+      update : [ 'javascript-loadData.js' ] 
+      dummy  : []
+default:
+  parameter : 
+    nullable : false
+    year : 
+      start : 'now'    
+      stop  : 'now-18' 

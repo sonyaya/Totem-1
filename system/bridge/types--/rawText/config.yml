@@ -1,0 +1,24 @@
+interface:
+  html:
+   #list   : list.html  
+    insert : insertUpdate.html 
+    update : insertUpdate.html 
+    dummy  : insertUpdate.html 
+  css:
+    list   : []
+    insert : []
+    update : []
+    dummy  : [] 
+  javascript:
+    head:
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
+    body:
+      list   : []
+      insert : []
+      update : []
+      dummy  : [] 
+default:
+  parameter : []
