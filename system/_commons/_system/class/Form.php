@@ -835,7 +835,7 @@
                     // CARREGA ARRAY COM TYPES
                     $preLoadedColumnsTypes = Array();
                     foreach($formArray['forms'][$action]['input'] as $key=>$val){
-                        $pathType = "types/{$val['type']}";
+                        $pathType = "../backend/types/{$val['type']}";
                         // verifica se o arquivo de 
                         // configuração do type existe
                         if(file_exists($confTypePath = "$pathType/config.yml")){
