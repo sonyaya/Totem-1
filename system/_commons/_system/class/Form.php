@@ -260,6 +260,76 @@
             return $this;
         }
 
+        /**
+         * Monta o array com os dados a serem apresentado nas listagens de dados
+         * 
+         * @param type $formFilename
+         * @param type $page
+         * @param type $rowsPerPage
+         * @param type $orderBy
+         * @param type $condition
+         * @return type
+         */
+        public function getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1){
+            // VERIFICA SE O ARQUIVO 
+            // DE FORMULÁRIO EXISTE
+            if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
+                // caso exista, carrega o formulário
+                $formArray = Yaml::parse(file_get_contents($filePath));
+            }else{
+                // caso não exista, mostra mensagem de erro
+                trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
+                exit;
+            }  
+            
+            
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
+            }
+            
+            // VARIAVES COMUNS
+            $table       = $formArray['header']['table'];
+            $pk          = $formArray['header']['p-key'];
+            $page        = (empty($page)       ) ? 1 : $page;
+            $rowsPerPage = (empty($rowsPerPage)) ? $formArray['forms']['list']['rows-per-page'] : $rowsPerPage;
+            $orderBy     = (empty($orderBy)    ) ? 1 : "$orderBy";
+            $condition   = (empty($condition)  ) ? 1 : $condition;
+            
+            // DEFAULT COLUMNS
+            foreach ( $formArray['forms']['list']['input'] as $key => $val) {
+                if( !empty($val['column']) && !empty($val['type']) ){
+                        // COLUNAS DO FORMULÁRIO PARA
+                        // SEREM LISTADAS
+                        $defaultColumns[ $val['label'] ] = $val['column'];
+                }
+            }
+            
+            // MONTA TABLE SELECT
+            $db = new MySQL();
+            $selectTable = $db
+              ->setTable($table)
+              ->getSelectQuery(
+                array_merge(
+                    Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
+                    $defaultColumns
+                ), 
+                1
+              )
+            ;
+
+            // BUSCA DADOS NO BANCO DE DADOS
+            return $db
+              ->setTable("($selectTable)")
+              ->setPage($page)
+              ->setRowsPerPage($rowsPerPage)
+              ->select(null, "$condition ORDER BY $orderBy")
+            ;
+        }
 
 
         /**
@@ -325,15 +395,11 @@
                 $formArray['forms']['list'] = $formB;
             }
             
-            // CARREGA TYPES COLUNAS A SEREM EXIBIDAS
-            $defaultColumns = Array();
+            // CARREGA TYPES
             $preLoadedColumnsTypes = Array();
             $columnNo = 1;
             foreach ( $formArray['forms']['list']['input'] as $key => $val) {
                 if( !empty($val['column']) && !empty($val['type']) ){
-                        // COLUNAS DO FORMULÁRIO PARA
-                        // SEREM LISTADAS
-                        $defaultColumns[ $val['label'] ] = $val['column'];
                                             
                         // caminho do type
                         $path = "types/{$val['type']}";
@@ -446,26 +512,12 @@
                 }
             }
             
-            // MONTA TABLE SELECT
+            // MySQL Object
             $db = new MySQL();
-            $selectTable = $db
-              ->setTable($table)
-              ->getSelectQuery(
-                array_merge(
-                    Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
-                    $defaultColumns
-                ), 
-                1
-              )
-            ;
-
+            $db->setTable($table);
+            
             // BUSCA DADOS NO BANCO DE DADOS
-            $result = $db
-              ->setTable("($selectTable)")
-              ->setPage($page)
-              ->setRowsPerPage($rowsPerPage)
-              ->select(null, "$condition ORDER BY $orderBy")
-            ;
+            $result = $this->getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1);
             $resultReference = Array();
             $resultReference = $result;
 
