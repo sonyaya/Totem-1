@@ -282,7 +282,6 @@
                 exit;
             }  
             
-            
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
             if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
