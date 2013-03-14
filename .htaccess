@@ -10,12 +10,15 @@
 
 # BRIDGE
 
+    RewriteRule ^api/(.*?)/([0-9]*)$    system/bridge/index.php?_m_action=$1&_m_id=$2 [QSA,L]
+    RewriteRule ^api/(.*?)$             system/bridge/index.php?_m_action=$1 [QSA,L]
+
     RewriteRule ^bridge/(.*?)/([0-9]*)$ system/bridge/index.php?_m_action=$1&_m_id=$2 [QSA,L]
-    RewriteRule ^bridge/(.*?)$ system/bridge/index.php?_m_action=$1 [QSA,L]
+    RewriteRule ^bridge/(.*?)$          system/bridge/index.php?_m_action=$1 [QSA,L]
 
 # FRONT-END
 
-    RewriteRule ^$ system/frontend/index.php [QSA,L]
+    RewriteRule ^$               system/frontend/index.php [QSA,L]
     RewriteRule ^frontend/(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
 
 # FRONT-END (ações na url raiz)
