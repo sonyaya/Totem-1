@@ -297,7 +297,7 @@
             $page        = (empty($page)       ) ? 1 : $page;
             $rowsPerPage = (empty($rowsPerPage)) ? $formArray['forms']['list']['rows-per-page'] : $rowsPerPage;
             $orderBy     = (empty($orderBy)    ) ? 1 : "$orderBy";
-            $condition   = (empty($condition)  ) ? 1 : str_replace("%%_m_pk%%", $pk, $condition);
+            $condition   = (empty($condition)  ) ? 1 :  $condition;
             
             // DEFAULT COLUMNS
             foreach ( $formArray['forms']['list']['input'] as $key => $val) {
