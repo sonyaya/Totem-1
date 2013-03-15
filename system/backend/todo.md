@@ -13,6 +13,7 @@ List
 
 BUGS
 ====
+- Verificar e Melhorar sistema de permissões
 
 List
 ----
