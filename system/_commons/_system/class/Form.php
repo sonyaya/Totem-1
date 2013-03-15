@@ -308,6 +308,9 @@
                 }
             }
             
+            // 
+            $defaultColumns = Array();
+            
             // MONTA TABLE SELECT
             $db = new MySQL();
             $selectTable = $db
