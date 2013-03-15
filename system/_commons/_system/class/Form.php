@@ -280,15 +280,19 @@
                 // caso não exista, mostra mensagem de erro
                 trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
                 exit;
-            }  
+            }
             
-            // VERIFICA SE EXISTE CLASSE
-            // DE EVENTOS DE FORMULÁRIO
-            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
-                require_once $filePath;
-                $formEvents = new \FormEvents();
-            }else{
-                $formEvents = Array();
+            // MESCLA FORULÁRIOS SE NECESSÁRIO
+            if( isset($formArray['forms']['list']['merge-form']) && is_array($formArray['forms']['list']['merge-form']) ){
+                $formA = Array();
+                $formB = Array();
+                foreach($formArray['forms']['list']['merge-form'] as $formKey){
+                    if( isset($formArray['forms'][ $formKey]) && is_array($formArray['forms'][ $formKey]) ){
+                        $formA = $formArray['forms'][ $formKey];
+                    }
+                    $formB = array_replace_recursive($formA, $formB);
+                }
+                $formArray['forms']['list'] = $formB;
             }
             
             // VARIAVES COMUNS
@@ -310,7 +314,6 @@
                         $defaultColumns[ $val['label'] ] = $val['column'];
                 }
             }
-            
             
             // MONTA TABLE SELECT
             $db = new MySQL();
@@ -384,6 +387,15 @@
             $headJS  = Array();
             $bodyJS  = Array();
             $headCSS = Array();
+            
+            // VERIFICA SE EXISTE CLASSE
+            // DE EVENTOS DE FORMULÁRIO
+            if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
+                require_once $filePath;
+                $formEvents = new \FormEvents();
+            }else{
+                $formEvents = Array();
+            }
             
             // MESCLA FORULÁRIOS SE NECESSÁRIO
             if( isset($formArray['forms']['list']['merge-form']) && is_array($formArray['forms']['list']['merge-form']) ){
