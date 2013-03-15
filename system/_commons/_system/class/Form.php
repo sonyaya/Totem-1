@@ -299,6 +299,9 @@
             $orderBy     = (empty($orderBy)    ) ? 1 : "$orderBy";
             $condition   = (empty($condition)  ) ? 1 :  $condition;
             
+            // 
+            $defaultColumns = Array();
+            
             // DEFAULT COLUMNS
             foreach ( $formArray['forms']['list']['input'] as $key => $val) {
                 if( !empty($val['column']) && !empty($val['type']) ){
@@ -308,8 +311,6 @@
                 }
             }
             
-            // 
-            $defaultColumns = Array();
             
             // MONTA TABLE SELECT
             $db = new MySQL();
