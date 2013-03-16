@@ -532,7 +532,7 @@
             $db->setTable($table);
             
             // BUSCA DADOS NO BANCO DE DADOS
-            $result = $this->getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1);
+            $result = $this->getViewData($formFilename, $page, $rowsPerPage, $orderBy, $condition);
             $resultReference = Array();
             $resultReference = $result;
 
