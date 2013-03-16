@@ -237,7 +237,7 @@ layout.list.button.order = (function(){
     layout.ajax.hideLoader();
 
     var stateObj = { foo: "bar" };
-    history.pushState(stateObj, null, "?action=view-listAndInsert-form"+url);
+    history.pushState(stateObj, null, "?action="+layout.uri('action') +url);
 });
 
 /**
@@ -283,7 +283,23 @@ layout.list.button.reload = (function(){
 /**
  * 
  */
-layout.list.button.page = (function(){});
+layout.list.button.page = (function(){
+    list.updateAttributes();
+    url = "&path=" + list.form
+        + "&" + $(this).attr("rel")
+        + "&orderBy=" + list.orderBy
+        + "&cond=" + JSON.stringify(list.cond)
+    ;
+
+    layout.ajax.showLoader();
+    $(".list-content").load("?action=view-list-window-form" + url, function(){
+        list.addOrderClass();
+    });
+    
+    var stateObj = { foo: "bar" };
+    history.pushState(stateObj, null, "?action="+layout.uri('action') +url);
+    layout.ajax.hideLoader();
+});
 
 /**
  * 

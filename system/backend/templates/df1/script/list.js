@@ -7,7 +7,8 @@ $(function(){
     $(".window.list").on("click", ".bt-reload-list", layout.list.button.reload);
     $(".window.list").on("click", ".next-page"     , layout.list.button.nextPage);
     $(".window.list").on("click", ".prev-page"     , layout.list.button.prevPage);
-
+    $(".window.list").on("click", ".bt-page"       , layout.list.button.page);
+ 
     // ACTIONS
     $(".window.list").on("click", ".edit"  , layout.list.action.edit);
     $(".window.list").on("click", ".delete", layout.list.action.delete);
