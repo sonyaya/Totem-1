@@ -5,7 +5,6 @@
     use backend\Frontend;
     use backend\Util;
     use vendor\Symfony\Component\Yaml\Yaml;
-   
 
     class Form{
         
@@ -270,7 +269,7 @@
          * @param type $condition
          * @return type
          */
-        public function getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1){
+        public function getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1, $form='list'){
             // VERIFICA SE O ARQUIVO 
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
@@ -283,23 +282,23 @@
             }
             
             // MESCLA FORULÁRIOS SE NECESSÁRIO
-            if( isset($formArray['forms']['list']['merge-form']) && is_array($formArray['forms']['list']['merge-form']) ){
+            if( isset($formArray['forms'][$form]['merge-form']) && is_array($formArray['forms'][$form]['merge-form']) ){
                 $formA = Array();
                 $formB = Array();
-                foreach($formArray['forms']['list']['merge-form'] as $formKey){
+                foreach($formArray['forms'][$form]['merge-form'] as $formKey){
                     if( isset($formArray['forms'][ $formKey]) && is_array($formArray['forms'][ $formKey]) ){
                         $formA = $formArray['forms'][ $formKey];
                     }
                     $formB = array_replace_recursive($formA, $formB);
                 }
-                $formArray['forms']['list'] = $formB;
+                $formArray['forms'][$form] = $formB;
             }
             
             // VARIAVES COMUNS
             $table       = $formArray['header']['table'];
             $pk          = $formArray['header']['p-key'];
             $page        = (empty($page)       ) ? 1 : $page;
-            $rowsPerPage = (empty($rowsPerPage)) ? $formArray['forms']['list']['rows-per-page'] : $rowsPerPage;
+            $rowsPerPage = (empty($rowsPerPage)) ? $formArray['forms'][$form]['rows-per-page'] : $rowsPerPage;
             $orderBy     = (empty($orderBy)    ) ? 1 : "$orderBy";
             $condition   = (empty($condition)  ) ? 1 :  $condition;
             
@@ -307,7 +306,7 @@
             $defaultColumns = Array();
             
             // DEFAULT COLUMNS
-            foreach ( $formArray['forms']['list']['input'] as $key => $val) {
+            foreach ( $formArray['forms'][$form]['input'] as $key => $val) {
                 if( !empty($val['column']) && !empty($val['type']) ){
                         // COLUNAS DO FORMULÁRIO PARA
                         // SEREM LISTADAS
