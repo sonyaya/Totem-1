@@ -5,9 +5,9 @@
 
 # BACK-END
 
-    RewriteRule ^admin/(.*)$         system/backend/$1        [QSA,L]
-    RewriteRule ^backend/(.*)$       system/backend/$1        [QSA,L]
-    RewriteRule ^administrator/(.*)$ system/backend/$1        [QSA,L]
+    RewriteRule ^admin/?(.*)$         system/backend/$1        [QSA,L]
+    RewriteRule ^backend/?(.*)$       system/backend/$1        [QSA,L]
+    RewriteRule ^administrator/?(.*)$ system/backend/$1        [QSA,L]
 
 # BRIDGE
 
@@ -20,6 +20,7 @@
 # FRONT-END
 
     RewriteRule ^$               system/frontend/index.php                 [QSA,L]
+    RewriteRule ^site/(.*?)$     system/frontend/index.php?_m_html=$1.html [QSA,L]
     RewriteRule ^frontend/(.*?)$ system/frontend/index.php?_m_html=$1.html [QSA,L]
 
 # FRONT-END (ações na url raiz)
