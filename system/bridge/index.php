@@ -58,12 +58,12 @@
                 if( isset($_GET['_m_id']) ){
                     $condition   = "_M_PRIMARY_KEY_VALUE_ = '{$_GET['_m_id']}'";
                     $form = new Form();
-                    $return = $form->getViewData($path, $page, $rowsPerPage, $orderBy, $condition);
+                    $return = $form->getViewData($path, $page, $rowsPerPage, $orderBy, $condition, "bridge");
                     echo json_encode($return); 
                 }else{
                     $condition   = (empty($_GET['condition'])  ) ? null : $_GET['condition'];
                     $form = new Form();
-                    $return = $form->getViewData($path, $page, $rowsPerPage, $orderBy, $condition);
+                    $return = $form->getViewData($path, $page, $rowsPerPage, $orderBy, $condition, "bridge");
                     echo json_encode($return); 
                 }
                 break;
