@@ -6,6 +6,9 @@
   
 - label: "Banners"
   link: "?action=view-inTabs-form&path=fashionsite/forms/banner"
+  
+- label: "Videos"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/video"
  
 - label: "Clippings"
   link: "?action=view-inTabs-form&path=fashionsite/forms/clipping"

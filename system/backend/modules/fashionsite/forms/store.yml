@@ -11,7 +11,7 @@ forms:
   # -- LIST --------------------------------------------------------------------
   
   list:
-    title: 'Listagem de Lejas'
+    title: 'Listagem de Lojas'
     rows-per-page: 15
     input:
       - type: number
@@ -22,6 +22,10 @@ forms:
         label: Nome
         column: name
 
+        
+      - type: example
+        label: Cidade
+        column: city
         
            
   # -- INSERT ------------------------------------------------------------------
@@ -55,7 +59,7 @@ forms:
         label: Cidade
         column: city_id
         parameter : 
-          table : fashionsite_city
+          table : common_city
           column : id
           label : name
           insert-form : "common/forms/city" 
@@ -82,4 +86,10 @@ forms:
   
   delete:
     merge-form: [ delete, insert ]
+    input: []
+      
+  # -- BRIDGE ------------------------------------------------------------------
+  
+  bridge:
+    merge-form: [ bridge, list ]
     input: []

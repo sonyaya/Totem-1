@@ -30,3 +30,7 @@ forms:
         title: 'Inserindo Grupo de Usuários'
         merge-form: [ insert, update ]
         input: []
+  
+    bridge:
+        merge-form: [ bridge, list ]
+        input: []

@@ -55,3 +55,7 @@ forms:
             - type: CKEditor
               label: Mensagem
               column: message
+
+    bridge:
+        merge-form: [ bridge, list ]
+        input: []

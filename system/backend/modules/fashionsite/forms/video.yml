@@ -1,0 +1,51 @@
+header:
+  title: 'Vídeos'
+  table: fashionsite_video
+  p-key: id
+
+forms:
+  
+  list:
+    title: 'Listagm Videos'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Título
+        column: title
+        
+      - type: example
+        label: Link
+        column: link
+
+  insert:
+    title: 'Inserindo Videos'
+    input:
+      - type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          size : 100
+          
+      - type: meioMask
+        label: Link
+        column: link
+        parameter : 
+          size : 255
+  update:
+    title: 'Atualizando Videos'
+    merge-form: [ update, insert ]
+    input: []
+
+  delete:
+    merge-form: [ delete, insert ]
+    input: []
+      
+  # -- BRIDGE ------------------------------------------------------------------
+  
+  bridge:
+    merge-form: [ bridge, list ]
+    input: []

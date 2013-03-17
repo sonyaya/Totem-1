@@ -88,3 +88,7 @@ forms:
         title: 'Inserindo Usuário'
         merge-form: [ insert, update ]
         input: []
+
+    bridge:
+        merge-form: [ bridge, list ]
+        input: []

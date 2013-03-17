@@ -129,3 +129,9 @@ forms:
   delete:
     merge-form: [ delete, insert ]
     input: []
+      
+  # -- BRIDGE ------------------------------------------------------------------
+  
+  bridge:
+    merge-form: [ bridge, list ]
+    input: []
