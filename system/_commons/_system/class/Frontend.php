@@ -72,8 +72,9 @@
                 
                 // variaveis
                 preg_match_all("/#(.*?)#/i", $match['link'], $vars, PREG_SET_ORDER);
+                $file_path = $match['link'];
                 foreach ($vars as $var) {
-                    $file_path = str_replace($var[0], $this->getMVar($var[1]), $match['link']);
+                    $file_path = str_replace($var[0], $this->getMVar($var[1]), $file_path);
                 }
                 
                 // import
