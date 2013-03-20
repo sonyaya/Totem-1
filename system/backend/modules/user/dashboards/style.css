@@ -224,3 +224,30 @@ div.dash div.box{
     
     div.info-box.color4 div.main { background: rgba(164, 203, 172, 0.8 ) }
     div.info-box.color4 div.label{ background: rgba(164, 203, 172, 0.65) }
+
+    
+/* --- INFO-BOX  -------------------------------------------------------------- */
+    div.simple-val{
+        clear: both;
+        margin-bottom: 5px;
+        }
+    
+    div.simple-val span{
+        background: black;
+        border-radius: 6px 6px 6px 6px;
+        color: white;
+        float: right;
+        font-size: 0.8em;
+        overflow: hidden;
+        padding: 3px;
+        }
+        
+    div.simple-val label{
+        color: black;
+        font-size: 1em;
+        }
+    
+    div.simple-val.color1 span{ background: rgb(187, 187, 136 ) }
+    div.simple-val.color2 span{ background: rgb(238, 170, 136 ) }
+    div.simple-val.color3 span{ background: rgb(238, 221, 153 ) }
+    div.simple-val.color4 span{ background: rgb(164, 203, 172 ) }
