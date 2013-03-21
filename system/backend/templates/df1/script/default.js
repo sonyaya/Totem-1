@@ -233,8 +233,8 @@ layout.list.button.order = (function(){
     layout.ajax.showLoader();
     $(".list-content").load("?action=view-list-window-form" + url, function(){ 
         list.addOrderClass(order); 
+        layout.ajax.hideLoader();
     });
-    layout.ajax.hideLoader();
 
     var stateObj = { foo: "bar" };
     history.pushState(stateObj, null, "?action="+layout.uri('action') +url);
