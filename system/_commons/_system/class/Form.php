@@ -536,7 +536,11 @@
             $resultReference = $result;
 
             // BUSCA NUMÉRO DE PAGINAS
-            $maxPages = $db->getLastPage($condition);
+            $maxPages = $db
+                ->setPage($page)
+                ->setRowsPerPage($rowsPerPage)
+                ->getLastPage($condition)
+            ;
             
             //
             $TDs = "";
