@@ -58,15 +58,6 @@
                             break;
                         }
                         
-                        // DEBUG
-                        #echo $context . "\r\n";
-                        #echo $actualContext." - " . (($grant)? "sim" : "não") ."\r\n";
-                        #print_r($grant);
-                        #print_r($denny);
-                        #print_r($actualMenu);
-                        #echo "\r\n\r\n ----------------------------- \r\n\r\n";
-                        #exit;
-                        
                         //
                         $grantInherit = $grant;
                         $dennyInherit = $denny;
