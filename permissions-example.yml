@@ -1,78 +1,17 @@
-#
-# PERMISSÕES NO BACKEND - ADMIN
-#
 backend:
-    # bloqueio padrão de formulários
-    forms:
-        view: true
-        save: true
-       
-#    # hide specific menu by path
-#    hide-menu-by-path:
-#      - user/forms/group
-#       
-#    # show menu of a module
-#    show-module:
-#      - user
-#      
-#    # bloqueio por módulo ou arquivo
-#    modules:
-#        view:
-#          insert:
-#            - {user:{forms:{group: false}}}
-#
-#          update: 
-#            - ""
-#            
-#          dashboard: 
-#            - ""
-#            
-#        save:
-#          insert: 
-#            - {user: {forms: {group: false}}}
-#            
-#          update: 
-#            - ""
-#            
-#          delete: 
-#            - ""
-          
-          
-#
-# PERMISSÕES NO BACKEND - INSERT ONLY
-#
-backend:
-    forms:
-        view:
-          inTab    : false
-          update   : false
-          insert   : true
-          list     : false
-          dummy    : false
-          dashboard: false
-        save:
-          insert: true
-          update: false
-          delete: false
-    show-module:
-      - all
-          
-          
-          
-          
-          
-#
-# PERMISSÕES NO BACKEND - CANT SEE DASHBOARD AND CANT INSERT, UPDATE OR DELETE
-#
-backend:
-    forms:
-        view:
-          inTab    : true
-          update   : true
-          insert   : true
-          list     : true
-          dummy    : true
-          dashboard: false
-        save: false
-    show-module:
-      - all
+    _grant_: [insert, update, delete, viewForm, viewList, viewInTabs, viewDashboard, viewDummyForm ]
+    _denny_: []
+    _smenu_:
+
+        modules: 
+          _grant_: all
+          _denny_: []
+          _smenu_:
+
+            user: 
+              _grant_: all
+              _denny_: [ viewInTabs ]
+              
+            blog: 
+              _grant_: all
+              _denny_: []

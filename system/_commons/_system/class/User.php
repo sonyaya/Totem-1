@@ -13,28 +13,78 @@
         /**
          *
          */
-        public static function check($context="backend", $returnType="html"){
+        public static function check($context="backend", $action="", $returnType="html"){
             global $_M_CONF;
             global $_M_THIS_CONFIG;
-
+                    
             if( !empty($_SESSION['user']) ){
                     // busca variaveis
                     $contextArray = explode("/", $context);
-                    $user_permission = $_SESSION['user']['permissions'];
+                    $actualMenu = $_SESSION['user']['permissions'];
+                   
+
                     
                     // pega permissão para o contexto
-                    $user_actual_context_permission = $user_permission;
-                    foreach( $contextArray as $val ){
-                        if( isset($user_actual_context_permission[ $val ]) ){
-                            $user_actual_context_permission = $user_actual_context_permission[ $val ];
+                    $count = 0;
+                    $grant = false;
+                    
+                    while(true){
+                        //
+                        if(isset($contextArray[$count])){
+                            $actualContext = $contextArray[$count];
+                            $grant         = (isset($actualMenu[ $actualContext ]['_grant_'])) ? $actualMenu[ $actualContext ]['_grant_'] : false;   
+                            $denny         = (isset($actualMenu[ $actualContext ]['_denny_'])) ? $actualMenu[ $actualContext ]['_denny_'] : false;   
+                            $actualMenu    = (isset($actualMenu[ $actualContext ]['_smenu_'])) ? $actualMenu[ $actualContext ]['_smenu_'] : "..." ;
+                            
+                            //
+                            switch (true){
+                                case ($denny == "all"): 
+                                    $grant = false; 
+                                    break;
+                                
+                                case (is_array($denny) && in_array($action, $denny)): 
+                                    $grant = false; 
+                                    break;
+                                
+                                case ($grant == "all"): 
+                                    $grant = true; 
+                                    break;
+                                
+                                case (is_array($grant) && in_array($action, $grant)): 
+                                    $grant = true; 
+                                    break;
+                            }
                         }else{
                             break;
                         }
-                    }
-                    $user_actual_context_permission = is_array($user_actual_context_permission) ? false : $user_actual_context_permission;
+                        
+                        // DEBUG
+                        #echo $context . "\r\n";
+                        #echo $actualContext." - " . (($grant)? "sim" : "não") ."\r\n";
+                        #print_r($grant);
+                        #print_r($denny);
+                        #print_r($actualMenu);
+                        #echo "\r\n\r\n ----------------------------- \r\n\r\n";
+                        #exit;
+                        
+                        //
+                        $grantInherit = $grant;
+                        $dennyInherit = $denny;
+                        
+                        //
+                        if(
+                          $count > 999 ||
+                          !$grant || 
+                          !is_array($actualMenu)
+                        ) break;
 
+                        
+                        //
+                        $count++;
+                    }
+                    
                     // executa ação conforme permissão para o contexto
-                    if( $user_actual_context_permission ){
+                    if( $grant ){
                         return true;
                     }else{
                         $message = "Você não possui permissão para executar o contexto '$context'.";

@@ -212,8 +212,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DO
                 // DASHBOARD ESPECIFÍCO
                 case "view-dashboard":{
-                    if( !User::check("backend/forms/view/dashboard", "bool") )
-                        User::check("backend/modules/view/dashboard/{$path}", "html");
+                    User::check("backend/{$path}", "viewDashboard", "html");
                     $dashboard = new DashboardComposer();
                     $dashboard->viewDashboard( $path, "dashboard.html" );
                     break;
@@ -222,8 +221,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 case "view-insert-form":{
-                    if( !User::check("backend/forms/view/insert", "bool") )
-                        User::check("backend/modules/view/insert/{$path}", "html");
+                    User::check("backend/{$path}", "viewForm", "html");
                     self::viewFormInsert("form.html", $path);
                     break;
                 }
@@ -231,8 +229,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 case "view-update-form":{
-                    if( !User::check("backend/forms/view/update", "bool") )
-                        User::check("backend/modules/view/update/{$path}", "html");
+                    User::check("backend/{$path}", "viewForm", "html");
                     self::viewFormUpdate("form.html", $path, $get['id']);
                     break;
                 }
@@ -240,8 +237,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO FALSO
                 case "view-dummy-form":{
-                    if( !User::check("backend/forms/view/dummy", "bool") )
-                        User::check("backend/modules/view/dummy/{$path}", "html");
+                    User::check("backend/{$path}", "viewDummyForm", "html");
                     self::viewFormUpdate("dummy-form.html", $path, "dummy");
                     break;
                 }
@@ -249,8 +245,7 @@
                 // BUSCA LISTA DE DADOS REFERENTE 
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 case "view-list-form":{
-                    if( !User::check("backend/forms/view/list", "bool") )
-                        User::check("backend/modules/view/list/{$path}", "html");
+                    User::check("backend/{$path}", "viewList", "html");
                     self::viewFormList("list.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -259,8 +254,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // E O FORMULÁRIO DE INSERÇÃO
                 case "view-inTabs-form":{
-                    if( !User::check("backend/forms/view/inTabs", "bool") )
-                        User::check("backend/modules/view/inTabs/{$path}", "html");
+                    User::check("backend/{$path}", "viewInTabs", "html");
                     self::viewFormInTabs("listAndInsert.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -269,8 +263,7 @@
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 // EM JANELA
                 case "view-insert-window-form":{
-                    if( !User::check("backend/forms/view/insert", "bool") )
-                        User::check("backend/modules/view/insert/{$path}", "html");
+                    User::check("backend/{$path}", "viewForm", "html");
                     self::viewFormInsert("form-window.html", $path);
                     break;
                 }
@@ -279,8 +272,7 @@
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 // EM JANELA
                 case "view-update-window-form":{
-                    if( !User::check("backend/forms/view/update", "bool") )
-                        User::check("backend/modules/view/update/{$path}", "html");
+                    User::check("backend/{$path}", "viewForm", "viewForm", "html");
                     self::viewFormUpdate("form-window.html", $path, $get['id']);
                     break;
                 }
@@ -289,8 +281,7 @@
                 // TELA DE FORMULÁRIO FALSO
                 // EM JANELA
                 case "view-dummy-window-form":{
-                    if( !User::check("backend/forms/view/dummy", "bool") )
-                        User::check("backend/modules/view/dummy/{$path}", "html");
+                    User::check("backend/{$path}", "viewDummyForm", "html");
                     self::viewFormUpdate("dummy-form-window.html", $path, "dummy");
                     break;
                 }
@@ -299,8 +290,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // EM JANELA
                 case "view-list-window-form":{
-                    if( !User::check("backend/forms/view/list", "bool") )
-                        User::check("backend/modules/view/list/{$path}", "html");
+                    User::check("backend/{$path}", "viewForm", "html");
                     self::viewFormList("list-window.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -314,8 +304,7 @@
 
                 // DELETA UM FORMULÁRIO
                 case "delete-form":{
-                    if( !User::check("backend/forms/save/delete", "bool") )
-                        User::check("backend/modules/save/delete/{$path}", "json");
+                    User::check("backend/{$path}", "json");
                     $form = new Form();
                     echo json_encode( $form->deleteForm( $path, $get['id']) );
                     break;
@@ -325,11 +314,9 @@
                 // NO BANCO DE DADOS
                 case "save-form":{
                     if( preg_match("/update\:.*/i", $post['_M_ACTION']) ){
-                        if( !User::check("backend/forms/save/update", "bool") )
-                            User::check("backend/modules/save/update/{$path}", "json");
+                        User::check("backend/{$path}", "update", "json");
                     }else{
-                        if( !User::check("backend/forms/save/insert", "bool") )
-                            User::check("backend/modules/save/insert/{$path}", "json");
+                        User::check("backend/{$path}", "insert", "json");
                     }
 
                     $form = new Form();
