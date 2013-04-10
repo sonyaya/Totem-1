@@ -9,8 +9,8 @@ $(function(){
         window.location.hash = $this.attr("id");
     });
 
-    if( (deepLink = window.location.hash) !== ''){
-        $(deepLink).click();
+    if( (window.location.hash) !== ''){
+        $(window.location.hash).click();
     }
 
     // BOTÕES DE NAVEGAÇÃO ENTRE ABAS

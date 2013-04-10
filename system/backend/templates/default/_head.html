@@ -2,13 +2,13 @@
 <meta name="viewport" content="width=device-width">
 
 <!-- DEFAULT CSS -->
-<link rel="stylesheet" href="&m.var:template;/css/style.css">
-<link rel="stylesheet" href="&m.var:template;/css/style-small.css" media="screen and (max-width: 750px)">
+<link rel="stylesheet" href="#m.var:template;/css/style.css;">
+<link rel="stylesheet" href="#m.var:template;/css/style-small.css" media="screen and (max-width: 750px)">
 
 <!-- TYPE CSS -->
-<m.foreach var="css" key="KEY">
-<link rel="stylesheet" href="&m.var:css.#KEY#;">
-</m.foreach>
+<!--<m.foreach var="css" key="KEY">-->
+<link rel="stylesheet" href="#m.var:css.#KEY#;">
+<!--</m.foreach>-->
 
 <!-- FRAMEWORK JAVASCRIPT -->
 <script src="&m.var:template;/libs/jquery.js"></script>
@@ -19,6 +19,6 @@
 <script src="&m.var:template;/script/default.js"></script>
 
 <!-- TYPE JAVASCRIPT -->
-<m.foreach var="javascript.head" key="KEY">
+<!--<m.foreach var="javascript.head" key="KEY">-->
 <script src="&m.var:javascript.head.#KEY#;"></script>
-</m.foreach>
+<!--</m.foreach>-->

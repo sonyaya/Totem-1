@@ -2,7 +2,7 @@ $(function(){
     list = {};
     list.action  = layout.uri("action"); 
     list.form    = layout.uri("path");
-    list.cond    = ($.trim(cond = layout.uri("cond")) == "") ? [] : $.parseJSON(cond);
+    list.cond    = ($.trim(cond = layout.uri("cond")) === "") ? [] : $.parseJSON(cond);
     list.page    = layout.uri("page");
     list.orderBy = layout.uri("orderBy");
     
@@ -45,7 +45,7 @@ var layout = new Object();
  * SE ENCARREGA DE ABRIR POPUPS
  */
 layout.popup = function(url, title){
-    if( layout.uri("path") == layout.uri("path", url) ){
+    if( layout.uri("path") === layout.uri("path", url) ){
         newWindow = window.open(url, title);        
     }else{
         var w = screen.width / 1.2;
@@ -74,7 +74,7 @@ layout.popup = function(url, title){
  * SE ENCARREGA DE FACILTAR A NAVEGAÇÃO PELA URI
  */
 layout.uri = (function(key, uriArray){
-    if(typeof uriArray == "undefined")
+    if(typeof uriArray === "undefined")
         uriArray = window.location.search
     uriArray = uriArray.split(/[?&](.*?)=.*?/im);
     pos = $.inArray(key, uriArray);
@@ -209,9 +209,9 @@ layout.list.action.edit = (function(){
  * 
  */
 layout.list.action.delete = (function(){
-    msg  = "ATENÇÃO!\r\n\r\n"
-    msg += "- Você esta prestes a deletar um registro do banco de dados, \r\n"
-    msg += "esta ação não poderá ser desfeita, clique em OK se realmente \r\n"
+    msg  = "ATENÇÃO!\r\n\r\n";
+    msg += "- Você esta prestes a deletar um registro do banco de dados, \r\n";
+    msg += "esta ação não poderá ser desfeita, clique em OK se realmente \r\n";
     msg += "deseja eliminar este registo.";
     if( confirm(msg) ){
         var delId = $(this).attr('href');
@@ -221,7 +221,7 @@ layout.list.action.delete = (function(){
                 if(data.error){
                     alert(data.message);
                 }else{
-                    if( $("table tbody tr").length == 1 ){
+                    if( $("table tbody tr").length === 1 ){
                         location.reload(true);
                     }else{
                         $("tr[rel="+ delId +"]").remove();
