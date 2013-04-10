@@ -1,10 +1,10 @@
-<m.if cond="&m.var:bool:_GET.popup;">
+<!--<m.if cond="&m.var:bool:_GET.popup;">-->
     <!DOCTYPE html>
     <html>
         <head>
             <title>&m.var:main-title; - &m.var:title;</title>
 
-            &m.include:#template#/_head.html;  
+            <!--&m.include:#template#/_head.html;-->
             
             <!-- FORM SCRIPTS -->
             <script src="&m.var:template;/script/form.js"></script>
@@ -17,29 +17,34 @@
                 </div>
             </div>
         
-            <h1>&m.var:title;</h1>
+            <h1><!--&m.var:title;--></h1>
 
             <div class="content">
-                &m.include:#template#/form-content.html;
+                <!--&m.include:#template#/form-content.html;-->
             </div>
 
-            <script
-                &m.include:#template#/script/bodyJs.inc.js;
+            <script>
+                /*&m.include:#template#/script/bodyJs.inc.js;*/
             </script>
         </body>
     </html>
-</m.if>
+<!--</m.if>-->
 
-<m.if cond="&m.var:bool:_GET.popup; -eq- false">
-    <head>
-      <m.foreach var="javascript.head" key="KEY">
-        <script src="&m.var:javascript.head.#KEY#;"></script>
-      </m.foreach>
-    </head>
-    <div class="content">
-        &m.include:#template#/form-content.html;
-    </div>
-    <script>
-        &m.include:#template#/script/bodyJs.inc.js;
-    </script>
-</m.if>
+<!--<m.if cond="&m.var:bool:_GET.popup; -eq- false">-->
+    <!DOCTYPE html>
+    <html>
+        <head>
+          <m.foreach var="javascript.head" key="KEY">
+            <script src="&m.var:javascript.head.#KEY#;"></script>
+          </m.foreach>
+        </head>
+        <body>
+            <div class="content">
+                <!--&m.include:#template#/form-content.html;-->
+            </div>
+            <script>
+                /*&m.include:#template#/script/bodyJs.inc.js;*/
+            </script>
+        </body>
+    </html>
+<!--</m.if>-->

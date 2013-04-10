@@ -1,6 +1,6 @@
 var pieChart;
 
-var paisEstadoCidade = &m.var:json:data.paisEstadoCidade;
+var paisEstadoCidade = '-&m.var:json:data.paisEstadoCidade;-';
 
 //
 var paisData = [];

@@ -31,7 +31,7 @@
             $TAG = preg_quote($TAG);
 
             // ENCONTRA AS TAGS
-            preg_match_all("/(?P<indent>[ \t]*?)(?P<tag>(\"-&$TAG|'-&$TAG|&$TAG):(?P<value>.*?)(;-\"|;-'|;))/im", $DOM, $TAGS, PREG_SET_ORDER);
+            preg_match_all("/(?P<indent>[ \t]*?)(?P<tag>(\/\*&|<\!--&|\"-&|'-&|&)$TAG:(?P<value>.*?)(;\*\/|;-->|;-\"|;-'|;))/im", $DOM, $TAGS, PREG_SET_ORDER);
             return $TAGS;
         }
 
@@ -67,8 +67,8 @@
             $TAG = preg_quote($TAG);
 
             // STRING REGEX
-            $regexOpenTag  = "/[\r\n]{0,1}(?P<indent>[ \t]*?)(\"-<|'-<|<)\s*?$TAG\s*?(?P<attr>.*?)\s*?(>-\"|>-'|>)/i";
-            $regexCloseTag = "/(\"-<|'-<|<)\/\s*?$TAG\s*?(>-\"|>-'|>)/i";
+            $regexOpenTag  = "/[\r\n]{0,1}(?P<indent>[ \t]*?)(<!--<|\/\*<|<)\s*?$TAG\s*?(?P<attr>.*?)\s*?(>-->|>\*\/|>)/i";
+            $regexCloseTag = "/(<!--<|\/\*<|<)\/\s*?$TAG\s*?(>-->|>\*\/|>)/i";
 
             // REGEX PARA ENCONTRAR TAGS DE ABERTURA E FECHAMENTO
             preg_match_all($regexOpenTag  , $DOM , $openTags  , PREG_OFFSET_CAPTURE);
