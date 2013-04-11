@@ -39,9 +39,9 @@
          */
         public function __construct($htmlFile, $mInitVARS="", $getFile=true){
             $this->mVARS          = $mInitVARS;
-            $this->mVARS['_GET']  = $_GET;
+            $this->mVARS['_GET' ] = $_GET;
             $this->mVARS['_POST'] = $_POST;
-            $this->mVARS['_NOW']  = getdate();
+            $this->mVARS['_NOW' ] = getdate();
 
             $this->DOM = new DOMCrawler($htmlFile, $getFile);
         }
