@@ -12,8 +12,8 @@
 /system/backend/image-buffer/buffer/*.png
 /system/backend/image-buffer/buffer/*.part
 
-/system/frontend/log/*.txt
+/system/frontend/logs/*.txt
 
-/system/bridge/log/*.txt
+/system/bridge/logs/*.txt
 
-/system/console/log/*.txt
+/system/console/logs/*.txt
