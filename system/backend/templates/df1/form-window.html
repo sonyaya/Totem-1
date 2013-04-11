@@ -7,7 +7,7 @@
             <!--&m.include:#template#/_head.html;-->
             
             <!-- FORM SCRIPTS -->
-            <script src="&m.var:template;/script/form.js"></script>
+            <script src="E/m.var:template;/script/form.js"></script>
         </head>
         <body class="popup-window">
             <div id="loader">
@@ -33,7 +33,7 @@
 <m.if cond="&m.var:bool:_GET.popup; -eq- false">
     <head>
       <m.foreach var="javascript.head" key="KEY">
-        <script src="&m.var:javascript.head.#KEY#;"></script>
+        <script src="E/m.var:javascript.head.#KEY#;"></script>
       </m.foreach>
     </head>
     <div class="content">
