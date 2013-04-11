@@ -31,7 +31,7 @@
             $TAG = preg_quote($TAG);
 
             // ENCONTRA AS TAGS
-            preg_match_all("/(?P<indent>[ \t]*?)(?P<tag>(\/\*&|<\!--&|\"-&|'-&|&)$TAG:(?P<value>.*?)(;\*\/|;-->|;-\"|;-'|;))/im", $DOM, $TAGS, PREG_SET_ORDER);
+            preg_match_all("/(?P<indent>[ \t]*?)(?P<tag>(\/\*&|<\!--&|\"-&|'-&|&|E\/)$TAG:(?P<value>.*?)(;\*\/|;-->|;-\"|;-'|;))/im", $DOM, $TAGS, PREG_SET_ORDER);
             return $TAGS;
         }
 
