@@ -36,8 +36,9 @@
                             $denny         = (isset($actualMenu[ $actualContext ]['_denny_'])) ? $actualMenu[ $actualContext ]['_denny_'] : false;   
                             $actualMenu    = (isset($actualMenu[ $actualContext ]['_smenu_'])) ? $actualMenu[ $actualContext ]['_smenu_'] : "..." ;
                             
+                            
                             //
-                            switch (true){
+                            switch(true){
                                 case ($denny == "all"): 
                                     $grant = false; 
                                     break;
@@ -75,11 +76,8 @@
                     }
                     
                     // executa ação conforme permissão para o contexto
-                    if( $grant ){
-                        return true;
-                    }else{
+                    if( !$grant ){
                         $message = "Você não possui permissão para executar o contexto '$context'.";
-
                         $return = Array(
                             "error"     => true,
                             "errorCode" => "check-2",
@@ -93,10 +91,12 @@
                             
                             case "print_r":
                                 print_r($return);
+                                exit;
                                 break;
 
                             case "json":
                                 echo json_encode($return);
+                                exit;
                                 break;
 
                             case 'html':
@@ -107,11 +107,12 @@
                                         $_M_THIS_CONFIG,
                                         Array( "error" => $message )
                                     )
-                                );
+                                );       
+                                exit;
                                 break;
                         }
-                        exit;
-                            
+                    }else{
+                        return true;
                     }
             }else{
                 echo new Frontend(
