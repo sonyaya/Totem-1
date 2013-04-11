@@ -6,7 +6,7 @@
     <tr>
         <th class="action"></th>
       <-m.foreach var="table.columns" key="KEY">
-        <th class='&-m.var:table.columns.#KEY#;.label title_&-m.var:table.columns.#KEY#;.number'>&-m.var:table.columns.#KEY#;.label</th>
+        <th class='&-m.var:table.columns.__KEY__;.label title_&-m.var:table.columns.__KEY__;.number'>&-m.var:table.columns.__KEY__;.label</th>
       </-m.foreach>
     </tr>
     -->
@@ -20,8 +20,8 @@
     <-m.foreach var="table.data" key="ROW">
       <tr>
           <td class="action">action</td>
-        <-m.foreach var="table.data.#ROW#" key="COLUMN">
-          <td>&-m.var:table.data.#ROW#.#COLUMN#;</td>
+        <-m.foreach var="table.data.__ROW__" key="COLUMN">
+          <td>&-m.var:table.data.__ROW__.__COLUMN__;</td>
         </-m.foreach>
       </tr>
     </-m.foreach>
@@ -35,7 +35,7 @@
     <button class="bt-page" rel="page=1">Inicio</button>
     <button class="prev-page">Anterior</button>
    <m.foreach var="pages.list" key="KEY">
-    <button class="bt-page &m.var:pages.list.#KEY#.active;" rel="&m.var:pages.list.#KEY#.link;">&m.var:pages.list.#KEY#.number;</button>
+    <button class="bt-page &m.var:pages.list.__KEY__.active;" rel="&m.var:pages.list.__KEY__.link;">&m.var:pages.list.__KEY__.number;</button>
    </m.foreach>
     <button class="next-page">Próximo</button>
     <button class="bt-page" rel="&m.var:pages.last.link;">Fim</button>
