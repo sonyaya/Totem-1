@@ -1001,7 +1001,7 @@
                     $errorArray = Array();
                     $data = array_merge_recursive($origData, $data);
                     foreach($origData as $key=>$val){
-                        if(method_exists($obj = $preLoadedColumnsTypes[$key]['class'], $method = "after".ucwords($action))){
+                        if( isset($preLoadedColumnsTypes[$key]['class']) && method_exists($obj = $preLoadedColumnsTypes[$key]['class'], $method = "after".ucwords($action)) ){
                             $obj->$method($origData[$key], $key, $allData, $preLoadedColumnsTypes[$key]['parameter'], Array("column"=>$pk, "value"=>$id));
                         }
                     }
