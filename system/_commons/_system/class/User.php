@@ -13,7 +13,7 @@
         /**
          *
          */
-        public static function check($context="backend", $action="", $returnType="html"){
+        public static function check($context="backend", $action="all", $returnType="html"){
             global $_M_CONF;
             global $_M_THIS_CONFIG;
                     
@@ -39,7 +39,7 @@
                             
                             //
                             switch(true){
-                                case ($denny == "all" || $denny == "module"): 
+                                case ($denny == "all"): 
                                     $grant = false; 
                                     break;
                                 
