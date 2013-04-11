@@ -9,15 +9,15 @@ TO-DO
 Frontend
 --------
 
-- ### inTabs
+- # inTabs
 
    - ...
 
-- ### List
+- # List
 
     - Adicionar ajax para pesquisas no template list no template DF1
 
-- ### Form
+- # Form
 
     - ...
 
@@ -30,7 +30,7 @@ Bridge
 ------
 - ...
 
-## Console
+ Console
 
 - ...
 
@@ -44,16 +44,16 @@ BUGS
 Backend
 -------
 
-- ### inTabs
+- # inTabs
 
    - ...
 
-- ### List
+- # List
 
     - Criado um formulário de pesquisa, porém ele é limitado e portanto deve se melhorado.
     - O formulário atual de pesquisa para o list possui bugs em pesquisas utilizando % (BETEEWEN, LIKE e RLIKE)
 
-- ### Form
+- # Form
 
     - Tipo imagesUpload não altera a ordem das imagens no android
 
