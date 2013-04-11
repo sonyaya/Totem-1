@@ -1,9 +1,10 @@
 TO-DO
 =====
 
-- Criar sistema de log de alterações e permissões por módulos.
+- Criar sistema de log de alterações.
 - Adicionar imagem ao login de usuário
 - Adicionar metódos como submit, search etc tudo no dafault layout do template
+- Melhorar segurança de acesso ao bridge
 
 Frontend
 --------
