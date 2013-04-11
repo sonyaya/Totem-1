@@ -1,17 +1,17 @@
 backend:
-    _grant_: [insert, update, delete, viewForm, viewList, viewInTabs, viewDashboard, viewDummyForm ]
-    _denny_: []
-    _smenu_:
+  _grant_: [ insert, update, delete, view-dashboard, view-list-form, view-dummy-form, view-insert-form, view-update-form, view-inTabs-form ]
+  _denny_: []
+  _smenu_:
 
         modules: 
           _grant_: all
           _denny_: []
           _smenu_:
 
-            user: 
-              _grant_: all
-              _denny_: [ viewInTabs ]
-              
-            blog: 
-              _grant_: all
-              _denny_: []
+              user: 
+                _grant_: all
+                _denny_: [view-inTabs-form ]
+
+              blog: 
+                _grant_: all
+                _denny_: []
