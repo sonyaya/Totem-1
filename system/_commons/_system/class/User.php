@@ -39,7 +39,7 @@
                             
                             //
                             switch(true){
-                                case ($denny == "all"): 
+                                case ($denny == "all" || $denny == "module"): 
                                     $grant = false; 
                                     break;
                                 
