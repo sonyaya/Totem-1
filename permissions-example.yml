@@ -10,8 +10,12 @@ backend:
 
               user: 
                 _grant_: all
-                _denny_: [view-inTabs-form ]
+                _denny_: []
 
               blog: 
+                _grant_: all
+                _denny_:  [ module ] # bloqueia acesso ao modulo completamente
+                
+              example:
                 _grant_: all
                 _denny_: []

@@ -1,7 +1,6 @@
 TO-DO
 =====
 
-- Verificar e Melhorar sistema de permissões
 - Criar sistema de log de alterações e permissões por módulos.
 - Adicionar imagem ao login de usuário
 - Adicionar metódos como submit, search etc tudo no dafault layout do template

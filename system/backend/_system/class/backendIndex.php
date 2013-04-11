@@ -212,7 +212,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DO
                 // DASHBOARD ESPECIFÍCO
                 case "view-dashboard":{
-                    User::check("backend/{$path}", "viewDashboard", "html");
+                    User::check("backend/{$path}", $action, "html");
                     $dashboard = new DashboardComposer();
                     $dashboard->viewDashboard( $path, "dashboard.html" );
                     break;
@@ -221,7 +221,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 case "view-insert-form":{
-                    User::check("backend/{$path}", "viewForm", "html");
+                    User::check("backend/{$path}", $action, "html");
                     self::viewFormInsert("form.html", $path);
                     break;
                 }
@@ -229,7 +229,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 case "view-update-form":{
-                    User::check("backend/{$path}", "viewForm", "html");
+                    User::check("backend/{$path}", $action, "html");
                     self::viewFormUpdate("form.html", $path, $get['id']);
                     break;
                 }
@@ -237,7 +237,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO FALSO
                 case "view-dummy-form":{
-                    User::check("backend/{$path}", "viewDummyForm", "html");
+                    User::check("backend/{$path}", $action, "html");
                     self::viewFormUpdate("dummy-form.html", $path, "dummy");
                     break;
                 }
@@ -245,7 +245,7 @@
                 // BUSCA LISTA DE DADOS REFERENTE 
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 case "view-list-form":{
-                    User::check("backend/{$path}", "viewList", "html");
+                    User::check("backend/{$path}", $action, "html");
                     self::viewFormList("list.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -254,7 +254,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // E O FORMULÁRIO DE INSERÇÃO
                 case "view-inTabs-form":{
-                    User::check("backend/{$path}", "viewInTabs", "html");
+                    User::check("backend/{$path}", $action, "html");
                     self::viewFormInTabs("listAndInsert.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -263,7 +263,7 @@
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 // EM JANELA
                 case "view-insert-window-form":{
-                    User::check("backend/{$path}", "viewForm", "html");
+                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormInsert("form-window.html", $path);
                     break;
                 }
@@ -272,7 +272,7 @@
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 // EM JANELA
                 case "view-update-window-form":{
-                    User::check("backend/{$path}", "viewForm", "viewForm", "html");
+                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormUpdate("form-window.html", $path, $get['id']);
                     break;
                 }
@@ -281,7 +281,7 @@
                 // TELA DE FORMULÁRIO FALSO
                 // EM JANELA
                 case "view-dummy-window-form":{
-                    User::check("backend/{$path}", "viewDummyForm", "html");
+                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormUpdate("dummy-form-window.html", $path, "dummy");
                     break;
                 }
@@ -290,7 +290,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // EM JANELA
                 case "view-list-window-form":{
-                    User::check("backend/{$path}", "viewForm", "html");
+                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormList("list-window.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -304,7 +304,7 @@
 
                 // DELETA UM FORMULÁRIO
                 case "delete-form":{
-                    User::check("backend/{$path}", "json");
+                    User::check("backend/{$path}", "delete", "json");
                     $form = new Form();
                     echo json_encode( $form->deleteForm( $path, $get['id']) );
                     break;
@@ -404,6 +404,7 @@
         static private function createMenuRecursive($array, $deep=0, $deepClass=1){
             global $_M_CONFIG;
 
+            
             $indent = 4;
             $pad0 = str_pad("", $deep);
             $pad1 = str_pad("", $deep+($indent) );
@@ -416,15 +417,8 @@
                     //
                     parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
                     
-                    //
-                    $hideMenuPath = 
-                        isset($_SESSION['user']['permissions']['backend']['hide-menu-by-path']) 
-                            ? $_SESSION['user']['permissions']['backend']['hide-menu-by-path'] 
-                            : Array()
-                        ;
-
-                    //
-                    if( !in_array($mLnk['path'], $hideMenuPath) ){
+                    // permissões por menus
+                    if( User::check("backend/modules/{$mLnk['path']}", $mLnk['action'], "bool") ){
                         $ret .= $pad1 . "<li>\r\n";
                         // os arrays de comparação devem 
                         // ter no minimo estas chaves
@@ -437,7 +431,7 @@
                         $mLnk = array_replace($arrCompare, $mLnk);
                         $mLnk['module'] = preg_replace("/\/.*$/", "", $mLnk['path']);
 
-                        // array da pagina/url atual (paginaa que esta sendo mostrada no browser)
+                        // array da pagina/url atual (pagina que esta sendo mostrada no browser)
                         $pLnk = array_replace($arrCompare, $_GET);
                         $pLnk['module'] = preg_replace("/\/.*$/", "", $pLnk['path']);
 
@@ -463,16 +457,12 @@
                 }else{
                     // Recursividade de modulo
                     if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
-                        // verifica se o usuário pode ver este módulo
-                        if( 
-                            !isset( $_SESSION['user']['permissions']['backend']['show-module'] ) ||
-                            $_SESSION['user']['permissions']['backend']['show-module'] === true ||
-                            in_array('all', $_SESSION['user']['permissions']['backend']['show-module'] ) ||
-                            in_array($val['load-from-module'], $_SESSION['user']['permissions']['backend']['show-module'] )
-                        ){
+                        // permissões por modulo
+                        if( User::check("backend/modules/{$val['load-from-module']}", "all", "bool") ){
+                            // verifica se o usuário pode ver este módulo
                             $ret .= $pad1 . "<li>\r\n";
                             $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
-                            
+
                             // variaveis comuns
                             global $_M_MENU_PARTS;
                             global $_M_MENU_MODULE;
