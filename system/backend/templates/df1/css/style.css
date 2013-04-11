@@ -405,13 +405,13 @@ iframe{
         }
         
     nav.top-tabs ul li span{
-        width: 12px;
-        height: 12px;
-        text-indent: -1000px;
-        vertical-align: sub;
-        background: url("../img/iconic/x_alt.svg") no-repeat center center;
+        background: url("../img/iconic/x_alt.svg") no-repeat scroll center center;
         background-size: 100%;
         display: inline-block;
+        height: 14px;
+        text-indent: -1000px;
+        vertical-align: baseline;
+        width: 14px;
         }
         
     
