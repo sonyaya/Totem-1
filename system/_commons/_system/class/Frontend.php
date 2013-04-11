@@ -71,7 +71,7 @@
                 $file_path = $match['link'];
                 
                 // variaveis
-                preg_match_all("/#(.*?)#/i", $match['link'], $vars, PREG_SET_ORDER);
+                preg_match_all("/__(.*?)__/i", $match['link'], $vars, PREG_SET_ORDER);
                 $file_path = $match['link'];
                 foreach ($vars as $var) {
                     $file_path = str_replace($var[0], $this->getMVar($var[1]), $file_path);
@@ -93,7 +93,7 @@
                     $file_path = $TAG['value'];
                     
                     // variaveis
-                    preg_match_all("/#(.*?)#/i", $TAG['value'], $vars, PREG_SET_ORDER);
+                    preg_match_all("/__(.*?)__/i", $TAG['value'], $vars, PREG_SET_ORDER);
                     foreach ($vars as $var) {
                         $file_path = str_replace($var[0], $this->getMVar($var[1]), $TAG['value']);
                     }
@@ -205,7 +205,7 @@
                         foreach($var as $key=>$val){
                             $str = rtrim($TAG['innerHTML'], "\t ");
                             $str = preg_replace("/(.*?)[\r\n]$/i", "$1", $str);
-                            $HTML .= str_replace("#{$aKEY}#", $key, $str);
+                            $HTML .= str_replace("__{$aKEY}__", $key, $str);
                         }
                     }
                     
@@ -238,14 +238,14 @@
 
                         for($i=$start; $i<=$stop; $i++){
                             $val = str_pad( $i, strlen($start), "0", STR_PAD_LEFT );
-                            $HTML .= str_replace("#{$aKEY}#", $val, rtrim($TAG['innerHTML']) );
+                            $HTML .= str_replace("__{$aKEY}__", $val, rtrim($TAG['innerHTML']) );
                         }
 
                     }elseif($start > $stop){
 
                         for($i=$start; $i>=$stop; $i--){
                             $val = str_pad( $i, strlen($stop), "0", STR_PAD_LEFT );
-                            $HTML .= str_replace("#{$aKEY}#", $val, rtrim($TAG['innerHTML']) );
+                            $HTML .= str_replace("__{$aKEY}__", $val, rtrim($TAG['innerHTML']) );
                         }
 
                     }
