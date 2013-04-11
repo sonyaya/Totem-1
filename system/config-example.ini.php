@@ -1,11 +1,12 @@
 ;<?php exit(); ?>
 
 [system]
-  root-path   = "totem/"
-  salt        = "your salt phrase, change this phrase only once before installing the system, and never touch it again!"
-  pepper      = "your pepper phrase, change this phrase only once before installing the system, and never touch it again!"
-  upload-path = "../uploads"
-  time-zone   = "America/Sao_Paulo"
+  root-path       = "totem/"
+  salt            = "your salt phrase, change this phrase only once before installing the system, and never touch it again!"
+  pepper          = "your pepper phrase, change this phrase only once before installing the system, and never touch it again!"
+  upload-path     = "../uploads"
+  time-zone       = "America/Sao_Paulo"
+  log-php-errors  = true
 
 [smtp]
   host               = "smtp.gmail.com"

@@ -36,13 +36,6 @@
         }
     }
 
-    # -- SAVE PHP ERROS IN A FILE ----------------------------------------------
-
-    error_reporting(E_ALL);
-//    ini_set ("display_errors" , "off");
-//    ini_set ("log_errors"     , "On");
-//    ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
-
     # -- AUTOLOAD --------------------------------------------------------------
 
     spl_autoload_register( 
@@ -87,3 +80,12 @@
     # -- DEFINE TIME ZONE ATUAL ------------------------------------------------
 
     date_default_timezone_set( $_M_CONFIG->system['time-zone'] );
+    
+    # -- SAVE PHP ERROS IN A FILE ----------------------------------------------
+    
+    if( $_M_CONFIG->system['log-php-errors'] ){
+        error_reporting(E_ALL);
+        ini_set ("display_errors" , "off");
+        ini_set ("log_errors"     , "On");
+        ini_set ("error_log"      , "logs/".date('Y-m')."___backent-php-errors.txt");
+    }
