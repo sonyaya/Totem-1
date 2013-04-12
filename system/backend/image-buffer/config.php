@@ -4,11 +4,11 @@
     if(file_exists($file = "../../config.ini.php")){
         $_M_CONFIG = (object)parse_ini_file($file, true);
     }else{
-        die("Configuration file ../config.ini.php not found!");
+        die("Configuration file config.ini.php not found!");
     }
     
     // BASE DIR
-    $options['basedir'] = "../" . $_M_CONFIG->system['upload-path'];
+    $options['basedir'] = "../../" . $_M_CONFIG->system['upload-path'];
     
     // DEFAULT IMAGE SIZE
     $options['size']['width']  = 200;
