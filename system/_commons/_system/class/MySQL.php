@@ -64,6 +64,7 @@
          */
         public function __construct(){
             global $_M_CONFIG;
+            global $_M_THIS_CONFIG;
 
             # VERIFICAR SE PDO MySQL ESTA ATIVO
             if( !extension_loaded('pdo_mysql') ){
@@ -91,6 +92,9 @@
             $this->PDO->exec('SET character_set_connection=utf8');
             $this->PDO->exec('SET character_set_client=utf8');
             $this->PDO->exec('SET character_set_results=utf8');
+            
+            # 
+            $this->rowsPerPage = $_M_THIS_CONFIG['rows-per-page'];
         }
 
         /**
