@@ -72,7 +72,7 @@
         $_M_CONFIG = (object)parse_ini_file("../config.ini.php", true);
 
         // CAMINHO DO PATH-UPLOAD RELATIVO A PASTA SYSTEM
-        $_M_CONFIG = "../{$_M_CONFIG->system['upload-path']}";
+        $_M_CONFIG->system['upload-path'] = "../{$_M_CONFIG->system['upload-path']}";
         
         // CONFIGURAÇÕES PARA ESTA APLICAÇÃO
         $_M_THIS_CONFIG = $_M_CONFIG->frontend;
