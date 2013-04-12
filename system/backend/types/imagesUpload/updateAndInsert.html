@@ -26,7 +26,7 @@
         <ul>
           <m.if cond="&m.var:bool:_GET.id;">
           <m.foreach var="toLayout.files.order" key="KEY">
-            <li data-file="&m.var:toLayout.files.order.#KEY#;"><input value="&m.var:toLayout.files.order.#KEY#;" name="&m.var:name;[]" type="hidden"><img src="image-buffer/130x95/&m.var:toLayout.files.order.#KEY#;"></li>
+            <li data-file="&m.var:toLayout.files.order.__KEY__;"><input value="&m.var:toLayout.files.order.__KEY__;" name="&m.var:name;[]" type="hidden"><img src="image-buffer/130x95/&m.var:toLayout.files.order.__KEY__;"></li>
           </m.foreach>
           </m.if>
         </ul>
