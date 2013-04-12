@@ -64,7 +64,7 @@
             $toTypeLayout = Array(
                 "folder" => $folder,
                 "files" => json_decode($thisData, true),
-                "upload-folder" => $_M_CONFIG->system['upload-path']
+                "upload-folder" => preg_replace("/\.\.\//", "", $_M_CONFIG->system['upload-path'], 1) 
             );
         }
 
