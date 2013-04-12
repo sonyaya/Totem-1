@@ -39,7 +39,7 @@ Este é responsavel por informar qual é o título principal dos formulários, a
 Tipos de Formulários
 ====================
 
-Existem diversos tipos de formulários … … 
+Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
 <a id="save-form"></a>
 ## Formulário de Inserção ou Atualização
@@ -67,5 +67,10 @@ Estes formulários possuem três propriedades, são elas:
 
 <a id="rest-form"></a>
 ## Formulário Rest API
+
+…
+
+<a id="clone-form"></a>
+## Como clonar formulários
 
 …
