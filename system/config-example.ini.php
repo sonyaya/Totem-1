@@ -38,6 +38,7 @@
   root-path     = "system/backend/"
   template      = "templates/df1/"
   max-page-list = 10
+  rows-per-page = 100
   start-place   = "?action=view-dashboard&path=user/dashboards/dashboard"
   bootstrap     = '
     "userBootstrap" : "modules/user/extra/bootstrap.php"
