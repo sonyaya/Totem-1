@@ -4,7 +4,7 @@
         <title></title>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <m.import>
-            m.var:imported = "#config.html-folder#/example.json";
+            m.var:imported = "__config.html-folder__/example.json";
         </m.import>
     </head>
     <body>
@@ -49,7 +49,7 @@
         <h1>FOREACH USING GET</h1>
         <pre>
           <m.foreach var="_GET" key="KEY">
-            #KEY# -> &m.var:_GET.#KEY#;
+            __KEY__ -> &m.var:_GET.__KEY__;
           </m.foreach>
         </pre>
         
@@ -67,11 +67,11 @@
         <h1>REPEAT</h1>
         <pre>
           <m.repeat start="1" stop="5" key="KEY">
-            #KEY#
+            __KEY__
           </m.repeat>
         </pre>
         
         <h1>INCLUDE</h1>
-        &m.include:#config.html-folder#/include.html;
+        &m.include:__config.html-folder__/include.html;
     </body>
 </html>
