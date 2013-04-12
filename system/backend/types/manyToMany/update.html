@@ -38,9 +38,9 @@
             <ul>
                 <!-- lis -->
               <m.foreach var="toLayout" key="KEY">
-                <li class='li_&m.var:toLayout.#KEY#.data.0.value;' data-value='&m.var:toLayout.KEY#.data.0.value;' data-name='&m.var:name;[]'>
-                    <input type='hidden' name='&m.var:name;[]' value='&m.var:toLayout.#KEY#.data.0.value;'>
-                    &m.var:toLayout.#KEY#.data.0.label;
+                <li class='li_&m.var:toLayout.__KEY__.data.0.value;' data-value='&m.var:toLayout.KEY#.data.0.value;' data-name='&m.var:name;[]'>
+                    <input type='hidden' name='&m.var:name;[]' value='&m.var:toLayout.__KEY__.data.0.value;'>
+                    &m.var:toLayout.__KEY__.data.0.label;
                 </li>
               </m.foreach>
             </ul>

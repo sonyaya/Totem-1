@@ -1,7 +1,7 @@
 CKEditor 4 Changelog
 ====================
 
-## CKEditor 4.0.1
+____ CKEditor 4.0.1
 
 Fixed issues:
 
@@ -45,7 +45,7 @@ Fixed issues:
 * [#9693](http://dev.ckeditor.com/ticket/9693): Removed "live preview" checkbox from UI color picker.
 
 
-## CKEditor 4.0
+____ CKEditor 4.0
 
 The first stable release of the new CKEditor 4 code line.
 

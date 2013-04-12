@@ -2,7 +2,7 @@
   <label>&m.var:label;</label>
   <select name="&m.var:name;" class="&m.var:type;" id="&m.var:id;">
     <m.foreach var="parameter" key="KEY">
-      <option value="&m.var:parameter.#KEY#;">#KEY#</option>
+      <option value="&m.var:parameter.__KEY__;">__KEY__</option>
     </m.foreach>
   </select>
 </div>

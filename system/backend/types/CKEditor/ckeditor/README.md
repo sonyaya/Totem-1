@@ -8,12 +8,12 @@ CKEditor is a text editor to be used inside web pages. It's not a replacement
 for desktop text editors like Word or OpenOffice, but a component to be used as
 part of web applications and websites.
 
-## Documentation
+____ Documentation
 
 The full editor documentation is available online at the following address:
 http://docs.ckeditor.com
 
-## Installation
+____ Installation
 
 Installing CKEditor is an easy task. Just follow these simple steps:
 
@@ -25,7 +25,7 @@ Installing CKEditor is an easy task. Just follow these simple steps:
 **Note:** CKEditor is by default installed in the `ckeditor` folder. You can
 place the files in whichever you want though.
 
-## Checking Your Installation
+____ Checking Your Installation
 
 The editor comes with a few sample pages that can be used to verify that
 installation proceeded properly. Take a look at the `samples` directory.
