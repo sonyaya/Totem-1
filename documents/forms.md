@@ -211,14 +211,14 @@ forms:
 
 [▲](#summary) É possível adicionar evetos para qualquer formulário, estes eventos podem executar quaquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos fomulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
 
-- [beforeLoadData: Antes de carregar valores na interface](#beforeLoadData)
-- [afterLoadData: Após carregar valores na interface](#afterLoadData)
-- [beforeInsert: Antes de executar *insert* no banco de dados](#beforeInsert)
-- [afterInsert: Após de executar *insert* no banco de dados](#afterInsert)
-- [beforeUpdate: Antes de executar *update* no banco de dados](#beforeUpdate)
-- [afterUpdate: Após de executar *update* no banco de dados](#afterUpdate)
-- [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
-- [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
+- [beforeLoadData: Antes de carregar valores na interface](#event-beforeLoadData)
+- [afterLoadData: Após carregar valores na interface](#event-afterLoadData)
+- [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
+- [afterInsert: Após de executar *insert* no banco de dados](#event-afterInsert)
+- [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
+- [afterUpdate: Após de executar *update* no banco de dados](#event-afterUpdate)
+- [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
+- [afterDelete: Após de executar *delete* no banco de dados](#event-afterDelete)
 
 <a name="event-beforeLoadData" id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
