@@ -29,8 +29,8 @@ Os formulários são configurados por um arquivo YAML preferencialmente devem se
 
 São basicamente utilizados para informar ao módulo **backend** quais são as rotinas de inserção, atualização, exclusão além de rotinas mais específicas, porém também podem prover informações para outros módulos como o **bridge (api)** e consequentemente para o **frontend**.
 
-<a id="save-form">&nbsp;</a>
-## Cabeçalho
+
+## <a id="save-form">Cabeçalho</a>
 
 Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
@@ -41,8 +41,8 @@ header:
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-<a id="save-form">&nbsp;</a>
-Tipos de Formulários
+
+<a id="save-form">Tipos de Formulários</a>
 ====================
 
 Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
@@ -142,6 +142,7 @@ forms:
               
               # podemos ter quantos inputs forem necessários
 ```
+   
    
 <a id="delete-form">&nbsp;</a>
 ## Formulário de Exclusão
