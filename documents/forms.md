@@ -1,4 +1,4 @@
-<a name="summary" id="summary">teste</a>
+<a name="summary" id="summary"></a>
 Sumário
 =======
 
@@ -23,7 +23,7 @@ Sumário
 6. [Exemplo de formulário completo](#complete-form)
 
 
-<a id="intro"></a>
+<a name="intro" id="intro"></a>
 
 1. Formulários
 ==============
@@ -39,7 +39,7 @@ Sumário
 
 São basicamente utilizados para informar ao módulo **backend** quais são as rotinas de inserção, atualização, exclusão além de rotinas mais específicas, porém também podem prover informações para outros módulos como o **bridge (api)** e consequentemente para o **frontend**.
 
-<a id="head"></a>
+<a name="head" id="head"></a>
 2. Cabeçalho
 ============
 
@@ -52,13 +52,13 @@ header:
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-<a id="save-form"></a>
+<a name="save-form" id="save-form"></a>
 3 Tipos de Formulários
 ======================
 
 [▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
-<a id="save-form"></a>
+<a name="save-form" id="save-form"></a>
 ## 3.1 Formulário de Inserção ou Atualização
 
 [▲](#save-form) Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
@@ -88,7 +88,7 @@ forms:
 ```
 
 
-<a id="dummy-form"></a>
+<a name="dummy-form" id="dummy-form"></a>
 ## 3.2 Boneco (dummy)
 
 [▲](#save-form) É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
@@ -131,7 +131,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
     }
 ```
    
-<a id="list-form"></a>
+<a name="list-form" id="list-form"></a>
 ## 3.3 Formulário de Listagem 
  
 [▲](#save-form) O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
@@ -155,7 +155,7 @@ forms:
 ```
 > Vale resaltar que os valores para column dos inputs neste formulário podem ser uma sub-query, exemplo: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
 
-<a id="delete-form"></a>
+<a name="delete-form" id="delete-form"></a>
 ## 3.4 Formulário de Exclusão
 
 [▲](#save-form) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
@@ -176,7 +176,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-<a id="rest-form"></a>
+<a name="rest-form" id="rest-form"></a>
 ## 3.5 Formulário Rest API (bridge)
 
 [▲](#save-form) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
@@ -198,7 +198,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-<a id="events"></a>
+<a name="events" id="events"></a>
 4. Eventos de formulários
 ========================
 
@@ -213,47 +213,47 @@ forms:
 - [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
 - [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
 
-<a id="event-beforeLoadData"></a>
+<a name="event-beforeLoadData" id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
 
 [▲](#events) …
 
-<a id="event-afterLoadData"></a>
+<a name="event-afterLoadData" id="event-afterLoadData"></a>
 ## 4.2 afterLoadData: Após carregar valores na interface
 
 [▲](#events) …
 
-<a id="event-beforeInsert"></a>
+<a name="event-beforeInsert" id="event-beforeInsert"></a>
 ## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
 
 [▲](#events) …
 
-<a id="event-afterInsert"></a>
+<a name="event-afterInsert" id="event-afterInsert"></a>
 ## 4.4 afterInsert: Após de executar *insert* no banco de dados
 
 [▲](#events) …
 
-<a id="event-beforeUpdate"></a>
+<a name="event-beforeUpdate" id="event-beforeUpdate"></a>
 ## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
 
 [▲](#events) …
 
-<a id="event-afterUpdate"></a>
+<a name="event-afterUpdate" id="event-afterUpdate"></a>
 ## 4.6 afterUpdate: Após de executar *update* no banco de dados
 
 [▲](#events) …
 
-<a id="event-beforeDelete"></a>
+<a name="event-beforeDelete" id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
 
 [▲](#events) …
 
-<a id="event-afterDelete"></a>
+<a name="event-afterDelete" id="event-afterDelete"></a>
 ## 4.8 afterDelete: Após de executar *delete* no banco de dados
 
 [▲](#events) …
 
-<a id="clone-form"></a>
+<a name="clone-form" id="clone-form"></a>
 5 Como clonar formulários
 =========================
 
@@ -378,7 +378,7 @@ Resumindo as para mesclagem são:
 
 - Inputs com alias diferentes não são mesclados e sim incluidos.
 
-<a id="complete-form"></a>
+<a name="complete-form" id="complete-form"></a>
 6. Exemplo de formulário completo
 =========================
 
