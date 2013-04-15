@@ -1,5 +1,4 @@
-Sumário
-=======
+# Sumário
 
 - [Introdução](#intro)
 - [Cabeçalho do Arquivo](#head)
@@ -15,8 +14,7 @@ Sumário
 
 
 <a id="intro"></a>
-Formulários
-===========
+# Formulários
 
 Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
 
@@ -42,8 +40,7 @@ header:
 ```
 
 <a id="save-form"></a>
-Tipos de Formulários
-====================
+# Tipos de Formulários
 
 Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
