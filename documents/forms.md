@@ -360,12 +360,13 @@ forms:
 …
 
 ```
+Resumindo as para mesclagem são: 
 
-> Resumo: 
-> 
-> - para o parametro *merge-forms* o valor mais a esquerda tem prioridade no processo de mesclagem. 
->  - *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade. 
->  - Inputs com alias diferentes não são mesclados e sim incluidos.
+- para o parametro *merge-forms* o valor mais a esquerda tem prioridade no processo de mesclagem. 
+
+- *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade. 
+
+- Inputs com alias diferentes não são mesclados e sim incluidos.
 
 <a id="complete-form"></a>
 6. Exemplo de formulário completo
