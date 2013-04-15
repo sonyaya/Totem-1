@@ -41,8 +41,7 @@ header:
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-<a id="save-form"></a>
-Tipos de Formulários
+Tipos de Formulários [save-form] ##
 ====================
 
 Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
