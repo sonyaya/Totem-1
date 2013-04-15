@@ -142,7 +142,8 @@ forms:
               
               # podemos ter quantos inputs forem necessários
 ```
-   
+> Vale resaltar que os valores para column dos inputs neste formulário podem ser uma sub-query, exemplo: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
+
 <a id="delete-form"></a>
 ## Formulário de Exclusão
 
