@@ -34,7 +34,7 @@ São basicamente utilizados para informar ao módulo **backend** quais são as r
 
 Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
-```
+```yaml
 header:
     title: Nome pricipal de seus formulários
     table: nome_da_tabela_no_banco_de_dados
