@@ -252,11 +252,11 @@ veja um exemplo da implementação deste evento:
 
 ```php
 <?php
-  class FormEvents {
-      function beforeLoadData($pkey, $config){
-         // seu código aqui
-      }
-  }
+    class FormEvents {
+        function beforeLoadData($pkey, $config){
+           // seu código aqui
+        }
+    }
 ```
 
 
@@ -265,35 +265,98 @@ veja um exemplo da implementação deste evento:
 
 [▲](#events) …
 
+```php
+<?php
+    class FormEvents {
+        afterLoadData(&$loadedData, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
+
 <a name="event-beforeInsert" id="event-beforeInsert"></a>
 ## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
 
 [▲](#events) …
+
+```php
+<?php
+    class FormEvents {
+        function beforeInsert(&$data, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
 
 <a name="event-afterInsert" id="event-afterInsert"></a>
 ## 4.4 afterInsert: Após de executar *insert* no banco de dados
 
 [▲](#events) …
 
+```php
+<?php
+    class FormEvents {
+        function afterInsert($data, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
+
 <a name="event-beforeUpdate" id="event-beforeUpdate"></a>
 ## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
 
 [▲](#events) …
+
+```php
+<?php
+    class FormEvents {
+        function beforeUpdate(&$data, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
 
 <a name="event-afterUpdate" id="event-afterUpdate"></a>
 ## 4.6 afterUpdate: Após de executar *update* no banco de dados
 
 [▲](#events) …
 
+```php
+<?php
+    class FormEvents {
+        function afterUpdate($data, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
+
 <a name="event-beforeDelete" id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
 
 [▲](#events) …
 
+```php
+<?php
+    class FormEvents {
+        function beforeDelete(&$data, $pkey, $config){
+           // seu código aqui
+        }
+    }
+```
+
 <a name="event-afterDelete" id="event-afterDelete"></a>
 ## 4.8 afterDelete: Após de executar *delete* no banco de dados
 
 [▲](#events) …
+
+```php
+<?php
+    class FormEvents {
+        function afterDelete($data, $pkey){
+           // seu código aqui
+        }
+    }
+```
 
 <a name="clone-form" id="clone-form"></a>
 5 Como clonar formulários
