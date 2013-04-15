@@ -14,7 +14,7 @@ Sumário
 - [Como clonar formulários](#clone-form)
 
 
-<a id="intro"></a>
+<a id="intro">&nbsp;</a>
 Formulários
 ===========
 
@@ -29,24 +29,25 @@ Os formulários são configurados por um arquivo YAML preferencialmente devem se
 
 São basicamente utilizados para informar ao módulo **backend** quais são as rotinas de inserção, atualização, exclusão além de rotinas mais específicas, porém também podem prover informações para outros módulos como o **bridge (api)** e consequentemente para o **frontend**.
 
-<a id="save-form"></a>
+<a id="save-form">&nbsp;</a>
 ## Cabeçalho
 
 Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
-```yaml
+```
 header:
     title: Nome pricipal de seus formulários
     table: nome_da_tabela_no_banco_de_dados
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-Tipos de Formulários [save-form] ##
+<a id="save-form">&nbsp;</a>
+Tipos de Formulários
 ====================
 
 Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
-<a id="save-form"></a>
+<a id="save-form">&nbsp;</a>
 ## Formulário de Inserção ou Atualização
 
 Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
@@ -76,7 +77,7 @@ forms:
 ```
 
 
-<a id="dummy-form"></a>
+<a id="dummy-form">&nbsp;</a>
 ## Boneco (dummy)
 
 É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
@@ -100,7 +101,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-Exemplo de como pode ser criado o arquivo PHP:
+Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 
 ```php
 <?php
@@ -119,7 +120,7 @@ Exemplo de como pode ser criado o arquivo PHP:
     }
 ```
    
-<a id="list-form"></a>
+<a id="list-form">&nbsp;</a>
 ## Formulário de Listagem
  
 O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
@@ -142,7 +143,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
    
-<a id="delete-form"></a>
+<a id="delete-form">&nbsp;</a>
 ## Formulário de Exclusão
 
 O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
@@ -163,8 +164,8 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-<a id="rest-form"></a>
-## Formulário Rest API
+<a id="rest-form">&nbsp;</a>
+## Formulário Rest API (bridge)
 
 Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
 
@@ -185,11 +186,11 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-<a id="events"></a>
+<a id="events">&nbsp;</a>
 ## Eventos de formulários
 
 …
-<a id="clone-form"></a>
+<a id="clone-form">&nbsp;</a>
 ## Como clonar formulários
 
 …
