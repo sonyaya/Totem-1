@@ -10,7 +10,16 @@ Sumário
     - [Exclusão (delete)](#delete-form)
     - [Formulário para Rest API (bridge)](#rest-form)
 4. [Eventos de formulários](#events)
+    - [beforeLoadData: Antes de carregar valores na interface](#beforeLoadData)
+    - [afterLoadData: Após carregar valores na interface](#afterLoadData)
+    - [beforeInsert: Antes de executar *insert* no banco de dados](#beforeInsert)
+    - [afterInsert: Após de executar *insert* no banco de dados](#afterInsert)
+    - [beforeUpdate: Antes de executar *update* no banco de dados](#beforeUpdate)
+    - [afterUpdate: Após de executar *update* no banco de dados](#afterUpdate)
+    - [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
+    - [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
 5. [Como clonar formulários](#clone-form)
+6. [Exemplo de formulário completo](#complete-form)
 
 
 <a id="intro"></a>
@@ -191,10 +200,282 @@ forms:
 4. Eventos de formulários
 ========================
 
+É possível adicionar evetos para qualquer formulário, estes eventos podem executar quaquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos fomulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
+
+- [beforeLoadData: Antes de carregar valores na interface](#beforeLoadData)
+- [afterLoadData: Após carregar valores na interface](#afterLoadData)
+- [beforeInsert: Antes de executar *insert* no banco de dados](#beforeInsert)
+- [afterInsert: Após de executar *insert* no banco de dados](#afterInsert)
+- [beforeUpdate: Antes de executar *update* no banco de dados](#beforeUpdate)
+- [afterUpdate: Após de executar *update* no banco de dados](#afterUpdate)
+- [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
+- [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
+
+## 4.1 beforeLoadData: Antes de carregar valores na interface
+
+…
+
+## 4.2 afterLoadData: Após carregar valores na interface
+
+…
+
+## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
+
+…
+
+## 4.4 afterInsert: Após de executar *insert* no banco de dados
+
+…
+
+## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
+
+…
+
+## 4.6 afterUpdate: Após de executar *update* no banco de dados
+
+…
+
+## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
+
+…
+
+## 4.8 afterDelete: Após de executar *delete* no banco de dados
+
 …
 
 <a id="clone-form"></a>
 5 Como clonar formulários
 =========================
 
+Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, api (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
+
+Em uma situação específica onde é preciso copiar exatamente os valores do de um outro formulário podemos fazer o seguinte:
+
+```
 …
+
+forms:
+    insert:
+        title: inserindo
+        inputs:
+            - type: meioMask
+              label: Nome
+              column: name
+              parameter:
+                size: 20
+                
+            - type: fk
+              label: Grupo
+              column: group_id
+              parameter:
+                column: id
+                table: _m_group
+                label: name 
+    update:
+    	title: atualizando
+    	merge-form: [ update, insert ]
+    	inputs: []
+    	
+…
+
+```
+
+Note a propriedade *merge-form* no formulário update, esta proriedade recebeu o array *[ update, insert ]* que informa que o formulário update tem prioridade ao ser mesclado com o formulário insert, o que significa que caso exista algum valor no parâmetro inputs do formulário update e este conter o mesmo alias nos parâmetros *inputs* do formulário insert, o valor que sera considera é o valor do parâmetro iputs do formulário update, no exemplo a seguir veremos como isso pode ser feito:
+
+
+```
+…
+
+forms:
+    insert:
+        title: inserindo
+        inputs:
+            nome:                 # alias/apelido para o input   
+              type: meioMask
+              label: Nome
+              column: name
+              parameter:
+                size: 20
+             
+            gurpo:               # alias/apelido para o input
+              type: fk
+              label: Grupo
+              column: group_id
+              parameter:
+                column: id
+                table: _m_group
+                label: name 
+    update:
+    	title: atualizando
+    	merge-form: [ update, insert ]
+    	inputs:
+            nome:                 # alias/apelido para o input   
+              type: mask
+              label: Nome (atualizando)
+              column: name
+              parameter:
+                size: 200
+    	
+…
+
+```
+
+Note que no caso a cima foi adicionado um apelido para cada tipo de input adicionado a lista, este apelido é utilizado posteriormente para alterarmos os valores do formulário que esta sendo clonado, no nosso caso o update tem priodidade sobre o insert porque o valor de *merge-forms* é *[ update, insert ]* o que faz com que o update sobreescreva o que foi meclado do formulário insert, porém caso o valor de merge-forms* fosse o contrário *[ insert, update ]*, nada ocorreria pois quem passaria a ter prioridade superio seria o insert e consequentemente ele iria sobre escreve os valores contidos no parâmetro *inputs* do formulário update.
+
+Também é possível adicionar mais valores ao *inputs*, basta que sejam adicionados alias não contidos no *inputs* que serão clonados, veja o exemplo a seguir:
+
+```
+…
+
+forms:
+    insert:
+        title: inserindo
+        inputs:
+            nome:                 # alias/apelido para o input   
+              type: meioMask
+              label: Nome
+              column: name
+              parameter:
+                size: 20
+             
+            gurpo:               # alias/apelido para o input
+              type: fk
+              label: Grupo
+              column: group_id
+              parameter:
+                column: id
+                table: _m_group
+                label: name 
+    update:
+    	title: atualizando
+    	merge-form: [ update, insert ]
+    	inputs:
+            nome2:                 # alias/apelido para o input   
+              type: mask
+              label: Nome (dois)
+              column: name2
+              parameter:
+                size: 200
+    	
+…
+
+```
+
+> Resumo: 
+> 
+> - para o parametro *merge-forms* o valor mais a esquerda tem prioridade no processo de mesclagem. 
+> 
+>  - *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade. 
+>  
+>  - Inputs com alias diferentes não são mesclados e sim incluidos.
+
+<a id="complete-form"></a>
+6. Exemplo de formulário completo
+=========================
+
+```
+header:
+    title: 'Cadastro de Usuários'
+    table: _m_user
+    p-key: id
+forms:
+    insert:
+        title: 'Inserindo Usuário'
+        input:
+            - type: fk
+              label: Grupo
+              column: group_id
+              parameter:
+                column: id
+                table: _m_group
+                label: name 
+                insert-form  : "user/forms/group" 
+              
+            - type: meioMask
+              label: 'Primeiro Nome'
+              column: first_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: 'Nome do Meio'
+              column: middle_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Sobrenome
+              column: last_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Login
+              column: login
+              parameter:
+                size: 20
+              
+            - type: password
+              label: Senha
+              column: password
+              
+            - type: textarea
+              label: Permissões
+              column: permissions
+              
+            - type: meioMask
+              label: email
+              column: Email
+              parameter:
+                size: 100
+
+    update:
+        title: 'Atualizando Usuário'
+        merge-form: [ update, insert ]
+        input: []
+
+    list:
+        title: 'Listagm de Usuários'
+        rows-per-page: 200
+        input:
+            - type: example
+              label: Cod.
+              column: id
+
+            - type: example
+              label: 'Nome'
+              column: first_name
+              
+            - type: example
+              label: 'Nome do Meio'
+              column: middle_name
+              
+            - type: example
+              label: Sobrenome
+              column: last_name
+              
+            - type: example
+              label: Login
+              column: login
+              
+            - type: example
+              label: Email
+              column: Email
+              
+            - type: example
+              label: Grupo
+              column: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
+
+    dummy:
+        php: user-dummy.php
+        merge-form: [ update, list ]
+        input: []
+
+    delete:
+        merge-form: [ update, list ]
+        input: []
+
+    bridge:
+        merge-form: [ update, list ]
+        input: []
+```
