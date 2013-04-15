@@ -24,10 +24,11 @@ Sumário
 
 
 <a id="intro"></a>
-1. Formulários [<a href="#" class="button minibutton " icon_class=" mini-icon-arr-left"><span class="mini-icon  mini-icon-arr-left"></span>Iconed</a>](#summary)
+
+1. Formulários
 ==============
 
-Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
+[▲](#summary) Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
 
 - [Formulário de Inserção](#save-form)
 - [Formulário de Atualização](#save-form)
@@ -42,7 +43,7 @@ São basicamente utilizados para informar ao módulo **backend** quais são as r
 2. Cabeçalho
 ============
 
-Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
+[▲](#summary) Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
 ```
 header:
@@ -55,12 +56,12 @@ header:
 3 Tipos de Formulários
 ======================
 
-Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
+[▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
 <a id="save-form"></a>
 ## 3.1 Formulário de Inserção ou Atualização
 
-Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
+[▲](#save-form) Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
 
 Estes formulários possuem três propriedades, são elas:
 
@@ -90,7 +91,7 @@ forms:
 <a id="dummy-form"></a>
 ## 3.2 Boneco (dummy)
 
-É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
+[▲](#save-form) É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
 
 Seus parâmetros são muito semelhantes aos parâmetros dos formulários de inserção e atualização além de funcionarem basicamente igual, porém com o diferencial que por padrão este formulário não executa diretamente inserção, atualização ou qualquer outro processo, ele apenas irá executar o arquivo *PHP* que for indicado pelo parâmetro *php:*, veja como este formulário é configurado:
    
@@ -133,7 +134,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 <a id="list-form"></a>
 ## 3.3 Formulário de Listagem 
  
-O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
+[▲](#save-form) O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
 
 Veja um exemplo de como este trecho do formulário pode ser:
 
@@ -157,7 +158,7 @@ forms:
 <a id="delete-form"></a>
 ## 3.4 Formulário de Exclusão
 
-O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
+[▲](#save-form) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
 
 Veja um exemplo de copo pode ser o trecho deste tipo de formulário no arquivo YAML:
 
@@ -178,7 +179,7 @@ forms:
 <a id="rest-form"></a>
 ## 3.5 Formulário Rest API (bridge)
 
-Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
+[▲](#save-form) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
 
 Veja como pode ser este trecho do YAML:
 
@@ -201,7 +202,7 @@ forms:
 4. Eventos de formulários
 ========================
 
-É possível adicionar evetos para qualquer formulário, estes eventos podem executar quaquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos fomulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
+[▲](#summary) É possível adicionar evetos para qualquer formulário, estes eventos podem executar quaquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos fomulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
 
 - [beforeLoadData: Antes de carregar valores na interface](#beforeLoadData)
 - [afterLoadData: Após carregar valores na interface](#afterLoadData)
@@ -215,48 +216,48 @@ forms:
 <a id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
 
-…
+[▲](#events) …
 
 <a id="event-afterLoadData"></a>
 ## 4.2 afterLoadData: Após carregar valores na interface
 
-…
+[▲](#events) …
 
 <a id="event-beforeInsert"></a>
 ## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="event-afterInsert"></a>
 ## 4.4 afterInsert: Após de executar *insert* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="event-beforeUpdate"></a>
 ## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="event-afterUpdate"></a>
 ## 4.6 afterUpdate: Após de executar *update* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="event-afterDelete"></a>
 ## 4.8 afterDelete: Após de executar *delete* no banco de dados
 
-…
+[▲](#events) …
 
 <a id="clone-form"></a>
 5 Como clonar formulários
 =========================
 
-Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, api (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
+[▲](#summary) Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, api (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
 
 Em uma situação específica onde é preciso copiar exatamente os valores do de um outro formulário podemos fazer o seguinte:
 
