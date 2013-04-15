@@ -55,15 +55,63 @@ Estes formulários possuem três propriedades, são elas:
 - merge-form
     - não é uma propriedade obrigatória, é utilizado quando existe a necessidade de copiar os inputs de um outro formulário, isso é útil quando temos dois formulários que irão utilizar exatamente os mesmo ou grande maiorias das propriedades de outro formulário, veja mais informações em [como clonar formulários](#clone-form).
 
+    forms:
+      insert:
+        title: TÍTULO-MAIS-ESPECIFICO-PARA-O-FORMULÁRIO
+        input:
+        
+          - type: TIPO-ESPECIFICO-PARA-ESTE-INPUT
+            label: ETIQUETA-PARA-ESTE-INPUT
+            column: COLUNA-NO-BANCO-DE-DADOS-A-QUAL-ESSE-INPUT-IRÁ-REFERIR-SE
+            parameter : 
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              
+          - type: TIPO-ESPECIFICO-PARA-ESTE-INPUT
+            label: ETIQUETA-PARA-ESTE-INPUT
+            column: COLUNA-NO-BANCO-DE-DADOS-A-QUAL-ESSE-INPUT-IRÁ-REFERIR-SE
+            parameter : 
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              
+          - ...
+              
 <a id="list-form"></a>
 ## Formulário de Listagem
  
-…
+O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
+
+Veja um exemplo de como este trecho do formulário pode ser:
+
+    forms:
+      list:
+        title: TÍTULO-MAIS-ESPECIFICO-PARA-O-FORMULÁRIO
+        rows-per-page: 200
+        input:
+        
+          - type: TIPO-ESPECIFICO-PARA-ESTE-INPUT
+            label: ETIQUETA-PARA-ESTE-INPUT
+            column: COLUNA-NO-BANCO-DE-DADOS-A-QUAL-ESSE-INPUT-IRÁ-REFERIR-SE
+            parameter : 
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              
+          - type: TIPO-ESPECIFICO-PARA-ESTE-INPUT
+            label: ETIQUETA-PARA-ESTE-INPUT
+            column: COLUNA-NO-BANCO-DE-DADOS-A-QUAL-ESSE-INPUT-IRÁ-REFERIR-SE
+            parameter : 
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              PARAMETRO-PARA-O-TIPO : VALOR-PARA-O-PARAMETRO
+              
+          - ...
 
 <a id="delete-form"></a>
 ## Formulário de Exclusão
 
-…
+O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão apagados realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão. 
+
+Veja um exemplo de copo pode ser o trecho deste tipo de formulário no arquivo YAML:
+
 
 <a id="rest-form"></a>
 ## Formulário Rest API
