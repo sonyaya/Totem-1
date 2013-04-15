@@ -28,7 +28,7 @@ Sumário
 1. Formulários
 ==============
 
-[▲](#summary) Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
+[▲](#summary) Os formulários são configurados por um arquivo YAML preferencialmente armazenados na pasta **system/backend/modules/seu modulo/forms/arquivo.yml**, este único arquivo deve conter a configuração para os seguintes formulários:
 
 - [Formulário de Inserção](#save-form)
 - [Formulário de Atualização](#save-form)
@@ -220,10 +220,45 @@ forms:
 - [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
 - [afterDelete: Após de executar *delete* no banco de dados](#event-afterDelete)
 
+As classe possuem parâmetros com nomes padronizados para facilitar a criação de eventos, segue a explicação de cada um destes parâmetros:
+
+<a name="$pkey" id="$pakey"></a>
+### $pkey 
+	é o array contendo a chave primária do valor que esta sendo atualiza, deletado ou listado, contendo nome do campo e valor.
+
+<a name="$config" id="$config"></a>
+### $config 
+
+    é o array com os valores do arquivo de configuração.
+    
+<a name="$loadedData" id="$loadedData"></a>
+### $loadedData 
+	é o array dos valores carregados a partir do banco de dados.
+	
+<a name="$data" id="$data"></a>
+###$data 
+	… 
+
+
 <a name="event-beforeLoadData" id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
 
-[▲](#events) …
+[▲](#events) Quando um formulário de atualização é aberto é feita um busca no banco de dados das informações que serão modificadas, logo após essa requisição ser efetuada é executado o método *beforeLoadData* da classe *FormEvents*, este método possui os seguites parâmetros:
+
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+veja um exemplo da implementação deste evento:
+
+```php
+<?php
+  class FormEvents {
+      function beforeLoadData($pkey, $config){
+         // seu código aqui
+      }
+  }
+```
+
 
 <a name="event-afterLoadData" id="event-afterLoadData"></a>
 ## 4.2 afterLoadData: Após carregar valores na interface
