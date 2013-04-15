@@ -1,17 +1,16 @@
 Sumário
 =======
 
-0. [Introdução](#intro)
-- [Cabeçalho do Arquivo](#head)
-- [Tipos de Formulários](#form-types)
-    0. [Inserção (insert)](#save-form)
-    - [Atualização (update)](#save-form)
-    - [Boneco (dummy)](#dummy-form)
-    - [Listagem (list)](#list-form)
-    - [Exclusão (delete)](#delete-form)
-    - [Formulário para Rest API (bridge)](#rest-form)
-- [Eventos de formulários](#events)
-- [Como clonar formulários](#clone-form)
+1. [Introdução](#intro)
+2. [Cabeçalho do Arquivo](#head)
+3. [Tipos de Formulários](#form-types)
+    1. [Inserção (insert)](#save-form) / [Atualização (update)](#save-form)
+    2. [Boneco (dummy)](#dummy-form)
+    3. [Listagem (list)](#list-form)
+    4. [Exclusão (delete)](#delete-form)
+    5. [Formulário para Rest API (bridge)](#rest-form)
+4. [Eventos de formulários](#events)
+5. [Como clonar formulários](#clone-form)
 
 
 <a id="intro"></a>
@@ -122,7 +121,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 ```
    
 <a id="list-form"></a>
-## 3.3 Formulário de Listagem
+## 3.3 Formulário de Listagem 
  
 O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
 
@@ -193,6 +192,7 @@ forms:
 ========================
 
 …
+
 <a id="clone-form"></a>
 5 Como clonar formulários
 =========================
