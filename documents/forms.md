@@ -1,29 +1,30 @@
+<a id="summary"></a>
 Sumário
 =======
 
 1. [Introdução](#intro)
 2. [Cabeçalho do Arquivo](#head)
 3. [Tipos de Formulários](#form-types)
-    - [Inserção (insert)](#save-form) / [Atualização (update)](#save-form)
-    - [Boneco (dummy)](#dummy-form)
-    - [Listagem (list)](#list-form)
-    - [Exclusão (delete)](#delete-form)
-    - [Formulário para Rest API (bridge)](#rest-form)
+    1. [Inserção (insert)](#save-form) / [Atualização (update)](#save-form)
+    2. [Boneco (dummy)](#dummy-form)
+    3. [Listagem (list)](#list-form)
+    4. [Exclusão (delete)](#delete-form)
+    5. [Formulário para Rest API (bridge)](#rest-form)
 4. [Eventos de formulários](#events)
-    - [beforeLoadData: Antes de carregar valores na interface](#beforeLoadData)
-    - [afterLoadData: Após carregar valores na interface](#afterLoadData)
-    - [beforeInsert: Antes de executar *insert* no banco de dados](#beforeInsert)
-    - [afterInsert: Após de executar *insert* no banco de dados](#afterInsert)
-    - [beforeUpdate: Antes de executar *update* no banco de dados](#beforeUpdate)
-    - [afterUpdate: Após de executar *update* no banco de dados](#afterUpdate)
-    - [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
-    - [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
+    1. [beforeLoadData: Antes de carregar valores na interface](#event-beforeLoadData)
+    2. [afterLoadData: Após carregar valores na interface](#event-afterLoadData)
+    3. [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
+    4. [afterInsert: Após de executar *insert* no banco de dados](#event-afterInsert)
+    5. [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
+    6. [afterUpdate: Após de executar *update* no banco de dados](#event-afterUpdate)
+    7. [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
+    8. [afterDelete: Após de executar *delete* no banco de dados](#event-afterDelete)
 5. [Como clonar formulários](#clone-form)
 6. [Exemplo de formulário completo](#complete-form)
 
 
 <a id="intro"></a>
-1. Formulários
+1. Formulários [<a href="#" class="button minibutton " icon_class=" mini-icon-arr-left"><span class="mini-icon  mini-icon-arr-left"></span>Iconed</a>](#summary)
 ==============
 
 Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
@@ -37,7 +38,7 @@ Os formulários são configurados por um arquivo YAML preferencialmente devem se
 
 São basicamente utilizados para informar ao módulo **backend** quais são as rotinas de inserção, atualização, exclusão além de rotinas mais específicas, porém também podem prover informações para outros módulos como o **bridge (api)** e consequentemente para o **frontend**.
 
-<a id="save-form"></a>
+<a id="head"></a>
 2. Cabeçalho
 ============
 
@@ -211,34 +212,42 @@ forms:
 - [beforeDelete: Antes de executar *delete* no banco de dados](#beforeDelete)
 - [afterDelete: Após de executar *delete* no banco de dados](#afterDelete)
 
+<a id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
 
 …
 
+<a id="event-afterLoadData"></a>
 ## 4.2 afterLoadData: Após carregar valores na interface
 
 …
 
+<a id="event-beforeInsert"></a>
 ## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
 
 …
 
+<a id="event-afterInsert"></a>
 ## 4.4 afterInsert: Após de executar *insert* no banco de dados
 
 …
 
+<a id="event-beforeUpdate"></a>
 ## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
 
 …
 
+<a id="event-afterUpdate"></a>
 ## 4.6 afterUpdate: Após de executar *update* no banco de dados
 
 …
 
+<a id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
 
 …
 
+<a id="event-afterDelete"></a>
 ## 4.8 afterDelete: Após de executar *delete* no banco de dados
 
 …
