@@ -5,20 +5,20 @@ Sumário
 1. [Introdução](#intro)
 2. [Cabeçalho do Arquivo](#head)
 3. [Tipos de Formulários](#form-types)
-    1. [Inserção (insert)](#save-form) / [Atualização (update)](#save-form)
-    2. [Boneco (dummy)](#dummy-form)
-    3. [Listagem (list)](#list-form)
-    4. [Exclusão (delete)](#delete-form)
-    5. [Formulário para Rest API (bridge)](#rest-form)
+    - [Inserção (insert)](#save-form) / [Atualização (update)](#save-form)
+    - [Boneco (dummy)](#dummy-form)
+    - [Listagem (list)](#list-form)
+    - [Exclusão (delete)](#delete-form)
+    - [Formulário para Rest API (bridge)](#rest-form)
 4. [Eventos de formulários](#events)
-    1. [beforeLoadData: Antes de carregar valores na interface](#event-beforeLoadData)
-    2. [afterLoadData: Após carregar valores na interface](#event-afterLoadData)
-    3. [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
-    4. [afterInsert: Após de executar *insert* no banco de dados](#event-afterInsert)
-    5. [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
-    6. [afterUpdate: Após de executar *update* no banco de dados](#event-afterUpdate)
-    7. [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
-    8. [afterDelete: Após de executar *delete* no banco de dados](#event-afterDelete)
+    - [beforeLoadData: Antes de carregar valores na interface](#event-beforeLoadData)
+    - [afterLoadData: Após carregar valores na interface](#event-afterLoadData)
+    - [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
+    - [afterInsert: Após de executar *insert* no banco de dados](#event-afterInsert)
+    - [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
+    - [afterUpdate: Após de executar *update* no banco de dados](#event-afterUpdate)
+    - [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
+    - [afterDelete: Após de executar *delete* no banco de dados](#event-afterDelete)
 5. [Como clonar formulários](#clone-form)
 6. [Exemplo de formulário completo](#complete-form)
 
@@ -52,16 +52,23 @@ header:
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-<a name="save-form" id="save-form"></a>
+<a name="form-types" id="form-types"></a>
 3 Tipos de Formulários
 ======================
 
-[▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
+[▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade específica, verifique a listagem com todos os tipos de formulários que o sistema disponibiliza:
+
+- [Inserção (insert)](#save-form)
+- [Atualização (update)](#save-form)
+- [Boneco (dummy)](#dummy-form)
+- [Listagem (list)](#list-form)
+- [Exclusão (delete)](#delete-form)
+- [Formulário para Rest API (bridge)](#rest-form)
 
 <a name="save-form" id="save-form"></a>
 ## 3.1 Formulário de Inserção ou Atualização
 
-[▲](#save-form) Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
+[▲](#form-types) Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
 
 Estes formulários possuem três propriedades, são elas:
 
@@ -91,7 +98,7 @@ forms:
 <a name="dummy-form" id="dummy-form"></a>
 ## 3.2 Boneco (dummy)
 
-[▲](#save-form) É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
+[▲](#form-types) É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
 
 Seus parâmetros são muito semelhantes aos parâmetros dos formulários de inserção e atualização além de funcionarem basicamente igual, porém com o diferencial que por padrão este formulário não executa diretamente inserção, atualização ou qualquer outro processo, ele apenas irá executar o arquivo *PHP* que for indicado pelo parâmetro *php:*, veja como este formulário é configurado:
    
@@ -134,7 +141,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 <a name="list-form" id="list-form"></a>
 ## 3.3 Formulário de Listagem 
  
-[▲](#save-form) O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
+[▲](#form-types) O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
 
 Veja um exemplo de como este trecho do formulário pode ser:
 
@@ -158,7 +165,7 @@ forms:
 <a name="delete-form" id="delete-form"></a>
 ## 3.4 Formulário de Exclusão
 
-[▲](#save-form) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
+[▲](#form-types) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
 
 Veja um exemplo de copo pode ser o trecho deste tipo de formulário no arquivo YAML:
 
@@ -179,7 +186,7 @@ forms:
 <a name="rest-form" id="rest-form"></a>
 ## 3.5 Formulário Rest API (bridge)
 
-[▲](#save-form) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
+[▲](#form-types) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
 
 Veja como pode ser este trecho do YAML:
 
