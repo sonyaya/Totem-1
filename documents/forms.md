@@ -1,9 +1,10 @@
-# Sumário
+Sumário
+=======
 
-- [Introdução](#intro)
+0. [Introdução](#intro)
 - [Cabeçalho do Arquivo](#head)
 - [Tipos de Formulários](#form-types)
-    - [Inserção (insert)](#save-form)
+    0. [Inserção (insert)](#save-form)
     - [Atualização (update)](#save-form)
     - [Boneco (dummy)](#dummy-form)
     - [Listagem (list)](#list-form)
@@ -14,7 +15,8 @@
 
 
 <a id="intro"></a>
-# Formulários
+1. Formulários
+==============
 
 Os formulários são configurados por um arquivo YAML preferencialmente devem ser gravados na pasta "system/backend/modules/seu modulo/forms/arquivo.yml_", este único arquivo deve conter a configuração para os seguintes formulários:
 
@@ -28,7 +30,8 @@ Os formulários são configurados por um arquivo YAML preferencialmente devem se
 São basicamente utilizados para informar ao módulo **backend** quais são as rotinas de inserção, atualização, exclusão além de rotinas mais específicas, porém também podem prover informações para outros módulos como o **bridge (api)** e consequentemente para o **frontend**.
 
 <a id="save-form"></a>
-## Cabeçalho
+2. Cabeçalho
+============
 
 Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
@@ -40,12 +43,13 @@ header:
 ```
 
 <a id="save-form"></a>
-# Tipos de Formulários
+3 Tipos de Formulários
+======================
 
 Existem diversos tipos de formulários cada um com uma funcionalidade específica… … 
 
 <a id="save-form"></a>
-## Formulário de Inserção ou Atualização
+## 3.1 Formulário de Inserção ou Atualização
 
 Os dois formulários são criados exatamente iguais, portanto esta descrição funciona tanto pra um quanto pra outro diferenciando apenas no fato que a chave para referência de configuração são distintas, no caso do formulário de inserção o caminho da chave de referência é *forms/insert* e o formulário de atualização tem o caminho *forms/update*.
 
@@ -75,7 +79,7 @@ forms:
 
 
 <a id="dummy-form"></a>
-## Boneco (dummy)
+## 3.2 Boneco (dummy)
 
 É o tipo de formulário utilizado para criação de qualquer processo que não possa ser feito com os outros formulários, também é o mais indicado para criação de relatórios.
 
@@ -118,7 +122,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 ```
    
 <a id="list-form"></a>
-## Formulário de Listagem
+## 3.3 Formulário de Listagem
  
 O formulário de listagem é exatamente igual ao formulário de inserção e ao formulário de atualização, exceto pelo fato de possuir uma propriedade extra, utilizada especificamente para informar quantos itens serão apresentados em cada página listagem, esta propriedade não é obrigatória, porém caso não informada o sistema passará a considerar o valor informados no arquivo de configuração config.uni.php na propriedade backend/rows-per-page.
 
@@ -142,7 +146,7 @@ forms:
 > Vale resaltar que os valores para column dos inputs neste formulário podem ser uma sub-query, exemplo: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
 
 <a id="delete-form"></a>
-## Formulário de Exclusão
+## 3.4 Formulário de Exclusão
 
 O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
 
@@ -163,7 +167,7 @@ forms:
 ```
 
 <a id="rest-form"></a>
-## Formulário Rest API (bridge)
+## 3.5 Formulário Rest API (bridge)
 
 Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
 
@@ -185,10 +189,12 @@ forms:
 ```
 
 <a id="events"></a>
-## Eventos de formulários
+4. Eventos de formulários
+========================
 
 …
 <a id="clone-form"></a>
-## Como clonar formulários
+5 Como clonar formulários
+=========================
 
 …
