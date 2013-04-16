@@ -4,7 +4,18 @@ Sumário
 
 1. [Introdução](#intro)
 2. [Criando um tipo personalizado](#creating)
-
+    - [O arquivo de configuração (config.yml)](#config)
+    - Arquivo de eventos de tipo
+        - [validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.](#event-validate)
+        - [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
+        - [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
+        - [beforeList: Antes do formulário de listagem mostrar os valores na interface](#event-beforeList)
+        - [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
+        - [beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm)
+        - [afterInsert: Após executar *insert* no banco de dados](#event-afterInsert)
+        - [afterUpdate: Após executar *update* no banco de dados](#event-afterUpdate)
+        - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
+        - [ajax: Quando for executa uma requisição ajax para o tipo](#event-ajax)
 
 <a name="intro" id="intro"></a>
 1. Tipos de Inputs
@@ -45,8 +56,6 @@ Sumário
 
 ### example
 - É um tipo utilizado para demonstrar como são feitos os tipos.
-- Parâmetros
-    - ...
 
 ### fk
 - Parecido com o combobox, porém neste tipo os valores são buscados de uma tabela no banco de dados, criando assim um relação simples entre as tabelas.
@@ -71,7 +80,7 @@ Sumário
     - **nullable** *pode ser nulo?*
 
 ### manyToMany
-- ...
+- Permite fazer relacionamento entre três tabelas, um relacionamento muitos para muitos.
 - Parâmetros
     - **nullable**     *pode ser nulo?
     - **middle-table** *nome da tabela intermediária*
@@ -108,6 +117,202 @@ Sumário
 - Parâmetros
     - **nullable**     *pode ser nulo?*
 
-<a name="intro" id="intro"></a>
-1. Tipos de Inputs
-==================
+<a name="creating" id="creating"></a>
+2. Criando tipos personalizados
+==============================
+
+[▲](#summary) …
+
+<a name="config" id="config"></a>
+## 2.1 config.yml
+
+Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para criação do tipo, ele indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo.
+
+```
+interface:
+  html:
+    list   : list.html   # carrega arquivo HTML para ser mostrado na tela de listagem, não é obrigatório e caso não seja informado deixa o sistema mais rápido
+    insert : insert.html # carrega o arquivo HTML para formulários de inserção
+    update : update.html # carrega o arquivo HTML para formulários de atualização
+    dummy  : dummy.html  # carrega o arquivo HTML para formulários de boneco
+
+  css:         
+    list   : []          # carrega arquivos CSS no head do formulário de listagem, não é obrigatório
+    insert : []          # carrega arquivos CSS no head do formulário de insert, não é obrigatório
+    update : []          # carrega arquivos CSS no head do formulário de update, não é obrigatório
+    dummy  : []          # carrega arquivos CSS no head do formulário de dummy, não é obrigatório
+
+  javascript:
+    head:
+      list   : []        # carrega arquivo javascript no head do formulário de listagem, não é obrigatório
+      insert : []        # carrega arquivo javascript no head do formulário de insert, não é obrigatório
+      update : []        # carrega arquivo javascript no head do formulário de update, não é obrigatório
+      dummy  : []        # carrega arquivo javascript no head do formulário de dummy, não é obrigatório
+
+    body:
+      list   : []        # carrega arquivo javascript antes do fechamento do body do formulário de listagem, não é obrigatório
+      insert : []        # carrega arquivo javascript antes do fechamento do body do formulário de insert, não é obrigatório
+      update : []        # carrega arquivo javascript antes do fechamento do body do formulário de update, não é obrigatório
+      dummy  : []        # carrega arquivo javascript antes do fechamento do body do formulário de dummy, não é obrigatório
+
+default:
+  parameter : 
+    parâmetro-padrão : valor-padrão # define valores e parâmetros padrões
+```
+
+<a name="events" id="events"></a>
+## 2.2 Arquivo de eventos de tipo
+
+Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP, este arquivo deve conter uma classe com o mesmo nome do tipo, e será responsave manipular os eventos do tipo, os eventos que ele irá controlar são os seguintes:
+
+<a name="event-validate" id="event-validate"></a>
+### 2.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
+
+[▲](#summary) …
+
+```php
+<?php
+    class example{
+        public function validate($thisData, $thisColumn, &$allData, $parameters, $thisLabel){
+            // code here
+        }
+    }
+```
+
+<a name="event-beforeInsert" id="event-beforeInsert"></a>
+### 2.2.2 beforeInsert: Antes de executar *insert* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function beforeInsert(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-beforeUpdate" id="event-beforeUpdate"></a>
+### 2.2.3 beforeUpdate: Antes de executar *update* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function beforeUpdate(&$thisData, $thisColumn, &$allData, $parameters,  $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-beforeList" id="event-beforeList"></a>
+### 2.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function beforeList(&$thisData, $thisRow, $thisColumn, &$allData){
+            // code here
+        }
+    }
+```
+
+<a name="event-beforeDelete" id="event-beforeDelete"></a>
+### 2.2.5 beforeDelete: Antes de executar *delete* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function beforeDelete(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-beforeLoadDataToForm" id="event-beforeLoadDataToForm"></a>
+### 2.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function beforeLoadDataToForm(&$thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){ 
+            // code here 
+        }
+    }
+```
+
+<a name="event-afterInsert" id="event-afterInsert"></a>
+### 2.2.7 afterInsert: Após executar *insert* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function afterInsert(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-afterUpdate" id="event-afterUpdate"></a>
+### 2.2.8 afterUpdate: Após executar *update* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function afterUpdate(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-afterDelete" id="event-afterDelete"></a>
+### 2.2.9 afterDelete: Após executar *delete* no banco de dados
+
+[▲](#summary) …
+
+
+```php
+<?php
+    class example{
+        public function afterDelete(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
+            // code here
+        }
+    }
+```
+
+<a name="event-ajax" id="event-ajax"></a>
+### 2.2.10 ajax:  Quando for executa uma requisição ajax para o tipo
+
+[▲](#summary) …
+
+```php
+<?php
+    class example{
+        public function ajax(){
+            // code here
+        }
+    }
+```
+
+## 2.3 Arquivo de interface de tipo
+
+…
