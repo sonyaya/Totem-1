@@ -15,12 +15,8 @@ Módulo capaz de criar relatórios, formulários de inserção e edição no ban
   - Criação de um novo menu
   - Adição de menus de módulos
   - Adicionando bootstrap de módulo ao sistema
-- Formulários
-  - Eventos (classe PHP)
-  - [Arquivo de Configuração de Formulários (YAML)](documents/forms.md)
+- [Formulários](documents/forms.md)
 - [Tipos (types)](documents/types.md)
-  - Arquivo de configuração (YAML) 
-  - Eventos (classe PHP)
 
 Frontend
 --------
