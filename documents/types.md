@@ -163,7 +163,7 @@ Sumário
 <a name="config" id="config"></a>
 ## 3.1 config.yml
 
-Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para criação do tipo, ele indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo.
+[▲](#creating) Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para criação do tipo, ele indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo que você esta criando, veja a seguir um exemplo comentado:
 
 ```
 interface:
@@ -200,12 +200,12 @@ default:
 <a name="events" id="events"></a>
 ## 3.2 Arquivo de eventos
 
-Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP, este arquivo deve conter uma classe com o mesmo nome do tipo, e será responsave manipular os eventos do tipo, os eventos que ele irá controlar são os seguintes:
+[▲](#creating) Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP, este arquivo deve conter uma classe com o mesmo nome do tipo, e será responsave manipular os eventos do tipo, os eventos que ele irá controlar são os seguintes:
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
 
-[▲](#summary) …
+[▲](#events) …
 
 ```php
 <?php
@@ -219,8 +219,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-beforeInsert" id="event-beforeInsert"></a>
 ### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -234,8 +233,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-beforeUpdate" id="event-beforeUpdate"></a>
 ### 3.2.3 beforeUpdate: Antes de executar *update* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -249,8 +247,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-beforeList" id="event-beforeList"></a>
 ### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -264,8 +261,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-beforeDelete" id="event-beforeDelete"></a>
 ### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -279,8 +275,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-beforeLoadDataToForm" id="event-beforeLoadDataToForm"></a>
 ### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -294,8 +289,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-afterInsert" id="event-afterInsert"></a>
 ### 3.2.7 afterInsert: Após executar *insert* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -309,8 +303,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-afterUpdate" id="event-afterUpdate"></a>
 ### 3.2.8 afterUpdate: Após executar *update* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -324,8 +317,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-afterDelete" id="event-afterDelete"></a>
 ### 3.2.9 afterDelete: Após executar *delete* no banco de dados
 
-[▲](#summary) …
-
+[▲](#events) …
 
 ```php
 <?php
@@ -339,8 +331,7 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="event-ajax" id="event-ajax"></a>
 ### 3.2.10 ajax:  Quando for executa uma requisição ajax para o tipo
 
-[▲](#summary) …
-
+[▲](#events) …
 ```php
 <?php
     class example{
@@ -353,4 +344,4 @@ Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP
 <a name="interface" id="interface"></a>
 ## 2.3 Arquivo de interface
 
-…
+[▲](#creating) …
