@@ -371,13 +371,19 @@ No exemplo a seguir temos o seguinte cenário, caso o valor do campo *id* for ig
 <a name="event-afterDelete" id="event-afterDelete"></a>
 ## 4.8 afterDelete: Após de executar *delete* no banco de dados
 
-[▲](#events) …
+[▲](#events) Após o formulário de exclusão remover valores do banco de dados é possível executar este evento, permitindo assim que seja executado qualquer processo, o evento *afterDelete* possui os seguintes parâmetros:
+
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Imagine um cenário onde após os dados forem excluidos do banco de dados, necessitamos excluir uma pasta no sistema cujo o nome é o valor da chave primária excluida, veja o exemplo a seguir:
 
 ```php
 <?php
     class FormEvents {
         function afterDelete($data, $pkey){
-           // seu código aqui
+            rmdir( $pkey[ $config['p-key'] ] );
         }
     }
 ```
