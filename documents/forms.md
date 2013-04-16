@@ -224,20 +224,20 @@ As classe possuem parâmetros com nomes padronizados para facilitar a criação 
 
 <a name="$pkey" id="$pakey"></a>
 ### $pkey 
-	é o array contendo a chave primária do valor que esta sendo atualiza, deletado ou listado, com nome do campo e valor.
+	Contém o array com a chave primária do valor que esta sendo atualiza, deletado ou listado, com nome do campo e valor.
 
 <a name="$config" id="$config"></a>
 ### $config 
 
-    é o array com os valores do arquivo de configuração.
+    Contém o array com os valores do arquivo de configuração.
     
 <a name="$loadedData" id="$loadedData"></a>
 ### $loadedData 
-	é o array dos valores carregados a partir do banco de dados.
+	Contém o array dos valores carregados a partir do banco de dados.
 	
 <a name="$data" id="$data"></a>
 ###$data 
-	são os valores enviados para a classe a partir da interface.
+	Contém um array com os valores enviados para os métods a partir da interface.
 
 
 <a name="event-beforeLoadData" id="event-beforeLoadData"></a>
