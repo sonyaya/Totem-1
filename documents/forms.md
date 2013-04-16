@@ -47,7 +47,7 @@ São basicamente utilizados para informar ao módulo **backend** quais são as r
 
 ```
 header:
-    title: Nome pricipal de seus formulários
+    title: Nome principal de seus formulários
     table: nome_da_tabela_no_banco_de_dados
     p-key: nome_da_chave_primaria_da_tabela
 ```
@@ -165,7 +165,7 @@ forms:
 <a name="delete-form" id="delete-form"></a>
 ## 3.4 Formulário de Exclusão
 
-[▲](#form-types) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parametro *title*. 
+[▲](#form-types) O formulário de exclusão funciona exatamente como os formulários de edição e inserção, porém com o diferencial que neste formulário os tipos (inputs) não são usados para entrada de dados, eles são utilizados apenas para validar se os dados que serão removidos realmente podem ser eliminados ou executar alguma ação específica antes ou após a exclusão, por não se tratar de um formulário visual, este formulário dispensa a necessidade do parâmetro *title*. 
 
 Veja um exemplo de copo pode ser o trecho deste tipo de formulário no arquivo YAML:
 
@@ -186,7 +186,7 @@ forms:
 <a name="rest-form" id="rest-form"></a>
 ## 3.5 Formulário Rest API (bridge)
 
-[▲](#form-types) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a api pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
+[▲](#form-types) Este formulário é reponsável por fornecer ao módulo **bridge** quais serão os tipos de inputs que serão executados, assim como o formulário de exclusão ele não é  um formulário visual, porém a API pode retornar conteúdos paginados o que faz com que este formulário possa ter o parâmetro *rows-per-page*.
 
 Veja como pode ser este trecho do YAML:
 
@@ -209,7 +209,7 @@ forms:
 4. Eventos de formulários
 ========================
 
-[▲](#summary) É possível adicionar evetos para qualquer formulário, estes eventos podem executar quaquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos fomulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
+[▲](#summary) É possível adicionar eventos para qualquer formulário, estes eventos podem executar qualquer tipo de ação utilizando os dados do formulário ou não, para adicionar tais eventos aos formulários é preciso criar um arquivo de classe PHP na mesma pasta e mesmo nome do arquivo YAML, caso tenhamos um arquivo de formulário chamado *user.yml* na pasta *modules/user/user.yml* para adicionar eventos a este formulário termos que ter um arquivo chamado *user.php* nesta mesma pasta, e por sua vez esse arquivo deve conter uma classe PHP chamada *FormEvents* com ao menos um dos métodos a seguir:
 
 - [beforeLoadData: Antes de carregar valores na interface](#event-beforeLoadData)
 - [afterLoadData: Após carregar valores na interface](#event-afterLoadData)
@@ -224,7 +224,7 @@ As classe possuem parâmetros com nomes padronizados para facilitar a criação 
 
 <a name="$pkey" id="$pakey"></a>
 ### $pkey 
-	é o array contendo a chave primária do valor que esta sendo atualiza, deletado ou listado, contendo nome do campo e valor.
+	é o array contendo a chave primária do valor que esta sendo atualiza, deletado ou listado, com nome do campo e valor.
 
 <a name="$config" id="$config"></a>
 ### $config 
@@ -237,18 +237,18 @@ As classe possuem parâmetros com nomes padronizados para facilitar a criação 
 	
 <a name="$data" id="$data"></a>
 ###$data 
-	… 
+	são os valores enviados para a classe a partir da interface.
 
 
 <a name="event-beforeLoadData" id="event-beforeLoadData"></a>
 ## 4.1 beforeLoadData: Antes de carregar valores na interface
 
-[▲](#events) Quando um formulário de atualização é aberto é feita um busca no banco de dados das informações que serão modificadas, logo após essa requisição ser efetuada é executado o método *beforeLoadData* da classe *FormEvents*, este método possui os seguites parâmetros:
+[▲](#events) Antes mesmo de buscar as informações que serão alteradas o método *beforeLoadData* da classe *FormEvents*, este método possui apenas os parâmetros:
 
 - [$pkey](#$pkey)
 - [$config](#$config)
 
-veja um exemplo da implementação deste evento:
+O que significa que não é possível saber quais são os valores que serão alterados ou mesmo alterá-los antes de apresenta-los em tela para o usuário, porém com o valor da chave primária e os valores de configuração do formulário é possível executar os mais diversos processos antes mesmo dos valores serem solicitados ao banco de dados, veja um exemplo:
 
 ```php
 <?php
@@ -263,13 +263,21 @@ veja um exemplo da implementação deste evento:
 <a name="event-afterLoadData" id="event-afterLoadData"></a>
 ## 4.2 afterLoadData: Após carregar valores na interface
 
-[▲](#events) …
+[▲](#events) Quando um formulário de atualização é solicitado é feita uma busca no banco de dados das informações que serão modificadas, logo após essa requisição ser efetuada é executado o método *afterLoadData* da classe *FormEvents*, este método possui os seguintes parâmetros:
+
+- [$loadedData](#$loadedData)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Com este evento é possível alerar ou formatar os valores que serão apresentados no formulário, verificar se os dados que serão mostrados são válido ou executar quaquer outro processo PHP antes de apresentar o valor para o usuário.
+
+veja um exemplo da implementação deste evento:
 
 ```php
 <?php
     class FormEvents {
         afterLoadData(&$loadedData, $pkey, $config){
-           // seu código aqui
+           $loadedData['login'] = $loadedData['login'] . " Alterado";
         }
     }
 ```
@@ -277,13 +285,19 @@ veja um exemplo da implementação deste evento:
 <a name="event-beforeInsert" id="event-beforeInsert"></a>
 ## 4.3 beforeInsert: Antes de executar *insert* no banco de dados
 
-[▲](#events) …
+[▲](#events) Antes que o formulário de inserção efetue a perpetuação dos dados no banco de dados o evento *beforeInsert* é executado, permitindo assim a possibilidade de validar os dados que serão gravados ou mesmo executar algum processo relevante a perpetuação dos dados, este formulário possui os seguintes parâmetros:
+
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Para o exemplo a seguir, imagine que temos um valor que no banco de dados é númerico porém na interface este número possui um mascara, logo ao tentar inserir este número no banco de dados sera retornado um eerro de incompatibilidade, para reseolver esta situação podemos fazer o seguinte:
 
 ```php
 <?php
     class FormEvents {
         function beforeInsert(&$data, $pkey, $config){
-           // seu código aqui
+           $data['numero'] = preg_replace("/\D/", "", $data['numero']);
         }
     }
 ```
@@ -291,13 +305,19 @@ veja um exemplo da implementação deste evento:
 <a name="event-afterInsert" id="event-afterInsert"></a>
 ## 4.4 afterInsert: Após de executar *insert* no banco de dados
 
-[▲](#events) …
+[▲](#events) Este evento é executa logo após a inserção de dados no banco de dados pelo formulário de inserção, isso significa que em caso de não existir nenhuma situação adversa durante a inserção, o evento *afterInsert* será executado, nos permitindo executar qualquer processo, este evento possui os seguintes parâmetros:
+
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Imagine que após a inserção dos dados é preciso que seja criada uma pasta cujo o nome será o valor de um dos campos do formulário, veja o exemplo a seguir:
 
 ```php
 <?php
     class FormEvents {
         function afterInsert($data, $pkey, $config){
-           // seu código aqui
+           mkdir($data['dir'], 0777);
         }
     }
 ```
@@ -305,30 +325,24 @@ veja um exemplo da implementação deste evento:
 <a name="event-beforeUpdate" id="event-beforeUpdate"></a>
 ## 4.5 beforeUpdate: Antes de executar *update* no banco de dados
 
-[▲](#events) …
+[▲](#events) Tem o funcionamento semelhante ao evento [beforeInsert](#event-beforeInsert), diferenciando apenas que este evento é exectado antes da atualização de dados feita pelo formulário de atualização, este método possui os mesmos parâmetros do *beforeInsert*:
 
-```php
-<?php
-    class FormEvents {
-        function beforeUpdate(&$data, $pkey, $config){
-           // seu código aqui
-        }
-    }
-```
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Veja o exemplo do [beforeInsert](#event-beforeInsert) apenas tendo em mente que o nome do método é diferente.
 
 <a name="event-afterUpdate" id="event-afterUpdate"></a>
 ## 4.6 afterUpdate: Após de executar *update* no banco de dados
 
-[▲](#events) …
+[▲](#events) Tem o funcionamento semelhante ao evento [afterInsert](#event-afterInsert), diferenciando apenas que este evento é exectado após a atualização de dados feita pelo formulário de atualização, este método possui os mesmos parâmetros do *afterInsert*:
 
-```php
-<?php
-    class FormEvents {
-        function afterUpdate($data, $pkey, $config){
-           // seu código aqui
-        }
-    }
-```
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+Veja o exemplo do [afterInsert](#event-afterInsert) apenas tendo em mente que o nome do método é diferente.
 
 <a name="event-beforeDelete" id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
@@ -362,7 +376,7 @@ veja um exemplo da implementação deste evento:
 5 Como clonar formulários
 =========================
 
-[▲](#summary) Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, api (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
+[▲](#summary) Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, API (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
 
 Em uma situação específica onde é preciso copiar exatamente os valores do de um outro formulário podemos fazer o seguinte:
 
@@ -395,7 +409,7 @@ forms:
 
 ```
 
-Note a propriedade *merge-form* no formulário update, esta proriedade recebeu o array *[ update, insert ]* que informa que o formulário update tem prioridade ao ser mesclado com o formulário insert, o que significa que caso exista algum valor no parâmetro inputs do formulário update e este conter o mesmo alias nos parâmetros *inputs* do formulário insert, o valor que sera considera é o valor do parâmetro iputs do formulário update, no exemplo a seguir veremos como isso pode ser feito:
+Note a propriedade *merge-form* no formulário update, esta proriedade recebeu o array *[ update, insert ]* que informa que o formulário update tem prioridade ao ser mesclado com o formulário insert, o que significa que caso exista algum valor no parâmetro inputs do formulário update e este conter o mesmo alias nos parâmetros *inputs* do formulário insert, o valor que será considera é o valor do parâmetro iputs do formulário update, no exemplo a seguir veremos como isso pode ser feito:
 
 
 ```
@@ -435,7 +449,7 @@ forms:
 
 ```
 
-Note que no caso a cima foi adicionado um apelido para cada tipo de input adicionado a lista, este apelido é utilizado posteriormente para alterarmos os valores do formulário que esta sendo clonado, no nosso caso o update tem priodidade sobre o insert porque o valor de *merge-forms* é *[ update, insert ]* o que faz com que o update sobreescreva o que foi meclado do formulário insert, porém caso o valor de merge-forms* fosse o contrário *[ insert, update ]*, nada ocorreria pois quem passaria a ter prioridade superio seria o insert e consequentemente ele iria sobre escreve os valores contidos no parâmetro *inputs* do formulário update.
+Note que no caso a cima foi adicionado um apelido para cada tipo de input adicionado a lista, este apelido é utilizado posteriormente para alterarmos os valores do formulário que esta sendo clonado, no nosso caso o update tem prioridade sobre o insert porque o valor de *merge-forms* é *[ update, insert ]* o que faz com que o update sobrescreva o que foi mesclado do formulário insert, porém caso o valor de merge-forms* fosse o contrário *[ insert, update ]*, nada ocorreria pois quem passaria a ter prioridade superior seria o insert e consequentemente ele iria sobre escreve os valores contidos no parâmetro *inputs* do formulário update.
 
 Também é possível adicionar mais valores ao *inputs*, basta que sejam adicionados alias não contidos no *inputs* que serão clonados, veja o exemplo a seguir:
 
@@ -475,13 +489,13 @@ forms:
 …
 
 ```
-Resumindo as para mesclagem são: 
+Resumindo as regras para mesclagem são: 
 
-- para o parametro *merge-forms* o valor mais a esquerda tem prioridade no processo de mesclagem. 
+- para o parâmetro *merge-forms* o valor mais a esquerda tem prioridade no processo de mesclagem. 
 
 - *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade. 
 
-- Inputs com alias diferentes não são mesclados e sim incluidos.
+- Inputs com alias diferentes não são mesclados e sim incluídos.
 
 <a name="complete-form" id="complete-form"></a>
 6. Exemplo de formulário completo
