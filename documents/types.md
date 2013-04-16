@@ -195,6 +195,10 @@ interface:
 default:
   parameter : 
     parâmetro-padrão : valor-padrão # define valores e parâmetros padrões
+    parâmetro-padrão : valor-padrão # define valores e parâmetros padrões
+    parâmetro-padrão : valor-padrão # define valores e parâmetros padrões
+    parâmetro-padrão : valor-padrão # define valores e parâmetros padrões
+    # adicione quantos parametros achar necessário
 ```
 
 <a name="events" id="events"></a>
