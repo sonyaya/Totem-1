@@ -347,13 +347,23 @@ Veja o exemplo do [afterInsert](#event-afterInsert) apenas tendo em mente que o 
 <a name="event-beforeDelete" id="event-beforeDelete"></a>
 ## 4.7 beforeDelete: Antes de executar *delete* no banco de dados
 
-[▲](#events) …
+[▲](#events) Antes do formulário de exclusão remover valores do banco de dados é possível executar este evento, permitindo assim que seja executado qualquer processo ou mesmo a verificação e validação dos dados antes da exclusão, o evento *beforeDelete* possui os seguintes parâmetros:
+
+- [$data](#$data)
+- [$pkey](#$pkey)
+- [$config](#$config)
+
+No exemplo a seguir temos o seguinte cenário, caso o valor do campo *id* for igual a *1* o processo de exclusão será cancelado e será apresentado uma mensagem de erro ao usuário:
 
 ```php
 <?php
+    use backend/Log;
+
     class FormEvents {
-        function beforeDelete(&$data, $pkey, $config){
-           // seu código aqui
+        function beforeDelete($data, $pkey, $config){
+            if($data['id'] == 1){
+                Log::ajaxError("001", "Não é possível excluir id = 1.");
+            }
         }
     }
 ```
@@ -495,7 +505,7 @@ Resumindo as regras para mesclagem são:
 
 - *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade. 
 
-- Inputs com alias diferentes não são mesclados e sim incluídos.
+- *inputs* com alias diferentes não são mesclados e sim incluídos.
 
 <a name="complete-form" id="complete-form"></a>
 6. Exemplo de formulário completo
