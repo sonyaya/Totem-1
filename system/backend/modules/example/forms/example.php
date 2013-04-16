@@ -35,7 +35,7 @@ class FormEvents {
      * Executa ao enviar o formulário para ser salvo antes de atualiza
      * /
     function beforeUpdate(&$data, $pkey, $config){
-        
+
     } */
     
     /**
