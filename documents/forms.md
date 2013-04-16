@@ -24,7 +24,6 @@ Sumário
 
 
 <a name="intro" id="intro"></a>
-
 1. Formulários
 ==============
 
@@ -53,8 +52,8 @@ header:
 ```
 
 <a name="form-types" id="form-types"></a>
-3 Tipos de Formulários
-======================
+3. Tipos de Formulários
+=======================
 
 [▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade específica, verifique a listagem com todos os tipos de formulários que o sistema disponibiliza:
 
@@ -389,8 +388,8 @@ Imagine um cenário onde após os dados forem excluidos do banco de dados, neces
 ```
 
 <a name="clone-form" id="clone-form"></a>
-5 Como clonar formulários
-=========================
+5. Como clonar formulários
+==========================
 
 [▲](#summary) Qualquer formulário pode ter os valores do parâmetro *input:* mesclados com os valores de outro formulário desde que os formulários estejam no mesmo arquivo YAML, esta alternava é muito útil quando todos os *inputs* são exatamente iguais ou a grande maioria dos inputs são iguais entre dois ou mais formulários, muitas vezes o formulário de inserção, atualização, exclusão, API (bridge) são iguais ou ao menos parecidos, nestes casos é possível criar clones de formulários utilizando a propriedade *merge-form*. 
 
