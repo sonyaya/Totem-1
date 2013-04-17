@@ -14,7 +14,7 @@ Frontend
 Backend
 -------
 
-- ...
+- Criado um formulário de pesquisa (list e inTabs), porém ele é limitado e portanto deve se melhorado.
 
 Bridge
 ------
