@@ -4,6 +4,9 @@ Sumário
 
 1. [Totem](#intro)
     - [Config](documents/default/config.md)
+    - Kaizen
+        - [To-do](documents/default/todo.md)
+        - [Bugs](documents/default/bugs.md)
 2. Backend
     - [Menus](documents/backend/menus.md)
     - [Formulários](documents/backend/forms.md)
