@@ -327,7 +327,7 @@
                 // EXECUTA AJAX DE ALGUM TYPE ESPECIFICO
                 case "type-ajax":{
                     $type = $get['type'];
-                    if( file_exists($fileType = "types/$type/$type.php") ){
+                    if( file_exists($fileType = "types/$type/config-events.php") ){
                         require_once $fileType;
                         $obj = new $type();
                         if( method_exists ( $obj , "ajax" ) ){
