@@ -229,56 +229,57 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$thisData" id="$thisData"></a>
 ### $thisData
 
-    …
+    Contém o valor do campo atual.
 
 <a name="$thisColumn" id="$thisColumn"></a>
 ### $thisColumn
 
-    …
+    Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
 
 <a name="$allData" id="$allData"></a>
 ### $allData
 
-    …
+    Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta sendo submetido.
 
 <a name="$thisLabel" id="$thisLabel"></a>
 ### $thisLabel
 
-    …
+    Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido no momento.
 
 <a name="$parameters" id="$parameters"></a>
 ### $parameters
 
-    …
+    Contém um array com os parâmetros informados no fomulário para o campo atual.
 
 <a name="$pKey" id="$pKey"></a>
 ### $pkey 
 
-	Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
-
+    Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
 
 <a name="$thisRow" id="$thisRow"></a>
 ### $thisRow
 
-    …
-
+    Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas da linha atual que está sendo listada.
 
 <a name="$toTypeLayout" id="$toTypeLayout"></a>
 ### $toTypeLayout
 
-    …
-
+    Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de rodapé informados no arquivo [config.yaml](#config).
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
 
-[▲](#events) …
+[▲](#events) Antes de executar qualquer evento no formulário todos os campos são válidados, o evento resposavel por validar cada campo é o *validate* dos tipos de input, este evento responsáveis por validar os valores contidos em seu campo na interface, caso este método não for criado ou seu retorno for nulo, os campos sempre serão válidos.
+
+Este evento possui os seguintes parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$thisLabel](#thisLabel)
+
+Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
 
 ```php
 <?php
@@ -297,6 +298,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 ### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados
 
 [▲](#events) …
+
+Este evento possui os seguintes parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -318,6 +321,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 
 [▲](#events) …
 
+Este evento possui os seguintes parâmetros:
+
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
@@ -338,6 +343,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 
 [▲](#events) …
 
+Este evento possui os seguintes parâmetros:
+
 - [$thisData](#thisData)
 - [$thisRow](#thisRow)
 - [$thisColumn](#thisColumn)
@@ -356,6 +363,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 ### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados
 
 [▲](#events) …
+
+Este evento possui os seguintes parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -376,6 +385,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 ### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização
 
 [▲](#events) …
+
+Este evento possui os seguintes parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -398,6 +409,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 
 [▲](#events) …
 
+Este evento possui os seguintes parâmetros:
+
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
@@ -417,6 +430,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 ### 3.2.8 afterUpdate: Após executar *update* no banco de dados
 
 [▲](#events) …
+
+Este evento possui os seguintes parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -444,6 +459,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 
 [▲](#events) …
 
+Este evento possui os seguintes parâmetros:
+
 ```php
 <?php
     class example{
@@ -457,6 +474,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 ### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo
 
 [▲](#events) …
+
+Este evento possui os seguintes parâmetros:
 
 ```php
 <?php
