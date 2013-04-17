@@ -146,7 +146,7 @@
                     $path = "types/{$val['type']}";
                     
                     // importa classe de type
-                    if(file_exists($classPath = "$path/{$val['type']}.php")){
+                    if(file_exists($classPath = "$path/config-events.php")){
                         require_once $classPath;
                     }else{
                         return Array(
@@ -428,7 +428,7 @@
                         if(file_exists($confTypePath = "$pathType/config.yml")){
                             // carrega arquivo de configuração do type
                             $loadedType = Yaml::parse($confTypePath);
-                            $classPath = "$pathType/{$val['type']}.php";
+                            $classPath = "$pathType/config-events.php";
 
                             // importa classe de type
                             if(file_exists($classPath)){
@@ -860,7 +860,7 @@
                         if(file_exists($confTypePath = "$pathType/config.yml")){
                             // carrega arquivo de configuração do type
                             $loadedType = Yaml::parse($confTypePath);
-                            $classPath = "$pathType/{$val['type']}.php";
+                            $classPath = "$pathType/config-events.php";
 
                             // importa classe de type
                             if(file_exists($classPath)){
@@ -1079,7 +1079,7 @@
                         $path = "types/{$val['type']}";
 
                         // importa classe de type
-                        if(file_exists($classPath = "$path/{$val['type']}.php")){
+                        if(file_exists($classPath = "$path/config-events.php")){
                             require_once $classPath;
                         }else{
                             return Array(
