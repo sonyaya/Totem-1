@@ -10,8 +10,7 @@ Módulo capaz de criar relatórios, formulários de inserção e edição no ban
 
 ### Documentação
 
-- Padrões de pastas
-- Menus
+- [Menus](documents/menus.md)
   - Criação de um novo menu
   - Adição de menus de módulos
   - Adicionando bootstrap de módulo ao sistema
