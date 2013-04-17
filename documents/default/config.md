@@ -9,4 +9,4 @@ Sumário
 1. Configurando o totem
 =======================
 
-[▲](#summary) … teste
+[▲](#summary) …
