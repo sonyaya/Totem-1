@@ -32,6 +32,9 @@ Sumário
         - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
         - [ajax: Ao executar uma requisição ajax para o tipo](#event-ajax)
     - [Arquivo de interface](#interface)
+        - [Como acessar valores do sistema na interface](#interface-acess-values)
+            - [Como acessar valores do totem](#interface-acess-totem-values)
+            - [Como acessar valores do tipo](#interface-acess-type-values)
 4. Configurando os parâmetros de tipos
 
 <a name="intro" id="intro"></a>
@@ -490,3 +493,18 @@ Este evento possui os seguintes parâmetros:
 ## 2.3 Arquivo de interface
 
 [▲](#creating) …
+
+<a name="interface-acess-values" id="interface-acess-values"></a>
+### 2.3.1 Como acessar valores do sistema na interface](#interface-acess-values)
+
+[▲](#interface) …
+
+<a name="" id=""></a>
+#### 2.3.1.1 Como acessar valores do totem
+
+[▲](#interface-acess-values) …
+
+<a name="" id=""></a>
+#### 2.3.1.2 Como acessar valores do tipo
+
+[▲](#interface-acess-values) …
