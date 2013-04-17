@@ -30,7 +30,7 @@ Sumário
         - [afterInsert: Após executar *insert* no banco de dados](#event-afterInsert)
         - [afterUpdate: Após executar *update* no banco de dados](#event-afterUpdate)
         - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
-        - [ajax: Quando for executa uma requisição ajax para o tipo](#event-ajax)
+        - [ajax: Ao executar uma requisição ajax para o tipo](#event-ajax)
     - [Arquivo de interface](#interface)
 4. Configurando os parâmetros de tipos
 
@@ -46,7 +46,7 @@ Sumário
 2. Tipos padrões
 ================
 
-[▲](#summary) …
+[▲](#summary) O totem possui alguns tipos padrões, estes tipos podem ajudar novos usuários a personalizar seus formulários conforme sua necessidade, porém em casos que os tipos padrões não suprem as necessidades de desenvolvimento é possível criar tipos para ações específicas, leia o tópico [Criando um tipo personalizado](#creating) e veja como criar seu próprio tipo, a seguir veja a lista de tipos padrões e suas especificações:
 
 <a name="type-CKEditor" id="type-CKEditor"></a>
 ## CKEditor
@@ -114,31 +114,31 @@ Sumário
 ## manyToMany
 - [▲](#default-types) Permite fazer relacionamento entre três tabelas, um relacionamento muitos para muitos.
 - Parâmetros
-    - **nullable**     *pode ser nulo?
-    - **middle-table** *nome da tabela intermediária*
-    - **middle-fk**    *coluna chave estrangeira da tabela intermediária*
-    - **middle-pk**    *coluna chave primária da tabela intermediária*
-    - **right-table**  *nome da tabela da direita*
-    - **right-fk**     *coluna chave estrangeira da tabela da direita*
-    - **right-label**  *coluna chave primária da tabela da direita*
-    - **insert-form**  *caminho do formulário para inserção de novos valores*
+    - **nullable**        *pode ser nulo?
+    - **middle-table**    *nome da tabela intermediária*
+    - **middle-fk**       *coluna chave estrangeira da tabela intermediária*
+    - **middle-pk**       *coluna chave primária da tabela intermediária*
+    - **right-table**     *nome da tabela da direita*
+    - **right-fk**        *coluna chave estrangeira da tabela da direita*
+    - **right-label**     *coluna chave primária da tabela da direita*
+    - **insert-form**     *caminho do formulário para inserção de novos valores*
 
 <a name="type-meioMask" id="type-meioMask"></a>
 ## meioMask
 - [▲](#default-types) Tipo baseado na famosa mascara jQuery [meioMask](http://www.meiocodigo.com/projects/meiomask/).
 - Parâmetros
-    - **nullable**     *pode ser nulo?*
-    - **placeholder**  *texto placeholder*
-    - **size**         *quantidade máxima de caracteres aceita*
-    - **mask**         *mascara para o campo, mascaras preconfiguradas: phone, phone-us, cpf, cnpj, date, date-us, cep, time e cc*
+    - **nullable**        *pode ser nulo?*
+    - **placeholder**     *texto placeholder*
+    - **size**            *quantidade máxima de caracteres aceita*
+    - **mask**            *mascara para o campo, mascaras preconfiguradas: phone, phone-us, cpf, cnpj, date, date-us, cep, time e cc*
 
 <a name="type-number" id="type-number"></a>
 ## number
 - [▲](#default-types) Campo de entrada que aceita somente números
 - Parâmetros
-    - **min**  *valor mínimo aceito*
-    - **max**  *valor máximo aceito*
-    - **step** *multiplos aceitos, 2 em 2, 3 em 3 etc.*
+    - **min**             *valor mínimo aceito*
+    - **max**             *valor máximo aceito*
+    - **step**            *multiplos aceitos, 2 em 2, 3 em 3 etc.*
 
 <a name="type-password" id="type-password"></a>
 ## password
@@ -152,7 +152,7 @@ Sumário
 ## textarea
 - [▲](#default-types) Este tipo adiciona um textarea do HTML.
 - Parâmetros
-    - **nullable**     *pode ser nulo?*
+    - **nullable**        *pode ser nulo?*
 
 <a name="creating" id="creating"></a>
 3. Criando tipos personalizados
@@ -163,41 +163,41 @@ Sumário
 <a name="config" id="config"></a>
 ## 3.1 config.yml
 
-[▲](#creating) Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para criação do tipo, ele indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo que você esta criando, veja a seguir um exemplo comentado:
+[▲](#creating) Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para interpretação do tipo que você esta criando, por padrão o nome deste arquivo deve sempre ser *config.yml* e deve estar sempre dentro de uma pasta com o nome do tipo e por sua vez esta pasta deve estar dentro da pasta *types* do módulo *backend*, este arquivo YAML indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo que você esta criando, veja a seguir um exemplo comentado deste arquivo:
 
-```
+```yaml
 interface:
   html:
-    list   : list.html   # carrega arquivo HTML para ser mostrado na tela de listagem, não é obrigatório e caso não seja informado deixa o sistema mais rápido
-    insert : insert.html # carrega o arquivo HTML para formulários de inserção
-    update : update.html # carrega o arquivo HTML para formulários de atualização
-    dummy  : dummy.html  # carrega o arquivo HTML para formulários de boneco
-
-  css:         
-    list   : [ arq1.css, arq2.css, arq3.css ]   # carrega arquivos CSS no head do formulário de listagem, não é obrigatório
-    insert : [ arq1.css, arq2.css, arq3.css ]   # carrega arquivos CSS no head do formulário de insert, não é obrigatório
-    update : [ arq1.css, arq2.css, arq3.css ]   # carrega arquivos CSS no head do formulário de update, não é obrigatório
-    dummy  : [ arq1.css, arq2.css, arq3.css ]   # carrega arquivos CSS no head do formulário de dummy, não é obrigatório
-
-  javascript:
-    head:
-      list   : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript no head do formulário de listagem, não é obrigatório
-      insert : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript no head do formulário de insert, não é obrigatório
-      update : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript no head do formulário de update, não é obrigatório
-      dummy  : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript no head do formulário de dummy, não é obrigatório
-
-    body:
-      list   : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript antes do fechamento do body do formulário de listagem, não é obrigatório
-      insert : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript antes do fechamento do body do formulário de insert, não é obrigatório
-      update : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript antes do fechamento do body do formulário de update, não é obrigatório
-      dummy  : [ arq1.js, arq2.js, arq3.js ]    # carrega arquivo javascript antes do fechamento do body do formulário de dummy, não é obrigatório
-
-default:
-  parameter : 
-    parâmetro-padrão1 : valor-padrão1           # define valores e parâmetros padrões
-    parâmetro-padrão2 : valor-padrão2           # define valores e parâmetros padrões
-    parâmetro-padrão3 : valor-padrão3           # define valores e parâmetros padrões
-    parâmetro-padrão4 : valor-padrão4           # define valores e parâmetros padrões
+    list   : list.html                        # carrega arquivo HTML para ser mostrado na tela de listagem, não é obrigatório e caso não seja informado deixa o sistema mais rápido
+    insert : insert.html                      # carrega o arquivo HTML para formulários de inserção
+    update : update.html                      # carrega o arquivo HTML para formulários de atualização
+    dummy  : dummy.html                       # carrega o arquivo HTML para formulários de boneco
+ 
+  css:       
+    list   : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de listagem, não é obrigatório
+    insert : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de insert, não é obrigatório
+    update : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de update, não é obrigatório
+    dummy  : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de dummy, não é obrigatório
+ 
+  javascri 
+    he 
+      list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de listagem, não é obrigatório
+      insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de insert, não é obrigatório
+      update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de update, não é obrigatório
+      dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de dummy, não é obrigatório
+ 
+    bo 
+      list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de listagem, não é obrigatório
+      insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de insert, não é obrigatório
+      update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de update, não é obrigatório
+      dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de dummy, não é obrigatório
+ 
+defau 
+  parameter 
+    parâmetro-padrão1 : valor-padrão1         # define valores e parâmetros padrões
+    parâmetro-padrão2 : valor-padrão2         # define valores e parâmetros padrões
+    parâmetro-padrão3 : valor-padrão3         # define valores e parâmetros padrões
+    parâmetro-padrão4 : valor-padrão4         # define valores e parâmetros padrões
     parâmetro-padrão 5:
         parâmetro-padrão1 : valor-padrão1
         parâmetro-padrão2 : valor-padrão2
@@ -209,18 +209,86 @@ default:
 <a name="events" id="events"></a>
 ## 3.2 Arquivo de eventos
 
-[▲](#creating) Este arquivo deve ter mesmo nome da sua pasta do tipo porém com a extensão PHP, este arquivo deve conter uma classe com o mesmo nome do tipo, e será responsave manipular os eventos do tipo, os eventos que ele irá controlar são os seguintes:
+[▲](#creating) Este arquivo deve ter mesmo nome *config-events.php* e deve conter uma classe com o mesmo nome do tipo, é importante ressaltar que o arquivo com a classe de eventos **não é definida** em *config.ini* e por isso deve seguir este padrão de nomeclatura.
+
+Esta classe PHP será responsave manipular os eventos do tipo que esta sendo criado, veja a seguir os eventos que ele deve controlar com exemplos e explicações:
+
+- [validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.](#event-validate)
+- [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
+- [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
+- [beforeList: Antes do formulário de listagem mostrar os valores na interface](#event-beforeList)
+- [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
+- [beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm)
+- [afterInsert: Após executar *insert* no banco de dados](#event-afterInsert)
+- [afterUpdate: Após executar *update* no banco de dados](#event-afterUpdate)
+- [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
+- [ajax: Ao executar uma requisição ajax para o tipo](#event-ajax)
+
+Para facilitar o entendimento dos parâmetros recebidos pelos métodos de eventos, nós padrnizamos os nomes das variaveis, segue uma lista com as nomeclaruras que criamos
+
+<a name="$thisData" id="$thisData"></a>
+### $thisData
+
+    …
+
+<a name="$thisColumn" id="$thisColumn"></a>
+### $thisColumn
+
+    …
+
+<a name="$allData" id="$allData"></a>
+### $allData
+
+    …
+
+<a name="$thisLabel" id="$thisLabel"></a>
+### $thisLabel
+
+    …
+
+<a name="$parameters" id="$parameters"></a>
+### $parameters
+
+    …
+
+<a name="$pKey" id="$pKey"></a>
+### $pkey 
+
+	Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
+
+
+<a name="$thisRow" id="$thisRow"></a>
+### $thisRow
+
+    …
+
+
+<a name="$toTypeLayout" id="$toTypeLayout"></a>
+### $toTypeLayout
+
+    …
+
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
 
 [▲](#events) …
 
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$thisLabel](#thisLabel)
+
 ```php
 <?php
     class example{
         public function validate($thisData, $thisColumn, &$allData, $parameters, $thisLabel){
-            // code here
+            if( empty( $thisData ) ){
+                return Array( "error" => true, "message" => "O campo $thisLabel, não pode ser vazio." );
+            }else{
+                return Array( "error" => false );
+            }
         }
     }
 ```
@@ -229,6 +297,12 @@ default:
 ### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados
 
 [▲](#events) …
+
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
 
 ```php
 <?php
@@ -244,6 +318,12 @@ default:
 
 [▲](#events) …
 
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
+
 ```php
 <?php
     class example{
@@ -257,6 +337,11 @@ default:
 ### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface
 
 [▲](#events) …
+
+- [$thisData](#thisData)
+- [$thisRow](#thisRow)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
 
 ```php
 <?php
@@ -272,6 +357,12 @@ default:
 
 [▲](#events) …
 
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
+
 ```php
 <?php
     class example{
@@ -285,6 +376,13 @@ default:
 ### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização
 
 [▲](#events) …
+
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$toTypeLayout](#toTypeLayout)
+- [$pKey](#pKey)
 
 ```php
 <?php
@@ -300,6 +398,12 @@ default:
 
 [▲](#events) …
 
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
+
 ```php
 <?php
     class example{
@@ -314,6 +418,12 @@ default:
 
 [▲](#events) …
 
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
+
 ```php
 <?php
     class example{
@@ -325,6 +435,12 @@ default:
 
 <a name="event-afterDelete" id="event-afterDelete"></a>
 ### 3.2.9 afterDelete: Após executar *delete* no banco de dados
+
+- [$thisData](#thisData)
+- [$thisColumn](#thisColumn)
+- [$allData](#allData)
+- [$parameters](#parameters)
+- [$pKey](#pKey)
 
 [▲](#events) …
 
@@ -338,9 +454,10 @@ default:
 ```
 
 <a name="event-ajax" id="event-ajax"></a>
-### 3.2.10 ajax:  Quando for executa uma requisição ajax para o tipo
+### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo
 
 [▲](#events) …
+
 ```php
 <?php
     class example{

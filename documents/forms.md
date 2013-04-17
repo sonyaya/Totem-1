@@ -44,7 +44,7 @@ São basicamente utilizados para informar ao módulo **backend** quais são as r
 
 [▲](#summary) Este é responsável por informar qual é o título principal dos formulários, além de descrever qual é a tabela e chave primária do banco de dados que serão  utilizados por estes formulários, segue exemplo de cabeçalho do arquivo YAML:
 
-```
+```yaml
 header:
     title: Nome principal de seus formulários
     table: nome_da_tabela_no_banco_de_dados
@@ -78,7 +78,7 @@ Estes formulários possuem três propriedades, são elas:
 - merge-form
     - não é uma propriedade obrigatória, é utilizado quando existe a necessidade de copiar os inputs de um outro formulário, isso é útil quando temos dois formulários que irão utilizar exatamente os mesmo ou grande maiorias das propriedades de outro formulário, veja mais informações em [como clonar formulários](#clone-form).
 
-```
+```yaml
 forms:
     insert: # no caso de formulário de atualização, o valor seria update:
         title: TÍTULO-PARA-ESTE-FORMULÁRIO
@@ -102,7 +102,7 @@ forms:
 Seus parâmetros são muito semelhantes aos parâmetros dos formulários de inserção e atualização além de funcionarem basicamente igual, porém com o diferencial que por padrão este formulário não executa diretamente inserção, atualização ou qualquer outro processo, ele apenas irá executar o arquivo *PHP* que for indicado pelo parâmetro *php:*, veja como este formulário é configurado:
    
 
-```
+```yaml
 forms:
     dummy:
         title: TÍTULO-PARA-ESTE-FORMULÁRIO
@@ -144,7 +144,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
 
 Veja um exemplo de como este trecho do formulário pode ser:
 
-```
+```yaml
 forms:
     insert:
         title: TÍTULO-PARA-ESTE-FORMULÁRIO
@@ -168,7 +168,7 @@ forms:
 
 Veja um exemplo de copo pode ser o trecho deste tipo de formulário no arquivo YAML:
 
-```
+```yaml
 forms:
     delete:
         input:
@@ -189,7 +189,7 @@ forms:
 
 Veja como pode ser este trecho do YAML:
 
-```
+```yaml
 forms:
     bridge:
         rows-per-page: 200 # este é o único ponto que difere do formulário de exclusão
@@ -223,7 +223,8 @@ As classe possuem parâmetros com nomes padronizados para facilitar a criação 
 
 <a name="$pkey" id="$pakey"></a>
 ### $pkey 
-	Contém o array com a chave primária do valor que esta sendo atualiza, deletado ou listado, com nome do campo e valor.
+
+	Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
 
 <a name="$config" id="$config"></a>
 ### $config 
@@ -232,10 +233,12 @@ As classe possuem parâmetros com nomes padronizados para facilitar a criação 
     
 <a name="$loadedData" id="$loadedData"></a>
 ### $loadedData 
+
 	Contém o array dos valores carregados a partir do banco de dados.
 	
 <a name="$data" id="$data"></a>
 ###$data 
+
 	Contém um array com os valores enviados para os métods a partir da interface.
 
 
@@ -395,7 +398,7 @@ Imagine um cenário onde após os dados forem excluidos do banco de dados, neces
 
 Em uma situação específica onde é preciso copiar exatamente os valores do de um outro formulário podemos fazer o seguinte:
 
-```
+````yaml
 …
 
 forms:
@@ -468,7 +471,7 @@ Note que no caso a cima foi adicionado um apelido para cada tipo de input adicio
 
 Também é possível adicionar mais valores ao *inputs*, basta que sejam adicionados alias não contidos no *inputs* que serão clonados, veja o exemplo a seguir:
 
-```
+```yaml
 …
 
 forms:
@@ -516,7 +519,7 @@ Resumindo as regras para mesclagem são:
 6. Exemplo de formulário completo
 =========================
 
-```
+```yaml
 header:
     title: 'Cadastro de Usuários'
     table: _m_user
