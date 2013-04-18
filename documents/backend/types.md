@@ -236,46 +236,42 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$thisData" id="$thisData"></a>
 ### $thisData
 
-    Contém o valor do campo atual.
+> Contém o valor do campo atual.
 
 <a name="$thisColumn" id="$thisColumn"></a>
 ### $thisColumn
 
-    Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
+> Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
 
 <a name="$allData" id="$allData"></a>
 ### $allData
 
-    Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta 
-    sendo submetido.
+> Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta sendo submetido.
 
 <a name="$thisLabel" id="$thisLabel"></a>
 ### $thisLabel
 
-    Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido no momento.
+> Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido no momento.
 
 <a name="$parameters" id="$parameters"></a>
 ### $parameters
 
-    Contém um array com os parâmetros informados no fomulário para o campo atual.
+> Contém um array com os parâmetros informados no fomulário para o campo atual.
 
 <a name="$pKey" id="$pKey"></a>
 ### $pkey 
 
-    Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado 
-    ou listado, com nome do campo e valor.
+> Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
 
 <a name="$thisRow" id="$thisRow"></a>
 ### $thisRow
 
-    Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas 
-    da linha atual que está sendo listada.
+> Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas da linha atual que está sendo listada.
 
 <a name="$toTypeLayout" id="$toTypeLayout"></a>
 ### $toTypeLayout
 
-    Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de 
-    rodapé informados no arquivo [config.yaml](#config).
+> Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de rodapé informados no arquivo [config.yaml](#config).
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
