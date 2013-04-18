@@ -165,6 +165,8 @@ Sumário
 
 Para iniciar a criação de um novo tipo é necessário primeiro criar uma pasta dentro da pasta types com o nome do tipo que você deseja criar, imagine que iremos criar um novo tipo com o nome *example*, logo para iniciar o processo de desenvolvimento é preciso criar a pasta *types/example* e dentro desta pasta devem ter três arquivos essenciais [config.yml](#config) e [config-events.php](#events), no caso do tipo ser um tipo que necessita ser apresentado para o usuário em formulários de listagem, inserção, exclusão ou boneco, é necessário ter mais um arquivo, responsavel por gerar a [interface gráfica](#interface) do tipo, este arquivo pode ter nome variado pois ele é definido no [config.yml](#config).
 
+É possível criar arquivos CSS que serão carregados por referência no cabeçalho assim como é possível carregar arquivos Javascript da mesma maneira, porém para os arquivos Javascript existe uma outra possíbilidade que é a de incorporar diretamente no corpo do HTML, para executar estas ações basta informar no [config.yml](#config) os caminhos que deseja adicionar ao arquivo de interface, nos arquivos incoporados é possível carregar valores do totem, sejam eles nativos do sistema ou valores epecíficos do tipo ou ainda valores passados por parâmetros. **(atenção isso é válido somente para os arquivos de interface e os arquivos Javascript incorporados)**.
+
 <a name="config" id="config"></a>
 ## 3.1 Arquivo de configuração de tipo (config.yml)
 
@@ -184,21 +186,21 @@ interface:
     update : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de update, não é obrigatório
     dummy  : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de dummy, não é obrigatório
  
-  javascri 
-    he 
+  javascript:
+    head:
       list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de listagem, não é obrigatório
       insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de insert, não é obrigatório
       update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de update, não é obrigatório
       dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de dummy, não é obrigatório
  
-    bo 
+    body:
       list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de listagem, não é obrigatório
       insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de insert, não é obrigatório
       update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de update, não é obrigatório
       dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de dummy, não é obrigatório
  
-defau 
-  parameter 
+default:
+  parameter: 
     parâmetro-padrão1 : valor-padrão1         # define valores e parâmetros padrões
     parâmetro-padrão2 : valor-padrão2         # define valores e parâmetros padrões
     parâmetro-padrão3 : valor-padrão3         # define valores e parâmetros padrões
@@ -234,42 +236,42 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$thisData" id="$thisData"></a>
 ### $thisData
 
-    Contém o valor do campo atual.
+> Contém o valor do campo atual.
 
 <a name="$thisColumn" id="$thisColumn"></a>
 ### $thisColumn
 
-    Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
+> Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
 
 <a name="$allData" id="$allData"></a>
 ### $allData
 
-    Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta sendo submetido.
+> Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta sendo submetido.
 
 <a name="$thisLabel" id="$thisLabel"></a>
 ### $thisLabel
 
-    Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido no momento.
+> Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido no momento.
 
 <a name="$parameters" id="$parameters"></a>
 ### $parameters
 
-    Contém um array com os parâmetros informados no fomulário para o campo atual.
+> Contém um array com os parâmetros informados no fomulário para o campo atual.
 
 <a name="$pKey" id="$pKey"></a>
 ### $pkey 
 
-    Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
+> Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
 
 <a name="$thisRow" id="$thisRow"></a>
 ### $thisRow
 
-    Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas da linha atual que está sendo listada.
+> Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas da linha atual que está sendo listada.
 
 <a name="$toTypeLayout" id="$toTypeLayout"></a>
 ### $toTypeLayout
 
-    Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de rodapé informados no arquivo [config.yaml](#config).
+> Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de rodapé informados no arquivo [config.yaml](#config).
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
