@@ -165,6 +165,8 @@ Sumário
 
 Para iniciar a criação de um novo tipo é necessário primeiro criar uma pasta dentro da pasta types com o nome do tipo que você deseja criar, imagine que iremos criar um novo tipo com o nome *example*, logo para iniciar o processo de desenvolvimento é preciso criar a pasta *types/example* e dentro desta pasta devem ter três arquivos essenciais [config.yml](#config) e [config-events.php](#events), no caso do tipo ser um tipo que necessita ser apresentado para o usuário em formulários de listagem, inserção, exclusão ou boneco, é necessário ter mais um arquivo, responsavel por gerar a [interface gráfica](#interface) do tipo, este arquivo pode ter nome variado pois ele é definido no [config.yml](#config).
 
+É possível criar arquivos CSS que serão carregados por referência no cabeçalho assim como é possível carregar arquivos Javascript da mesma maneira, porém para os arquivos Javascript existe uma outra possíbilidade que é a de incorporar diretamente no corpo do HTML, para executar estas ações basta informar no [config.yml](#config) os caminhos que deseja adicionar ao arquivo de interface, nos arquivos incoporados é possível carregar valores do totem, sejam eles nativos do sistema ou valores epecíficos do tipo ou ainda valores passados por parâmetros. **(atenção isso é válido somente para os arquivos de interface e os arquivos Javascript incorporados)**.
+
 <a name="config" id="config"></a>
 ## 3.1 Arquivo de configuração de tipo (config.yml)
 
