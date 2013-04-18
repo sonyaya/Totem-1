@@ -186,21 +186,21 @@ interface:
     update : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de update, não é obrigatório
     dummy  : [ arq1.css, arq2.css, arq3.css ] # carrega arquivos CSS no head do formulário de dummy, não é obrigatório
  
-  javascri 
-    he 
+  javascript:
+    head:
       list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de listagem, não é obrigatório
       insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de insert, não é obrigatório
       update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de update, não é obrigatório
       dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript no head do formulário de dummy, não é obrigatório
  
-    bo 
+    body:
       list   : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de listagem, não é obrigatório
       insert : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de insert, não é obrigatório
       update : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de update, não é obrigatório
       dummy  : [ arq1.js, arq2.js, arq3.js ]  # carrega arquivo javascript antes do fechamento do body do formulário de dummy, não é obrigatório
  
-defau 
-  parameter 
+default:
+  parameter: 
     parâmetro-padrão1 : valor-padrão1         # define valores e parâmetros padrões
     parâmetro-padrão2 : valor-padrão2         # define valores e parâmetros padrões
     parâmetro-padrão3 : valor-padrão3         # define valores e parâmetros padrões
