@@ -246,7 +246,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$allData" id="$allData"></a>
 ### $allData
 
-    Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta sendo submetido.
+    Contém um array com todos os valores e etiquetas de todos os campos do formulário que esta 
+    sendo submetido.
 
 <a name="$thisLabel" id="$thisLabel"></a>
 ### $thisLabel
@@ -261,12 +262,14 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$pKey" id="$pKey"></a>
 ### $pkey 
 
-    Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
+    Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado 
+    ou listado, com nome do campo e valor.
 
 <a name="$thisRow" id="$thisRow"></a>
 ### $thisRow
 
-    Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas da linha atual que está sendo listada.
+    Utilizado somente nas listagens, contém um array com os nomes e valores de todas as colunas 
+    da linha atual que está sendo listada.
 
 <a name="$toTypeLayout" id="$toTypeLayout"></a>
 ### $toTypeLayout
