@@ -274,7 +274,8 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="$toTypeLayout" id="$toTypeLayout"></a>
 ### $toTypeLayout
 
-    Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de rodapé informados no arquivo [config.yaml](#config).
+    Contém um array com valores que podem ser enviados para o arquivo de interface, ou javascript de 
+    rodapé informados no arquivo [config.yaml](#config).
 
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
