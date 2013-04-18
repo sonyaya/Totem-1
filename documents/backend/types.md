@@ -19,7 +19,7 @@ Sumário
     - [rawText](#type-rawText)
     - [textarea](#type-textarea)
 3. [Criando um tipo personalizado](#creating)
-    - [O arquivo de configuração (config.yml)](#config)
+    - [Arquivo de configuração de tipo (config.yml)](#config)
     - [Arquivo de eventos](#events)
         - [validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.](#event-validate)
         - [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
@@ -161,10 +161,12 @@ Sumário
 3. Criando tipos personalizados
 ==============================
 
-[▲](#summary) …
+[▲](#summary) O totem possui muitos tipos padrões, você pode saber mais sobre eles no capítulo [Tipos de Inputs](#default-types), porém o totem dispões da possibilidade de desenvolvimento de tipos customizados, para isso é preciso ter noções de javascript, html, php e yaml.
+
+Para iniciar a criação de um novo tipo é necessário primeiro criar uma pasta dentro da pasta types com o nome do tipo que você deseja criar, imagine que iremos criar um novo tipo com o nome *example*, logo para iniciar o processo de desenvolvimento é preciso criar a pasta *types/example* e dentro desta pasta devem ter três arquivos essenciais [config.yml](#config) e [config-events.php](#events), no caso do tipo ser um tipo que necessita ser apresentado para o usuário em formulários de listagem, inserção, exclusão ou boneco, é necessário ter mais um arquivo, responsavel por gerar a [interface gráfica](#interface) do tipo, este arquivo pode ter nome variado pois ele é definido no [config.yml](#config).
 
 <a name="config" id="config"></a>
-## 3.1 config.yml
+## 3.1 Arquivo de configuração de tipo (config.yml)
 
 [▲](#creating) Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para interpretação do tipo que você esta criando, por padrão o nome deste arquivo deve sempre ser *config.yml* e deve estar sempre dentro de uma pasta com o nome do tipo e por sua vez esta pasta deve estar dentro da pasta *types* do módulo *backend*, este arquivo YAML indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo que você esta criando, veja a seguir um exemplo comentado deste arquivo:
 
@@ -210,7 +212,7 @@ defau
 ```
 
 <a name="events" id="events"></a>
-## 3.2 Arquivo de eventos
+## 3.2 Arquivo de eventos (config-events.php)
 
 [▲](#creating) Este arquivo deve ter mesmo nome *config-events.php* e deve conter uma classe com o mesmo nome do tipo, é importante ressaltar que o arquivo com a classe de eventos **não é definida** em *config.ini* e por isso deve seguir este padrão de nomeclatura.
 
