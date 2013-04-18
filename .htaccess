@@ -11,8 +11,8 @@ Options +FollowSymlinks
    
 # BRIDGE   
    
-    RewriteRule ^(api|bridge)/(.*?)/([0-9]*)$          system/bridge/index.php?_m_action=$2&_m_id=$3  [QSA,L]
-    RewriteRule ^(api|bridge)/(.*?)$                   system/bridge/index.php?_m_action=$2           [QSA,L]
+    RewriteRule ^(api|bridge|rest)/(.*?)/([0-9]*)$     system/bridge/index.php?_m_action=$2&_m_id=$3  [QSA,L]
+    RewriteRule ^(api|bridge|rest)/(.*?)$              system/bridge/index.php?_m_action=$2           [QSA,L]
                     
 # FRONT-END                    
                     
