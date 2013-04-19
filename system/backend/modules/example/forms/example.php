@@ -50,7 +50,7 @@ class FormEvents {
      * /
     function beforeDelete(&$data, $pkey, $config){
         
-    }*/
+    } */
     
     /**
      * Executa depois de deletar formulário
