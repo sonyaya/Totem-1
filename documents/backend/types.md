@@ -373,7 +373,7 @@ O HTML deste tipo não renderizado é o seguite:
 <a name="event-beforeUpdate" id="event-beforeUpdate"></a>
 ### 3.2.3 beforeUpdate: Antes de executar *update* no banco de dados
 
-[▲](#events) …
+[▲](#events) Tem a mesma funcionalidade do [beforeInsert](#event-beforeInsert), porém este evento é executado antes de inserir assim como seu nome sugere.
 
 Este evento possui os seguintes parâmetros:
 
@@ -383,14 +383,7 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-```php
-<?php
-    class example{
-        public function beforeUpdate(&$thisData, $thisColumn, &$allData, $parameters,  $pKey){
-            // code here
-        }
-    }
-```
+Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas trocar o nome do método de *beforeInsert* para *beforeUpdate*.
 
 <a name="event-beforeList" id="event-beforeList"></a>
 ### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface
