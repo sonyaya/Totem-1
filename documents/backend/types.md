@@ -1,5 +1,4 @@
-<a name="summary" id="summary"></a>
-Sumário
+Sumário <a name="summary" id="summary"></a>
 =======
 
 1. [Introdução](#intro)
@@ -37,30 +36,30 @@ Sumário
             - [Como acessar valores do tipo](#interface-access-type-values)
 4. Configurando os parâmetros de tipos
 
-<a name="intro" id="intro"></a>
-1. Tipos de Inputs
+1. Tipos de Inputs <a name="intro" id="intro"></a>
 ==================
 
 [▲](#summary) *Tipos*, *types*, *tipos de inputs* ou até mesmo *inputs* são possíveis nomeclaturas para apresentar a base de qualquer formulário do módulo *backend*, estes objetos são reponsaveis por criar a aparencia e funcionamento para entrada de dados no sistema, criar validadores de interface, ajax e server side além de tratar os valores que são inseridos, editados ou mesmo excluidos do banco de dados.
 
 É possivel criar os mais diversos *tipos de inputs*, seja uma simples entrada de texto até mesmo um relacionamento entre duas ou mais tabélas, por padrão o **totem** possui os seguintes tipos:
 
-<a name="default-types" id="default-types"></a>
-2. Tipos padrões
+2. Tipos padrões <a name="default-types" id="default-types"></a>
 ================
 
 [▲](#summary) O totem possui alguns tipos padrões, estes tipos podem ajudar novos usuários a personalizar seus formulários conforme sua necessidade, porém em casos que os tipos padrões não suprem as necessidades de desenvolvimento é possível criar tipos para ações específicas, leia o tópico [Criando um tipo personalizado](#creating) e veja como criar seu próprio tipo, a seguir veja a lista de tipos padrões e suas especificações:
 
-<a name="type-CKEditor" id="type-CKEditor"></a>
-## CKEditor
+
+CKEditor <a name="type-CKEditor" id="type-CKEditor"></a>
+--------
 
 [▲](#default-types) Adiciona um tipo baseado na biblioteca [CKEditor](http://ckeditor.com/).
 
 - Parâmetros
     - …
 
-<a name="type-combobox" id="type-combobox"></a>
-## combobox
+
+combobox <a name="type-combobox" id="type-combobox"></a>
+--------
 
 [▲](#default-types) Cria um objeto com a tag select do HTML, ele permite que o usuário decida quais serão os valores inseridos no banco de dados e as etiquetas que são apresentadas para o usuário.
 
@@ -70,8 +69,8 @@ Sumário
     - **valor-3 : etiqueta-3**
       - *adicione quantos valores achar necessário*
 
-<a name="type-dateBr" id="type-dateBr"></a>
-## dateBr
+dateBr <a name="type-dateBr" id="type-dateBr"></a>
+------
 
 [▲](#default-types) Cria três objetos do tipo select do HTML, o primeiro com os anos, o segundo com os meses e o terceiro com os dias. Quando enviado para o banco o formato é o padrão do MySQL (Y-m-d).
 
@@ -81,8 +80,9 @@ Sumário
         - **start** *ano de inicio da listagem*
         - **stop**  *ano máximo da listagem*
 
-<a name="type-dateTimeBr" id="type-dateTimeBr"></a>
-## dateTimeBr
+
+dateTimeBr <a name="type-dateTimeBr" id="type-dateTimeBr"></a>
+----------
 
 [▲](#default-types) Parecido com o dateBr com a diferença que o *dateTimeBr* possui selects do HTML a mais, o primeiro é a hora, o segundo refere-se aos minutos e o tereiro aos segundos.
 
@@ -92,8 +92,8 @@ Sumário
         - **start** *ano de inicio da listagem*
         - **stop**  *ano máximo da listagem*
 
-<a name="type-example" id="type-example"></a>
-## example
+example <a name="type-example" id="type-example"></a>
+-------
 
 [▲](#default-types) É um tipo utilizado para demonstrar como são feitos os tipos.
 
@@ -108,8 +108,8 @@ Sumário
     - **label**       *coluna do banco de dados que erá utilizada para as etiquetas do select*
     - **insert-form** *caminho do formulário para inserção de novos valores*
 
-<a name="type-imagesUpload" id="type-imagesUpload"></a>
-## imagesUpload
+imagesUpload <a name="type-imagesUpload" id="type-imagesUpload"></a>
+------------
 
 [▲](#default-types) Permite envio de imagens para o sistema, estas imagens são salvas em um caminho informado nos parâmetros e em uma sub-pasta com o nome do valor da chave primária, além de permitir ordenação e adição de informação diversas na imagem, atente-se que ele insere um jSon no banco de dados.
 
@@ -120,16 +120,16 @@ Sumário
       - **label/chave : \<input name="data"\>**                 *informação adicional para imagem*
       - *adicione quantos valores achar necessário*
 
-<a name="type-jsonArray" id="type-jsonArray"></a>
-## jsonArray
+jsonArray <a name="type-jsonArray" id="type-jsonArray"></a>
+---------
 
 [▲](#default-types) Cria uma lista ordenada, utilizada para gravar diversos valores em uma única coluna no banco de dados, apropriado para criação de campos do tipo TAG ou lista de telefones.
 
 - Parâmetros
     - **nullable** *pode ser nulo?*
 
-<a name="type-manyToMany" id="type-manyToMany"></a>
-## manyToMany
+manyToMany <a name="type-manyToMany" id="type-manyToMany"></a>
+----------
 
 [▲](#default-types) Permite fazer relacionamento entre três tabelas, um relacionamento muitos para muitos.
 
@@ -143,8 +143,8 @@ Sumário
     - **right-label**     *coluna chave primária da tabela da direita*
     - **insert-form**     *caminho do formulário para inserção de novos valores*
 
-<a name="type-meioMask" id="type-meioMask"></a>
-## meioMask
+meioMask <a name="type-meioMask" id="type-meioMask"></a>
+--------
 
 [▲](#default-types) Tipo baseado na famosa mascara jQuery [meioMask](http://www.meiocodigo.com/projects/meiomask/).
 
@@ -154,8 +154,8 @@ Sumário
     - **size**            *quantidade máxima de caracteres aceita*
     - **mask**            *mascara para o campo, mascaras preconfiguradas: phone, phone-us, cpf, cnpj, date, date-us, cep, time e cc*
 
-<a name="type-number" id="type-number"></a>
-## number
+number <a name="type-number" id="type-number"></a>
+------
 
 [▲](#default-types) Campo de entrada que aceita somente números
 
@@ -164,18 +164,18 @@ Sumário
     - **max**             *valor máximo aceito*
     - **step**            *multiplos aceitos, 2 em 2, 3 em 3 etc.*
 
-<a name="type-password" id="type-password"></a>
-## password
+password <a name="type-password" id="type-password"></a>
+--------
 
 [▲](#default-types) Campo de senha com confirmação de senha.
 
-<a name="type-rawText" id="type-rawText"></a>
-## rawText
+rawText <a name="type-rawText" id="type-rawText"></a>
+-------
 
 [▲](#default-types) Texto integro (exatamente como foi gravado no banco) somente para visualização, sem permissões para alterar.
 
-<a name="type-textarea" id="type-textarea"></a>
-## textarea
+textarea <a name="type-textarea" id="type-textarea"></a>
+--------
 
 [▲](#default-types) Este tipo adiciona um textarea do HTML.
 
@@ -192,8 +192,8 @@ Para iniciar a criação de um novo tipo é necessário primeiro criar uma pasta
 
 É possível criar arquivos CSS que serão carregados por referência no cabeçalho assim como é possível carregar arquivos Javascript da mesma maneira, porém para os arquivos Javascript existe uma outra possíbilidade que é a de incorporar diretamente no corpo do HTML, para executar estas ações basta informar no [config.yml](#config) os caminhos que deseja adicionar ao arquivo de interface, nos arquivos incoporados é possível carregar valores do totem, sejam eles nativos do sistema ou valores epecíficos do tipo ou ainda valores passados por parâmetros. **(atenção isso é válido somente para os arquivos de interface e os arquivos Javascript incorporados)**.
 
-<a name="config" id="config"></a>
-## 3.1 Arquivo de configuração de tipo (config.yml)
+3.1 Arquivo de configuração de tipo (config.yml) <a name="config" id="config"></a>
+------------------------------------------------
 
 [▲](#creating) Este arquivo é responsavel por informar ao sistema quais arquivos serão utilizados para interpretação do tipo que você esta criando, por padrão o nome deste arquivo deve sempre ser *config.yml* e deve estar sempre dentro de uma pasta com o nome do tipo e por sua vez esta pasta deve estar dentro da pasta *types* do módulo *backend*, este arquivo YAML indica quais são os arquivos javascript, css e html que serão utilizados na interface gráfica, além dos parâmetros padrões do tipo que você esta criando, veja a seguir um exemplo comentado deste arquivo:
 
@@ -238,8 +238,9 @@ default:
   # adicione quantos parametros achar necessário
 ```
 
-<a name="events" id="events"></a>
-## 3.2 Arquivo de eventos (config-events.php)
+
+3.2 Arquivo de eventos (config-events.php) <a name="events" id="events"></a>
+------------------------------------------
 
 [▲](#creating) Este arquivo deve ter mesmo nome *config-events.php* e deve conter uma classe com o mesmo nome do tipo, é importante ressaltar que o arquivo com a classe de eventos **não é definida** em *config.ini* e por isso deve seguir este padrão de nomeclatura.
 
@@ -543,7 +544,7 @@ Este evento possui os seguintes parâmetros:
 ```
 
 <a name="event-ajax" id="event-ajax"></a>
-### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo
+### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo ### {: #teste}
 
 [▲](#events) …
 
@@ -558,13 +559,13 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="interface" id="interface"></a>
-## 2.3 Arquivo de interface
+2.3 Arquivo de interface <a name="interface" id="interface"></a>
+------------------------
 
 [▲](#creating) …
 
 <a name="interface-access-values" id="interface-access-values"></a>
-### 2.3.1 Como acessar valores do sistema na interface](#interface-access-values)
+### 2.3.1 Como acessar valores do sistema na interface
 
 [▲](#interface) …
 
