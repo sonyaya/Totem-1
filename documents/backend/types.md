@@ -32,9 +32,9 @@ Sumário
         - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
         - [ajax: Ao executar uma requisição ajax para o tipo](#event-ajax)
     - [Arquivo de interface](#interface)
-        - [Como acessar valores do sistema na interface](#interface-acess-values)
-            - [Como acessar valores do totem](#interface-acess-totem-values)
-            - [Como acessar valores do tipo](#interface-acess-type-values)
+        - [Como acessar valores do sistema na interface](#interface-access-values)
+            - [Como acessar valores do totem](#interface-access-totem-values)
+            - [Como acessar valores do tipo](#interface-access-type-values)
 4. Configurando os parâmetros de tipos
 
 <a name="intro" id="intro"></a>
@@ -276,7 +276,9 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 <a name="event-validate" id="event-validate"></a>
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
 
-[▲](#events) Antes de executar qualquer evento no formulário todos os campos são válidados, o evento resposavel por validar cada campo é o *validate* dos tipos de input, este evento responsáveis por validar os valores contidos em seu campo na interface, caso este método não for criado ou seu retorno for nulo, os campos sempre serão válidos.
+[▲](#events) Antes de executar qualquer evento no formulário todos os campos são válidados, o evento resposavel por validar cada campo é o *validate* dos tipos de input, este evento responsáveis por verificar os valor contido no campo na interface, caso este método não for criado ou seu retorno for nulo, os campos sempre serão válidos.
+
+Para retornar uma mensagem de erro é preciso que este método retorne um array com duas chaves a primeira é *error* e seu valor dever ser um boleano verdadeiro e a segunda chave deve ser *message* e contém o texto para a mensagem de erro para o campo atual.
 
 Este evento possui os seguintes parâmetros:
 
@@ -304,7 +306,7 @@ Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
 <a name="event-beforeInsert" id="event-beforeInsert"></a>
 ### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados
 
-[▲](#events) …
+[▲](#events) Antes de executar insert no banco de dados este método é chamado para cada campo do formulário, isto permite que seja executada alguma ação para qualquer campo antes que ele seja inserido no banco de dados, dentre estas ações é possível até mesmo remover a inserção de um determinado campo até mesmo a alteração ou formatação do campo que deverá ser inserido no banco de dados.
 
 Este evento possui os seguintes parâmetros:
 
@@ -314,13 +316,58 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
+Veja a seguir como funciona a inserção de um campo do tipo dateBr, os campos dataBr formatam a varivel do tipo data para o formato compativel com o MySQL:
+
 ```php
 <?php
     class example{
         public function beforeInsert(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            // code here
+            $thisData = "{$thisData['year']}-{$thisData['month']}-{$thisData['day']}";
         }
     }
+```
+
+O HTML deste tipo não renderizado é o seguite:
+
+```HTML
+<div class="input-holder &m.var:type;">
+  <label>&m.var:label;</label>
+  <div class="inner-holder">
+    
+    <div class="box year">
+      <label>Ano</label> 
+      <select name="&m.var:name;[year]" class="input-year" id="&m.var:id;_year" required>
+          <m.if cond="&m.var:bool:parameter.nullable;">
+            <option val="--">--</option>
+          </m.if>  
+          <m.repeat start="toLayout.year.start" stop="toLayout.year.stop" key="YEAR">
+            <option>__YEAR__</option>
+          </m.repeat>
+      </select>
+    </div>
+
+    <div class="box month">
+      <label>Mês</label>
+      <select name="&m.var:name;[month]" class="input-month" id="&m.var:id;_month" required>
+        <m.if cond="&m.var:bool:parameter.nullable;">
+          <option val="--">--</option>
+        </m.if> 
+        <m.repeat start="01" stop="12" key="MONTH">
+          <option>__MONTH__</option>
+        </m.repeat>
+      </select>
+    </div>
+
+    <div class="box day">
+      <label>Dia</label>
+      <select name="&m.var:name;[day]" class="input-day" id="&m.var:id;_day" required>
+        <option>1</option>
+      </select>
+    </div>
+
+    <div class="clear"></div>
+  </div>
+</div>
 ```
 
 <a name="event-beforeUpdate" id="event-beforeUpdate"></a>
@@ -498,17 +545,17 @@ Este evento possui os seguintes parâmetros:
 
 [▲](#creating) …
 
-<a name="interface-acess-values" id="interface-acess-values"></a>
-### 2.3.1 Como acessar valores do sistema na interface](#interface-acess-values)
+<a name="interface-access-values" id="interface-access-values"></a>
+### 2.3.1 Como acessar valores do sistema na interface](#interface-access-values)
 
 [▲](#interface) …
 
 <a name="" id=""></a>
 #### 2.3.1.1 Como acessar valores do totem
 
-[▲](#interface-acess-values) …
+[▲](#interface-access-values) …
 
 <a name="" id=""></a>
 #### 2.3.1.2 Como acessar valores do tipo
 
-[▲](#interface-acess-values) …
+[▲](#interface-access-values) …
