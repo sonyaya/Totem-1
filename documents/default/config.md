@@ -1,12 +1,9 @@
-<a name="summary" id="summary"></a>
-Sumário
+Sumário <a name="summary"></a>
 =======
 
 1. [Introdução](#intro)
 
-
-<a name="intro" id="intro"></a>
-1. Configurando o totem
+1. Configurando o totem <a name="intro"></a>
 =======================
 
 [▲](#summary) …

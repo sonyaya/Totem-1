@@ -1,9 +1,9 @@
-Sumário <a name="summary" id="summary"></a>
+Sumário <a name="summary"></a>
 =======
 
 1. [Introdução](#intro)
 
-1. Interfaces <a name="intro" id="intro"></a>
+1. Interfaces <a name="intro"></a>
 =============
 
 [▲](#summary) ...
