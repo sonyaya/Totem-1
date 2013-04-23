@@ -20,12 +20,15 @@ Sumário <a name="summary"></a>
 3. [Criando um tipo personalizado](#creating)
     - [Arquivo de configuração de tipo (config.yml)](#config)
     - [Arquivo de eventos](#events)
-        - [validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.](#event-validate)
+        - [validate: Verifica se o campo não possui nenhum restrição para ser inserido, 
+           atualizado ou deletado.](#event-validate)
         - [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
         - [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
-        - [beforeList: Antes do formulário de listagem mostrar os valores na interface](#event-beforeList)
+        - [beforeList: Antes do formulário de listagem mostrar os valores na 
+           interface](#event-beforeList)
         - [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
-        - [beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm)
+        - [beforeLoadDataToForm: Antes de mostrar os valores que serão editados 
+           no formulário de atualização](#event-beforeLoadDataToForm)
         - [afterInsert: Após executar *insert* no banco de dados](#event-afterInsert)
         - [afterUpdate: Após executar *update* no banco de dados](#event-afterUpdate)
         - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
@@ -123,8 +126,10 @@ de uma tabela no banco de dados, criando assim um relação simples entre as tab
 
 - Parâmetros
     - **table**       *tabela no banco de dados*
-    - **column**      *coluna do banco de dados que será utilizada para os valores do select*
-    - **label**       *coluna do banco de dados que erá utilizada para as etiquetas do select*
+    - **column**      *coluna do banco de dados que será utilizada para os valores 
+                       do select*
+    - **label**       *coluna do banco de dados que erá utilizada para as etiquetas 
+                       do select*
     - **insert-form** *caminho do formulário para inserção de novos valores*
 
 imagesUpload                                                                                                                               <a name="type-imagesUpload"></a>
@@ -138,8 +143,10 @@ que ele insere um jSon no banco de dados.
 - Parâmetros
    - **folder** *caminho da pasta que serão gravadas as imagens*
    - **inputs**
-      - **label/chave : \<textarea name="data"\>\</textarea\>** *informação adicional para imagem*
-      - **label/chave : \<input name="data"\>**                 *informação adicional para imagem*
+      - **label/chave : \<textarea name="data"\>\</textarea\>** *informação adicional 
+                                                                 para imagem*
+      - **label/chave : \<input name="data"\>**                 *informação adicional 
+                                                                 para imagem*
       - *adicione quantos valores achar necessário*
 
 jsonArray                                                                                                                                  <a name="type-jsonArray"></a>
@@ -178,7 +185,8 @@ meioMask                                                                        
     - **nullable**        *pode ser nulo?*
     - **placeholder**     *texto placeholder*
     - **size**            *quantidade máxima de caracteres aceita*
-    - **mask**            *mascara para o campo, mascaras preconfiguradas: phone, phone-us, cpf, cnpj, date, date-us, cep, time e cc*
+    - **mask**            *mascara para o campo, mascaras preconfiguradas: phone, 
+                           phone-us, cpf, cnpj, date, date-us, cep, time e cc*
 
 number                                                                                                                                     <a name="type-number"></a>
 ------
@@ -300,12 +308,14 @@ padrão de nomeclatura.
 Esta classe PHP será responsave manipular os eventos do tipo que esta sendo criado, 
 veja a seguir os eventos que ele deve controlar com exemplos e explicações:
 
-- [validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.](#event-validate)
+- [validate: Verifica se o campo não possui nenhum restrição para ser inserido, 
+   atualizado ou deletado.](#event-validate)
 - [beforeInsert: Antes de executar *insert* no banco de dados](#event-beforeInsert)
 - [beforeUpdate: Antes de executar *update* no banco de dados](#event-beforeUpdate)
 - [beforeList: Antes do formulário de listagem mostrar os valores na interface](#event-beforeList)
 - [beforeDelete: Antes de executar *delete* no banco de dados](#event-beforeDelete)
-- [beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm)
+- [beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário 
+   de atualização](#event-beforeLoadDataToForm)
 - [afterInsert: Após executar *insert* no banco de dados](#event-afterInsert)
 - [afterUpdate: Após executar *update* no banco de dados](#event-afterUpdate)
 - [afterDelete: Após executar *delete* no banco de dados](#event-afterDelete)
@@ -313,54 +323,46 @@ veja a seguir os eventos que ele deve controlar com exemplos e explicações:
 
 Para facilitar o entendimento dos parâmetros recebidos pelos métodos de eventos, 
 nós padrnizamos os nomes das variaveis, segue uma lista com as nomeclaruras que 
-criamos
+criamos:
 
-### $thisData <a name="$thisData"></a>
+#### $thisData                                                                                                                              <a name="$thisData"></a>
 
 > Contém o valor do campo atual.
 
-<a name="$thisColumn"></a>
-### $thisColumn
+#### $thisColumn                                                                                                                            <a name="$thisColumn"></a>
 
 > Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
 
-<a name="$allData"></a>
-### $allData
+#### $allData                                                                                                                              <a name="$allData"></a>
 
 > Contém um array com todos os valores e etiquetas de todos os campos do formulário 
 > que esta sendo submetido.
 
-<a name="$thisLabel"></a>
-### $thisLabel
+#### $thisLabel                                                                                                                            <a name="$thisLabel"></a>
 
 > Contém o valor da etiqueta do campo que esta sendo editado, alterado ou removido 
 > no momento.
 
-<a name="$parameters"></a>
-### $parameters
+#### $parameters                                                                                                                           <a name="$parameters"></a>
 
 > Contém um array com os parâmetros informados no fomulário para o campo atual.
 
-<a name="$pKey"></a>
-### $pkey 
+#### $pkey                                                                                                                                 <a name="$pKey"></a>
 
 > Contém o array com a chave primária do valor que esta sendo inserido, atualizado, 
 > deletado ou listado, com nome do campo e valor.
 
-<a name="$thisRow"></a>
-### $thisRow
+#### $thisRow                                                                                                                              <a name="$thisRow"></a>
 
 > Utilizado somente nas listagens, contém um array com os nomes e valores de todas 
 > as colunas da linha atual que está sendo listada.
 
-<a name="$toTypeLayout"></a>
-### $toTypeLayout
+#### $toTypeLayout <a name="$toTypeLayout"></a>
 
 > Contém um array com valores que podem ser enviados para o arquivo de interface, 
 > ou javascript de rodapé informados no arquivo [config.yaml](#config).
 
-<a name="event-validate"></a>
-### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.
+### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.                             <a name="event-validate"></a>
 
 [▲](#events) Antes de executar qualquer evento no formulário todos os campos são 
 válidados, o evento resposavel por validar cada campo é o *validate* dos tipos de 
@@ -395,8 +397,7 @@ Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
     }
 ```
 
-<a name="event-beforeInsert"></a>
-### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados
+### 3.2.2 beforeInsert: Antes de executar *insert* no banco de dados                                                                       <a name="event-beforeInsert"></a>
 
 [▲](#events) Antes de executar insert no banco de dados este método é chamado para 
 cada campo do formulário, isto permite que seja executada alguma ação para qualquer 
@@ -467,8 +468,7 @@ O HTML deste tipo não renderizado é o seguite:
 </div>
 ```
 
-<a name="event-beforeUpdate"></a>
-### 3.2.3 beforeUpdate: Antes de executar *update* no banco de dados
+### 3.2.3 beforeUpdate: Antes de executar *update* no banco de dados                                                                       <a name="event-beforeUpdate"></a>
 
 [▲](#events) Tem a mesma funcionalidade do [beforeInsert](#event-beforeInsert), 
 porém este evento é executado antes de inserir assim como seu nome sugere.
@@ -484,8 +484,7 @@ Este evento possui os seguintes parâmetros:
 > Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas 
 > trocar o nome do método de *beforeInsert* para *beforeUpdate*.
 
-<a name="event-beforeList"></a>
-### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface
+### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface                                                      <a name="event-beforeList"></a>
 
 [▲](#events) Este evento é executado logo após ser feito a busca de informações 
 no banco de dados e antes de ser apresentada em tela, o que permite a execução de 
@@ -520,8 +519,7 @@ veja o exemplo a seguir para esta situação:
     }
 ```
 
-<a name="event-beforeDelete"></a>
-### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados
+### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados                                                                       <a name="event-beforeDelete"></a>
 
 [▲](#events) …
 
@@ -542,8 +540,7 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="event-beforeLoadDataToForm"></a>
-### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização
+### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização                                <a name="event-beforeLoadDataToForm"></a>
 
 [▲](#events) …
 
@@ -565,8 +562,7 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="event-afterInsert"></a>
-### 3.2.7 afterInsert: Após executar *insert* no banco de dados
+### 3.2.7 afterInsert: Após executar *insert* no banco de dados                                                                            <a name="event-afterInsert"></a>
 
 [▲](#events) …
 
@@ -587,8 +583,7 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="event-afterUpdate"></a>
-### 3.2.8 afterUpdate: Após executar *update* no banco de dados
+### 3.2.8 afterUpdate: Após executar *update* no banco de dados                                                                            <a name="event-afterUpdate"></a>
 
 [▲](#events) …
 
@@ -609,8 +604,7 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="event-afterDelete"></a>
-### 3.2.9 afterDelete: Após executar *delete* no banco de dados
+### 3.2.9 afterDelete: Após executar *delete* no banco de dados                                                                            <a name="event-afterDelete"></a>
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -631,8 +625,7 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-<a name="event-ajax"></a>
-### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo ### {: #teste}
+### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo                                                                               <a name="event-ajax"></a>
 
 [▲](#events) …
 
@@ -652,17 +645,14 @@ Este evento possui os seguintes parâmetros:
 
 [▲](#creating) …
 
-<a name="interface-access-values"></a>
-### 2.3.1 Como acessar valores do sistema na interface
+### 2.3.1 Como acessar valores do sistema na interface                                                                                     <a name="interface-access-values"></a>
 
 [▲](#interface) …
 
-<a name=""></a>
-#### 2.3.1.1 Como acessar valores do totem
+#### 2.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
 
 [▲](#interface-access-values) …
 
-<a name=""></a>
-#### 2.3.1.2 Como acessar valores do tipo
+#### 2.3.1.2 Como acessar valores do tipo                                                                                                  <a name=""></a>
 
 [▲](#interface-access-values) …

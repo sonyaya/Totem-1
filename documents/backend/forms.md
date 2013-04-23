@@ -1,4 +1,4 @@
-Sumário <a name="summary"></a>
+Sumário                                                                                                                                    <a name="summary"></a>
 =======
 
 1. [Introdução](#intro)
@@ -22,7 +22,7 @@ Sumário <a name="summary"></a>
 6. [Exemplo de formulário completo](#complete-form)
 
 
-1. Formulários <a name="intro"></a>
+1. Formulários                                                                                                                             <a name="intro"></a>
 ==============
 
 [▲](#summary) Os formulários são configurados por um arquivo YAML preferencialmente 
@@ -41,7 +41,7 @@ de inserção, atualização, exclusão além de rotinas mais específicas, por�
 podem prover informações para outros módulos como o **bridge (api)** e consequentemente 
 para o **frontend**.
 
-2. Cabeçalho                                                                    <a name="head"></a>
+2. Cabeçalho                                                                                                                               <a name="head"></a>
 ============
 
 [▲](#summary) Este é responsável por informar qual é o título principal dos formulários, 
@@ -55,7 +55,7 @@ header:
     p-key: nome_da_chave_primaria_da_tabela
 ```
 
-3. Tipos de Formulários                                                         <a name="form-types"></a>
+3. Tipos de Formulários                                                                                                                    <a name="form-types"></a>
 =======================
 
 [▲](#summary) Existem diversos tipos de formulários cada um com uma funcionalidade 
@@ -69,7 +69,7 @@ disponibiliza:
 - [Exclusão (delete)](#delete-form)
 - [Formulário para Rest API (bridge)](#rest-form)
 
-3.1 Formulário de Inserção ou Atualização                                       <a name="save-form"></a>
+3.1 Formulário de Inserção ou Atualização                                                                                                  <a name="save-form"></a>
 -----------------------------------------
 
 [▲](#form-types) Os dois formulários são criados exatamente iguais, portanto esta 
@@ -83,9 +83,14 @@ Estes formulários possuem três propriedades, são elas:
 - title
     - refere-se ao titulo secundário do formulário, para uma descrição pouco mais aprimorada
 - input
-    - é responsável de informar quais os tipos e as propriedades dos tipos o formulário ira conter, para intender melhor o que são e como funcionam estes tipos leia [a documentação de tipos](types.md).
+    - é responsável de informar quais os tipos e as propriedades dos tipos o formulário 
+      ira conter, para intender melhor o que são e como funcionam estes tipos leia 
+      [a documentação de tipos](types.md).
 - merge-form
-    - não é uma propriedade obrigatória, é utilizado quando existe a necessidade de copiar os inputs de um outro formulário, isso é útil quando temos dois formulários que irão utilizar exatamente os mesmo ou grande maiorias das propriedades de outro formulário, veja mais informações em [como clonar formulários](#clone-form).
+    - não é uma propriedade obrigatória, é utilizado quando existe a necessidade 
+      de copiar os inputs de um outro formulário, isso é útil quando temos dois 
+      formulários que irão utilizar exatamente os mesmo ou grande maiorias das propriedades 
+      de outro formulário, veja mais informações em [como clonar formulários](#clone-form).
 
 ```yaml
 forms:
@@ -103,7 +108,7 @@ forms:
 ```
 
 
-3.2 Boneco (dummy)                                                              <a name="dummy-form"></a>
+3.2 Boneco (dummy)                                                                                                                         <a name="dummy-form"></a>
 ------------------
 
 [▲](#form-types) É o tipo de formulário utilizado para criação de qualquer processo 
@@ -152,7 +157,7 @@ Exemplo de como pode ser criado o arquivo PHP (ARQUIVO-PHP-A-SER-EXECUTADO.php):
     }
 ```
    
-3.3 Formulário de Listagem                                                      <a name="list-form"></a>
+3.3 Formulário de Listagem                                                                                                                 <a name="list-form"></a>
 -------------------------- 
 
 [▲](#form-types) O formulário de listagem é exatamente igual ao formulário de inserção 
@@ -179,9 +184,10 @@ forms:
               
               # podemos ter quantos inputs forem necessários
 ```
-> Vale resaltar que os valores para column dos inputs neste formulário podem ser uma sub-query, exemplo: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
+> Vale resaltar que os valores para column dos inputs neste formulário podem ser 
+> uma sub-query, exemplo: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
 
-3.4 Formulário de Exclusão                                                      <a name="delete-form"></a>
+3.4 Formulário de Exclusão                                                                                                                 <a name="delete-form"></a>
 --------------------------
 
 [▲](#form-types) O formulário de exclusão funciona exatamente como os formulários 
@@ -207,7 +213,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-3.5 Formulário Rest API (bridge)                                                <a name="rest-form"></a>
+3.5 Formulário Rest API (bridge)                                                                                                           <a name="rest-form"></a>
 --------------------------------
 
 [▲](#form-types) Este formulário é reponsável por fornecer ao módulo **bridge** 
@@ -232,7 +238,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
-4. Eventos de formulários                                                       <a name="events"></a>
+4. Eventos de formulários                                                                                                                  <a name="events"></a>
 =========================
 
 [▲](#summary) É possível adicionar eventos para qualquer formulário, estes eventos 
@@ -256,27 +262,24 @@ um dos métodos a seguir:
 As classe possuem parâmetros com nomes padronizados para facilitar a criação de 
 eventos, segue a explicação de cada um destes parâmetros:
 
-<a name="$pkey"></a>
-### $pkey 
+### $pkey                                                                                                                                  <a name="$pkey"></a>
 
-> Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor.
+> Contém o array com a chave primária do valor que esta sendo inserido, atualizado, 
+> deletado ou listado, com nome do campo e valor.
 
-<a name="$config"></a>
-### $config 
+### $config                                                                                                                                <a name="$config"></a>
 
 > Contém o array com os valores do arquivo de configuração.
     
-<a name="$loadedData"></a>
-### $loadedData 
+### $loadedData                                                                                                                            <a name="$loadedData"></a>
 
 > Contém o array dos valores carregados a partir do banco de dados.
 	
-<a name="$data"></a>
-###$data 
+###$data                                                                                                                                   <a name="$data"></a> 
 
 > Contém um array com os valores enviados para os métods a partir da interface.
 
-4.1 beforeLoadData: Antes de carregar valores na interface                      <a name="event-beforeLoadData"></a>
+4.1 beforeLoadData: Antes de carregar valores na interface                                                                                 <a name="event-beforeLoadData"></a>
 ----------------------------------------------------------
 
 [▲](#events) Antes mesmo de buscar as informações que serão alteradas o método 
@@ -300,7 +303,7 @@ dados, veja um exemplo:
     }
 ```
 
-4.2 afterLoadData: Após carregar valores na interface                           <a name="event-afterLoadData"></a>
+4.2 afterLoadData: Após carregar valores na interface                                                                                      <a name="event-afterLoadData"></a>
 -----------------------------------------------------
 
 [▲](#events) Quando um formulário de atualização é solicitado é feita uma busca 
@@ -327,7 +330,7 @@ veja um exemplo da implementação deste evento:
     }
 ```
 
-4.3 beforeInsert: Antes de executar *insert* no banco de dados                  <a name="event-beforeInsert"></a>
+4.3 beforeInsert: Antes de executar *insert* no banco de dados                                                                             <a name="event-beforeInsert"></a>
 --------------------------------------------------------------
 
 [▲](#events) Antes que o formulário de inserção efetue a perpetuação dos dados 
@@ -353,7 +356,7 @@ situação podemos fazer o seguinte:
     }
 ```
 
-4.4 afterInsert: Após de executar *insert* no banco de dados                    <a name="event-afterInsert"></a>
+4.4 afterInsert: Após de executar *insert* no banco de dados                                                                               <a name="event-afterInsert"></a>
 ------------------------------------------------------------
 
 [▲](#events) Este evento é executa logo após a inserção de dados no banco de dados 
@@ -377,7 +380,7 @@ nome será o valor de um dos campos do formulário, veja o exemplo a seguir:
     }
 ```
 
-4.5 beforeUpdate: Antes de executar *update* no banco de dados                  <a name="event-beforeUpdate"></a>
+4.5 beforeUpdate: Antes de executar *update* no banco de dados                                                                             <a name="event-beforeUpdate"></a>
 --------------------------------------------------------------
 
 [▲](#events) Tem o funcionamento semelhante ao evento [beforeInsert](#event-beforeInsert), 
@@ -392,7 +395,7 @@ pelo formulário de atualização, este método possui os mesmos parâmetros do
 Veja o exemplo do [beforeInsert](#event-beforeInsert) apenas tendo em mente que 
 o nome do método é diferente.
 
-4.6 afterUpdate: Após de executar *update* no banco de dados                    <a name="event-afterUpdate"></a>
+4.6 afterUpdate: Após de executar *update* no banco de dados                                                                               <a name="event-afterUpdate"></a>
 ------------------------------------------------------------
 
 [▲](#events) Tem o funcionamento semelhante ao evento [afterInsert](#event-afterInsert), 
@@ -407,7 +410,7 @@ pelo formulário de atualização, este método possui os mesmos parâmetros do
 Veja o exemplo do [afterInsert](#event-afterInsert) apenas tendo em mente que o 
 nome do método é diferente.
 
-4.7 beforeDelete: Antes de executar *delete* no banco de dados                  <a name="event-beforeDelete"></a>
+4.7 beforeDelete: Antes de executar *delete* no banco de dados                                                                             <a name="event-beforeDelete"></a>
 --------------------------------------------------------------
 
 [▲](#events) Antes do formulário de exclusão remover valores do banco de dados 
@@ -436,7 +439,7 @@ ao usuário:
     }
 ```
 
-4.8 afterDelete: Após de executar *delete* no banco de dados                    <a name="event-afterDelete"></a>
+4.8 afterDelete: Após de executar *delete* no banco de dados                                                                               <a name="event-afterDelete"></a>
 ------------------------------------------------------------
 
 [▲](#events) Após o formulário de exclusão remover valores do banco de dados é 
@@ -460,7 +463,7 @@ o exemplo a seguir:
     }
 ```
 
-5. Como clonar formulários                                                      <a name="clone-form"></a>
+5. Como clonar formulários                                                                                                                 <a name="clone-form"></a>
 ==========================
 
 [▲](#summary) Qualquer formulário pode ter os valores do parâmetro *input:* mesclados 
@@ -604,7 +607,7 @@ Resumindo as regras para mesclagem são:
 
 - *inputs* com alias diferentes não são mesclados e sim incluídos.
 
-6. Exemplo de formulário completo <a name="complete-form"></a>
+6. Exemplo de formulário completo                                                                                                          <a name="complete-form"></a>
 =================================
 
 ```yaml
