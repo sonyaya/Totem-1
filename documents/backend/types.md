@@ -386,7 +386,7 @@ criamos:
 
 #### $parameters                                                                                                                           <a name="$parameters"></a>
 
-> Contém um array com os parâmetros informados no fomulário para o campo atual.
+> Contém um array com os parâmetros informados no formulário para o campo atual.
 
 #### $pkey                                                                                                                                 <a name="$pKey"></a>
 
@@ -406,7 +406,7 @@ criamos:
 ### 3.2.1 validate: Verifica se o campo não possui nenhum restrição para ser inserido, atualizado ou deletado.                             <a name="event-validate"></a>
 
 [▲](#events) Antes de executar qualquer evento no formulário todos os campos são
-válidados, o evento resposavel por validar cada campo é o *validate* dos tipos de
+válidados, o evento responsável por validar cada campo é o *validate* dos tipos de
 input, este evento responsáveis por verificar os valor contido no campo na interface,
 caso este método não for criado ou seu retorno for nulo, os campos sempre serão válidos.
 
@@ -527,10 +527,10 @@ Este evento possui os seguintes parâmetros:
 
 ### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface                                                      <a name="event-beforeList"></a>
 
-[▲](#events) Este evento é executado logo após ser feito a busca de informações
-no banco de dados e antes de ser apresentada em tela, o que permite a execução de
-qualquer processo antes mesmo que os dados sejam impressos na tela, tornando viavel
-também a formatação/manipulação dos dados apresentados.
+[▲](#events) Este evento é executado logo após ser feita a busca de informações
+no banco de dados e antes destas informações serem apresentadas em tela, o que permite 
+a execução de qualquer processo antes mesmo que os dados sejam impressos na tela, 
+tornando viável também a formatação/manipulação dos dados apresentados.
 
 > Note que se caso não seja extremamente necessário **deve ser evitado o uso deste
 > evento**, pelo simples fato de que ele é executado para cada um dos dados apresentados
@@ -562,7 +562,9 @@ veja o exemplo a seguir para esta situação:
 
 ### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados                                                                       <a name="event-beforeDelete"></a>
 
-[▲](#events) …
+[▲](#events) Antes de executar delete no banco de dados este método é chamado para
+cada campo do formulário, assim é possível executar quaisquer processos relacionados 
+a exclusão de determinado campo do formulário.
 
 Este evento possui os seguintes parâmetros:
 
@@ -572,11 +574,19 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
+Imagine que um arquivo deve ser excluido antes que os valores que possuem algum
+tipo de relação com este arquivo seja removido, neste exemplo imagine que um arquivo 
+de imagem JPG com o mesmo nome do campo deverá ser excluido.
+
 ```php
 <?php
     class example{
         public function beforeDelete(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            // code here
+            if( file_exists("{$thisData}.jpg") ){
+                unlink("{$thisData}.jpg"):
+            }else{
+                return Array( "error" => true, "message" => "O arquivo {$thisData}.jpg, não foi encontrado." );
+            }
         }
     }
 ```
@@ -647,24 +657,21 @@ Este evento possui os seguintes parâmetros:
 
 ### 3.2.9 afterDelete: Após executar *delete* no banco de dados                                                                            <a name="event-afterDelete"></a>
 
+[▲](#events) Este evento é muito semelhante ao evento [beforeDelete](#event-beforeDelete),
+somente se diferenciando no memento em que ele é executado, este evento é executado
+logo após a execução do delete no banco de dados, enquanto o [beforeDelete](#event-beforeDelete)
+é executado antes da execução do delete.
+
+Este evento possui os seguintes parâmetros:
+
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-[▲](#events) …
-
-Este evento possui os seguintes parâmetros:
-
-```php
-<?php
-    class example{
-        public function afterDelete(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            // code here
-        }
-    }
-```
+> Veja o exemplo do tópico [beforeDelete](#event-beforeDelete) e considere apenas
+> trocar o nome do método de *beforeDelete* para *afterDelete*.
 
 ### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo                                                                               <a name="event-ajax"></a>
 
@@ -681,19 +688,19 @@ Este evento possui os seguintes parâmetros:
     }
 ```
 
-2.3 Arquivo de interface                                                                                                                   <a name="interface"></a>
+3.3 Arquivo de interface                                                                                                                   <a name="interface"></a>
 ------------------------
 
 [▲](#creating) …
 
-### 2.3.1 Como acessar valores do sistema na interface                                                                                     <a name="interface-access-values"></a>
+### 3.3.1 Como acessar valores do sistema na interface                                                                                     <a name="interface-access-values"></a>
 
 [▲](#interface) …
 
-#### 2.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
+#### 3.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
 
 [▲](#interface-access-values) …
 
-#### 2.3.1.2 Como acessar valores do tipo                                                                                                  <a name=""></a>
+#### 3.3.1.2 Como acessar valores do tipo                                                                                                  <a name=""></a>
 
 [▲](#interface-access-values) …
