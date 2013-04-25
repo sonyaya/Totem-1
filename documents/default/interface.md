@@ -9,5 +9,5 @@ Sumário                                                                        
 [▲](#summary) ...
 
 
-2. Marcações Extendindas 
+2. Marcações Extendindas
 ========================
