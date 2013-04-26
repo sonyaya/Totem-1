@@ -442,8 +442,8 @@ Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
 [▲](#events) Antes de executar insert no banco de dados este método é chamado para
 cada campo do formulário, isto permite que seja executada alguma ação para qualquer
 campo antes que ele seja inserido no banco de dados, dentre estas ações é possível
-até mesmo remover a inserção de um determinado campo até mesmo a alteração ou formatação
-do campo que deverá ser inserido no banco de dados.
+até mesmo remover a inserção do campo, é possivel até mesmo alterar ou formatar 
+campo.
 
 Este evento possui os seguintes parâmetros:
 
@@ -625,14 +625,22 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-> Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas
-> trocar o nome do método de *beforeInsert* para *beforeUpdate*.
+Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
+valores forem inseridos no banco de dados.
+
+```php
+<?php
+    class example{
+        public function afterInsert($thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
+            rename("/tmp/tmp_file.txt", "/pasta/{$thisData}");
+        }
+    }
 ```
 
 ### 3.2.8 afterUpdate: Após executar *update* no banco de dados                                                                            <a name="event-afterUpdate"></a>
 
 [▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
-porém este evento é executado após ser executado o update no banco de dados.
+porém este evento é executado após de ser executado o insert no banco de dados.
 
 Este evento possui os seguintes parâmetros:
 
@@ -642,8 +650,16 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-> Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas
-> trocar o nome do método de *beforeInsert* para *beforeUpdate*.
+Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
+valores forem atualizados no banco de dados.
+
+```php
+<?php
+    class example{
+        public function afterUpdate($thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
+            rename("/tmp/tmp_file.txt", "/pasta/{$thisData}");
+        }
+    }
 ```
 
 ### 3.2.9 afterDelete: Após executar *delete* no banco de dados                                                                            <a name="event-afterDelete"></a>
