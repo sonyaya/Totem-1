@@ -696,9 +696,18 @@ logo após a execução do delete no banco de dados, enquanto o [beforeDelete](#
 
 ### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo                                                                               <a name="event-ajax"></a>
 
-[▲](#events) …
+[▲](#events) São eventos usados por aquivos de interface em sua maior parte do 
+tempo, é utilizado para criar processos onde é possível buscar informações sem que
+seja necessário a atualização completa da página, o que significa que apenas treixos
+da pagina irão ser atualizados.
+
+> Leia o arqitigo [AJAX (programação)](http://pt.wikipedia.org/wiki/AJAX_%28programa%C3%A7%C3%A3o%29)
+> da Wikipédia.
 
 #### Parâmetros:
+
+> Este evento não possui parâmetros porém valores passados por POST ou GET podem
+> ser utilizados sem restrições.
 
 #### Exemplo:
 
