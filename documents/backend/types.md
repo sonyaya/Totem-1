@@ -414,13 +414,15 @@ duas chaves a primeira é *error* e seu valor dever ser um boleano verdadeiro e 
 segunda chave deve ser *message* e contém o texto para a mensagem de erro para o
 campo atual.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$thisLabel](#thisLabel)
+
+#### Exemplo:
 
 Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
 
@@ -445,13 +447,15 @@ campo antes que ele seja inserido no banco de dados, dentre estas ações é pos
 até mesmo remover a inserção do campo, é possivel até mesmo alterar ou formatar 
 campo.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$pKey](#pKey)
+
+#### Exemplo:
 
 Veja a seguir como funciona a inserção de um campo do tipo dateBr, os campos dataBr
 formatam a varivel do tipo data para o formato compativel com o MySQL:
@@ -513,7 +517,7 @@ O HTML deste tipo não renderizado é o seguite:
 [▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
 porém este evento é executado antes de ser executado o insert no banco de dados.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -535,12 +539,14 @@ tornando viável também a formatação/manipulação dos dados apresentados.
 > evento**, pelo simples fato de que ele é executado para cada um dos dados apresentados
 > em tela o que pode tornar a listagem muito mais lenta.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisRow](#thisRow)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
+
+#### Exemplo:
 
 Imagine uma situação onde é preciso formatar uma coluna com mascara de telefone,
 veja o exemplo a seguir para esta situação:
@@ -565,13 +571,15 @@ veja o exemplo a seguir para esta situação:
 cada campo do formulário, assim é possível executar quaisquer processos relacionados 
 a exclusão de determinado campo do formulário.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$pKey](#pKey)
+
+#### Exemplo:
 
 Imagine que um arquivo deve ser excluido antes que os valores que possuem algum
 tipo de relação com este arquivo seja removido, neste exemplo imagine que um arquivo 
@@ -594,7 +602,7 @@ de imagem JPG com o mesmo nome do campo deverá ser excluido.
 
 [▲](#events) …
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -602,6 +610,8 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$toTypeLayout](#toTypeLayout)
 - [$pKey](#pKey)
+
+#### Exemplo:
 
 ```php
 <?php
@@ -617,13 +627,15 @@ Este evento possui os seguintes parâmetros:
 [▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
 porém este evento é executado após de ser executado o insert no banco de dados.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$pKey](#pKey)
+
+#### Exemplo:
 
 Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
 valores forem inseridos no banco de dados.
@@ -642,13 +654,15 @@ valores forem inseridos no banco de dados.
 [▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
 porém este evento é executado após de ser executado o insert no banco de dados.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
 - [$allData](#allData)
 - [$parameters](#parameters)
 - [$pKey](#pKey)
+
+#### Exemplo:
 
 Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
 valores forem atualizados no banco de dados.
@@ -669,7 +683,7 @@ somente se diferenciando no memento em que ele é executado, este evento é exec
 logo após a execução do delete no banco de dados, enquanto o [beforeDelete](#event-beforeDelete)
 é executado antes da execução do delete.
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
 
 - [$thisData](#thisData)
 - [$thisColumn](#thisColumn)
@@ -684,7 +698,9 @@ Este evento possui os seguintes parâmetros:
 
 [▲](#events) …
 
-Este evento possui os seguintes parâmetros:
+#### Parâmetros:
+
+#### Exemplo:
 
 ```php
 <?php
