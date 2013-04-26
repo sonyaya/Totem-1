@@ -113,7 +113,7 @@ tereiro aos segundos.
         - **start** *ano de inicio da listagem*
         - **stop**  *ano máximo da listagem*
 
-example <a name="type-example"></a>
+example                                                                                                                                    <a name="type-example"></a>
 -------
 
 [▲](#default-types) É um tipo utilizado para demonstrar como são feitos os tipos.
@@ -181,7 +181,7 @@ meioMask                                                                        
 [▲](#default-types) Tipo baseado na famosa mascara jQuery
 [meioMask](http://www.meiocodigo.com/projects/meiomask/).
 
-- Parâmetros
+- Parâmetros`
     - **nullable**        *pode ser nulo?*
     - **placeholder**     *texto placeholder*
     - **size**            *quantidade máxima de caracteres aceita*
@@ -192,7 +192,6 @@ number                                                                          
 ------
 
 [▲](#default-types) Campo de entrada que aceita somente números
-
 - Parâmetros
     - **min**             *valor mínimo aceito*
     - **max**             *valor máximo aceito*
@@ -366,11 +365,11 @@ Para facilitar o entendimento dos parâmetros recebidos pelos métodos de evento
 nós padrnizamos os nomes das variaveis, segue uma lista com as nomeclaruras que
 criamos:
 
-#### $thisData                                                                                                                              <a name="$thisData"></a>
+#### $thisData                                                                                                                             <a name="$thisData"></a>
 
 > Contém o valor do campo atual.
 
-#### $thisColumn                                                                                                                            <a name="$thisColumn"></a>
+#### $thisColumn                                                                                                                           <a name="$thisColumn"></a>
 
 > Contém o nome da coluna que esta sendo editada, alterada ou removida no momento.
 
@@ -511,8 +510,8 @@ O HTML deste tipo não renderizado é o seguite:
 
 ### 3.2.3 beforeUpdate: Antes de executar *update* no banco de dados                                                                       <a name="event-beforeUpdate"></a>
 
-[▲](#events) Tem a mesma funcionalidade do [beforeInsert](#event-beforeInsert),
-porém este evento é executado antes de inserir assim como seu nome sugere.
+[▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
+porém este evento é executado antes de ser executado o insert no banco de dados.
 
 Este evento possui os seguintes parâmetros:
 
@@ -615,7 +614,8 @@ Este evento possui os seguintes parâmetros:
 
 ### 3.2.7 afterInsert: Após executar *insert* no banco de dados                                                                            <a name="event-afterInsert"></a>
 
-[▲](#events) …
+[▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
+porém este evento é executado após de ser executado o insert no banco de dados.
 
 Este evento possui os seguintes parâmetros:
 
@@ -625,18 +625,14 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-```php
-<?php
-    class example{
-        public function afterInsert(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            // code here
-        }
-    }
+> Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas
+> trocar o nome do método de *beforeInsert* para *beforeUpdate*.
 ```
 
 ### 3.2.8 afterUpdate: Após executar *update* no banco de dados                                                                            <a name="event-afterUpdate"></a>
 
-[▲](#events) …
+[▲](#events) Tem o mesmo funcionamento do [beforeInsert](#event-beforeInsert),
+porém este evento é executado após ser executado o update no banco de dados.
 
 Este evento possui os seguintes parâmetros:
 
@@ -646,13 +642,8 @@ Este evento possui os seguintes parâmetros:
 - [$parameters](#parameters)
 - [$pKey](#pKey)
 
-```php
-<?php
-    class example{
-        public function afterUpdate(&$thisData, $thisColumn, &$allData, $parameters, $pKey){
-            // code here
-        }
-    }
+> Veja o exemplo do tópico [beforeInsert](#event-beforeInsert) e considere apenas
+> trocar o nome do método de *beforeInsert* para *beforeUpdate*.
 ```
 
 ### 3.2.9 afterDelete: Após executar *delete* no banco de dados                                                                            <a name="event-afterDelete"></a>
