@@ -600,7 +600,13 @@ de imagem JPG com o mesmo nome do campo deverá ser excluido.
 
 ### 3.2.6 beforeLoadDataToForm: Antes de mostrar os valores que serão editados no formulário de atualização                                <a name="event-beforeLoadDataToForm"></a>
 
-[▲](#events) …
+[▲](#events) Este evento é executado antes de ser eviando o tipo para ser renderizado
+como HTML pelo browser, segundos antes do sistema interpretar os arquivos de interface
+do tipo, ele pernmite enviar para o arquivo de interface variaveis pertinentes através
+de um array chamado toLayout.
+
+> Leia o tópico [Como acessar valores do sistema na interface](#interface-access-values) 
+> para maiores informações de como é feito o acesso a variavel toLayout.
 
 #### Parâmetros:
 
@@ -617,9 +623,25 @@ de imagem JPG com o mesmo nome do campo deverá ser excluido.
 <?php
     class example{
         public function beforeLoadDataToForm(&$thisData, $thisColumn, &$allData, $parameters, &$toTypeLayout, $pKey){
-            // code here
+            return Array(
+                "nome" => "Daniel de Andrade Varela",
+                "funcao" => Array(
+                    "Desenvolvedor",
+                    "Designer",
+                    "Programador
+                )
+            )
         }
     }
+```
+
+E estes valores podem ser acessados pelo arquivo de interface da seguinte maneira:
+
+```html
+Nome: &toLayout.nome;
+Função I: &toLayout.funcao.0;
+Função II: &toLayout.funcao.1;
+Função III: &toLayout.funcao.2;
 ```
 
 ### 3.2.7 afterInsert: Após executar *insert* no banco de dados                                                                            <a name="event-afterInsert"></a>
@@ -711,14 +733,35 @@ da pagina irão ser atualizados.
 
 #### Exemplo:
 
+Imagine um campo de chave extrangeire que precisa buscar valores em tempo de execução
+porém ser necessário a atualização da pagina sempre que este processo for executado.
+
 ```php
 <?php
     class example{
         public function ajax(){
-            // code here
+            $db = new MySQL();
+            echo 
+                json_encode(
+                    $db
+                        ->setTable($_POST['table'])
+                        ->setPage(1)
+                        ->setRowsPerPage(5)
+                        ->select(
+                            Array( 
+                                "value"=>$_POST['column'], 
+                                "label"=>$_POST['label']
+                            ), 
+                            "`{$_POST['label']}` like '{$_POST['value']}%' ORDER BY `{$_POST['label']}`"
+                        )
+                )
+            ;
         }
     }
 ```
+
+Considere que deve existir um Javascript para executar e interpratar este retorno,
+o link para execução deste Ajax deve ser algo como *?action=type-ajax&type=NOME-DO-TIPO*.
 
 3.3 Arquivo de interface                                                                                                                   <a name="interface"></a>
 ------------------------
