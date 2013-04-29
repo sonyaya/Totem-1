@@ -37,7 +37,6 @@ Sumário                                                                        
         - [Como acessar valores do sistema na interface](#interface-access-values)
             - [Como acessar valores do totem](#interface-access-totem-values)
             - [Como acessar valores do tipo](#interface-access-type-values)
-4. Configurando os parâmetros de tipos
 
 1. Tipos de Inputs                                                                                                                         <a name="intro"></a>
 ==================
