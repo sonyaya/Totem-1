@@ -793,59 +793,72 @@ do *totem*, para isso fique atento para a nomeclatura:
 
 - &m.var:nome-da-variável; ou
 - /Em.var:nome-da-variável; ou
-- \<!--&m.var:nome-da-variável;
+- \<!--&m.var:nome-da-variável;--\>
 
 As variáveis que estão disponíveis são as seguinter:
 
-- toLayout
-    - São os valores vindos da classe de eventos, mais especificamente pelo método
-      e evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes 
-      de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm),
-      pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo
-      evento o acesso se dá utilizando "." para separar as chaves, por exemplo: 
-      &m.var:toLayout.primeiro-nome;.
-    - Disponível nos formulários:
-        - Insert
-        - Update
-- parameter
-    - Retorna para interface os valores informados na configuração do *tipo* no
-      formulário, este arquivo retorna um array, que pode ser acessado utilizando
-      "." para separar as chaves, por exemplo: &m.var:parameter.propriedade;.
-    - Disponível nos formulários:
-        - List
-        - Insert
-        - Update
-- label
-    - Apenas retorna a etiqueta do campo, assim como o *parameter* recebe valores
-      informados na configuração do tipo nos arquivos de configuração de formulários,
-      este recebe o valor *label* das configurações de tipo no arquivo de formulário.
-    - Disponível nos formulários:
-        - List
-        - Insert
-        - Update
-- type
-    - Retorna o nome *tipo* que esta sendo utilizado no momento. 
-    - Disponível nos formulários:
-        - List
-        - Insert
-        - Update
-- value
-    - Em formulários onde é carregado velores do banco de dados, esta variável tem
-      como responsabilidade retornar este valor previamente gravado no banco de 
-      dados.
-    - Disponível nos formulários:
-        - List
-        - Update
-- id
-    - Retorno um identificador único para cada *tipo*, esse identificador é composto
-      pelo nome do *tipo* e uma sequecia variável única.
-    - Disponível nos formulários:
-        - Insert
-        - Update
-- column / name
-    - Disponível nos formulários:
-        - Insert
-        - Update
+#### toLayout
+
+> São os valores vindos da classe de eventos, mais especificamente pelo método e 
+> evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes de mostrar 
+> os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm),
+> pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo 
+> evento o acesso se dá utilizando "." para separar as chaves, por exemplo: &m.var:toLayout.primeiro-nome;.
+
+- Disponível nos formulários:
+    - Insert
+    - Update
+
+#### parameter
+
+- Retorna para interface os valores informados na configuração do *tipo* no
+  formulário, este arquivo retorna um array, que pode ser acessado utilizando
+  "." para separar as chaves, por exemplo: &m.var:parameter.propriedade;.
+- Disponível nos formulários:
+    - List
+    - Insert
+    - Update
+
+#### label
+
+- Apenas retorna a etiqueta do campo, assim como o *parameter* recebe valores
+  informados na configuração do tipo nos arquivos de configuração de formulários,
+  este recebe o valor *label* das configurações de tipo no arquivo de formulário.
+- Disponível nos formulários:
+    - List
+    - Insert
+    - Update
+
+#### type
+
+- Retorna o nome *tipo* que esta sendo utilizado no momento. 
+- Disponível nos formulários:
+    - List
+    - Insert
+    - Update
+
+#### value
+
+- Em formulários onde é carregado velores do banco de dados, esta variável tem
+  como responsabilidade retornar este valor previamente gravado no banco de 
+  dados.
+- Disponível nos formulários:
+    - List
+    - Update
+
+#### id
+
+- Retorno um identificador único para cada *tipo*, esse identificador é composto
+  pelo nome do *tipo* e uma sequecia variável única.
+- Disponível nos formulários:
+    - Insert
+    - Update
+
+#### column / name
+
+- Disponível nos formulários:
+    - Insert
+    - Update
 
 #### 3.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
 
