@@ -606,7 +606,7 @@ do tipo, ele pernmite enviar para o arquivo de interface variaveis pertinentes a
 de um array chamado toLayout.
 
 > Leia o tópico [Como acessar valores do sistema na interface](#interface-access-values) 
-> para maiores informações de como é feito o acesso a variavel toLayout.
+> para maiores informações de como é feito o acesso a variável toLayout.
 
 #### Parâmetros:
 
@@ -766,15 +766,90 @@ o link para execução deste Ajax deve ser algo como *?action=type-ajax&type=NOM
 3.3 Arquivo de interface                                                                                                                   <a name="interface"></a>
 ------------------------
 
-[▲](#creating) …
+[▲](#creating) Os arquivos de interface são responsaveis por determinar como a 
+interface vai aparentar e como ira funcionar, neste caso estamos falando sobre as 
+interfaces dos inputs, então cada *tipo* deve ter sua representação visual para 
+os formulários de inserção, exclusão e atualização, estes arquivos são feitos com 
+HTML extendido com o motor de interface do *totem*, porém também por vezes é necessária
+a utilização de arquivos *javascript* para eventuais funcionalidades do *tipo* e 
+para incrementar o visual da interface do *tipo* pode ser utilizado um arquivo CSS.
+
+O arquivo de interface devem ser informados no arquivo de configuração [config.yml](#config),
+um mesmo arquivo pode ser utilizado em mais de um formulário porém de qualquer maneira
+ele deve ser indicado no arquivo de configuração, uma vez para cada dormulário.
+
+Como dito anteriormente os arquivos podem ser feito utilizando a extensão de interface
+do *totem*, com esta extensão é possível adicionar à interface diversos parâmetros,
+como label do campo, nome do campo, id do campo, tipo do campo, valor do campo e
+os valores que foram eviados via parâmetro para o *tipo* além de valores enviados
+por evento.
+
+> Veja o tipo example, na pasta de tipos no backend.
 
 ### 3.3.1 Como acessar valores do sistema na interface                                                                                     <a name="interface-access-values"></a>
 
-[▲](#interface) …
+[▲](#interface) É possível acessar os valores utilizando a extensão do HTML padrão
+do *totem*, para isso fique atento para a nomeclatura:
+
+- &m.var:nome-da-variável; ou
+- /Em.var:nome-da-variável; ou
+- \<!--&m.var:nome-da-variável;
+
+As variáveis que estão disponíveis são as seguinter:
+
+- toLayout
+    - São os valores vindos da classe de eventos, mais especificamente pelo método
+      e evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes 
+      de mostrar os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm),
+      pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo
+      evento o acesso se dá utilizando "." para separar as chaves, por exemplo: 
+      &m.var:toLayout.primeiro-nome;.
+    - Disponível nos formulários:
+        - Insert
+        - Update
+- parameter
+    - Retorna para interface os valores informados na configuração do *tipo* no
+      formulário, este arquivo retorna um array, que pode ser acessado utilizando
+      "." para separar as chaves, por exemplo: &m.var:parameter.propriedade;.
+    - Disponível nos formulários:
+        - List
+        - Insert
+        - Update
+- label
+    - Apenas retorna a etiqueta do campo, assim como o *parameter* recebe valores
+      informados na configuração do tipo nos arquivos de configuração de formulários,
+      este recebe o valor *label* das configurações de tipo no arquivo de formulário.
+    - Disponível nos formulários:
+        - List
+        - Insert
+        - Update
+- type
+    - Retorna o nome *tipo* que esta sendo utilizado no momento. 
+    - Disponível nos formulários:
+        - List
+        - Insert
+        - Update
+- value
+    - Em formulários onde é carregado velores do banco de dados, esta variável tem
+      como responsabilidade retornar este valor previamente gravado no banco de 
+      dados.
+    - Disponível nos formulários:
+        - List
+        - Update
+- id
+    - Retorno um identificador único para cada *tipo*, esse identificador é composto
+      pelo nome do *tipo* e uma sequecia variável única.
+    - Disponível nos formulários:
+        - Insert
+        - Update
+- column / name
+    - Disponível nos formulários:
+        - Insert
+        - Update
 
 #### 3.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
 
-[▲](#interface-access-values) …
+[▲](#interface-access-values) 
 
 #### 3.3.1.2 Como acessar valores do tipo                                                                                                  <a name=""></a>
 
