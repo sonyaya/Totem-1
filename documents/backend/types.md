@@ -784,6 +784,9 @@ como label do campo, nome do campo, id do campo, tipo do campo, valor do campo e
 os valores que foram eviados via parâmetro para o *tipo* além de valores enviados
 por evento.
 
+Para saber como funciona o classe de extensão de interface HTML, leia a documentação
+[default/interface](../default/interface.md).
+
 > Veja o tipo example, na pasta de tipos no backend.
 
 ### 3.3.1 Como acessar valores do sistema na interface                                                                                     <a name="interface-access-values"></a>
@@ -797,73 +800,73 @@ do *totem*, para isso fique atento para a nomeclatura:
 
 As variáveis que estão disponíveis são as seguinter:
 
-#### toLayout
+#### toLayout                                                                                                                              <a name="var-toLayout"></a>
 
 > São os valores vindos da classe de eventos, mais especificamente pelo método e 
 > evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes de mostrar 
 > os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm),
 > pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo 
 > evento o acesso se dá utilizando "." para separar as chaves, por exemplo: &m.var:toLayout.primeiro-nome;.
+> 
+> Disponível nos formulários:
+> - Insert
+> - Update
 
-- Disponível nos formulários:
-    - Insert
-    - Update
+#### parameter                                                                                                                             <a name="var-parameter"></a>
 
-#### parameter
+> Retorna para interface os valores informados na configuração do *tipo* no
+> formulário, este arquivo retorna um array, que pode ser acessado utilizando
+> "." para separar as chaves, por exemplo: &m.var:parameter.propriedade;.
+>
+> Disponível nos formulários:
+> - List
+> - Insert
+> - Update
 
-- Retorna para interface os valores informados na configuração do *tipo* no
-  formulário, este arquivo retorna um array, que pode ser acessado utilizando
-  "." para separar as chaves, por exemplo: &m.var:parameter.propriedade;.
-- Disponível nos formulários:
-    - List
-    - Insert
-    - Update
+#### label                                                                                                                                 <a name="var-tabel"></a>
 
-#### label
+> Apenas retorna a etiqueta do campo, assim como o *parameter* recebe valores
+> informados na configuração do tipo nos arquivos de configuração de formulários,
+> este recebe o valor *label* das configurações de tipo no arquivo de formulário.
+>
+> Disponível nos formulários:
+> - List
+> - Insert
+> - Update
 
-- Apenas retorna a etiqueta do campo, assim como o *parameter* recebe valores
-  informados na configuração do tipo nos arquivos de configuração de formulários,
-  este recebe o valor *label* das configurações de tipo no arquivo de formulário.
-- Disponível nos formulários:
-    - List
-    - Insert
-    - Update
+#### type                                                                                                                                  <a name="var-type"></a>
 
-#### type
+> Retorna o nome *tipo* que esta sendo utilizado no momento. 
+>
+> Disponível nos formulários:
+> - List
+> - Insert
+> - Update
 
-- Retorna o nome *tipo* que esta sendo utilizado no momento. 
-- Disponível nos formulários:
-    - List
-    - Insert
-    - Update
+#### value                                                                                                                                 <a name="var-value"></a>
 
-#### value
+> Em formulários onde é carregado velores do banco de dados, esta variável tem
+> como responsabilidade retornar este valor previamente gravado no banco de 
+> dados.
+>
+> Disponível nos formulários:
+> - List
+> - Update
 
-- Em formulários onde é carregado velores do banco de dados, esta variável tem
-  como responsabilidade retornar este valor previamente gravado no banco de 
-  dados.
-- Disponível nos formulários:
-    - List
-    - Update
+#### id                                                                                                                                    <a name="var-id"></a>
 
-#### id
+> Retorno um identificador único para cada *tipo*, esse identificador é composto
+> pelo nome do *tipo* e uma sequecia variável única.
+>
+> Disponível nos formulários:
+> - Insert
+> - Update
 
-- Retorno um identificador único para cada *tipo*, esse identificador é composto
-  pelo nome do *tipo* e uma sequecia variável única.
-- Disponível nos formulários:
-    - Insert
-    - Update
+#### column, name                                                                                                                          <a name="var-name"></a><a name="var-column"></a>
 
-#### column / name
-
-- Disponível nos formulários:
-    - Insert
-    - Update
-
-#### 3.3.1.1 Como acessar valores do totem                                                                                                 <a name=""></a>
-
-[▲](#interface-access-values) 
-
-#### 3.3.1.2 Como acessar valores do tipo                                                                                                  <a name=""></a>
-
-[▲](#interface-access-values) …
+> Os dois parâmetros retornam o nome da coluna no banco de dados ao qual o *tipo* 
+> esta sendo referido.
+>
+> Disponível nos formulários:
+>   - Insert
+>   - Update
