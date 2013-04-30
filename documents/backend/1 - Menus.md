@@ -101,13 +101,13 @@ de todas as ações existentes:
 | recover-password                    |                                                                                                                           |
 | change-password                     |                                                                                                                           |
 
-* <a name="cit-1"></a>
-É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja 
-possível identifica em qual linha do banco esta ação ira  ser executada.
+\* <a name="cit-1">
+_É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja 
+possível identifica em qual linha do banco esta ação ira  ser executada._</a>
 
-** <a name="cit-2">
-É preciso passar o parâmetro *type* pelo método GET para identificação de qual 
-*tipo de input* esta requisitando o ajax.
+\*\* <a name="cit-2">
+_É preciso passar o parâmetro *type* pelo método GET para identificação de qual 
+**tipo de input** esta requisitando o ajax._</a>
 
 #### submenu
 

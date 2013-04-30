@@ -261,23 +261,15 @@ um dos métodos a seguir:
 
 As classe possuem parâmetros com nomes padronizados para facilitar a criação de
 eventos, segue a explicação de cada um destes parâmetros:
+                                                                                                                   
+| Variável          | Descrição                                                                                                                         |
+| -----------------:|:--------------------------------------------------------------------------------------------------------------------------------- |
+| $pkey             | Contém o array com a chave primária do valor que esta sendo inserido, atualizado, deletado ou listado, com nome do campo e valor. | <a name="$pkey"></a>     
+| $config           | Contém o array com os valores do arquivo de configuração.                                                                         | <a name="$config"></a>     
+| $loadedData       | Contém o array dos valores carregados a partir do banco de dados.                                                                 | <a name="$loadedData"></a>    
+| $data             | Contém um array com os valores enviados para os métods a partir da interface.                                                     | <a name="$data"></a>    
 
-### $pkey                                                                                                                                  <a name="$pkey"></a>
 
-> Contém o array com a chave primária do valor que esta sendo inserido, atualizado,
-> deletado ou listado, com nome do campo e valor.
-
-### $config                                                                                                                                <a name="$config"></a>
-
-> Contém o array com os valores do arquivo de configuração.
-
-### $loadedData                                                                                                                            <a name="$loadedData"></a>
-
-> Contém o array dos valores carregados a partir do banco de dados.
-	
-###$data                                                                                                                                   <a name="$data"></a>
-
-> Contém um array com os valores enviados para os métods a partir da interface.
 
 4.1 beforeLoadData: Antes de carregar valores na interface                                                                                 <a name="event-beforeLoadData"></a>
 ----------------------------------------------------------
