@@ -95,7 +95,8 @@ Como acessar o módulo **Bridge**
 - http://seu-domínio/bridge/...
 
 > Substitua os três pontos por seus comando Rest API, caso feita uma requisição 
-> vai post estes comando devem ser enviados via post. Leia mais na documentação a seguir:
+> vai post estes comando devem ser enviados via post. Leia mais na documentação 
+> a seguir:
 
 Documentação Bridge (Rest API)
 ------------------------------
