@@ -1,5 +1,4 @@
-<a name="summary" id="summary"></a>
-Sumário
+Sumário                                                                                                                                    <a name="summary" id="summary"></a>
 =======
 
 1. [Totem](#intro)
@@ -19,51 +18,75 @@ Sumário
 5. Console
 
 
-Totem
-=====
+1. Totem
+========
 
-Totem é uma framework desenvolvida em php para criação de sites e sistemas, com o intuito de separar de maneira consisa a responsabilidade do desenvolvedor frontend e backend, separando os processos em:
+Totem é uma framework desenvolvida em php para criação de sites e sistemas, com 
+o intuito de separar de maneira consisa a responsabilidade do desenvolvedor frontend 
+e backend, separando os processos em:
 
-### Documentação geral
-- [Config](documents/config.md)
+Documentação geral
+------------------
 
-Backend
--------
+- [Config](documents/default/config.md)
+- [Requisitos mínimos](#)
+- Melhoria contínua
+    - [To-do](documents/default/todo.md)
+    - [Bugs](documents/default/bugs.md)
+- Equipe
+    - Daniel de Andrade Varela
 
-Módulo capaz de criar relatórios, formulários de inserção e edição no banco de dados, listagem de dados, exclusão de dados, além de formulários que não possuem relação com o banco de dados, tudo  desenvolvido baseando-se em arquivos YML o que torna muito simples a criação e customização conforme as necessidades do projeto.
+2. Backend
+==========
+
+Módulo capaz de criar relatórios, formulários de inserção e edição no banco de dados, 
+listagem de dados, exclusão de dados, além de formulários que não possuem relação 
+com o banco de dados, tudo  desenvolvido baseando-se em arquivos YML o que torna 
+muito simples a criação e customização conforme as necessidades do projeto.
 
 Como acessar o módulo **Backend** 
 - http://seu-domínio/admin
 - http://seu-domínio/administrator
 - http://seu-domínio/backend
 
-### Documentação Backend
+Documentação Backend
+--------------------
 
-- [Menus](documents/backend/menus.md)
-- [Formulários](documents/backend/forms.md)
-- [Tipos (types)](documents/backend/types.md)
+- [Menus](documents/backend/1 - Menus.md)
+- [Formulários](documents/backend/2 - Forms.md)
+- [Tipos (types)](documents/backend/3 - Types.md)
 
-Frontend
---------
+3. Frontend
+===========
 
-Módulo desenvolvido com a finalidade de facilitar o desenvolvimento de interfaces para o usuário final de sistemas desenvolvidos basea-dos no totem, esse módulo é capaz de absorver todas as informações estocadas e processadas pelo módulo backend de forama direta ou por requisições ao módulo bridge.
+Módulo desenvolvido com a finalidade de facilitar o desenvolvimento de interfaces 
+para o usuário final de sistemas desenvolvidos basea-dos no totem, esse módulo é 
+capaz de absorver todas as informações estocadas e processadas pelo módulo backend 
+de forama direta ou por requisições ao módulo bridge.
 
 Como acessar o módulo **frontend** 
 - http://seu-domínio/
 - http://seu-domínio/site
 - http://seu-domínio/frontend
 
-> Adicione */sua-pagina* para acessar suas páginas, caso não seja adicionado a pagina que será apresenta é a index.
+> Adicione */sua-pagina* para acessar suas páginas, caso não seja adicionado a pagina 
+> que será apresenta é a index.
 
 
-### Documentação Frontend
+Documentação Frontend
+---------------------
 
 - ...
 
-Bridge
-------
+4. Bridge
+=========
 
-Modulo capaz de criar uma Rest API automaticamente ou de forma manual desenvolvido diretamente com os recursos deste módulo, isso significa que ao criar um formulário no módulo backend é possivel acessa-lo via Rest API diretamente no módulo bridge, porém caso necessite a criação de alguma funcionalidade especifica cujo a qual não existe formulário no módulo vackend é possivel desenvolver diretamente no módulo bridge.
+Modulo capaz de criar uma Rest API automaticamente ou de forma manual desenvolvido 
+diretamente com os recursos deste módulo, isso significa que ao criar um formulário 
+no módulo backend é possivel acessa-lo via Rest API diretamente no módulo bridge, 
+porém caso necessite a criação de alguma funcionalidade especifica cujo a qual não 
+existe formulário no módulo vackend é possivel desenvolver diretamente no módulo 
+bridge.
 
 
 Como acessar o módulo **Bridge** 
@@ -71,17 +94,20 @@ Como acessar o módulo **Bridge**
 - http://seu-domínio/rest/...
 - http://seu-domínio/bridge/...
 
-> Substitua os três pontos por seus comando Rest API, caso feita uma requisição vai post estes comando devem ser enviados via post. Leia mais na documentação a seguir:
+> Substitua os três pontos por seus comando Rest API, caso feita uma requisição 
+> vai post estes comando devem ser enviados via post. Leia mais na documentação a seguir:
 
-### Documentação Bridge (Rest API)
+Documentação Bridge (Rest API)
+------------------------------
 
 - ...
 
-Console
--------
+5. Console
+==========
 
 Em breve...
 
-### Documentação Console
+Documentação Console
+--------------------
 
 - ...

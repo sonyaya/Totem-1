@@ -169,7 +169,7 @@ a página inicial do módulo.
       link: ?action=view-dummy-form&path=example/forms/example
 ```
 
-**modules/user/menu.yml***
+**modules/user/menu.yml**
 ```yml
 - label: "Dashboard"
   link: "?action=view-dashboard&path=user/dashboards/dashboard"
