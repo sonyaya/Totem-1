@@ -16,11 +16,11 @@ sistemas, com o intuito de separar de maneira consisa a responsabilidade do dese
 frontend, backend e o gestor de conteúdo, o *Totem* consiste nos módulos frontend,
 backend, bridge e console.
 
-O módulo *frontend* é específico para criação da aparencia do site com HTML, CSS 
-e Javascript, ele dispõe de diversas extenções para facilitar a vida do programador.
-
 O módulo *backend* é onde o programador irá criar todas as regras do sistema e o 
 gestor de conteúdo  ira abastecer o banco de dados e obter informações sobre o site/sistema.
+
+O módulo *frontend* é específico para criação da aparencia do site com HTML, CSS 
+e Javascript, ele dispõe de diversas extenções para facilitar a vida do programador.
 
 O módulo *bridge* facilita para os programadores disponibilizando de maneira simples 
 uma API de maneira simples para terceiros que desejam acessar ou enviar informações 
@@ -49,7 +49,8 @@ não possuem relação com o banco de dados, tudo  desenvolvido baseando-se em a
 YAML o que torna muito simples a criação e customização conforme as necessidades 
 do projeto.
 
-Como acessar o módulo **Backend** 
+### Como acessar o módulo **Backend** 
+
 - http://seu-domínio/admin
 - http://seu-domínio/administrator
 - http://seu-domínio/backend
@@ -65,11 +66,13 @@ Como acessar o módulo **Backend**
 ===========
 
 [▲](#summary) Módulo desenvolvido com a finalidade de facilitar o desenvolvimento 
-de interfaces para o usuário final de sistemas desenvolvidos basea-dos no totem, 
-esse módulo é capaz de absorver todas as informações estocadas e processadas pelo 
-módulo backend de forama direta ou por requisições ao módulo bridge.
+de interfaces além de separar-lo do desenvolvimento de regras de sistema e abstração 
+de banco de dados, esse módulo é capaz de absorver todas as informações estocadas 
+e processadas pelo módulo *backend* de forama direta ou por requisições ao módulo 
+bridge.
 
-Como acessar o módulo **frontend** 
+### Como acessar o módulo **frontend** 
+
 - http://seu-domínio/
 - http://seu-domínio/site
 - http://seu-domínio/frontend
@@ -85,12 +88,12 @@ Como acessar o módulo **frontend**
 4. Bridge (Rest API)                                                                                                                       <a name="bridge"></a>
 ====================
 
-[▲](#summary) Modulo capaz de criar uma Rest API automaticamente ou de forma manual 
-desenvolvido diretamente com os recursos deste módulo, isso significa que ao criar 
-um formulário no módulo backend é possivel acessa-lo via Rest API diretamente no 
-módulo bridge, porém caso necessite a criação de alguma funcionalidade especifica 
-cujo a qual não existe formulário no módulo vackend é possivel desenvolver diretamente 
-no módulo bridge.
+[▲](#summary) Módulo capaz de criar uma Rest API automaticamente ou de forma manual 
+(desenvolvido diretamente com os recursos deste módulo), isso significa que ao criar 
+um formulário no módulo *backend* é possivel acessá-lo via Rest API sem a necessidade
+de programação, porém caso necessite a criação de alguma funcionalidade específica 
+cujo a qual não existe formulário no módulo *backend* ou este necessite de alguma
+funcionalidade específica é possivel desenvolver manual no módulo *bridge*.
 
 Como acessar o módulo **Bridge** 
 - http://seu-domínio/api/...
