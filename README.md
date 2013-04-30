@@ -11,10 +11,10 @@ Sumário                                                                        
 1. Totem                                                                                                                                   <a name="intro"></a>
 ========
 
-[▲](#summary) Totem é uma framework desenvolvida em PHP para criação de sites e 
-sistemas, com o intuito de separar de maneira consisa a responsabilidade do desenvolvedor 
-frontend, backend e o gestor de conteúdo, o *Totem* consiste nos módulos frontend,
-backend, bridge e console.
+[▲](#summary) Totem é uma [*framework*](http://pt.wikipedia.org/wiki/Framework) 
+desenvolvida em PHP para criação de sites e sistemas, com o intuito de separar de 
+maneira consisa a responsabilidade do desenvolvedor frontend, backend e o gestor 
+de conteúdo, o *Totem* consiste nos módulos frontend, backend, bridge e console.
 
 O módulo *backend* é onde o programador irá criar todas as regras do sistema e o 
 gestor de conteúdo  ira abastecer o banco de dados e obter informações sobre o site/sistema.
@@ -88,14 +88,17 @@ bridge.
 4. Bridge (Rest API)                                                                                                                       <a name="bridge"></a>
 ====================
 
-[▲](#summary) Módulo capaz de criar uma Rest API automaticamente ou de forma manual 
+[▲](#summary) Módulo capaz de criar uma (Rest API)[1] automaticamente ou de forma manual 
 (desenvolvido diretamente módulo *bridge*), isso significa que ao criar um formulário 
-no módulo *backend* é possivel acessá-lo via Rest API sem a necessidade de programação, 
+no módulo *backend* é possivel acessá-lo via (Rest API)[1] sem a necessidade de programação, 
 porém caso exista a necessedade de ser desenvolvida alguma funcionalidade específica 
 cujo a qual não existe no formulário do módulo *backend* ou simplesmete o formulário
 não exista no módulo *backend*, é possivel desenvolver manualmente no módulo *bridge*.
 
-Como acessar o módulo *Bridge**
+[1]: http://pt.wikipedia.org/wiki/REST
+
+### Como acessar o módulo *Bridge*
+
 - http://seu-domínio/api/...
 - http://seu-domínio/rest/...
 - http://seu-domínio/bridge/...
