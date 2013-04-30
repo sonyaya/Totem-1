@@ -79,39 +79,41 @@ load-from-module e module-star-url, segue uma explicação para cada uma destas 
 > ações que podem ser executadas pelo sistema para este formulário, segue uma lista
 > de todas as ações existentes:
 > 
-> | Ações de Interface                  | Descrição                                                                                                           |
-> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
-> | view-dashboard                      | Apresenta a tela de *dashboard* do formulário.                                                                      |       
-> | view-insert-form                    | Apresenta a tela de *inserção* do formulário.                                                                       |      
-> | view-update-form [\*](#cit-1)       | Apresenta a tela de *atualização* do formulário.                                                                    |         
-> | view-dummy-form                     | Apresenta a tela de *boneco* do formulário.                                                                         |    
-> | view-list-form                      | Apresenta a tela de *listagem de dados* do formulário.                                                              |               
-> | view-inTabs-form                    | Apresenta a tela contendo o agropamento por abas da tela de *atualização*, *inserção* e *listagem* do formulário.   |                                |
-> | view-insert-window-form             | Apresenta a tela de *inserção* do formulário em formato de popup.                                                   |                          
-> | view-update-window-form [\*](#cit-1)| Apresenta a tela de *atualização* do formulário em formato de popup.                                                |
-> | view-dummy-window-form              | Apresenta a tela de *boneco* do formulário em formato de popup.                                                     |
-> | view-list-window-form               | Apresenta a tela de *listagem* do formulário em formato de popup.                                                   |
-> | view-change-password                | Apresenta a tela de *troca de senha* do formulário.                                                                 |
+> | Ações de Interface                  | Descrição                                                                                                                 |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+> | view-dashboard                      | Apresenta a tela de *dashboard* do formulário.                                                                            |       
+> | view-insert-form                    | Apresenta a tela de *inserção* do formulário.                                                                             |      
+> | view-update-form [\*](#cit-1)       | Apresenta a tela de *atualização* do formulário.                                                                          |         
+> | view-dummy-form                     | Apresenta a tela de *boneco* do formulário.                                                                               |    
+> | view-list-form                      | Apresenta a tela de *listagem de dados* do formulário.                                                                    |               
+> | view-inTabs-form                    | Apresenta a tela contendo o agropamento por abas da tela de *atualização*, *inserção* e *listagem* do formulário.         |                                |
+> | view-insert-window-form             | Apresenta a tela de *inserção* do formulário em formato de popup.                                                         |                          
+> | view-update-window-form [\*](#cit-1)| Apresenta a tela de *atualização* do formulário em formato de popup.                                                      |
+> | view-dummy-window-form              | Apresenta a tela de *boneco* do formulário em formato de popup.                                                           |
+> | view-list-window-form               | Apresenta a tela de *listagem* do formulário em formato de popup.                                                         |
+> | view-change-password                | Apresenta a tela de *troca de senha* do formulário.                                                                       |
 > 
+> ------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+>
+> | Ações de Banco de dados             | Descrição                                                                                                                 |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+> | delete-form [\*](#cit-1)            | Remove valore no banco de dados.                                                                                          |  
+> | save-form                           | Recebe os valores do método POST da tela de inserção ou atualização e atualiza ou insere os dados conforme a necessidade. |
 > 
-> | Ações de Banco de dados       | Descrição                                                                                                                 |
-> |:-----------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
-> | delete-form [\*](#cit-1)      | Remove valore no banco de dados.                                                                                          |  
-> | save-form                     | Recebe os valores do método POST da tela de inserção ou atualização e atualiza ou insere os dados conforme a necessidade. |   
+> ------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+>
+> | Ações de tipos                      | Descrição                                                                                                                 |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+> | type-ajax [\*\*](#cit-2)            | É utilizado para retornar valores a um determinado *tipo de input* via ajax.                                              |
 > 
-> 
-> | Ações de tipos                      | Descrição                                                                                                           |
-> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
-> | type-ajax [\*\*](#cit-2)            | É utilizado para retornar valores a um determinado *tipo de input* via ajax.                                        |
-> 
-> 
-> | Ações de usuário                    | Descrição                                                                                                           |
-> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
-> | login                               |                                                                                                                     |
-> | logout                              |                                                                                                                     |
-> | recover-password                    |                                                                                                                     |
-> | change-password                     |                                                                                                                     |
-> |                                     |                                                                                                                     |
+> ------------------------------------------------------------------------------------------------------------------------------------------------------------------- 
+>       
+> | Ações de usuário                    | Descrição                                                                                                                 |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+> | login                               |                                                                                                                           |
+> | logout                              |                                                                                                                           |
+> | recover-password                    |                                                                                                                           |
+> | change-password                     |                                                                                                                           |
 > 
 > 
 > <a name="cit-1">
