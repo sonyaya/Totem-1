@@ -1,32 +1,22 @@
-Sumário                                                                                                                                    <a name="summary" id="summary"></a>
+Sumário                                                                                                                                    <a name="summary"></a>
 =======
 
 1. [Totem](#intro)
-    - [Config](documents/default/config.md)
-    - [Requisitos mínimos](#)
-    - Melhoria contínua
-        - [To-do](documents/default/todo.md)
-        - [Bugs](documents/default/bugs.md)
-    - Equipe
-        - Daniel de Andrade Varela
-2. Backend
-    - [Menus](documents/backend/1 - Menus.md)
-    - [Formulários](documents/backend/2 - Forms.md)
-    - [Tipos (types)](documents/backend/3 - Types.md)
-3. Frontend
-4. Bridge
-5. Console
+2. [Backend](#backend)
+3. [Frontend](#frontend)
+4. [Bridge](#bridge)
+5. [Console](#console)
 
 
-1. Totem
+1. Totem                                                                                                                                   <a name="intro"></a>
 ========
 
 Totem é uma framework desenvolvida em php para criação de sites e sistemas, com 
 o intuito de separar de maneira consisa a responsabilidade do desenvolvedor frontend 
 e backend, separando os processos em:
 
-Documentação geral
-------------------
+### Documentação geral
+
 
 - [Config](documents/default/config.md)
 - [Requisitos mínimos](#)
@@ -36,7 +26,8 @@ Documentação geral
 - Equipe
     - Daniel de Andrade Varela
 
-2. Backend
+
+2. Backend                                                                                                                                 <a name="backend"></a>
 ==========
 
 Módulo capaz de criar relatórios, formulários de inserção e edição no banco de dados, 
@@ -49,14 +40,14 @@ Como acessar o módulo **Backend**
 - http://seu-domínio/administrator
 - http://seu-domínio/backend
 
-Documentação Backend
---------------------
+### Documentação Backend
 
 - [Menus](documents/backend/1 - Menus.md)
 - [Formulários](documents/backend/2 - Forms.md)
 - [Tipos (types)](documents/backend/3 - Types.md)
 
-3. Frontend
+
+3. Frontend                                                                                                                                <a name="frontend"></a>
 ===========
 
 Módulo desenvolvido com a finalidade de facilitar o desenvolvimento de interfaces 
@@ -72,14 +63,13 @@ Como acessar o módulo **frontend**
 > Adicione */sua-pagina* para acessar suas páginas, caso não seja adicionado a pagina 
 > que será apresenta é a index.
 
-
-Documentação Frontend
----------------------
+### Documentação Frontend
 
 - ...
 
-4. Bridge
-=========
+
+4. Bridge (Rest API)                                                                                                                       <a name="bridge"></a>
+====================
 
 Modulo capaz de criar uma Rest API automaticamente ou de forma manual desenvolvido 
 diretamente com os recursos deste módulo, isso significa que ao criar um formulário 
@@ -87,7 +77,6 @@ no módulo backend é possivel acessa-lo via Rest API diretamente no módulo bri
 porém caso necessite a criação de alguma funcionalidade especifica cujo a qual não 
 existe formulário no módulo vackend é possivel desenvolver diretamente no módulo 
 bridge.
-
 
 Como acessar o módulo **Bridge** 
 - http://seu-domínio/api/...
@@ -98,17 +87,16 @@ Como acessar o módulo **Bridge**
 > vai post estes comando devem ser enviados via post. Leia mais na documentação 
 > a seguir:
 
-Documentação Bridge (Rest API)
-------------------------------
+### Documentação Bridge (Rest API)
 
 - ...
 
-5. Console
+
+5. Console                                                                                                                                 <a name="console"></a>
 ==========
 
 Em breve...
 
-Documentação Console
---------------------
+### Documentação Console
 
 - ...
