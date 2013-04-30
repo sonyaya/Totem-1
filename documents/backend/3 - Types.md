@@ -38,6 +38,7 @@ Sumário                                                                        
             - [Como acessar valores do totem](#interface-access-totem-values)
             - [Como acessar valores do tipo](#interface-access-type-values)
 
+
 1. Tipos de Inputs                                                                                                                         <a name="intro"></a>
 ==================
 
@@ -52,6 +53,7 @@ dados.
 texto até mesmo um relacionamento entre duas ou mais tabélas, por padrão o **totem**
 possui os seguintes tipos:
 
+
 2. Tipos padrões                                                                                                                           <a name="default-types"></a>
 ================
 
@@ -62,7 +64,6 @@ tipos para ações específicas, leia o tópico [Criando um tipo personalizado](
 e veja como criar seu próprio tipo, a seguir veja a lista de tipos padrões e suas
 especificações:
 
-
 CKEditor                                                                                                                                   <a name="type-CKEditor"></a>
 --------
 
@@ -70,7 +71,6 @@ CKEditor                                                                        
 
 - Parâmetros
     - …
-
 
 combobox                                                                                                                                   <a name="type-combobox"></a>
 --------
@@ -97,7 +97,6 @@ o formato é o padrão do MySQL (Y-m-d).
     - **year**
         - **start** *ano de inicio da listagem*
         - **stop**  *ano máximo da listagem*
-
 
 dateTimeBr                                                                                                                                 <a name="type-dateTimeBr"></a>
 ----------
@@ -214,6 +213,7 @@ textarea                                                                        
 
 - Parâmetros
     - **nullable**        *pode ser nulo?*
+
 
 3. Criando tipos personalizados                                                                                                            <a name="creating"></a>
 ===============================
@@ -334,7 +334,6 @@ default:
         parâmetro-padrão4 : valor-padrão4
   # adicione quantos parametros achar necessário
 ```
-
 
 3.2 Arquivo de eventos (config-events.php)                                                                                                 <a name="events"></a>
 ------------------------------------------
@@ -784,7 +783,7 @@ os valores que foram eviados via parâmetro para o *tipo* além de valores envia
 por evento.
 
 Para saber como funciona o classe de extensão de interface HTML, leia a documentação
-[default/interface](../default/interface.md).
+[default/interface](../common/interface.md).
 
 > Veja o tipo example, na pasta de tipos no backend.
 

@@ -41,6 +41,7 @@ de inserção, atualização, exclusão além de rotinas mais específicas, por�
 podem prover informações para outros módulos como o **bridge (api)** e consequentemente
 para o **frontend**.
 
+
 2. Cabeçalho                                                                                                                               <a name="head"></a>
 ============
 
@@ -54,6 +55,7 @@ header:
     table: nome_da_tabela_no_banco_de_dados
     p-key: nome_da_chave_primaria_da_tabela
 ```
+
 
 3. Tipos de Formulários                                                                                                                    <a name="form-types"></a>
 =======================
@@ -106,7 +108,6 @@ forms:
 
               # podemos ter quantos inputs forem necessários
 ```
-
 
 3.2 Boneco (dummy)                                                                                                                         <a name="dummy-form"></a>
 ------------------
@@ -238,6 +239,7 @@ forms:
               # podemos ter quantos inputs forem necessários
 ```
 
+
 4. Eventos de formulários                                                                                                                  <a name="events"></a>
 =========================
 
@@ -268,7 +270,6 @@ eventos, segue a explicação de cada um destes parâmetros:
 | $config       |   <a name="$config"></a>     Contém o array com os valores do arquivo de configuração.                                                                         |      
 | $loadedData   |   <a name="$loadedData"></a> Contém o array dos valores carregados a partir do banco de dados.                                                                 |    
 | $data         |   <a name="$data"></a>       Contém um array com os valores enviados para os métods a partir da interface.                                                     |     
-
 
 
 4.1 beforeLoadData: Antes de carregar valores na interface                                                                                 <a name="event-beforeLoadData"></a>
@@ -455,6 +456,7 @@ o exemplo a seguir:
     }
 ```
 
+
 5. Como clonar formulários                                                                                                                 <a name="clone-form"></a>
 ==========================
 
@@ -598,6 +600,7 @@ Resumindo as regras para mesclagem são:
 - *inputs* como o mesmo alias são sobrescritos segundo o critério de prioridade.
 
 - *inputs* com alias diferentes não são mesclados e sim incluídos.
+
 
 6. Exemplo de formulário completo                                                                                                          <a name="complete-form"></a>
 =================================

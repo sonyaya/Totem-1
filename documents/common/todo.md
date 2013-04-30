@@ -1,7 +1,7 @@
 TO-DO
 =====
 
-- Criar sistema de log de alterações.
+- Criar sistema de log.
 - Adicionar imagem ao login de usuário.
 - Adicionar metódos como submit, search etc tudo no dafault layout do template.
 - Melhorar segurança de acesso ao bridge.
@@ -10,13 +10,16 @@ TO-DO
 Frontend
 --------
 
-- Adicionar ajax para pesquisas no template DF1 list.
+- Criar opção para criação de menus.
+- Criar opção de multi idiomas.
 
 
 Backend
 -------
 
 - Criado um formulário de pesquisa (list e inTabs), porém ele é limitado e portanto deve se melhorado.
+- Adicionar ajax para pesquisas no template DF1 list.
+- Criar opção de multi idiomas.
 
 
 Bridge
@@ -29,3 +32,4 @@ Console
 -------
 
 - ...
+

@@ -31,13 +31,12 @@ em geral, como por exemplo a adição de novos módulos.
 
 ### Documentação geral
 
-- [Config](documents/default/config.md)
 - [Requisitos mínimos](#)
+- [Config](documents/common/2 - Config.md)
 - Melhoria contínua
-    - [To-do](documents/default/todo.md)
-    - [Bugs](documents/default/bugs.md)
-- Equipe
-    - Daniel de Andrade Varela
+    - [To-do](documents/common/todo.md)
+    - [Bugs](documents/common/bugs.md)
+- [Equipe](#documents/common/team.md)
 
 
 2. Backend                                                                                                                                 <a name="backend"></a>
