@@ -69,7 +69,7 @@ load-from-module e module-star-url, segue uma explicação para cada uma destas 
 
 #### label
 
-> É a etiqueta do link que será apresentada para o usuário.
+> É a etiqueta/título do link que será apresentada para o usuário.
 
 #### link
 
@@ -78,28 +78,28 @@ load-from-module e module-star-url, segue uma explicação para cada uma destas 
 > que o raiz sempre será a pastas *modules*), e o valor para *action* são as possíveis 
 > ações que podem ser executadas pelo sistema para este formulário, segue uma lista
 > de todas as ações existentes:
->
-> ##### view-dashboard
->
-> > teste
->
-> ##### view-insert-form
-> ##### view-update-form
-> ##### view-dummy-form
-> ##### view-list-form
-> ##### view-inTabs-form
-> ##### view-insert-window-form
-> ##### view-update-window-form
-> ##### view-dummy-window-form
-> ##### view-list-window-form
-> ##### view-change-password
-> ##### delete-form
-> ##### save-form
-> ##### type-ajax
-> ##### login
-> ##### logout
-> ##### recover-password
-> ##### change-password
+
+##### view-dashboard
+
+> teste
+
+##### view-insert-form
+##### view-update-form
+##### view-dummy-form
+##### view-list-form
+##### view-inTabs-form
+##### view-insert-window-form
+##### view-update-window-form
+##### view-dummy-window-form
+##### view-list-window-form
+##### view-change-password
+##### delete-form
+##### save-form
+##### type-ajax
+##### login
+##### logout
+##### recover-password
+##### change-password
 
 #### submenu
 
