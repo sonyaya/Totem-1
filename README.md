@@ -31,7 +31,7 @@ em geral, como por exemplo a adição de novos módulos.
 
 ### Documentação geral
 
-- [Requisitos mínimos](#)
+- [Requisitos mínimos](documents/common/1 - System Requirements.md)
 - [Config](documents/common/2 - Config.md)
 - Melhoria contínua
     - [To-do](documents/common/todo.md)
