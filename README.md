@@ -43,13 +43,13 @@ em geral, como por exemplo a adição de novos módulos.
 2. Backend                                                                                                                                 <a name="backend"></a>
 ==========
 
-[▲](#summary) Módulo capaz de criar relatórios, formulários de inserção e edição 
-no banco de dados, listagem de dados, exclusão de dados, além de formulários que 
-não possuem relação com o banco de dados, tudo  desenvolvido baseando-se em arquivos 
-YAML o que torna muito simples a criação e customização conforme as necessidades 
-do projeto.
+[▲](#summary) Módulo capaz de criar formulários de inserção, formulários de edição, 
+relatórios, listagem de dados, exclusão de dados, além de formulários que não necessariamente 
+possuem relação com o banco de dados (desenvolvidos para execução de algum processo 
+que o sistema não possua por padrão), tudo baseando em arquivos YAML e em casos mais 
+específicos PHP, o que torna muito simples a criação e customização do projeto.
 
-### Como acessar o módulo **Backend** 
+### Como acessar o módulo *Backend* 
 
 - http://seu-domínio/admin
 - http://seu-domínio/administrator
@@ -68,10 +68,10 @@ do projeto.
 [▲](#summary) Módulo desenvolvido com a finalidade de facilitar o desenvolvimento 
 de interfaces além de separar-lo do desenvolvimento de regras de sistema e abstração 
 de banco de dados, esse módulo é capaz de absorver todas as informações estocadas 
-e processadas pelo módulo *backend* de forama direta ou por requisições ao módulo 
+e processadas pelo módulo *backend*, de forma direta ou por requisições ao módulo 
 bridge.
 
-### Como acessar o módulo **frontend** 
+### Como acessar o módulo *frontend*
 
 - http://seu-domínio/
 - http://seu-domínio/site
@@ -89,13 +89,13 @@ bridge.
 ====================
 
 [▲](#summary) Módulo capaz de criar uma Rest API automaticamente ou de forma manual 
-(desenvolvido diretamente com os recursos deste módulo), isso significa que ao criar 
-um formulário no módulo *backend* é possivel acessá-lo via Rest API sem a necessidade
-de programação, porém caso necessite a criação de alguma funcionalidade específica 
-cujo a qual não existe formulário no módulo *backend* ou este necessite de alguma
-funcionalidade específica é possivel desenvolver manual no módulo *bridge*.
+(desenvolvido diretamente módulo *bridge*), isso significa que ao criar um formulário 
+no módulo *backend* é possivel acessá-lo via Rest API sem a necessidade de programação, 
+porém caso exista a necessedade de ser desenvolvida alguma funcionalidade específica 
+cujo a qual não existe no formulário do módulo *backend* ou simplesmete o formulário
+não exista no módulo *backend*, é possivel desenvolver manualmente no módulo *bridge*.
 
-Como acessar o módulo **Bridge** 
+Como acessar o módulo *Bridge**
 - http://seu-domínio/api/...
 - http://seu-domínio/rest/...
 - http://seu-domínio/bridge/...
@@ -114,6 +114,6 @@ Como acessar o módulo **Bridge**
 
 [▲](#summary) Em breve...
 
-### Documentação Console
+### Documentação do módulo *Console*
 
 - ...
