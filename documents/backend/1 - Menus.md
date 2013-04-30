@@ -79,69 +79,50 @@ load-from-module e module-star-url, segue uma explicação para cada uma destas 
 > ações que podem ser executadas pelo sistema para este formulário, segue uma lista
 > de todas as ações existentes:
 > 
-> - 1. Ações de Interface
->     - 1.1 view-dashboard
->         - Apresenta a tela de *dashboard* do formulário.
->
->     - 1.2 view-insert-form
->         - Apresenta a tela de *inserção* do formulário.
->
->     - 1.3 view-update-form [\*](#cit-1)
->         - Apresenta a tela de *atualização* do formulário.
->
->     - 1.4 view-dummy-form
->         - Apresenta a tela de *boneco* do formulário.
->
->     - 1.5 view-list-form
->         - Apresenta a tela de *listagem de dados* do formulário.
->
->     - 1.6 view-inTabs-form
->         - Apresenta a tela contendo o agropamento por abas da tela de *atualização*,
->           *inserção* e *listagem* do formulário.
->
->     - 1.7 view-insert-window-form
->         - Apresenta a tela de *inserção* do formulário em formato de popup.
->
->     - 1.8 view-update-window-form [\*](#cit-1)
->         - Apresenta a tela de *atualização* do formulário em formato de popup.
->
->     - 1.9 view-dummy-window-form
->         - Apresenta a tela de *boneco* do formulário em formato de popup.
->
->     - 1.10 view-list-window-form
->         - Apresenta a tela de *listagem* do formulário em formato de popup.
->
->     - 1.11 view-change-password
->         - Apresenta a tela de *troca de senha* do formulário.
->
-> - 2. Ações de Banco de dados
->     - 2.1 delete-form [\*](#cit-1)
->         - Tenta excluir valore no banco de dados.
->
->     - 2.2 save-form
->         - Recebe os valores do método POST da tela de inserção ou atualização 
->           e atualiza ou insere os dados conforme a necessidade.
->
-> - 3. Ações de tipos
->     - 3.1 type-ajax [\*\*](#cit-2)
->         - É utilizado para retornar valores a um determinado *tipo de input* via
->           ajax.
->
-> - 4. Ações de usuário
->     - 4.1 login
->     - 4.2 logout
->     - 4.3 recover-password
->     - 4.4 change-password
-
-<a name="cit-1">
-\* É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja 
-possível identifica em qual linha do banco esta ação ira  ser executada.
-</a>
-
-<a name="cit-2">
-\*\* É preciso passar o parâmetro *type* pelo método GET para identificação de qual 
-*tipo de input* esta requisitando o ajax.
-</a>
+> | Ações de Interface                  | Descrição                                                                                                           |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+> | view-dashboard                      | Apresenta a tela de *dashboard* do formulário.                                                                      |       
+> | view-insert-form                    | Apresenta a tela de *inserção* do formulário.                                                                       |      
+> | view-update-form [\*](#cit-1)       | Apresenta a tela de *atualização* do formulário.                                                                    |         
+> | view-dummy-form                     | Apresenta a tela de *boneco* do formulário.                                                                         |    
+> | view-list-form                      | Apresenta a tela de *listagem de dados* do formulário.                                                              |               
+> | view-inTabs-form                    | Apresenta a tela contendo o agropamento por abas da tela de *atualização*, *inserção* e *listagem* do formulário.   |                                |
+> | view-insert-window-form             | Apresenta a tela de *inserção* do formulário em formato de popup.                                                   |                          
+> | view-update-window-form [\*](#cit-1)| Apresenta a tela de *atualização* do formulário em formato de popup.                                                |
+> | view-dummy-window-form              | Apresenta a tela de *boneco* do formulário em formato de popup.                                                     |
+> | view-list-window-form               | Apresenta a tela de *listagem* do formulário em formato de popup.                                                   |
+> | view-change-password                | Apresenta a tela de *troca de senha* do formulário.                                                                 |
+> 
+> 
+> | Ações de Banco de dados       | Descrição                                                                                                                 |
+> |:-----------------------------:|:-------------------------------------------------------------------------------------------------------------------------:|
+> | delete-form [\*](#cit-1)      | Remove valore no banco de dados.                                                                                          |  
+> | save-form                     | Recebe os valores do método POST da tela de inserção ou atualização e atualiza ou insere os dados conforme a necessidade. |   
+> 
+> 
+> | Ações de tipos                      | Descrição                                                                                                           |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+> | type-ajax [\*\*](#cit-2)            | É utilizado para retornar valores a um determinado *tipo de input* via ajax.                                        |
+> 
+> 
+> | Ações de usuário                    | Descrição                                                                                                           |
+> |:-----------------------------------:|:-------------------------------------------------------------------------------------------------------------------:|
+> | login                               |                                                                                                                     |
+> | logout                              |                                                                                                                     |
+> | recover-password                    |                                                                                                                     |
+> | change-password                     |                                                                                                                     |
+> |                                     |                                                                                                                     |
+> 
+> 
+> <a name="cit-1">
+> \* É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja 
+> possível identifica em qual linha do banco esta ação ira  ser executada.
+> </a>
+> 
+> <a name="cit-2">
+> \*\* É preciso passar o parâmetro *type* pelo método GET para identificação de qual 
+> *tipo de input* esta requisitando o ajax.
+> </a>
 
 #### submenu
 
