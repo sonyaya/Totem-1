@@ -100,7 +100,7 @@
             function($errno, $errstr, $errfile, $errline){
 
                 if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_errors.md") ){
-                    $md  = "| Date                | System  | Error Num. | Error Type                                      | Error Line | Description                                                                                                                   | file                                                                                                                          | \r\n";
+                    $md  = "| Date                | System  | Error Num. | Error Type                                      | Error Line | Description                                                                                                                   | File                                                                                                                          | \r\n";
                     $md .= "|:-------------------:|:-------:|:----------:|:-----------------------------------------------:| ----------:|:----------------------------------------------------------------------------------------------------------------------------- |:----------------------------------------------------------------------------------------------------------------------------- | \r\n"; 
                 }else{
                     $md = file_get_contents($totemErrorFile);
