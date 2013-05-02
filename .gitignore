@@ -5,15 +5,20 @@
 /uploads/*
 /system/config.ini.php
 
-/system/backend/logs/*.txt
 /system/backend/image-buffer/buffer/*.jpg
 /system/backend/image-buffer/buffer/*.jpeg
 /system/backend/image-buffer/buffer/*.gif
 /system/backend/image-buffer/buffer/*.png
 /system/backend/image-buffer/buffer/*.part
 
+/system/backend/logs/*.txt
+/system/backend/logs/*.md
+
 /system/frontend/logs/*.txt
+/system/frontend/logs/*.md
 
 /system/bridge/logs/*.txt
+/system/bridge/logs/*.md
 
 /system/console/logs/*.txt
+/system/console/logs/*.md

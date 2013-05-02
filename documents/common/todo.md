@@ -12,6 +12,7 @@ Frontend
 
 - Criar opção para criação de menus.
 - Criar opção de multi idiomas.
+- Criar opcão de multiplos sites.
 
 
 Backend
