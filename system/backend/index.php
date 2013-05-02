@@ -39,8 +39,6 @@
         backendIndex::createMenu();
     }
 
-    backend\Log::log("Login", "Fulano de tal esta online", Array(1,2,3,4,5,6,7,8,9,0));
-
     # DECIDE QUAL AÇÃO EXECUTAR 
     $action = (isset($_GET['action']))? $_GET['action'] : "";
     $path   = (isset($_GET['path'])  )? $_GET['path']   : "";

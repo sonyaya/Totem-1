@@ -36,21 +36,14 @@
                             $denny         = (isset($actualMenu[ $actualContext ]['_denny_'])) ? $actualMenu[ $actualContext ]['_denny_'] : false;   
                             $actualMenu    = (isset($actualMenu[ $actualContext ]['_smenu_'])) ? $actualMenu[ $actualContext ]['_smenu_'] : "..." ;
                             
-                            
                             //
                             switch(true){
                                 case ($denny == "all"): 
-                                    $grant = false; 
-                                    break;
-                                
                                 case (is_array($denny) && in_array($action, $denny)): 
                                     $grant = false; 
                                     break;
                                 
                                 case ($grant == "all"): 
-                                    $grant = true; 
-                                    break;
-                                
                                 case (is_array($grant) && in_array($action, $grant)): 
                                     $grant = true; 
                                     break;
@@ -112,9 +105,12 @@
                                 break;
                         }
                     }else{
+                        if($returnType == "html" || $returnType == "json")
+                            Log::log("Access Allow", "Usuário '{$_SESSION['user']['login']}' acessou o contexto '$context' e a ação '$action', com o retorno do tipo '$returnType' ");
                         return true;
                     }
             }else{
+                Log::log("Access Denny", "Usuário '{$_SESSION['user']['login']}' tentou acessar o contexto '$context' e a ação '$action', com o retorno do tipo '$returnType' ");
                 echo new Frontend(
                     $_M_THIS_CONFIG['template']."login.html",
                     $_M_THIS_CONFIG
@@ -168,6 +164,7 @@
 
             //
             if(empty($select)){
+                Log::log("Login Denny", "Acesso ao sistema negado para o usuário '$login'.", $select);
                 $_SESSION['user'] = null;
                 return Array(
                     "error"     => true,
@@ -179,9 +176,9 @@
                 $uPermissions = Yaml::parse( $select['group']['permissions'] );
                 $select['permissions'] = array_replace_recursive($uPermissions, (array)$gPermissions);
                 unset($select['group']['permissions']);
-
+                Log::log("Login Allowed", "Acesso ao sistema permitido para o usuário '$login'.", $select);
                 $_SESSION['user'] = $select;
-                 return Array(
+                return Array(
                     "error"     => false,
                     "message"   => "Usuário logado com sucesso."
                 );
@@ -317,6 +314,7 @@
          *
          */
         public static function logout(){
+            Log::log("Logout", "'{$_SESSION['user']['login']}' deixou o sistema.");
             $_SESSION['user'] = null;
         }
     }
