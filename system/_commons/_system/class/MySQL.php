@@ -45,7 +45,6 @@
 
     namespace backend;
     
-    use backend\Log;
     use backend\Util;
 
     class MySQL{
