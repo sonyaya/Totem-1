@@ -1,7 +1,7 @@
 TO-DO
 =====
 
-- Criar sistema de log.
+- Adicionar log para eventos, como login, logout, change password, delete, update etc.
 - Adicionar imagem ao login de usuário.
 - Adicionar metódos como submit, search etc tudo no dafault layout do template.
 - Melhorar segurança de acesso ao bridge.
