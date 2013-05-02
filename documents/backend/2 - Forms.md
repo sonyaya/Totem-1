@@ -421,12 +421,10 @@ ao usuário:
 
 ```php
 <?php
-    use backend/Log;
-
     class FormEvents {
         function beforeDelete($data, $pkey, $config){
             if($data['id'] == 1){
-                Log::ajaxError("001", "Não é possível excluir id = 1.");
+                echo json_encode( Array( "error" => true, "message" => "O campo $thisLabel, não pode ser vazio." ) );
             }
         }
     }
