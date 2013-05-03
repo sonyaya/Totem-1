@@ -1169,6 +1169,9 @@
             }
             
             //
+            Log::log("Deleted Row", "Deleted row `{$formArray['header']['p-key']}`=$deleteId from table `{$formArray['header']['table']}`", $loadedData);
+            
+            //
             return $loadedData;
         }
         

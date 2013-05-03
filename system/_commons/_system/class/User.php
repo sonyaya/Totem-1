@@ -110,7 +110,6 @@
                         return true;
                     }
             }else{
-                Log::log("Access Denny", "Usuário '{$_SESSION['user']['login']}' tentou acessar o contexto '$context' e a ação '$action', com o retorno do tipo '$returnType' ");
                 echo new Frontend(
                     $_M_THIS_CONFIG['template']."login.html",
                     $_M_THIS_CONFIG
@@ -314,7 +313,7 @@
          *
          */
         public static function logout(){
-            Log::log("Logout", "'{$_SESSION['user']['login']}' deixou o sistema.");
+            Log::log("Logout", "Deixou o sistema.");
             $_SESSION['user'] = null;
         }
     }

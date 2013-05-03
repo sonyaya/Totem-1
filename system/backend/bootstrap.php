@@ -96,8 +96,13 @@
         
         # -- SAVE ERROS IN A FILE ----------------------------------------------
                 
+        register_shutdown_function(function(){
+            echo "fodeu!";
+            print_r(error_get_last());
+        });
+        
         set_error_handler(
-            function($errno, $errstr, $errfile, $errline){
+            function($errno, $errstr, $errfile, $errline, $errcontext){
 
                 if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_errors.md") ){
                     $md  = "| Date                | System  | Error Num. | Error Type                                       | Error Line | Description                                                                                                                                                                            | File                                                                                                                                                                                   | \r\n";
@@ -150,3 +155,13 @@
             }
         );
     }
+    
+    
+    
+    //backtrace
+    function x(){ y(); }
+    function y(){ z(); }
+    function z(){ erro(); }
+    x();
+    
+    

@@ -296,7 +296,7 @@
                                                         ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], true)
                                                     ,
                                                      $relation_val['concat'][0], 
-                                                     @$relation_val['concat'][1]
+                                                 ( isset($relation_val['concat'][1]) ) ? $relation_val['concat'][1] : ""
                                                 )
                                             ;
                                         }else{
