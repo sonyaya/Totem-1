@@ -198,7 +198,7 @@
                 foreach($TAGS as $TAG){
                     $HTML = "";
                     $ATTR = $TAG['attr'];
-                    $aKEY = @$ATTR['key'];
+                    $aKEY = (isset($ATTR['key']))? $ATTR['key'] : "";
                     $var  = $this->getMVar($ATTR['var']);
                     
                     if(!empty($var) && is_array($var)){
@@ -225,9 +225,9 @@
                     $HTML = "";
 
                     // busca a tags
-                    $start = @$TAG['attr']['start'];
-                    $stop  = @$TAG['attr']['stop' ];
-                    $aKEY  = @$TAG['attr']['key'];
+                    $start = ( isset($TAG['attr']['start']) ) ? $TAG['attr']['start'] : "";
+                    $stop  = ( isset($TAG['attr']['stop' ]) ) ? $TAG['attr']['stop']  : "";
+                    $aKEY  = ( isset($TAG['attr']['key']  ) ) ? $TAG['attr']['key']   : "";
                     
                     // busca mvar caso start e stop não sejam valores numéricos
                     $start = (!is_numeric($start)) ? $this->getMVar("int:$start") : $start;
@@ -303,7 +303,7 @@
 
                 case "bool";
                 case "boolean";
-                    return ( @$var ) ? 'true' : 'false';
+                    return ( (bool)$var ) ? 'true' : 'false';
                     break;
 
                 default:
