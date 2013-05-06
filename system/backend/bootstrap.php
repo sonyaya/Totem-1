@@ -87,6 +87,7 @@
     # -- ERROR CONTROL ---------------------------------------------------------
     
     if( $_M_CONFIG->system['log-php-errors'] ){
+        
         # -- SAVE PHP FATAL ERROS IN A FILE ------------------------------------
     
         error_reporting(E_ALL);
@@ -95,73 +96,90 @@
         ini_set ("error_log"      , "logs/".date('Y-m')."_-_fatal-errors.txt");
         
         # -- SAVE ERROS IN A FILE ----------------------------------------------
-                
-        register_shutdown_function(function(){
-            echo "fodeu!";
-            print_r(error_get_last());
-        });
         
-        set_error_handler(
-            function($errno, $errstr, $errfile, $errline, $errcontext){
-
-                if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_errors.md") ){
-                    $md  = "| Date                | System  | Error Num. | Error Type                                       | Error Line | Description                                                                                                                                                                            | File                                                                                                                                                                                   | \r\n";
-                    $md .= "|:-------------------:|:-------:|:----------:|:------------------------------------------------:| ----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | \r\n"; 
-                }else{
-                    $md = file_get_contents($totemErrorFile);
-                }
-
-                $md = trim($md);
-                $date = date("d/m/Y H:i:s");        
-                $errno   = str_pad( str_pad($errno  , 4, " ", STR_PAD_LEFT) , 10 , " ", STR_PAD_BOTH);
-                $errline = str_pad($errline, 10 , " ", STR_PAD_LEFT);
-                $errstr  = str_pad($errstr , 182, " ");
-                $errfile = str_pad($errfile, 182, " ");
-
-                switch ($errno) {
-                    case E_USER_ERROR:
-                        $md .= "\r\n| $date |  TOTEM  | $errno | <font color=#E13C26> E_USER_ERROR        </font> | $errline | $errstr | $errfile |";
-                        break;      
-
-                    case E_USER_WARNING:      
-                        $md .= "\r\n| $date |  TOTEM  | $errno | <font color=#F88B1C> E_USER_WARNING      </font> | $errline | $errstr | $errfile |";
-                        break;      
-
-                    case E_USER_NOTICE:      
-                        $md .= "\r\n| $date |  TOTEM  | $errno | <font color=#3171B2> E_USER_NOTICE       </font> | $errline | $errstr | $errfile |";
-                        break;      
-
-                    case E_WARNING:      
-                        $md .= "\r\n| $date |   PHP   | $errno | <font color=#F88B1C> E_WARNING           </font> | $errline | $errstr | $errfile |";
-                        break;      
-
-                    case E_NOTICE:      
-                        $md .= "\r\n| $date |   PHP   | $errno | <font color=#6A9D27> E_NOTICE            </font> | $errline | $errstr | $errfile |";
-                        break;
-
-                    case E_RECOVERABLE_ERROR:
-                        $md .= "\r\n| $date |   PHP   | $errno | <font color=#E13C26> E_RECOVERABLE_ERROR </font> | $errline | $errstr | $errfile |";
-                        break;
-
-
-                    default:
-                        $md .= "\r\n| $date |   ???   | $errno | <font color=#000000> UNKNOWN             </font> | $errline | $errstr | $errfile |";
-                        break;
-                }
-
-                file_put_contents($totemErrorFile, $md);
-
-                return true;
+        function error_handler($errno=null, $errstr=null, $errfile=null, $errline=null, $errcontext=null){
+            
+            //
+            if(
+                $errno      == null &&
+                $errstr     == null &&
+                $errfile    == null && 
+                $errline    == null && 
+                $errcontext == null
+            ){
+                $err        = error_get_last();
+                $errno      = $err['type'];
+                $errstr     = $err['message'];
+                $errfile    = $err['file'];
+                $errline    = $err['line'];
+                $errcontext = null;   
             }
-        );
+            
+            //
+            if( !file_exists($totemErrorFile = __DIR__ . "/logs/".date('Y-m')."_-_errors.md") ){
+                $md  = "| Date                | System  | Error Num. | Error Type                                                           | Error Line | Description                                                                                                                                                                            | File                                                                                                                                                                                   | \r\n";
+                $md .= "|:-------------------:|:-------:|:----------:|:--------------------------------------------------------------------:| ----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | \r\n"; 
+            }else{
+                $md = "";
+            }
+            
+            //
+            $md = trim($md);
+            $date = date("d/m/Y H:i:s");        
+            $errno   = str_pad( str_pad($errno  , 4, " ", STR_PAD_LEFT) , 10 , " ", STR_PAD_BOTH);
+            $errline = str_pad($errline, 10 , " ", STR_PAD_LEFT);
+            $errstr  = str_pad($errstr , 182, " ");
+            $errfile = str_pad($errfile, 182, " ");
+
+            //
+            switch ($errno) {
+                case E_ERROR:
+                    $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#FFFF00; background:#E13C26'> FATAL ERROR </span> | $errline | $errstr | $errfile |";
+
+                    // Separando os traceback no log de erros fatais
+                    $fileFatalErrors = fopen(__DIR__. "/logs/".date('Y-m')."_-_fatal-errors.txt", "a+");
+                    fwrite($fileFatalErrors, "\r\n-------------------------------------------\r\n\r\n");
+                    fclose($fileFatalErrors);
+                    
+                    break;
+                case E_USER_ERROR:
+                    $md .= "\r\n| $date |  TOTEM  | $errno | <span style='color:#E13C26'> E_USER_ERROR                    </span> | $errline | $errstr | $errfile |";
+                    break;                  
+            
+                case E_WARNING:                  
+                    $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#F88B1C'> E_WARNING                       </span> | $errline | $errstr | $errfile |";
+                    break;                  
+            
+                case E_USER_WARNING:                  
+                    $md .= "\r\n| $date |  TOTEM  | $errno | <span style='color:#F88B1C'> E_USER_WARNING                  </span> | $errline | $errstr | $errfile |";
+                    break;                  
+            
+                case E_NOTICE:                  
+                    $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#6A9D27'> E_NOTICE                        </span> | $errline | $errstr | $errfile |";
+                
+                case E_USER_NOTICE:                  
+                    $md .= "\r\n| $date |  TOTEM  | $errno | <span style='color:#3171B2'> E_USER_NOTICE                   </span> | $errline | $errstr | $errfile |";
+                    break;                  
+
+                case E_RECOVERABLE_ERROR:
+                    $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#E13C26'> E_RECOVERABLE_ERROR             </span> | $errline | $errstr | $errfile |";
+                    break;
+
+                default:
+                    $md .= "\r\n| $date |   ???   | $errno | <span style='color:#000000'> UNKNOWN                         </span> | $errline | $errstr | $errfile |";
+                    break;
+            }
+            
+            //
+            $file = fopen($totemErrorFile,"a+");
+            fwrite($file, $md);
+            fclose($file);
+            
+            //
+            return true;
+        }
+        
+        set_error_handler("error_handler");
+        register_shutdown_function("error_handler");
+        
     }
-    
-    
-    
-    //backtrace
-    function x(){ y(); }
-    function y(){ z(); }
-    function z(){ erro(); }
-    x();
-    
-    
