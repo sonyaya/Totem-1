@@ -97,23 +97,7 @@
         
         # -- SAVE ERROS IN A FILE ----------------------------------------------
         
-        function error_handler($errno=null, $errstr=null, $errfile=null, $errline=null, $errcontext=null){
-            
-            //
-            if(
-                $errno      == null &&
-                $errstr     == null &&
-                $errfile    == null && 
-                $errline    == null && 
-                $errcontext == null
-            ){
-                $err        = error_get_last();
-                $errno      = $err['type'];
-                $errstr     = $err['message'];
-                $errfile    = $err['file'];
-                $errline    = $err['line'];
-                $errcontext = null;   
-            }
+        function error_handler($errno, $errstr, $errfile, $errline, $errcontext){
             
             //
             if( !file_exists($totemErrorFile = __DIR__ . "/logs/".date('Y-m')."_-_errors.md") ){
@@ -180,6 +164,10 @@
         }
         
         set_error_handler("error_handler");
-        register_shutdown_function("error_handler");
+        
+        register_shutdown_function(function(){
+            $err = error_get_last();
+            error_handler($err['type'], $err['message'], $err['file'], $err['line'], null);        
+        });
         
     }
