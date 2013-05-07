@@ -1127,9 +1127,13 @@
                         Array('_M_PRIMARY_KEY_VALUE_' => $formArray['header']['p-key']),
                         $selectColumns
                     ),       
-                    "`{$formArray['header']['p-key']}` = '$deleteId' LIMIT 1"
+                    $where = "`{$formArray['header']['p-key']}` = '$deleteId' LIMIT 1"
                   )
             ;
+                    
+            // BUSCA DADOS NO BANCO PARA LOG
+            $oldData = $db->select(null, $where); 
+            $oldData = $oldData[0];
             
             // executa FormEvents::beforeDelete
             if(method_exists($formEvents, "beforeDelete")){
@@ -1169,7 +1173,7 @@
             }
             
             //
-            Log::log("Deleted Row", "Deleted row `{$formArray['header']['p-key']}`=$deleteId from table `{$formArray['header']['table']}`", $loadedData);
+            Log::log("*** DELETED ROW ***", "Deleted row `{$formArray['header']['p-key']}`=$deleteId from table `{$formArray['header']['table']}`", $oldData);
             
             //
             return $loadedData;
