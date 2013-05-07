@@ -112,8 +112,8 @@
             $date = date("d/m/Y H:i:s");        
             $errno   = str_pad( str_pad($errno  , 4, " ", STR_PAD_LEFT) , 10 , " ", STR_PAD_BOTH);
             $errline = str_pad($errline, 10 , " ", STR_PAD_LEFT);
-            $errstr  = str_pad(utf8_decode($errstr) , 182, " ");
-            $errfile = str_pad(utf8_decode($errfile), 182, " ");
+            $errstr  = utf8_encode(str_pad(utf8_decode($errstr) , 182, " ")); // POG: str_pad não calcula direito sem isso
+            $errfile = utf8_encode(str_pad(utf8_decode($errfile), 182, " ")); // POG: str_pad não calcula direito sem isso
 
             //
             switch ($errno) {
