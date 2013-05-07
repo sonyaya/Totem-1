@@ -3,7 +3,7 @@
     
     class Log{
 
-        public static function log($action, $msg, $oldData="…"){ 
+        public static function log($action, $msg, $oldData="..."){ 
             if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_log.md") ){
                $md  = "| Date                | Session ID                            | User                             | Action                            | Message                                                                                                                                                                               | Backup Data  | \r\n";
                $md .= "|:-------------------:|:------------------------------------- | --------------------------------:|:---------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | \r\n"; 
@@ -12,18 +12,19 @@
             }
             
             $md = trim($md);
+            
             $date = date("d/m/Y H:i:s");   
             
-            $action = trim($action);
+            $action = utf8_decode($action);
             $action = str_pad( strtoupper($action) , 33, " ");
             
-            $msg = trim($msg);
-            $msg = str_pad($msg, 184, " ", STR_PAD_RIGHT);
+            $msg = utf8_decode($msg);
+            $msg = str_pad($msg, 181, " ", STR_PAD_RIGHT);
             
-            $oldData = (is_array($oldData)) ? json_encode($oldData) : $oldData;
-            $oldData = trim($oldData);
+            $oldData = (is_array($oldData)) ? json_encode($oldData) : utf8_decode($oldData);
             
-            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "…" ;
+            $user = utf8_decode($user);
+            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "..." ;
             $user = str_pad($user, 32, " ", STR_PAD_LEFT);
             
             $session = session_id();
