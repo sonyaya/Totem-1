@@ -18,13 +18,13 @@
             $action = str_pad( strtoupper($action) , 33, " ");
             
             $msg = trim($msg);
-            $msg = str_pad($msg, 184, "-", STR_PAD_RIGHT);
+            $msg = str_pad($msg, 184, " ", STR_PAD_RIGHT);
             
-            $oldData = (is_array($oldData)) ? json_encode($oldData) : $oldData;
+            $oldData = (is_array($oldData)) ? json_encode($oldData) : (!empty($oldData))? $oldData : "…" ;
             $oldData = trim($oldData);
             $oldData = str_pad($oldData, 182, " ");
             
-            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "..." ;
+            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "…" ;
             $user = str_pad($user, 32, " ", STR_PAD_LEFT);
             
             $session = session_id();
