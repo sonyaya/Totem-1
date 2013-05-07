@@ -67,30 +67,27 @@
                 $pad_str_len = mb_strlen($pad_str);
                 $pad_len = $length - $input_len;
 
-                if ($type == STR_PAD_RIGHT)
-                {
-                        $repeat_times = ceil($pad_len / $pad_str_len);
-                        return mb_substr($input.str_repeat($pad_str, $repeat_times), 0, $length);
+                if ($type == STR_PAD_RIGHT){
+                    $repeat_times = ceil($pad_len / $pad_str_len);
+                    return mb_substr($input.str_repeat($pad_str, $repeat_times), 0, $length);
                 }
 
-                if ($type == STR_PAD_LEFT)
-                {
-                        $repeat_times = ceil($pad_len / $pad_str_len);
-                        return mb_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)).$input;
+                if ($type == STR_PAD_LEFT){
+                    $repeat_times = ceil($pad_len / $pad_str_len);
+                    return mb_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)).$input;
                 }
 
-                if ($type == STR_PAD_BOTH)
-                {
-                        $pad_len /= 2;
-                        $pad_amount_left = floor($pad_len);
-                        $pad_amount_right = ceil($pad_len);
-                        $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
-                        $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
+                if ($type == STR_PAD_BOTH){
+                    $pad_len /= 2;
+                    $pad_amount_left = floor($pad_len);
+                    $pad_amount_right = ceil($pad_len);
+                    $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
+                    $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 
-                        $padding_left = mb_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
-                        $padding_right = mb_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
+                    $padding_left = mb_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
+                    $padding_right = mb_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
 
-                        return $padding_left.$input.$padding_right;
+                    return $padding_left.$input.$padding_right;
                 }
 
                 trigger_error('mb_str_pad: Unknown padding type ('.$type.')', E_USER_ERROR);
