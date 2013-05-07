@@ -29,7 +29,7 @@
             $session = session_id();
             $session = str_pad($session, 37, " ");
         
-            $md .= "\r\n| $date | $session | $user | $action | $msg | $oldData";
+            $md .= "\r\n| $date | $session | $user | $action | $msg | $oldData |";
             
             file_put_contents($totemErrorFile, $md);
         }
