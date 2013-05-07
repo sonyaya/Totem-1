@@ -106,7 +106,7 @@
                         }
                     }else{
                         if($returnType == "html" || $returnType == "json")
-                            Log::log("Access Allow", "Usuário '{$_SESSION['user']['login']}' acessou o contexto '$context' e a ação '$action', com o retorno do tipo '$returnType' ");
+                            Log::log("REQUEST ALLOWED", "Usuário '{$_SESSION['user']['login']}' acessou o contexto '$context' com a ação '$action' e retorno do tipo '$returnType' ");
                         return true;
                     }
             }else{
@@ -163,7 +163,7 @@
 
             //
             if(empty($select)){
-                Log::log("Login Denny", "Acesso ao sistema negado para o usuário '$login'.", $select);
+                Log::log("ACCESS DENIED", "Acesso ao sistema negado para o usuário '$login'.", $select);
                 $_SESSION['user'] = null;
                 return Array(
                     "error"     => true,
@@ -175,7 +175,7 @@
                 $uPermissions = Yaml::parse( $select['group']['permissions'] );
                 $select['permissions'] = array_replace_recursive($uPermissions, (array)$gPermissions);
                 unset($select['group']['permissions']);
-                Log::log("Login Allowed", "Acesso ao sistema permitido para o usuário '$login'.", $select);
+                Log::log("ALLOWED ACCESS", "Acesso ao sistema permitido para o usuário '$login'.", $select);
                 $_SESSION['user'] = $select;
                 return Array(
                     "error"     => false,
@@ -313,7 +313,7 @@
          *
          */
         public static function logout(){
-            Log::log("Logout", "Deixou o sistema.");
+            Log::log("LEFT SYSTEM", "Deixou o sistema.");
             $_SESSION['user'] = null;
         }
     }
