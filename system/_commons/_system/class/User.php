@@ -168,14 +168,14 @@
                 return Array(
                     "error"     => true,
                     "errorCode" => "login",
-                    "message"   => "Usuário e/ou senha não encontrados."
+                    "message"   => "Usuário e/ou senha nao encontrados."
                 );
             }else{    
                 $gPermissions = Yaml::parse( $select['permissions'] );
                 $uPermissions = Yaml::parse( $select['group']['permissions'] );
                 $select['permissions'] = array_replace_recursive($uPermissions, (array)$gPermissions);
                 unset($select['group']['permissions']);
-                Log::log("ALLOWED ACCESS", "Acesso ao sistema permitido para o usuário '$login'.", $select);
+                Log::log("LOGIN", "Acesso ao sistema permitido para o usuário '$login'.", $select);
                 $_SESSION['user'] = $select;
                 return Array(
                     "error"     => false,
@@ -251,7 +251,7 @@
          *
          */
         public static function recoverPasswordChangePassword($recovery_hash, $password, $repeatPassword){
-            if(strlen($password) >= 6){
+            if(mb_strlen($password, 'utf8') >= 6){
                 if($password == $repeatPassword){
                     global $_M_CONFIG;
 
@@ -313,7 +313,7 @@
          *
          */
         public static function logout(){
-            Log::log("LEFT SYSTEM", "Deixou o sistema.");
+            Log::log("LOGOUT", "Deixou o sistema.");
             $_SESSION['user'] = null;
         }
     }
