@@ -273,7 +273,7 @@
             $path  = preg_replace("/^(.*?)\:/", "", $path);
             $path  = str_replace(".", "']['", $path);
             $path  = "['$path']";
-            $var   = eval("return @\$array$path;");
+            $var   = eval("return (isset(\$array$path))? \$array$path : '';");
             
             preg_match("/^(.*?)\:/", $oPath, $typeReturn);
             $typeReturn = 
