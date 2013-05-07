@@ -126,6 +126,7 @@
                     fclose($fileFatalErrors);
                     
                     break;
+                
                 case E_USER_ERROR:
                     $md .= "\r\n| $date |  TOTEM  | $errno | <span style='color:#E13C26'> E_USER_ERROR                    </span> | $errline | $errstr | $errfile |";
                     break;                  
@@ -167,7 +168,8 @@
         
         register_shutdown_function(function(){
             $err = error_get_last();
-            error_handler($err['type'], $err['message'], $err['file'], $err['line'], null);        
+            if(!empty($err))
+                error_handler($err['type'], $err['message'], $err['file'], $err['line'], null);        
         });
         
     }
