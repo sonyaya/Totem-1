@@ -21,7 +21,7 @@
                     $ret .= $item . $glue;
                 }
             }
-            $ret = substr($ret, 0, 0-mb_strlen($glue, 'utf8'));
+            $ret = substr($ret, 0, 0-mb_strlen($glue));
             return $ret;
         }
         
@@ -51,8 +51,7 @@
          * @author Oliver Saunders <oliver@osinternetservices.com>
          * @package php-utf8
          * @subpackage functions
-         * @see http://www.php.net/str_pad
-         * @uses utf8_substr
+         * @see http://www.php.net/str_pad https://github.com/fluxbb/utf8/tree/master/functions
          * @param string $input
          * @param int $length
          * @param string $pad_str
@@ -61,23 +60,23 @@
          */
         public static function utf8_str_pad($input, $length, $pad_str=' ', $type = STR_PAD_RIGHT)
         {
-                $input_len = utf8_strlen($input);
+                $input_len = mb_strlen($input);
                 if ($length <= $input_len)
                         return $input;
 
-                $pad_str_len = utf8_strlen($pad_str);
+                $pad_str_len = mb_strlen($pad_str);
                 $pad_len = $length - $input_len;
 
                 if ($type == STR_PAD_RIGHT)
                 {
                         $repeat_times = ceil($pad_len / $pad_str_len);
-                        return utf8_substr($input.str_repeat($pad_str, $repeat_times), 0, $length);
+                        return mb_substr($input.str_repeat($pad_str, $repeat_times), 0, $length);
                 }
 
                 if ($type == STR_PAD_LEFT)
                 {
                         $repeat_times = ceil($pad_len / $pad_str_len);
-                        return utf8_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)).$input;
+                        return mb_substr(str_repeat($pad_str, $repeat_times), 0, floor($pad_len)).$input;
                 }
 
                 if ($type == STR_PAD_BOTH)
@@ -88,8 +87,8 @@
                         $repeat_times_left = ceil($pad_amount_left / $pad_str_len);
                         $repeat_times_right = ceil($pad_amount_right / $pad_str_len);
 
-                        $padding_left = utf8_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
-                        $padding_right = utf8_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
+                        $padding_left = mb_substr(str_repeat($pad_str, $repeat_times_left), 0, $pad_amount_left);
+                        $padding_right = mb_substr(str_repeat($pad_str, $repeat_times_right), 0, $pad_amount_right);
 
                         return $padding_left.$input.$padding_right;
                 }

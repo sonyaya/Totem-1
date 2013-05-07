@@ -251,7 +251,7 @@
          *
          */
         public static function recoverPasswordChangePassword($recovery_hash, $password, $repeatPassword){
-            if(mb_strlen($password, 'utf8') >= 6){
+            if(mb_strlen($password) >= 6){
                 if($password == $repeatPassword){
                     global $_M_CONFIG;
 

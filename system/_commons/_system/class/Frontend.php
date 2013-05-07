@@ -237,7 +237,7 @@
                     if($start <= $stop){
 
                         for($i=$start; $i<=$stop; $i++){
-                            $val = str_pad( $i, mb_strlen($start, 'utf8'), "0", STR_PAD_LEFT );
+                            $val = str_pad( $i, mb_strlen($start), "0", STR_PAD_LEFT );
                             $HTML .= str_replace("__{$aKEY}__", $val, rtrim($TAG['innerHTML']) );
                         }
 

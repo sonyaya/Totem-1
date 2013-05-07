@@ -121,7 +121,7 @@
                 $innerHTML  = "";
                 $outerHTML  = "";
                 $openTag    = $openTags[$key][0];
-                $openTagPos = $openTags[$key][1] + mb_strlen($openTags[$key][0], 'utf8');
+                $openTagPos = $openTags[$key][1] + mb_strlen($openTags[$key][0]);
 
                 if($deep == 0){
                     $closeTag    = $closeTags[$key][0];
