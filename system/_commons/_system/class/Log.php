@@ -28,7 +28,7 @@
             $user = str_pad($user, 32, " ", STR_PAD_LEFT);
             
             $session = session_id();
-            $session = str_pad($session, 35, " ");
+            $session = str_pad($session, 32, " ");
         
             $md .= "\r\n| $date | $session | $user | $action | $msg | $oldData |";
             
