@@ -17,7 +17,7 @@
 
                 if( isset($parameters['mask']) ){
                     if( in_array( $parameters['mask'] , array_keys($count)) ){
-                        if( strlen($thisData) < $count[ $parameters['mask'] ] ){
+                        if( mb_strlen($thisData, 'utf8') < $count[ $parameters['mask'] ] ){
                             return Array( "error" => true, "message" => "O campo $thisLabel, não foi preenchido corretamente." );
                         }
                     }

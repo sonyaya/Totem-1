@@ -21,7 +21,7 @@
                     $ret .= $item . $glue;
                 }
             }
-            $ret = substr($ret, 0, 0-strlen($glue));
+            $ret = substr($ret, 0, 0-mb_strlen($glue, 'utf8'));
             return $ret;
         }
         
