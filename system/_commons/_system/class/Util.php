@@ -58,7 +58,7 @@
          * @param int $type ( same constants as str_pad )
          * @return string
          */
-        public static function utf8_str_pad($input, $length, $pad_str=' ', $type = STR_PAD_RIGHT)
+        public static function mb_str_pad($input, $length, $pad_str=' ', $type = STR_PAD_RIGHT)
         {
                 $input_len = mb_strlen($input);
                 if ($length <= $input_len)
@@ -93,7 +93,7 @@
                         return $padding_left.$input.$padding_right;
                 }
 
-                trigger_error('utf8_str_pad: Unknown padding type ('.$type.')', E_USER_ERROR);
+                trigger_error('mb_str_pad: Unknown padding type ('.$type.')', E_USER_ERROR);
         }
 
         

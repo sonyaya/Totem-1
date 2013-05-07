@@ -17,14 +17,14 @@
             
             $date = date("d/m/Y H:i:s");   
             
-            $action = Util::utf8_str_pad( strtoupper($action) , 33, " ");
+            $action = Util::mb_str_pad( strtoupper($action) , 33, " ");
             
-            $msg = Util::utf8_str_pad($msg, 181, " ", STR_PAD_RIGHT);
+            $msg = Util::mb_str_pad($msg, 181, " ", STR_PAD_RIGHT);
             
             $oldData = (is_array($oldData)) ? json_encode($oldData) : utf8_decode($oldData);
             
             $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "..." ;
-            $user = Util::utf8_str_pad($user, 32, " ", STR_PAD_LEFT);
+            $user = Util::mb_str_pad($user, 32, " ", STR_PAD_LEFT);
             
             $session = session_id();
             $session = str_pad($session, 32, " ");
