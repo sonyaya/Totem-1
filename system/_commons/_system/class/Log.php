@@ -3,7 +3,7 @@
     
     class Log{
 
-        public static function log($action, $msg, $oldData="..."){ 
+        public static function log($action, $msg, $oldData="?"){ 
             if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_log.md") ){
                $md  = "| Date                | Session ID                       | User                             | Action                            | Message                                                                                                                                                                               | Backup Data  | \r\n";
                $md .= "|:-------------------:|:-------------------------------- | --------------------------------:|:---------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | \r\n"; 
@@ -25,7 +25,7 @@
             
             $oldData = (is_array($oldData)) ? json_encode($oldData) : utf8_decode($oldData);
             
-            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "..." ;
+            $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "?" ;
             $user = utf8_decode($user); // POG: str_pad não calcula direito sem isso
             $user = str_pad($user, 32, " ", STR_PAD_LEFT);
             $user = utf8_encode($user); // POG: str_pad não calcula direito sem isso
