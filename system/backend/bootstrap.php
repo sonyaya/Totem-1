@@ -156,6 +156,7 @@
             }
             
             //
+            $md = utf8_encode($md);
             $file = fopen($totemErrorFile,"a+");
             fwrite($file, $md);
             fclose($file);

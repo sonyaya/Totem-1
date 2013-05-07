@@ -5,8 +5,8 @@
 
         public static function log($action, $msg, $oldData="..."){ 
             if( !file_exists($totemErrorFile = "logs/".date('Y-m')."_-_log.md") ){
-               $md  = "| Date                | Session ID                            | User                             | Action                            | Message                                                                                                                                                                               | Backup Data  | \r\n";
-               $md .= "|:-------------------:|:------------------------------------- | --------------------------------:|:---------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | \r\n"; 
+               $md  = "| Date                | Session ID                       | User                             | Action                            | Message                                                                                                                                                                               | Backup Data  | \r\n";
+               $md .= "|:-------------------:|:-------------------------------- | --------------------------------:|:---------------------------------:|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------ | \r\n"; 
             }else{
                $md = file_get_contents($totemErrorFile);
             }
@@ -23,12 +23,12 @@
             
             $oldData = (is_array($oldData)) ? json_encode($oldData) : utf8_decode($oldData);
             
-            $user = utf8_decode($user);
             $user = (!empty($_SESSION['user']['login']))? $_SESSION['user']['login'] : "..." ;
+            $user = utf8_decode($user);
             $user = str_pad($user, 32, " ", STR_PAD_LEFT);
             
             $session = session_id();
-            $session = str_pad($session, 37, " ");
+            $session = str_pad($session, 35, " ");
         
             $md .= "\r\n| $date | $session | $user | $action | $msg | $oldData |";
             
