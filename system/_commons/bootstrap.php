@@ -107,7 +107,7 @@ class bootstrap {
      * 
      * @return \bootstrap
      */
-    public function errorHandler($dir) {
+    public function errorHandler() {
         //
         if( $this->_M_CONFIG->system['log-php-errors'] ){
 
@@ -123,7 +123,7 @@ class bootstrap {
             function error_handler($errno, $errstr, $errfile, $errline, $errcontext){
 
                 //
-                if( !file_exists($totemErrorFile = $dir . "/logs/".date('Y-m')."_-_errors.md") ){
+                if( !file_exists($totemErrorFile = getcwd() . "/logs/".date('Y-m')."_-_errors.md") ){
                     $md  = "| Date                | System  | Error Num. | Error Type                                                           | Error Line | Description                                                                                                                                                                            | File                                                                                                                                                                                   | \r\n";
                     $md .= "|:-------------------:|:-------:|:----------:|:--------------------------------------------------------------------:| ----------:|:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |:-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | \r\n"; 
                 }else{
@@ -144,7 +144,7 @@ class bootstrap {
                         $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#FFFF00; background:#E13C26'> FATAL ERROR </span> | $errline | $errstr | $errfile |";
 
                         // Separando os traceback no log de erros fatais
-                        $fileFatalErrors = fopen($dir. "/logs/".date('Y-m')."_-_fatal-errors.txt", "a+");
+                        $fileFatalErrors = fopen( getcwd() . "/logs/".date('Y-m')."_-_fatal-errors2.txt", "a+");
                         fwrite($fileFatalErrors, "\r\n-------------------------------------------\r\n\r\n");
                         fclose($fileFatalErrors);
 
@@ -152,7 +152,7 @@ class bootstrap {
 
                     case E_USER_ERROR:
                         $md .= "\r\n| $date |  TOTEM  | $errno | <span style='color:#E13C26'> E_USER_ERROR                    </span> | $errline | $errstr | $errfile |";
-                        break;                  
+                        break;
 
                     case E_WARNING:                  
                         $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#F88B1C'> E_WARNING                       </span> | $errline | $errstr | $errfile |";
@@ -191,6 +191,7 @@ class bootstrap {
             set_error_handler("error_handler");
 
             register_shutdown_function(function(){
+                
                 $err = error_get_last();
                 if(!empty($err))
                     error_handler($err['type'], $err['message'], $err['file'], $err['line'], null);        

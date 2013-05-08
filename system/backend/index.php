@@ -1,8 +1,21 @@
 <?php
 
     # INICIALIAZAÇÃO 
-    require_once "bootstrap.php";
+    require_once "../_commons/bootstrap.php";
+    $bootstrap = new bootstrap("backend");
+    $bootstrap
+      ->errorHandler()
+      ->requirements( "5.3.0", Array("PDO", "pdo_mysql", "openssl", "session") )
+      ->autoloader()
+    ;
 
+    # VARIAVEIS GLOBAIS
+    $_M_CONFIG      = $bootstrap->_M_CONFIG;
+    $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
+    
+    # DESTROI O OBJETO BOOTSTRAP 
+    unset($bootstrap);
+    
     # USED CLASSES
     use backend\backendIndex;
     use vendor\Symfony\Component\Yaml\Yaml;
@@ -44,3 +57,7 @@
     $path   = (isset($_GET['path'])  )? $_GET['path']   : "";
     backendIndex::execAction($action, $path, $_GET, $_POST);
     
+    // teste
+    trigger_error("teste teste teste teste teste teste teste teste teste teste teste teste teste.");
+    adasdasdadasdasdadasdasd();
+    die;
