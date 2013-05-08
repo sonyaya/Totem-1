@@ -194,16 +194,15 @@
             //
             $db = new MySQL();
             $db->setTable($_M_CONFIG->users['table-users']);
-            $select =
-                $db
-                    ->setRowsPerPage(1)
-                    ->select(
-                        Array( "id", "email", "first_name", "middle_name", "last_name", "login" ),
-                        "login = '$login'",
-                        true, // paginator
-                        true  // listar sem contador se retornar somente uma linha
-                    )
-                ;
+            $select = $db
+              ->setRowsPerPage(1)
+              ->select(
+                  Array( "id", "email", "first_name", "middle_name", "last_name", "login" ),
+                  "login = '$login'",
+                  true, // paginator
+                  true  // listar sem contador se retornar somente uma linha
+              )
+            ;
 
             //
             if(!empty($select)){
@@ -244,7 +243,6 @@
                     "message"   => "O login digitado não foi encontrado em nossa base de dados."
                 );
             }
-
         }
 
         /**
