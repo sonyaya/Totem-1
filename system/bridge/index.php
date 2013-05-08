@@ -19,11 +19,23 @@
     # curl -X DELETE http://127.0.0.1/totem/bridge/common/forms/country/1
     #
 
-
-
     # INICIALIAZAÇÃO 
-    require_once "bootstrap.php";
+    require_once "../_commons/bootstrap.php";
+    $bootstrap = new bootstrap("bridge");
+    $bootstrap
+      ->errorHandler()
+      ->requirements( "5.3.0", Array("PDO", "pdo_mysql", "openssl", "session") )
+      ->autoloader()
+    ;
 
+    # VARIAVEIS GLOBAIS
+    $_M_CONFIG      = $bootstrap->_M_CONFIG;
+    $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
+    $_M_MODULE_PATH = getcwd();
+    
+    # DESTROI O OBJETO BOOTSTRAP
+    unset($bootstrap);
+    
     # USED CLASSES
     use backend\Frontend;
     use backend\Form;

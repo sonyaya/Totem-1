@@ -1,8 +1,22 @@
 <?php
 
     # INICIALIAZAÇÃO 
-    require_once "bootstrap.php";
+    require_once "../_commons/bootstrap.php";
+    $bootstrap = new bootstrap("frontend");
+    $bootstrap
+      ->errorHandler()
+      ->requirements( "5.3.0", Array("PDO", "pdo_mysql", "openssl", "session") )
+      ->autoloader()
+    ;
 
+    # VARIAVEIS GLOBAIS
+    $_M_CONFIG      = $bootstrap->_M_CONFIG;
+    $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
+    $_M_MODULE_PATH = getcwd();
+    
+    # DESTROI O OBJETO BOOTSTRAP
+    unset($bootstrap);
+    
     # USED CLASSES
     use backend\Frontend;
     

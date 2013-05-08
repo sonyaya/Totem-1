@@ -14,7 +14,7 @@
     $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
     $_M_MODULE_PATH = getcwd();
     
-    # DESTROI O OBJETO BOOTSTRAP 
+    # DESTROI O OBJETO BOOTSTRAP
     unset($bootstrap);
     
     # USED CLASSES
