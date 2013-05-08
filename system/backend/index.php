@@ -12,6 +12,7 @@
     # VARIAVEIS GLOBAIS
     $_M_CONFIG      = $bootstrap->_M_CONFIG;
     $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
+    $_M_MODULE_PATH = getcwd();
     
     # DESTROI O OBJETO BOOTSTRAP 
     unset($bootstrap);
@@ -56,8 +57,3 @@
     $action = (isset($_GET['action']))? $_GET['action'] : "";
     $path   = (isset($_GET['path'])  )? $_GET['path']   : "";
     backendIndex::execAction($action, $path, $_GET, $_POST);
-    
-    // teste
-    trigger_error("teste teste teste teste teste teste teste teste teste teste teste teste teste.");
-    adasdasdadasdasdadasdasd();
-    die;
