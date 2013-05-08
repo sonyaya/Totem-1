@@ -113,7 +113,7 @@ class Yaml
          * Para que fosse possivel melhorar as quebras de linhas
          */
         $ret = $yaml->dump($array, $inline);
-        
+
         if($lineBreak){
             $ret = preg_replace('/\:[\s\t]*"/', ': | ', $ret);
             preg_match_all('/( +)(.+?)\: \| (.*?)"[\r\n]/', $ret, $matches, PREG_SET_ORDER);
@@ -128,8 +128,8 @@ class Yaml
                         "$strSpaces$strKey: | \r\n" .
                         "$strSpaces$strIndent".
                         str_replace(
-                            '\r\n', 
-                            "\r\n$strSpaces$strIndent", 
+                            '\r\n',
+                            "\r\n$strSpaces$strIndent",
                             rtrim($replacement)
                         )
                     ) . "\r\n"

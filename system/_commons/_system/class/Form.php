@@ -1,29 +1,29 @@
 <?php
     namespace backend;
-    
+
     use backend\MySQL;
     use backend\Frontend;
     use backend\Util;
     use vendor\Symfony\Component\Yaml\Yaml;
 
     class Form{
-        
+
         /**
          *
-         * @var type 
+         * @var type
          */
         private $htmlLayout = "";
-        
+
         /**
          *
-         * @var type 
+         * @var type
          */
         private $sendArrayToLayout = Array();
-        
-        
+
+
         /**
          * Gera HTML do formulário
-         * 
+         *
          * @global array $_M_THIS_CONFIG
          * @param type $formFilename
          * @param type $updateId
@@ -32,7 +32,7 @@
         public function viewForm($formFilename, $updateId=null){
             global $_M_THIS_CONFIG;
 
-            // VERIFICA SE O ARQUIVO 
+            // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
@@ -51,22 +51,22 @@
             }else{
                 $formEvents = Array();
             }
-            
+
             // TYPE OF FORM: INSERT OR UPDATE OR DUMMY
             switch (true){
                 case is_null($updateId):
-                    $formType = "insert"; 
+                    $formType = "insert";
                     break;
-                
+
                 case is_numeric($updateId):
-                    $formType = "update"; 
+                    $formType = "update";
                     break;
-                
+
                 case $updateId == "dummy":
-                    $formType = "dummy"; 
+                    $formType = "dummy";
                     break;
             }
-            
+
             // MESCLA FORULÁRIOS SE NECESSÁRIO
             if( isset($formArray['forms'][ $formType ]['merge-form']) && is_array($formArray['forms'][ $formType ]['merge-form']) ){
                 $formA = Array();
@@ -79,7 +79,7 @@
                 }
                 $formArray['forms'][ $formType ] = $formB;
             }
-            
+
             // VARIAVEIS QUE SERÃO ENVIADAS PARA A TELA
             $inputs  = Array();
             $headJS  = Array();
@@ -87,16 +87,16 @@
             $headCSS = Array();
 
             // SETA ACTION CONFORME O TIPO DE FORMULÁRIO
-            
+
             switch ($formType){
                 case "insert":
                     $inputs[] = "<input name='_M_ACTION' type='hidden' value='insert'>";
                     break;
-                
+
                 case "dummy":
                     $inputs[] = "<input name='_M_ACTION' type='hidden' value='dummy-form'>";
                     break;
-                
+
                 case "update":
                     $inputs[] = "<input name='_M_ACTION' type='hidden' value='update:$updateId'>";
 
@@ -116,7 +116,7 @@
 
                     // busca dados no banco
                     $db = new MySQL();
-                    $loadedData = 
+                    $loadedData =
                         $db
                           ->setTable($formArray['header']['table'])
                           ->select(
@@ -136,7 +136,7 @@
             $counter = 0;
             foreach ( $formArray['forms'][ $formType ]['input'] as $key => $val) {
 
-                // verifica se o arquivo de 
+                // verifica se o arquivo de
                 // configuração do type existe
                 if(file_exists($confTypePath = "types/{$val['type']}/config.yml")){
                     // carrega arquivo de configuração do type
@@ -144,7 +144,7 @@
 
                     // caminho do type
                     $path = "types/{$val['type']}";
-                    
+
                     // importa classe de type
                     if(file_exists($classPath = "$path/config-events.php")){
                         require_once $classPath;
@@ -154,7 +154,7 @@
                             "errorCode" => "insertUpdate-loadType-3",
                             "message"   => "Arquivo de classe do tipo '{$val['type']}' não encontrado em '$classPath'."
                         );
-                    }                    
+                    }
 
                     // VARIAVEL QUE ENVIa VALORES PARA O LAYOUT
                     $toTypeLayout = Array();
@@ -163,19 +163,19 @@
                     $id = uniqid("{$val['column']}_");
 
                     // verifica parametros de type
-                    $val['parameter'] = array_merge( 
+                    $val['parameter'] = array_merge(
                         ( isset($confTypeArray['default']['parameter']) && is_array($confTypeArray['default']['parameter']) ) ? $confTypeArray['default']['parameter'] : Array() ,
                         ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
                     );
-                    
+
                     // executa beforeLoadDataToForm
                     $colname = ( is_array($colname = $val['column']) ) ? $colname[0] : $colname;
                     $typeObject = new $val['type']();
                     if( method_exists($typeObject, "beforeLoadDataToForm")){
                         $typeObject->beforeLoadDataToForm( $loadedData[0][$colname], $key, $loadedData[0], $val['parameter'], $toTypeLayout, Array("column" => $formArray['header']['p-key'], "value" => $updateId) );
                     }
-                    
-                    // variaveis que serão enviadas para 
+
+                    // variaveis que serão enviadas para
                     // o layout do type carregado
                     $variables = Array(
                             "id"        => $id ,
@@ -231,7 +231,7 @@
                     }
 
                 }else{
-                    // caso o arquivo de configuração do type não 
+                    // caso o arquivo de configuração do type não
                     // exista, retorna um type com mensagem de erro
                     $inputs[ $val['label'] ] = "<div class='input-holder error {$val['type']}'>{$val['label']}: type '$confTypePath' não encontrado.</div>";
                 }
@@ -254,14 +254,14 @@
                     )
                 )
             ;
-            
+
             //
             return $this;
         }
 
         /**
          * Monta o array com os dados a serem apresentado nas listagens de dados
-         * 
+         *
          * @param type $formFilename
          * @param type $page
          * @param type $rowsPerPage
@@ -270,7 +270,7 @@
          * @return type
          */
         public function getViewData($formFilename, $page=null, $rowsPerPage=null, $orderBy=1, $condition=1, $form='list'){
-            // VERIFICA SE O ARQUIVO 
+            // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
@@ -280,7 +280,7 @@
                 trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
                 exit;
             }
-            
+
             // MESCLA FORULÁRIOS SE NECESSÁRIO
             if( isset($formArray['forms'][$form]['merge-form']) && is_array($formArray['forms'][$form]['merge-form']) ){
                 $formA = Array();
@@ -293,7 +293,7 @@
                 }
                 $formArray['forms'][$form] = $formB;
             }
-            
+
             // VARIAVES COMUNS
             $table       = $formArray['header']['table'];
             $pk          = $formArray['header']['p-key'];
@@ -301,10 +301,10 @@
             $rowsPerPage = (empty($rowsPerPage)) ? $formArray['forms'][$form]['rows-per-page'] : $rowsPerPage;
             $orderBy     = (empty($orderBy)    ) ? 1 : "$orderBy";
             $condition   = (empty($condition)  ) ? 1 :  $condition;
-            
-            // 
+
+            //
             $defaultColumns = Array();
-            
+
             // DEFAULT COLUMNS
             foreach ( $formArray['forms'][$form]['input'] as $key => $val) {
                 if( !empty($val['column']) && !empty($val['type']) ){
@@ -313,7 +313,7 @@
                         $defaultColumns[ $val['label'] ] = $val['column'];
                 }
             }
-            
+
             // MONTA TABLE SELECT
             $db = new MySQL();
             $selectTable = $db
@@ -322,7 +322,7 @@
                 array_merge(
                     Array('_M_PRIMARY_KEY_VALUE_' => "$pk"),
                     $defaultColumns
-                ), 
+                ),
                 1
               )
             ;
@@ -339,7 +339,7 @@
 
         /**
          *
-         *  
+         *
          * @global array $_M_CONFIG
          * @global array $_M_THIS_CONFIG
          * @param type $formFilename
@@ -353,7 +353,7 @@
             global $_M_CONFIG;
             global $_M_THIS_CONFIG;
 
-            // VERIFICA SE O ARQUIVO 
+            // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
@@ -372,7 +372,7 @@
             }else{
                 $formEvents = Array();
             }
-            
+
             // VARIAVES COMUNS
             $table       = $formArray['header']['table'];
             $pk          = $formArray['header']['p-key'];
@@ -386,7 +386,7 @@
             $headJS  = Array();
             $bodyJS  = Array();
             $headCSS = Array();
-            
+
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
             if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
@@ -395,7 +395,7 @@
             }else{
                 $formEvents = Array();
             }
-            
+
             // MESCLA FORULÁRIOS SE NECESSÁRIO
             if( isset($formArray['forms']['list']['merge-form']) && is_array($formArray['forms']['list']['merge-form']) ){
                 $formA = Array();
@@ -408,13 +408,13 @@
                 }
                 $formArray['forms']['list'] = $formB;
             }
-            
+
             // CARREGA TYPES
             $preLoadedColumnsTypes = Array();
             $columnNo = 1;
             foreach ( $formArray['forms']['list']['input'] as $key => $val) {
                 if( !empty($val['column']) && !empty($val['type']) ){
-                                            
+
                         // caminho do type
                         $path = "types/{$val['type']}";
 
@@ -423,7 +423,7 @@
 
                         //
                         $pathType = "types/{$val['type']}";
-                        // verifica se o arquivo de 
+                        // verifica se o arquivo de
                         // configuração do type existe
                         if(file_exists($confTypePath = "$pathType/config.yml")){
                             // carrega arquivo de configuração do type
@@ -440,14 +440,14 @@
                                     "message"   => "Arquivo de classe do tipo '{$val['type']}' não encontrado em '$classPath'."
                                 );
                             }
-                         
+
                             // verifica parametros de type
-                            $val['parameter'] = array_merge( 
+                            $val['parameter'] = array_merge(
                                 ( isset($loadedType['default']['parameter']) && is_array($loadedType['default']['parameter']) ) ? $loadedType['default']['parameter'] : Array() ,
                                 ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
                             );
-                            
-                            // 
+
+                            //
                             $variables = Array(
                                     "label"         => $val['label']     ,
                                     "type"          => $val['type']      ,
@@ -495,7 +495,7 @@
                             }else{
                                 $fileHtml = "";
                             }
-                            
+
                             $preLoadedColumnsTypes[ $val['label'] ] = array_merge(
                                 Array(
                                     "id"            => $id,
@@ -509,7 +509,7 @@
                             );
 
                         }else{
-                            // caso o arquivo de configuração do type não 
+                            // caso o arquivo de configuração do type não
                             // exista, retorna um type com mensagem de erro
                             return Array(
                                 "error"     => true,
@@ -525,11 +525,11 @@
                     );
                 }
             }
-            
+
             // MySQL Object
             $db = new MySQL();
             $db->setTable($table);
-            
+
             // BUSCA DADOS NO BANCO DE DADOS
             $result = $this->getViewData($formFilename, $page, $rowsPerPage, $orderBy, $condition);
             $resultReference = Array();
@@ -541,32 +541,32 @@
                 ->setRowsPerPage($rowsPerPage)
                 ->getLastPage($condition)
             ;
-            
+
             //
             $TDs = "";
             $tbody = "";
 
             // EXECUTA FORMATAÇÃO DE TYPES
             array_walk(
-                $result, 
+                $result,
                 function(&$row, $rowKey) use($preLoadedColumnsTypes, $formArray, &$resultReference, &$tbody, &$TDs){
                     $TDs = "";
                     $pkValue = $row['_M_PRIMARY_KEY_VALUE_'];
                     unset($resultReference[ $rowKey ]['_M_PRIMARY_KEY_VALUE_']);
                     unset($resultReference[ $rowKey ]['_M_PRIMARY_KEY_VALUE_']);
 
-                    // EXECUTA METODO DA CLASSE DO TYPE 
+                    // EXECUTA METODO DA CLASSE DO TYPE
                     // E MONTA TDS PARA O BODY
                     array_walk(
                         $resultReference[ $rowKey ],
                         function(&$column, $columnKey) use($preLoadedColumnsTypes, &$resultReference, &$tbody, $rowKey, &$TDs){
                             // EXECUTA METODO DO TYPE
                             $typeObject = $preLoadedColumnsTypes[ $columnKey ]['class'];
-                            if( method_exists($typeObject, "beforeList")){                            
+                            if( method_exists($typeObject, "beforeList")){
                                $typeObject->beforeList($resultReference[ $rowKey ][ $columnKey ], $rowKey+1, $columnKey, $resultReference, $preLoadedColumnsTypes[ $columnKey ]['parameter']);
                             }
 
-                            // CARREGA LAYOUT PARA 
+                            // CARREGA LAYOUT PARA
                             // COLUNA SE FOR DEFINIDO
                             if( isset($preLoadedColumnsTypes[ $columnKey ]['html']) && !empty($preLoadedColumnsTypes[ $columnKey ]['html']) ){
                                 $resultReference[ $rowKey ][ $columnKey ] = (string)new Frontend(
@@ -589,9 +589,9 @@
                             if( is_array($colname = $preLoadedColumnsTypes[$columnKey]['column']) ){
                                 $colname = (isset($colname[0]))? $colname[0] : '';
                             }elseif( preg_match("/^[\d\W]/i", $colname) ){
-                                 $colname = 'sql_injection';  
+                                 $colname = 'sql_injection';
                             }
-                            
+
                             $colname = urlencode($colname);
 
                             $TDs .= "  ";
@@ -638,7 +638,7 @@
 
             // MONTA RESULT
             $result = Array();
-            $result['columns'] = $columns; 
+            $result['columns'] = $columns;
             $result['data']    = $resultReference;
             $result['thead']   = (isset($thead) && !empty($thead)) ? $thead : $columns[0];
             $result['tbody']   = (isset($tbody) && !empty($tbody)) ? $tbody : "<td>...</td>";
@@ -652,7 +652,7 @@
             if($pageStart <= 0){
                 $pageStart = 1;
                 $pageEnd = $pageStart + $maxPageList;
-                $pageEnd = ($pageEnd > $maxPages) ? $maxPages : $pageEnd ; 
+                $pageEnd = ($pageEnd > $maxPages) ? $maxPages : $pageEnd ;
             }
 
             // calcula ultima pagina
@@ -664,27 +664,27 @@
 
             // reticencias anterior
             if($pageStart > 1){
-                $result['pages']['list'][] = Array( 
-                    "number" => "...", 
-                    "link"   => "page=" . ($page - floor($maxPageList/2)), 
+                $result['pages']['list'][] = Array(
+                    "number" => "...",
+                    "link"   => "page=" . ($page - floor($maxPageList/2)),
                     "active" => "previus-five"
                 );
             }
 
             // lista de paginas
             for($i=$pageStart; $i<=$pageEnd; $i++){
-                $result['pages']['list'][] = Array( 
-                    "number" => $i, 
-                    "link"   => "page=" . $i, 
+                $result['pages']['list'][] = Array(
+                    "number" => $i,
+                    "link"   => "page=" . $i,
                     "active" => ($page == $i) ? "active" : "inactive"
                 );
             }
 
             // reticencias proximos
             if($pageEnd !== $maxPages){
-                $result['pages']['list'][] = Array( 
-                    "number" => "...", 
-                    "link"   => "page=" . ($page + $maxPageList + floor($maxPageList/2)), 
+                $result['pages']['list'][] = Array(
+                    "number" => "...",
+                    "link"   => "page=" . ($page + $maxPageList + floor($maxPageList/2)),
                     "active" => "previus-five"
                 );
             }
@@ -705,7 +705,7 @@
                 if( is_array($colname = $val['column']) ){
                     $colname = (isset($colname[0]))? $colname[0] : '';
                 }
-                
+
                 $searchForm .= "<div id='search_". Util::slug($val['label']) ."' class='input-holder search column_$columnNo'>\r\n";
                 $searchForm .= "    <label>{$val['label']}</label>\r\n";
                 $searchForm .= "    <input type='hidden' id='cond-column-$columnNo' name='cond[$columnNo][column]' value='". str_replace("'", "˙˙", $val['label']) ."'>\r\n";
@@ -730,7 +730,7 @@
 
             // RETORNA VALORES PARA INTERFACE GRÁFICA
             $this->addToArrayLayout(
-                    Array( 
+                    Array(
                         "main-title"  => $formArray['header']['title']          ,
                         "title"       => $formArray['forms']['list']['title']   ,
                         "form"        => $formFilename                          ,
@@ -750,12 +750,12 @@
                     )
                 )
             ;
-            
-            // 
+
+            //
             return $this;
         }
 
-        
+
         /**
          * Salva ou atualiza dados no banco de dados
          *
@@ -769,7 +769,7 @@
             global $_M_CONFIG;
             global $_M_THIS_CONFIG;
 
-            // VERIFICA SE OS DADOS PRA 
+            // VERIFICA SE OS DADOS PRA
             // ATUALIZAÇÃO ESTÃO CORRETOS
             if( !is_array($data) ){
                 trigger_error("Dados informados para atualização não sao válidos", E_USER_ERROR);
@@ -779,7 +779,7 @@
                 exit;
             }
 
-            // VERIFICA SE O ARQUIVO 
+            // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
@@ -789,7 +789,7 @@
                 trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
                 exit;
             }
-            
+
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
             if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
@@ -798,7 +798,7 @@
             }else{
                 $formEvents = Array();
             }
-            
+
             //
             $action = $data['_M_ACTION'];
             $table  = $formArray['header']['table'];
@@ -818,17 +818,17 @@
                 }
                 $formArray['forms'][ $insertOrUpdate ] = $formB;
             }
-            
+
             // monta objeto do banco de dados
             $db = new MySQL();
             $db->setTable($table);
 
             // executa ações
             switch (true) {
-                
+
 
                   /*
-                   * DUMMY FORM 
+                   * DUMMY FORM
                    */
                   case $action == "dummy-form":
                       $file = "". dirname($formFilename). "/". (($formArray['forms']['dummy']['php'])?$formArray['forms']['dummy']['php']:"");
@@ -842,7 +842,7 @@
                         );
                       }
                       break;
-  
+
                 /*
                  * INSERIR OU ATUALIZAR
                  */
@@ -850,12 +850,12 @@
                 case preg_match("/(update)\:([0-9]+?)$/i", $action, $matches):
                     $action = $matches[1];
                     $id = ( isset($matches[2]) && !empty($matches[2]))? $matches[2] : $db->getNextId();
-                    
+
                     // CARREGA ARRAY COM TYPES
                     $preLoadedColumnsTypes = Array();
                     foreach($formArray['forms'][$action]['input'] as $key=>$val){
                         $pathType = "../backend/types/{$val['type']}";
-                        // verifica se o arquivo de 
+                        // verifica se o arquivo de
                         // configuração do type existe
                         if(file_exists($confTypePath = "$pathType/config.yml")){
                             // carrega arquivo de configuração do type
@@ -874,11 +874,11 @@
                             }
 
                             // verifica parametros de type
-                            $val['parameter'] = array_merge( 
+                            $val['parameter'] = array_merge(
                                 ( isset($confTypeArray['default']['parameter']) && is_array($confTypeArray['default']['parameter']) ) ? $confTypeArray['default']['parameter'] : Array() ,
                                 ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
                             );
-                            
+
                             // carrega propriedades do type e a sua classe
                             $preLoadedColumnsTypes[ $val['column'] ] = array_merge(
                                 Array(
@@ -891,7 +891,7 @@
                             );
 
                         }else{
-                            // caso o arquivo de configuração do type não 
+                            // caso o arquivo de configuração do type não
                             // exista, retorna um type com mensagem de erro
                             return Array(
                                 "error"     => true,
@@ -901,7 +901,7 @@
                         }
                     }
 
-                    // EXECUTA VALIDATE DE CADA TYPE 
+                    // EXECUTA VALIDATE DE CADA TYPE
                     // PARA CADA COLUNA DEFINIDA EM DATA
                     $errorArray = Array();
                     foreach($data as $key=>$val){
@@ -928,14 +928,14 @@
                     // ARMAZENA OS VALORES ORIGINAIS DE $data EM $origData
                     $origData = $data;
 
-                    // EXECUTA BEFORE UPDATE OU INSERT 
+                    // EXECUTA BEFORE UPDATE OU INSERT
                     // DE CADA TYPE PARA CADA COLUNA DEFINIDA EM DATA
                     foreach($data as $key=>$val){
                         if( isset($preLoadedColumnsTypes[$key]['class']) ){
                             if(is_string($val)){
                                 $data[ $key ] = addslashes( $val );
                             }
-                            
+
                             if( method_exists($obj = $preLoadedColumnsTypes[$key]['class'], $method = "before".ucwords($action)) ){
                                 $obj->$method($data[$key], $key, $data, $preLoadedColumnsTypes[$key]['parameter'], Array( "column"=>$pk, "value"=>$id));
                             }
@@ -963,11 +963,11 @@
                         array_merge(
                             Array($pk => $id),
                             $data
-                        ), 
+                        ),
                         $where
                       )
                     ;
-                    
+
                     // EXECUTA EVENTO SE EXISTENTE
                     if($action == "update"){
                         // executa FormEvents::beforeUpdate
@@ -996,7 +996,7 @@
                         );
                     }
 
-                    // EXECUTA AFTER UPDATE OU INSERT 
+                    // EXECUTA AFTER UPDATE OU INSERT
                     // DE CADA TYPE PARA CADA COLUNA DEFINIDA EM DATA
                     $errorArray = Array();
                     $data = array_merge_recursive($origData, $data);
@@ -1016,9 +1016,9 @@
             }
         }
 
-        
+
         /**
-         * 
+         *
          * @global array $_M_CONFIG
          * @global array $_M_THIS_CONFIG
          * @global array $_M_MENU
@@ -1029,8 +1029,8 @@
             #global $_M_THIS_CONFIG;
             #global $_M_MENU;
             #global $_M_USER;
-            
-            // VERIFICA SE O ARQUIVO 
+
+            // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
                 // caso exista, carrega o formulário
@@ -1040,7 +1040,7 @@
                 trigger_error("Erro ao carregar formulário: $filePath", E_USER_ERROR);
                 exit;
             }
-            
+
             // VERIFICA SE EXISTE CLASSE
             // DE EVENTOS DE FORMULÁRIO
             if( file_exists($filePath = "$formFilename.php") && !empty($formFilename) ){
@@ -1049,7 +1049,7 @@
             }else{
                 $formEvents = Array();
             }
-            
+
             // MESCLA FORULÁRIOS SE NECESSÁRIO
             if( isset($formArray['forms']['delete']['merge-form']) && is_array($formArray['forms']['delete']['merge-form']) ){
                 $formA = Array();
@@ -1062,14 +1062,14 @@
                 }
                 $formArray['forms']['delete'] = $formB;
             }
-            
+
             // LISTA DE COLUNAS PARA O SELECT
             $selectColumns = Array();
-            
+
             // PERCORRE TODOS OS TYPES
             if( isset($formArray['forms']['delete']['input']) ){
                 foreach ( $formArray['forms']['delete']['input'] as $key => $val) {
-                    // verifica se o arquivo de 
+                    // verifica se o arquivo de
                     // configuração do type existe
                     if(file_exists($confTypePath = "types/{$val['type']}/config.yml")){
                         // carrega arquivo de configuração do type
@@ -1087,10 +1087,10 @@
                                 "errorCode" => "insertUpdate-loadType-3",
                                 "message"   => "Arquivo de classe do tipo '{$val['type']}' não encontrado em '$classPath'."
                             );
-                        }                    
+                        }
 
                         // verifica parametros de type
-                        $val['parameter'] = array_merge( 
+                        $val['parameter'] = array_merge(
                             ( isset($confTypeArray['default']['parameter']) && is_array($confTypeArray['default']['parameter']) ) ? $confTypeArray['default']['parameter'] : Array() ,
                             ( isset($val['parameter']) && is_array($val['parameter']) ) ? $val['parameter'] : Array()
                         );
@@ -1114,32 +1114,32 @@
                             $selectColumns[ $val['label'] ] = $val['column'];
                         }
                     }
-                }      
+                }
             }
-            
+
             // BUSCA DADOS NO BANCO
             $db = new MySQL();
-            $loadedData = 
+            $loadedData =
                 $db
                   ->setTable($formArray['header']['table'])
                   ->select(
                     array_merge(
                         Array('_M_PRIMARY_KEY_VALUE_' => $formArray['header']['p-key']),
                         $selectColumns
-                    ),       
+                    ),
                     $where = "`{$formArray['header']['p-key']}` = '$deleteId' LIMIT 1"
                   )
             ;
-                    
+
             // BUSCA DADOS NO BANCO PARA LOG
-            $oldData = $db->select(null, $where); 
+            $oldData = $db->select(null, $where);
             $oldData = $oldData[0];
-            
+
             // executa FormEvents::beforeDelete
             if(method_exists($formEvents, "beforeDelete")){
                 $formEvents->beforeDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId), $formArray['header'], $formArray['header']);
             }
-                    
+
             // BEFORE DELETE
             if(isset($preLoadedColumnsTypes)){
                 foreach($preLoadedColumnsTypes as $key => $type){
@@ -1149,14 +1149,14 @@
                     }
                 }
             }
-            
+
             // EXECUTA O DELETE
             $db->delete("`{$formArray['header']['p-key']}` = '$deleteId' LIMIT 1");
-            
+
             if( $errors = $db->getErrors() ){
                 return $errors;
             }
-            
+
             // AFTER DELETE
             if(isset($preLoadedColumnsTypes)){
                 foreach($preLoadedColumnsTypes as $key => $type){
@@ -1166,21 +1166,21 @@
                     }
                 }
             }
-            
+
             // executa FormEvents::afterDelete
             if(method_exists($formEvents, "afterDelete")){
                 $formEvents->afterDelete($loadedData, Array($formArray['header']['p-key']=>$deleteId), $formArray['header']);
             }
-            
+
             //
             Log::log("*** DELETED ROW ***", "Deleted row `{$formArray['header']['p-key']}`=$deleteId from table `{$formArray['header']['table']}`", $oldData);
-            
+
             //
             return $loadedData;
         }
-        
+
         /**
-         * 
+         *
          * @param type $formLayout
          */
         public function setLayout($layout) {
@@ -1189,17 +1189,17 @@
         }
 
         /**
-         * 
+         *
          * @global array $_M_THIS_CONFIG
          */
         public function writeHTML(){
             global $_M_THIS_CONFIG;
             echo new Frontend($_M_THIS_CONFIG['template'] ."/". $this->htmlLayout, $this->sendArrayToLayout);
         }
-        
+
         /**
          * Adiciona informações a serem enviados para listagem e formulário
-         * 
+         *
          * @global array $_M_THIS_CONFIG
          * @global array $_M_MENU
          * @global type $_M_MENU_PARTS
@@ -1213,9 +1213,9 @@
             global $_M_MENU_PARTS;
             global $_M_MENU_MODULE;
             global $_M_USER;
-            
+
             // O minimo que o array deve ter
-            $arrayBase = Array(  
+            $arrayBase = Array(
                 "user" => "" ,
                 "main-menu" => "" ,
                 "main-menu-parts" => "",
@@ -1240,13 +1240,13 @@
                     "thead" => ""
                 )
             );
-            
+
             //
             $this->sendArrayToLayout = array_replace_recursive($arrayBase, $this->sendArrayToLayout);
             $array = array_replace($arrayBase, $array);
-            
+
             // Monta o array
-            $array = Array(  
+            $array = Array(
                 "user" => $_M_USER ,
                 "main-menu" => $_M_MENU ,
                 "main-menu-parts" => $_M_MENU_PARTS,
@@ -1271,9 +1271,9 @@
                     "thead" => $array['table']['thead']
                 )
             );
-            
+
             // Retorna para a variavel que irá para a tela
             $this->sendArrayToLayout = array_merge($_M_THIS_CONFIG, $array);
         }
-        
+
     }

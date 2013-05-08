@@ -21,21 +21,21 @@ $html = '
 
 
 <b>Input Radio</b>
-<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes 
+<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes
 <br /><br />
 
 
 <b>Input Radio</b>
-<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice 
+<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice
 <br /><br />
 
 
 <b>Input Text</b>
-<input type="text" size="190" name="doi" value="10.1258/jrsm.100.5.211"> 
+<input type="text" size="190" name="doi" value="10.1258/jrsm.100.5.211">
 <br /><br />
 
 <b>Input Password</b>
-<input type="password" size="40" name="password" value="secret"> 
+<input type="password" size="40" name="password" value="secret">
 <br /><br />
 
 
@@ -64,21 +64,21 @@ $html = '
 <br /><br />
 
 <b>Input Radio</b>
-<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes 
+<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes
 <br /><br />
 
 
 <b>Input Radio</b>
-<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice 
+<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice
 <br /><br />
 
 
 <b>Input Text</b>
-<input type="text" size="40" name="doi" value="10.1258/jrsm.100.5.211" /> 
+<input type="text" size="40" name="doi" value="10.1258/jrsm.100.5.211" />
 <br />
 
 <b>Input Password</b>
-<input type="password" size="40" name="password" value="secret"> 
+<input type="password" size="40" name="password" value="secret">
 <br /><br />
 
 <input type="checkbox" name="QPC" value="ON" /> Checkboxes<br>
@@ -138,14 +138,14 @@ $html = '
 <form>
 
 <b>Input Radio</b>
-<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes  
+<input type="radio" name="pre_publication" value="0" checked="checked" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="pre_publication" value="1" > Yes
 
 <br /><br />
 
-<input type="hidden" name="doi" value="10.1258/jrsm.100.5.211" /> 
+<input type="hidden" name="doi" value="10.1258/jrsm.100.5.211" />
 
 <b>Input Radio</b>
-<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice   
+<input type="radio" name="recommended" value="0" > No &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="1" > Keep &nbsp;&nbsp;&nbsp;&nbsp; <input type="radio" name="recommended" value="2"  checked="checked" > Choice
 
 <br /><br />
 
@@ -154,7 +154,7 @@ $html = '
 
 Input text: <input type="text" size="40" name="doi" value="10.1258/jrsm.100.5.211" /> <br />
 
-Password: <input type="password" size="40" name="doi" value="pallcare" /> 
+Password: <input type="password" size="40" name="doi" value="pallcare" />
 <br /><br />
 
 Checkboxes: <br />
@@ -166,7 +166,7 @@ Checkboxes: <br />
 <input type="image" name="submit" src="goto.gif" />
 <input type="button" name="submit" value="Button" />
 <input type="reset" name="submit" value="Reset" />
-<input type="submit" name="submit" value="Submit" /> 
+<input type="submit" name="submit" value="Submit" />
 </form>
 
 ';
@@ -175,19 +175,19 @@ Checkboxes: <br />
 //==============================================================
 //==============================================================
 if (isset($_REQUEST['html'])) { echo '<html><head><style>'.file_get_contents('mpdfstyletables.css').'</style></head><body>'.$html.'</body></html>'; exit; }
-if (isset($_REQUEST['source'])) { 
+if (isset($_REQUEST['source'])) {
 	$file = __FILE__;
 	header("Content-Type: text/plain");
 	header("Content-Length: ". filesize($file));
 	header("Content-Disposition: attachment; filename='".$file."'");
 	readfile($file);
-	exit; 
+	exit;
 }
 //==============================================================
 //==============================================================
 //==============================================================
 
-$mpdf=new mPDF('c'); 
+$mpdf=new mPDF('c');
 
 $mpdf->default_lineheight_correction = 1.2;
 

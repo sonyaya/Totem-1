@@ -57,7 +57,7 @@
                 $imports .= $TAG['innerHTML'];
                 $this->DOM->removeTag($TAG);
             }
-            
+
             $regex = "{
                 m[.]var:(?P<var>.*?)
                 \s*?=\s*?
@@ -65,18 +65,18 @@
                     (?P<link>.*?)
                 (?P=aspas)\s*?;
             }six";
-            
+
             preg_match_all($regex, $imports, $matches, PREG_SET_ORDER);
             foreach($matches as $match){
                 $file_path = $match['link'];
-                
+
                 // variaveis
                 preg_match_all("/__(.*?)__/i", $match['link'], $vars, PREG_SET_ORDER);
                 $file_path = $match['link'];
                 foreach ($vars as $var) {
                     $file_path = str_replace($var[0], $this->getMVar($var[1]), $file_path);
                 }
-                
+
                 // import
                 $this->mVARS[$match['var']] = json_decode( file_get_contents($file_path), true);
             }
@@ -87,11 +87,11 @@
          *
          */
         public function mINCLUDE(){
-            while(count($this->DOM->findEComma("m.include")) > 0){ 
+            while(count($this->DOM->findEComma("m.include")) > 0){
                 $TAGS = $this->DOM->findEComma("m.include");
                 foreach($TAGS as $TAG){
                     $file_path = $TAG['value'];
-                    
+
                     // variaveis
                     preg_match_all("/__(.*?)__/i", $TAG['value'], $vars, PREG_SET_ORDER);
                     foreach ($vars as $var) {
@@ -188,7 +188,7 @@
                 }
             }
         }
-        
+
         /**
          * permite criar laços de repeticão para as variaveis importadas em mVAR
          *
@@ -200,7 +200,7 @@
                     $ATTR = $TAG['attr'];
                     $aKEY = (isset($ATTR['key']))? $ATTR['key'] : "";
                     $var  = $this->getMVar($ATTR['var']);
-                    
+
                     if(!empty($var) && is_array($var)){
                         foreach($var as $key=>$val){
                             $str = rtrim($TAG['innerHTML'], "\t ");
@@ -208,13 +208,13 @@
                             $HTML .= str_replace("__{$aKEY}__", $key, $str);
                         }
                     }
-                    
+
                     $this->DOM->replaceTag($TAG, $HTML);
                 }
             }
         }
-        
-        
+
+
         /**
          * permite criar laços de repetição
          *
@@ -228,7 +228,7 @@
                     $start = ( isset($TAG['attr']['start']) ) ? $TAG['attr']['start'] : "";
                     $stop  = ( isset($TAG['attr']['stop' ]) ) ? $TAG['attr']['stop']  : "";
                     $aKEY  = ( isset($TAG['attr']['key']  ) ) ? $TAG['attr']['key']   : "";
-                    
+
                     // busca mvar caso start e stop não sejam valores numéricos
                     $start = (!is_numeric($start)) ? $this->getMVar("int:$start") : $start;
                     $stop  = (!is_numeric($stop) ) ? $this->getMVar("int:$stop")  : $stop ;
@@ -249,13 +249,13 @@
                         }
 
                     }
-                    
+
                     // retorna pro layout
                     $this->DOM->replaceTag($TAG, $HTML);
                 }
             }
         }
-        
+
         /**
          * retorna variaveis comuns importadas por mIMPORT
          *
@@ -263,7 +263,7 @@
         private function getMVar($path){
             return $this->getMVarInArray($path, $this->mVARS);
         }
-        
+
         /**
          * retorna uma variaveis de um array passado por parametro
          *
@@ -274,11 +274,11 @@
             $path  = str_replace(".", "']['", $path);
             $path  = "['$path']";
             $var   = eval("return (isset(\$array$path))? \$array$path : '';");
-            
+
             preg_match("/^(.*?)\:/", $oPath, $typeReturn);
-            $typeReturn = 
+            $typeReturn =
                 ( !empty($typeReturn[1]) )
-                    ? $typeReturn[1] 
+                    ? $typeReturn[1]
                     : ""
             ;
 
@@ -290,7 +290,7 @@
                 case "print_r";
                     return print_r($var, true);
                     break;
-                
+
                 case "int";
                 case "integer";
                     return (integer)$var;

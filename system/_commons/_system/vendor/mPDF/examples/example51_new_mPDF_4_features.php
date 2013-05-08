@@ -7,12 +7,12 @@ h4, p {	margin: 0pt;
 }
 h5 { margin-bottom: 0; }
 table.items {
-	font-size: 9pt; 
+	font-size: 9pt;
 	border-collapse: collapse;
-	border: 3px solid #880000; 
+	border: 3px solid #880000;
 	background-color: #FFFFFF;
 }
-td { vertical-align: top; 
+td { vertical-align: top;
 }
 table thead td { background-color: #EEEEEE;
 	text-align: center;
@@ -39,93 +39,93 @@ table tfoot td { background-color: #AAFFEE;
 	odd-footer-name: html_myHTMLFooterOdd;
 	even-footer-name: html_myHTMLFooterEven;
 }
-#myfixed { 
-	position: fixed; 
-	overflow: auto; 
+#myfixed {
+	position: fixed;
+	overflow: auto;
 	height: 60mm;
-	margin-left: auto; 
-	right: 30mm; 
-	top: 150mm; 
-	border: 1px solid #880000; 
-	background-color: #EEDDFF; 
-	padding: 3em; 
-	text-align: justify; 
-	text-indent: 3em; 
-	font-size: 10pt; 
-	font-family:sans; 
-	font-style: italic; 
-	line-height: 1.8; 
+	margin-left: auto;
+	right: 30mm;
+	top: 150mm;
+	border: 1px solid #880000;
+	background-color: #EEDDFF;
+	padding: 3em;
+	text-align: justify;
+	text-indent: 3em;
+	font-size: 10pt;
+	font-family:sans;
+	font-style: italic;
+	line-height: 1.8;
 	color: red;
 }
-.myfixed2 { position: absolute; 
-	overflow: visible; 
+.myfixed2 { position: absolute;
+	overflow: visible;
 	left: 0;
 	right: 0;
-	width: 100mm; 
-	top: 40mm; 
-	margin-left: auto; 
-	margin-right: auto; 
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background: transparent url(\'bg.jpg\') repeat scroll right top; 
-	padding: 1.5em; 
-	font-family:sans; 
+	width: 100mm;
+	top: 40mm;
+	margin-left: auto;
+	margin-right: auto;
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background: transparent url(\'bg.jpg\') repeat scroll right top;
+	padding: 1.5em;
+	font-family:sans;
 }
-.myfixed3 { position: absolute; 
-	overflow: visible; 
-	right: 0; 
-	bottom: 0; 
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  
-	padding: 1.5em; 
-	font-family:sans; 
+.myfixed3 { position: absolute;
+	overflow: visible;
+	right: 0;
+	bottom: 0;
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+	padding: 1.5em;
+	font-family:sans;
 }
-.myfixed4 { position: absolute; 
-	overflow: auto; 
+.myfixed4 { position: absolute;
+	overflow: auto;
 	left: 150mm;
 	right: 0;
-	top: 100mm; 
-	height: 10mm; 
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  
-	padding: 0.5em; 
-	font-family:sans; 
+	top: 100mm;
+	height: 10mm;
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+	padding: 0.5em;
+	font-family:sans;
 }
-.myfixed5 { position: absolute; 
-	overflow: visible; 
+.myfixed5 { position: absolute;
+	overflow: visible;
 	left: 150mm;
 	right: 0;
-	top: 125mm; 
-	height: 10mm; 
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  
-	padding: 0.5em; 
-	font-family:sans; 
+	top: 125mm;
+	height: 10mm;
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+	padding: 0.5em;
+	font-family:sans;
 }
-.myfixed6 { position: absolute; 
-	overflow: hidden; 
+.myfixed6 { position: absolute;
+	overflow: hidden;
 	right: 150mm;
 	left: 0;
-	top: 110mm; 
-	height: 10mm; 
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  
-	padding: 0.5em; 
-	font-family:sans; 
+	top: 110mm;
+	height: 10mm;
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+	padding: 0.5em;
+	font-family:sans;
 }
-.myfixed7 { position: absolute; 
+.myfixed7 { position: absolute;
 	right: 140mm;
-	top: 130mm; 
+	top: 130mm;
 	width: auto;
-	border: 1px solid #000088; 
-	background-color: #EEDDFF; 
-	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  
-	padding: 0.5em; 
-	font-family:sans; 
+	border: 1px solid #000088;
+	background-color: #EEDDFF;
+	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
+	padding: 0.5em;
+	font-family:sans;
 }
 div.indic, div.arabic {
 	font-size: 14pt;
@@ -256,7 +256,7 @@ h4 { margin-bottom: 0.2em; }
 <h2>Fixed-position block elements</h2>
 mPDF 4.0 supports fixed-position block elements (at least partially). This page has some examples of fixed-position elements.
 <div id="myfixed">
-<div style="border: 1px solid #000088; background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  background-color: #DDFFEE; padding: 0.5em;">#1. Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula eros vehicula pretium. Maecenas feugiat pede vel risus. <span title="Nulla is marked by a span">Nulla</span> et lectus. Fusce eleifend neque sit amet erat. Integer <a href="mailto:admin@bpm1.com">consectetuer</a> nulla non orci. Morbi feugiat pulvinar dolor. Cras odio. 
+<div style="border: 1px solid #000088; background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;  background-color: #DDFFEE; padding: 0.5em;">#1. Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula eros vehicula pretium. Maecenas feugiat pede vel risus. <span title="Nulla is marked by a span">Nulla</span> et lectus. Fusce eleifend neque sit amet erat. Integer <a href="mailto:admin@bpm1.com">consectetuer</a> nulla non orci. Morbi feugiat pulvinar dolor. Cras odio.
 <p>Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula eros vehicula pretium. Maecenas feugiat pede vel risus. <span title="Nulla is marked by a span">Nulla</span> et lectus. Fusce eleifend neque sit amet erat. Integer <a href="mailto:admin@bpm1.com">consectetuer</a> nulla non orci. Morbi feugiat pulvinar dolor. Cras odio. </p>
 Donec mattis, nisi id euismod auctor, neque metus pellentesque risus, at eleifend lacus sapien et risus. Phasellus metus. Phasellus feugiat, lectus ac aliquam molestie, leo lacus tincidunt eros turpis, vel aliquam quam eros odio et sapien.
 <div style="border: 1px solid #008800; background-color: #EEFFDD; text-align: left; padding: 0.5em;">
@@ -596,13 +596,13 @@ Mauris ante pede, eros auctor ac, suscipit quis, malesuada sed, nulla. Integer s
 //==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF('s'); 
+$mpdf=new mPDF('s');
 
 $mpdf->SetDisplayMode('fullpage');
 
 $mpdf->WriteHTML($html);
 
-$mpdf->Output(); 
+$mpdf->Output();
 
 exit;
 

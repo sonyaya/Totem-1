@@ -12,7 +12,7 @@ $html = '
 //==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF(); 
+$mpdf=new mPDF();
 
 $mpdf->PDFA = true;
 $mpdf->PDFAauto = true;

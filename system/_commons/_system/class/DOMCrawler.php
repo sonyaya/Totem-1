@@ -1,13 +1,13 @@
 <?php
 
     namespace backend;
-    
+
     /**
      *
      */
     class DOMCrawler{
         private $file;
-        
+
         /**
          *
          */
@@ -48,7 +48,7 @@
             if( is_string($newStrHTML) ){
                 $newStrHTML = ( (string)$newStrHTML );
             }
-            
+
             //
             $this->file = str_replace($TAG[0], $newStrHTML, $DOM);
         }
@@ -116,7 +116,7 @@
             // | </div>                       |  </div>                    <- |  </div>                       |  </div>                       |  </div>                       |
             //  ------------------------------ ------------------------------- ------------------------------- ------------------------------- -------------------------------
             $deep = 0;
-            
+
             foreach($openTags as $key => $val){
                 $innerHTML  = "";
                 $outerHTML  = "";
@@ -146,12 +146,12 @@
 
                 // TRANSFORMA O ATTR EM ERRAY
                 $attrRet = "";
-                
+
                 $attrRet = $attr[$key][0];                                                             // Pega propriedades
                 $attrRet = str_replace("&", "%26", $attrRet);                                          // Substitui & por %26
                 $attrRet = preg_replace("/=[ \t]*?(?P<SEP>[\"'])(.*?)(?P=SEP)/i", "=$2", $attrRet);    // Remove aspas simples ou suplas sobresalientes
                 $attrRet = preg_replace("/[ \t]*?(\w*?\=)/i", "&$1", $attrRet);                        // Adiciona & de separação
-                
+
                 parse_str($attrRet, $attrRet);
 
                 // ARRAY RETURN CASO NÃO SEJA SETADO BUSCA POR ATRIBUTO OU O ATRINUTO SE ENCAIXA
@@ -209,7 +209,7 @@
             }
             $this->file = str_replace($TAG['HTMLSpace'], $ownValue, $DOM);
         }
-        
+
         /**
          *
          *
@@ -217,7 +217,7 @@
         public function getFile(){
             return $this->file;
         }
-        
+
         /**
          *
          *

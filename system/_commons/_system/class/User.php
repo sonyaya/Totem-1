@@ -16,58 +16,58 @@
         public static function check($context="backend", $action="all", $returnType="html"){
             global $_M_CONF;
             global $_M_THIS_CONFIG;
-                    
+
             if( !empty($_SESSION['user']) ){
                     // busca variaveis
                     $contextArray = explode("/", $context);
                     $actualMenu = $_SESSION['user']['permissions'];
-                   
 
-                    
+
+
                     // pega permissão para o contexto
                     $count = 0;
                     $grant = false;
-                    
+
                     while(true){
                         //
                         if(isset($contextArray[$count])){
                             $actualContext = $contextArray[$count];
-                            $grant         = (isset($actualMenu[ $actualContext ]['_grant_'])) ? $actualMenu[ $actualContext ]['_grant_'] : false;   
-                            $denny         = (isset($actualMenu[ $actualContext ]['_denny_'])) ? $actualMenu[ $actualContext ]['_denny_'] : false;   
+                            $grant         = (isset($actualMenu[ $actualContext ]['_grant_'])) ? $actualMenu[ $actualContext ]['_grant_'] : false;
+                            $denny         = (isset($actualMenu[ $actualContext ]['_denny_'])) ? $actualMenu[ $actualContext ]['_denny_'] : false;
                             $actualMenu    = (isset($actualMenu[ $actualContext ]['_smenu_'])) ? $actualMenu[ $actualContext ]['_smenu_'] : "..." ;
-                            
+
                             //
                             switch(true){
-                                case ($denny == "all"): 
-                                case (is_array($denny) && in_array($action, $denny)): 
-                                    $grant = false; 
+                                case ($denny == "all"):
+                                case (is_array($denny) && in_array($action, $denny)):
+                                    $grant = false;
                                     break;
-                                
-                                case ($grant == "all"): 
-                                case (is_array($grant) && in_array($action, $grant)): 
-                                    $grant = true; 
+
+                                case ($grant == "all"):
+                                case (is_array($grant) && in_array($action, $grant)):
+                                    $grant = true;
                                     break;
                             }
                         }else{
                             break;
                         }
-                        
+
                         //
                         $grantInherit = $grant;
                         $dennyInherit = $denny;
-                        
+
                         //
                         if(
                           $count > 999 ||
-                          !$grant || 
+                          !$grant ||
                           !is_array($actualMenu)
                         ) break;
 
-                        
+
                         //
                         $count++;
                     }
-                    
+
                     // executa ação conforme permissão para o contexto
                     if( !$grant ){
                         $message = "Você não possui permissão para executar o contexto '$context'.";
@@ -81,7 +81,7 @@
                             case 'bool':
                                 return false;
                                 break;
-                            
+
                             case "print_r":
                                 print_r($return);
                                 exit;
@@ -100,7 +100,7 @@
                                         $_M_THIS_CONFIG,
                                         Array( "error" => $message )
                                     )
-                                );       
+                                );
                                 exit;
                                 break;
                         }
@@ -129,7 +129,7 @@
 
             //
             $db = new MySQL();
-            $select = 
+            $select =
                 $db
                     ->setTable($_M_CONFIG->users['table-users'])
                     ->setRowsPerPage(1)
@@ -153,7 +153,7 @@
                             )
                         ),
                         "
-                            login = '$login' 
+                            login = '$login'
                             AND password = '$password'
                         ",
                         true, // paginator
@@ -170,7 +170,7 @@
                     "errorCode" => "login",
                     "message"   => "Usuário e/ou senha nao encontrados."
                 );
-            }else{    
+            }else{
                 $gPermissions = Yaml::parse( $select['permissions'] );
                 $uPermissions = Yaml::parse( $select['group']['permissions'] );
                 $select['permissions'] = array_replace_recursive($uPermissions, (array)$gPermissions);
@@ -194,7 +194,7 @@
             //
             $db = new MySQL();
             $db->setTable($_M_CONFIG->users['table-users']);
-            $select = 
+            $select =
                 $db
                     ->setRowsPerPage(1)
                     ->select(
@@ -207,12 +207,12 @@
 
             //
             if(!empty($select)){
-                $token = 
-                    time() . 
-                    $select['id'] . 
+                $token =
+                    time() .
+                    $select['id'] .
                     sha1(
-                        $_M_CONFIG->system['salt'] . 
-                        uniqid(rand(), true) . 
+                        $_M_CONFIG->system['salt'] .
+                        uniqid(rand(), true) .
                         $_M_CONFIG->system['pepper']
                     )
                 ;
@@ -229,7 +229,7 @@
                     $_M_THIS_CONFIG['template']."recovery-password-email.html",
                     array_merge(
                         $_M_THIS_CONFIG,
-                        Array( 
+                        Array(
                             "user" => $select,
                             "recovery_hash" => $token,
                         )
@@ -262,7 +262,7 @@
                     $db = new MySQL();
                     $db->setTable($_M_CONFIG->users['table-users']);
                     $db->save(
-                            Array( 
+                            Array(
                                 "password" => $password,
                                 "recovery_hash" => ''
                             ),

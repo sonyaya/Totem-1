@@ -44,7 +44,7 @@ Version 5.1 (October 20, 2009)
 Version 5.0.2 (May 24, 2009)
 * Fix for missing attachments when inline graphics are present
 * Fix for missing Cc in header when using SMTP (mail was sent,
-  but not displayed in header -- Cc receiver only saw email To: 
+  but not displayed in header -- Cc receiver only saw email To:
   line and no Cc line, but did get the email (To receiver
   saw same)
 

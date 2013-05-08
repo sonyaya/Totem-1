@@ -6,7 +6,7 @@ ini_set("pcre.backtrack_limit","200000");
 
 include("../mpdf.php");
 
-$mpdf=new mPDF(); 
+$mpdf=new mPDF();
 
 $mpdf->tabSpaces = 6;
 

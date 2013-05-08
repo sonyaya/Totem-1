@@ -4,24 +4,24 @@
     use vendor\PHPMailer\PHPMailer;
 
     /**
-     * 
-     * 
+     *
+     *
      */
     class Mail{
         private $mail = "";
 
         /**
-         * 
+         *
          * @global type $_M_CONFIG
          */
         public function __construct(){
             global $_M_CONFIG;
-            
+
             if( !extension_loaded('openssl') && $_M_CONFIG->smtp['SMTPSecure'] == "ssl" ){
                 trigger_error("Openssl não esta instalado/ativado neste servidor.", E_USER_ERROR);
                 exit;
             }
-            
+
             $this->mail = new PHPMailer();
             $this->mail->IsSMTP();
             $this->mail->Host       =  $_M_CONFIG->smtp['host'];      // SMTP server
@@ -35,10 +35,10 @@
         }
 
         /**
-         * 
+         *
          * @param type $email
          * @param type $name
-         * 
+         *
          * @return \backend\Mail
          */
         public function setFrom($email, $name){
@@ -47,10 +47,10 @@
         }
 
         /**
-         * 
+         *
          * @param type $email
          * @param type $name
-         * 
+         *
          * @return \backend\Mail
          */
         public function AddReplyTo($email, $name){
@@ -59,10 +59,10 @@
         }
 
         /**
-         * 
+         *
          * @param type $email
          * @param type $name
-         * 
+         *
          * @return \backend\Mail
          */
         public function addMail($email, $name){
@@ -71,10 +71,10 @@
         }
 
         /**
-         * 
+         *
          * @param type $email
          * @param type $name
-         * 
+         *
          * @return \backend\Mail
          */
         public function addCC($email, $name){
@@ -83,10 +83,10 @@
         }
 
         /**
-         * 
+         *
          * @param type $title
          * @param type $mensage
-         * 
+         *
          * @return type
          */
         public function send($title, $mensage){

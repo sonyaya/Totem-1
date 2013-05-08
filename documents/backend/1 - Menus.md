@@ -15,7 +15,7 @@ ao menu.
 
 Existem dois tipos básicos de menus, o primeiro que é o *menu simples* simplesmente
 pode ser adicionado ao arquivo *menu.yml* na pasta raiz do sistema *backend*, o segundo
-um pouco mais complexo é o *menu de módulo*, este apenas possui um referencia no 
+um pouco mais complexo é o *menu de módulo*, este apenas possui um referencia no
 *menu.yml* da pasta raiz para um outro *menu.yml* contido em uma pasta de módulo.
 
 Veja um exemplo de menu simples:
@@ -61,7 +61,7 @@ Veja um exemplo de menu de módulo:
 
 [▲](#summary) Todos os arquivos de menu seguem o mesmo padrão de desenvolvimento,
 porém você deve ter em mente que existem dois tipos de menus, menus simples e menus
-de modulos, os menus simples são adicionados diretamente no arquivo principal de 
+de modulos, os menus simples são adicionados diretamente no arquivo principal de
 menus contidos na pasta raiz do sistema cujo o nome é *menu.yml*, os menus de módulos
 estão são referenciados no arquivo pricipal de menu, porém eles dever estar contidos
 na pasta *modules* dentro da respectiva pasta do módulo e deve chamar-se *menu.yml*.
@@ -76,26 +76,26 @@ load-from-module e module-star-url, segue uma explicação para cada uma destas 
 #### link
 
 É a URL de acesso do itém atual do menu, normalmente algo do tipo **?action=**ACAO**&path=**CAMINHO-DO-FORMULARIO
-onde o valor para *path* deve ser o caminho do formulário a ser apresentado (considere 
-que o raiz sempre será a pastas *modules*), e o valor para *action* são as possíveis 
+onde o valor para *path* deve ser o caminho do formulário a ser apresentado (considere
+que o raiz sempre será a pastas *modules*), e o valor para *action* são as possíveis
 ações que podem ser executadas pelo sistema para este formulário, segue uma lista
 de todas as ações existentes:
 
 | Ações                               | Descrição                                                                                                                 |
 | -----------------------------------:|:------------------------------------------------------------------------------------------------------------------------- |
-| view-dashboard                      | Apresenta a tela de *dashboard* do formulário.                                                                            |       
-| view-insert-form                    | Apresenta a tela de *inserção* do formulário.                                                                             |      
-| view-update-form [\*](#cit-1)       | Apresenta a tela de *atualização* do formulário.                                                                          |         
-| view-dummy-form                     | Apresenta a tela de *boneco* do formulário.                                                                               |    
-| view-list-form                      | Apresenta a tela de *listagem de dados* do formulário.                                                                    |               
+| view-dashboard                      | Apresenta a tela de *dashboard* do formulário.                                                                            |
+| view-insert-form                    | Apresenta a tela de *inserção* do formulário.                                                                             |
+| view-update-form [\*](#cit-1)       | Apresenta a tela de *atualização* do formulário.                                                                          |
+| view-dummy-form                     | Apresenta a tela de *boneco* do formulário.                                                                               |
+| view-list-form                      | Apresenta a tela de *listagem de dados* do formulário.                                                                    |
 | view-inTabs-form                    | Apresenta a tela contendo o agropamento por abas da tela de *atualização*, *inserção* e *listagem* do formulário.         |                                |
-| view-insert-window-form             | Apresenta a tela de *inserção* do formulário em formato de popup.                                                         |                          
+| view-insert-window-form             | Apresenta a tela de *inserção* do formulário em formato de popup.                                                         |
 | view-update-window-form [\*](#cit-1)| Apresenta a tela de *atualização* do formulário em formato de popup.                                                      |
 | view-dummy-window-form              | Apresenta a tela de *boneco* do formulário em formato de popup.                                                           |
 | view-list-window-form               | Apresenta a tela de *listagem* do formulário em formato de popup.                                                         |
 | view-change-password                | Apresenta a tela de *troca de senha* do formulário.                                                                       |
-| delete-form [\*](#cit-1)            | Remove valore no banco de dados.                                                                                          |  
-| save-form                           | Recebe os valores do método POST da tela de inserção ou atualização e atualiza ou insere os dados conforme a necessidade. | 
+| delete-form [\*](#cit-1)            | Remove valore no banco de dados.                                                                                          |
+| save-form                           | Recebe os valores do método POST da tela de inserção ou atualização e atualiza ou insere os dados conforme a necessidade. |
 | type-ajax [\*\*](#cit-2)            | É utilizado para retornar valores a um determinado *tipo de input* via ajax.                                              |
 | login                               |                                                                                                                           |
 | logout                              |                                                                                                                           |
@@ -103,19 +103,19 @@ de todas as ações existentes:
 | change-password                     |                                                                                                                           |
 
 \* <a name="cit-1">
-_É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja 
+_É preciso passar o parâmetro *id* pelo método GET para esta ação, para que seja
 possível identifica em qual linha do banco esta ação ira  ser executada._</a>
 
 \*\* <a name="cit-2">
-_É preciso passar o parâmetro *type* pelo método GET para identificação de qual 
+_É preciso passar o parâmetro *type* pelo método GET para identificação de qual
 **tipo de input** esta requisitando o ajax._</a>
 
 #### submenu
 
-Deve conter um sub array com os submenus, com as propriedades descritas acima inclusive 
+Deve conter um sub array com os submenus, com as propriedades descritas acima inclusive
 é possível utilizar a propriedade submenu para adiciona ainda mais níveis.
 
-A quantidade de níveis é infinita e pode ser uma opção do programador, porém se 
+A quantidade de níveis é infinita e pode ser uma opção do programador, porém se
 o template que setiver sendo utilizado não possuir suporte para multiplos níveis
 eles não serão apresentados.
 
@@ -149,7 +149,7 @@ a página inicial do módulo.
 #
 # ESTE É UM MENU SIMPLES
 #
-  
+
 - label: Example
   submenu:
     - label: Dashboard
@@ -157,13 +157,13 @@ a página inicial do módulo.
 
     - label: InTabs
       link: ?action=view-inTabs-form&path=example/forms/example
-      
+
     - label: Insert Form
-      link: ?action=view-insert-form&path=example/forms/example      
-      
+      link: ?action=view-insert-form&path=example/forms/example
+
     - label: Update Form
       link: ?action=view-update-form&path=example/forms/example&id=1
-      
+
     - label: Dummy Form
       link: ?action=view-dummy-form&path=example/forms/example
 ```
@@ -172,13 +172,13 @@ a página inicial do módulo.
 ```yml
 - label: "Dashboard"
   link: "?action=view-dashboard&path=user/dashboards/dashboard"
-  
+
 - label: "Usuários"
   link: "?action=view-inTabs-form&path=user/forms/user"
 
 - label: "Grupos de Usuários"
   link: "?action=view-inTabs-form&path=user/forms/group"
-  
+
 - label: "Mensagens"
   link: "?action=view-inTabs-form&path=user/forms/message"
 ```

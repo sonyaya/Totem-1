@@ -22,12 +22,12 @@ body {
 
 @page :first {
 	margin-top: 6.5cm;
-	margin-bottom: 2cm; 
+	margin-bottom: 2cm;
 	header: html_myHTMLHeader;
 	footer: _blank;
 	resetpagenum: 1;
-	background-gradient: linear #FFFFFF #FFFF44 0 0.5 1 0.5; 
-	background: #ccffff url(bgbarcode.png) repeat-y fixed left top; 
+	background-gradient: linear #FFFFFF #FFFF44 0 0.5 1 0.5;
+	background: #ccffff url(bgbarcode.png) repeat-y fixed left top;
 }
 @page letterhead {
 	margin-top: 2.0cm;
@@ -42,18 +42,18 @@ body {
 
 @page letterhead :first {
 	margin-top: 6.5cm;
-	margin-bottom: 2cm; 
+	margin-bottom: 2cm;
 	header: html_myHTMLHeader;
 	footer: _blank;
 	resetpagenum: 1;
 }
 .gradient {
-	border:0.1mm solid #220044; 
+	border:0.1mm solid #220044;
 	background-color: #f0f2ff;
 	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
 }
 .rounded {
-	border:0.1mm solid #220044; 
+	border:0.1mm solid #220044;
 	background-color: #f0f2ff;
 	background-gradient: linear #c7cdde #f0f2ff 0 1 0 0.5;
 	border-radius: 2mm;
@@ -65,9 +65,9 @@ h4 {
 	margin-bottom: 0.3em;
 }
 div.text {
-	padding:1em; 
+	padding:1em;
 	margin-bottom: 0.25em;
-	text-align:justify; 
+	text-align:justify;
 }
 div.artificial {
 	font-family: arialuni; 	/* custom font using MS Arial Unicode  */
@@ -76,7 +76,7 @@ p { margin-top: 0; }
 .code {
 	font-family: mono;
 	font-size: 9pt;
-	background-color: #d5d5d5; 
+	background-color: #d5d5d5;
 	margin: 1em 1cm;
 	padding: 0 0.3cm;
 }
@@ -150,13 +150,13 @@ Block elements can now use the CSS property: border(style) = double. See also th
 <div class="gradient text">
 <h4>CJK fonts to embed as subsets</h4>
 When writing documents with Chinese, Japanese or Korean characters, mPDF has previously required the end-user to download Adobe\'s free CJK font pack.
-The ability to embed font subsets now makes it feasible to use open license CJK fonts. 2 fonts are now available to download as an additional font-pack: 
+The ability to embed font subsets now makes it feasible to use open license CJK fonts. 2 fonts are now available to download as an additional font-pack:
 <ul>
 <li>zn_hannom_a -  contains all characters in the SJIS, BIG-5, and GBK codepages; original file was Han Nom A font (Hi-res version) from http://vietunicode.sourceforge.net/fonts/fonts_hannom.html</li>
 <li>unbatang_0613 - contains all the (Korean) characters in the UHC codepage; original file from from http://kldp.net/projects/unfonts/download</li>
 </ul>
 The following characters only added an extra 15kB to the size of this PDF file, and approximately 0.15 seconds extra to compile:<br />
-Chinese (traditional) <span style="font-family:zn_hannom_a">'."\xe6\x86\x82\xe9\xac\xb1".'</span> ; chinese (simplified) <span style="font-family:zn_hannom_a">'."\xe6\x9d\xa5\xe8\x87\xaa".'</span> ; japanese <span style="font-family:zn_hannom_a">'."\xe3\x81\x9f\xe3\x82\x90".'</span> ; korean <span style="font-family:unBatang_0613">'."\xed\x82\xa4\xec\x8a\xa4".'</span> 
+Chinese (traditional) <span style="font-family:zn_hannom_a">'."\xe6\x86\x82\xe9\xac\xb1".'</span> ; chinese (simplified) <span style="font-family:zn_hannom_a">'."\xe6\x9d\xa5\xe8\x87\xaa".'</span> ; japanese <span style="font-family:zn_hannom_a">'."\xe3\x81\x9f\xe3\x82\x90".'</span> ; korean <span style="font-family:unBatang_0613">'."\xed\x82\xa4\xec\x8a\xa4".'</span>
 </div>
 <br />
 
@@ -182,12 +182,12 @@ Character substitution in UTF-8 files is enabled by setting:
 <p class="code">
 $mpdf->useSubstitutionsMB = true;
 </p>
-<div style="color:red; padding:0; margin:0;">NB In mPDF 5.0 this has changed to 
+<div style="color:red; padding:0; margin:0;">NB In mPDF 5.0 this has changed to
 <p class="code" style="padding:0; margin:0;">
 $mpdf->useSubstitutions = true;
 </p>
 </div>
-It is not recommended to enable this for regular use, as it will add to the processing time. 
+It is not recommended to enable this for regular use, as it will add to the processing time.
 </div>
 
 
@@ -250,7 +250,7 @@ top: <img src="sunset.jpg" width="100" style="vertical-align: top;" />
 
 <pagebreak />
 <h4>Image Alignment</h4>
-<div>From mPDF version 4.2 onwards, in-line images can be individually aligned (vertically). 
+<div>From mPDF version 4.2 onwards, in-line images can be individually aligned (vertically).
 </div>
 
 <div class="gradient" style="margin: 0.5em 0;">
@@ -342,7 +342,7 @@ This DIV has the line-height set as "2.0" and font-size as 12pt. The line-height
 Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse...
 <div style="font-size: 8pt; border: 0.2mm solid #880000; background-color: #FFEECC; padding: 0.3em;">
 This DIV has the font-size set as 8pt. The line-height of 2 is inherited...<br />
-Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula vehicula pretium. Maecenas feugiat pede vel risus. Nulla et lectus. Fusce eleifend neque sit amet erat. Integer consectetuer nulla non orci. 
+Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula vehicula pretium. Maecenas feugiat pede vel risus. Nulla et lectus. Fusce eleifend neque sit amet erat. Integer consectetuer nulla non orci.
 <div style="font-size: 18pt; border: 0.2mm solid #880000; background-color: #FFEECC; padding: 0.3em;">
 This DIV has the font-size set as 18pt. The line-height of 2 is inherited...<br />
 Nulla felis erat, imperdiet eu, ullamcorper non...
@@ -356,7 +356,7 @@ This DIV has the line-height set as "200%" and font-size as 12pt. The computed l
 Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse...
 <div style="font-size: 8pt; border: 0.2mm solid #880000; background-color: #FFEECC; padding: 0.3em;">
 This DIV has the font-size set as 8pt. The computed line-height of 24pt is inherited...<br />
-Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula vehicula pretium. Maecenas feugiat pede vel risus. Nulla et lectus. Fusce eleifend neque sit amet erat. Integer consectetuer nulla non orci. 
+Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit. Suspendisse potenti. Ut a eros at ligula vehicula pretium. Maecenas feugiat pede vel risus. Nulla et lectus. Fusce eleifend neque sit amet erat. Integer consectetuer nulla non orci.
 <div style="font-size: 18pt; border: 0.2mm solid #880000; background-color: #FFEECC; padding: 0.3em;">
 This DIV has the font-size set as 18pt. The computed line-height of 24pt is inherited...<br />
 Nulla felis erat, imperdiet eu, ullamcorper non...
@@ -400,7 +400,7 @@ A named @page can be selected when forcing a new page, e.g. this page was starte
 <span style="font-family: mono; font-size: 9pt;">&lt;pagebreak page-selector="letterhead" /&gt;</span>
 <br />
 The header and background on this page (and page 1 of the document) are set by the CSS selector: @page letterhead :first {} whilst subsequent pages have no header, a footer, and no background.
-<br /> 
+<br />
 CSS @page selectors allow different margins, backgrounds, headers/footers to be set on :first :left and :right pages. Only fixed or mirrored left- and right-margins are supported (i.e. cannot specify different margins for :left and :right).
 <br />
 This layout can be used to produce company letters with only the first page on letterheaded paper.
@@ -454,7 +454,7 @@ define('_MPDF_URI','../'); 	// required for the progress bar
 
 include("../mpdf.php");
 
-$mpdf=new mPDF('','A4','','',15,15,20,20,5,5); 
+$mpdf=new mPDF('','A4','','',15,15,20,20,5,5);
 
 $mpdf->StartProgressBarOutput(2);	// 2 => advanced mode
 
@@ -474,13 +474,13 @@ $mpdf->useSubstitutions = true;
 	imagearc($img, 140,  75,  50,  50,  0, 360, $blue);
 	ob_start();
 	imagejpeg($img);
-	$mpdf->smileyface = ob_get_clean(); 
+	$mpdf->smileyface = ob_get_clean();
 	imagedestroy($img);
 
 
 $mpdf->WriteHTML($html);
 
-$mpdf->Output(); 
+$mpdf->Output();
 exit;
 
 //==============================================================

@@ -21,7 +21,7 @@ $html = '
 
 include("../mpdf.php");
 
-$mpdf=new mPDF('c'); 
+$mpdf=new mPDF('c');
 
 $mpdf->SetDisplayMode('fullpage');
 

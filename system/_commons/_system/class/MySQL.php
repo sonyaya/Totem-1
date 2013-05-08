@@ -6,7 +6,7 @@
      * Changes::
      *    0.7:
      *      - getSelectQuery  : Retorna query string do select
-     * 
+     *
      *    0.6a:
      *      - getTableInfo     : Retorna array com informações sobre a tabela
      *      - getNextId        : Retorna qual é o valor da próxima chave primária
@@ -25,10 +25,10 @@
      *      - cancelQuery      : Cancela uma query especifica do pool de queries
      *      - cancelLastQuery  : Cancela a ultima query do pool de queries
      *      - cancelAllQueries : Cancela todas as queries do pool de queries
-     *      - getErrors        : Retorna um array com informações de todos os erros 
+     *      - getErrors        : Retorna um array com informações de todos os erros
      *      - clearErrors      : Limpa a lista de erros
-     *      - 
-     *      - 
+     *      -
+     *      -
      *
      *    0.1a:
      *      - execute        : Executa todas as SQLs Queries definidas por setQuery()
@@ -44,7 +44,7 @@
      */
 
     namespace backend;
-    
+
     use backend\Util;
 
     class MySQL{
@@ -70,29 +70,29 @@
                 trigger_error("PDO MySQL não esta instalado neste servidor.", E_USER_ERROR);
                 exit;
             }
-            
+
             # CONECTA NO BANCO DE DADOS
             $connectionString = ''.
                 'mysql:'
-              . 'host='   . $_M_CONFIG->mysql['host']     . ';' 
-              . 'port='   . $_M_CONFIG->mysql['port']     . ';' 
-              . 'dbname=' . $_M_CONFIG->mysql['database'] 
+              . 'host='   . $_M_CONFIG->mysql['host']     . ';'
+              . 'port='   . $_M_CONFIG->mysql['port']     . ';'
+              . 'dbname=' . $_M_CONFIG->mysql['database']
             ;
-            
-            
+
+
             # CRIA OBJETO PDO
             $this->PDO = new \PDO($connectionString, $_M_CONFIG->mysql['username'], $_M_CONFIG->mysql['password']);
 
             # CONFIGURA O PDO
-            $this->PDO->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false); 
+            $this->PDO->setAttribute(\PDO::ATTR_EMULATE_PREPARES, false);
 
             # DEFINE O CHARSET DO BANCO DE DADOS PARA UTF-8
             $this->PDO->exec("SET NAMES 'utf8'");
             $this->PDO->exec('SET character_set_connection=utf8');
             $this->PDO->exec('SET character_set_client=utf8');
             $this->PDO->exec('SET character_set_results=utf8');
-            
-            # 
+
+            #
             $this->rowsPerPage = $_M_THIS_CONFIG['rows-per-page'];
         }
 
@@ -124,7 +124,7 @@
                 $this->countAffectedRows = $transaction->rowCount();
                 $this->PDO->commit();
             }else{
-                $this->errors[] = Array(  
+                $this->errors[] = Array(
                     "query" => $query
                 );
             }
@@ -138,7 +138,7 @@
             // VERIFICA TABLE
             if( !isset($this->table) ){
                 trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
+                exit;
             }
 
             // VERIFICA SE É INSERÇÃO OU ATUALIZAÇÃO
@@ -163,7 +163,7 @@
                 // EXECUTA INSERÇÃO CASO NÃO OCORRA ERROS
                 if($this->getErrors()){
                     trigger_error("Erro ao exeutar save - insert: \r\n" . print_r($this->getErrors(), true) , E_USER_ERROR);
-                    exit;    
+                    exit;
                 }else{
                     $this->executeLast();
                 }
@@ -186,7 +186,7 @@
                 // EXECUTA ATUALIZAÇÃO CASO NÃO OCORRA ERROS
                 if($this->getErrors()){
                     trigger_error("Erro ao exeutar save - update: \r\n" . print_r($this->getErrors(), true) , E_USER_ERROR);
-                    exit;    
+                    exit;
                 }else{
                     $this->executeLast();
                 }
@@ -202,21 +202,21 @@
          * @param String  $where     condição que será executado o select
          * @param Boolean $ifOneCuts caso seja retornado apenas uma linha desconsidera a chave de contagem
          * @param Boolean $paginate  se será considerado a paginação ou não
-         * @return Array 
+         * @return Array
          */
         public function select($columns, $where, $ifOneCuts=false, $paginate=true){
             $query = $this->getSelectQuery($columns, $where, $ifOneCuts, $paginate);
-            
+
             // BUSCA ARRAY DE RESULTADO
             $this->setQuery($query);
-            
+
             if( !$this->getErrors() ){
                 if( $result = $this->PDO->query( $this->getQuery() ) ){
                     $return = $result->fetchAll(\PDO::FETCH_ASSOC);
                     array_pop($this->queries);
-                    
+
                     if(!is_null($columns)){
-                        
+
                         // BUSCA RELACIONAMENTOS
                         foreach ($columns as $key => $val) {
                             // SE A CHAVE NÃO FOR NUMERICA E O VALOR FOR
@@ -248,7 +248,7 @@
                             // PERORRE O ARRAY EXECUTANDO O RELACIONAMENTO
                             $that =& $this; // pog pra poder usar $this dentro do array_walk -- PHP 5.3
                             array_walk(
-                                $return, 
+                                $return,
                                 function(&$return, $key, $param) use($that){
                                     foreach ($param['relationships'] as $relation_key => $relation_val) {
 
@@ -257,7 +257,7 @@
                                         ($pk = @$relation_val['p-key']) ;
 
                                         // SHORT CIRCUIT TO GET F-KEY
-                                        ($tableAndColumn = @$relation_val[1])     || 
+                                        ($tableAndColumn = @$relation_val[1])     ||
                                         ($tableAndColumn = @$relation_val['f-key']) ;
 
                                         // SHORT CIRCUIT TO GET COLUMNS
@@ -268,10 +268,10 @@
                                         if( substr_count($tableAndColumn, ".") !== 1 ){
                                             trigger_error(
                                                 "O segundo parametro do relacionamento no método select() deve conter ".
-                                                "tabelaRelaciona.colunaRelacionada, você informou {$tableAndColumn}.", 
+                                                "tabelaRelaciona.colunaRelacionada, você informou {$tableAndColumn}.",
                                                 E_USER_ERROR
                                             );
-                                            exit;        
+                                            exit;
                                         }
 
                                         // VARIAVEIS DE RELACIONAMENTO
@@ -283,7 +283,7 @@
                                                         isset($relation_val['where'])  &&
                                                         !empty($relation_val['where'])
                                                     )
-                                                        ? $relation_val['where'] 
+                                                        ? $relation_val['where']
                                                         : '1'
                                                     ;
 
@@ -295,12 +295,12 @@
                                                         ->setTable($fk_table)
                                                         ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], true)
                                                     ,
-                                                     $relation_val['concat'][0], 
+                                                     $relation_val['concat'][0],
                                                  ( isset($relation_val['concat'][1]) ) ? $relation_val['concat'][1] : ""
                                                 )
                                             ;
                                         }else{
-                                            $return[$relation_key] = 
+                                            $return[$relation_key] =
                                                 $that
                                                     ->setTable($fk_table)
                                                     ->select($show_columns, "`$fk` = '$pk_value' AND ($where)", $param['ifOneCuts'], false)
@@ -308,7 +308,7 @@
                                         }
                                     }
                                 },
-                                Array( 
+                                Array(
                                     'relationships' => $relationships,
                                     'ifOneCuts' => $ifOneCuts
                                 )
@@ -332,7 +332,7 @@
                 }
             }else{
                 trigger_error("Erro ao exeutar select: \r\n" . print_r($this->getErrors(), true) , E_USER_ERROR);
-                exit;    
+                exit;
             }
         }
 
@@ -340,13 +340,13 @@
          * Equivalente ao Count do MySQL
          *
          * @param String $where condição que será executado o select
-         * @return Integer 
+         * @return Integer
          */
         public function rowsCount($where){
             // VERIFICA TABLE
             if( !isset($this->table) ){
                 trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
+                exit;
             }
 
             // BUSCA ARRAY DE RESULTADO
@@ -361,7 +361,7 @@
                 }
             }else{
                 trigger_error("Erro ao exeutar rowsCount: \r\n" . print_r($this->getErrors(), true) , E_USER_ERROR);
-                exit;    
+                exit;
             }
         }
 
@@ -369,7 +369,7 @@
          * Retorna a quantidade de paginas existentes com base em setRowsPerPage()
          *
          * @param String $where condição que será executado o select
-         * @return Integer 
+         * @return Integer
          */
         public function getLastPage($where){
             $page = ceil( $this->rowsCount($where) / $this->rowsPerPage );
@@ -385,7 +385,7 @@
             // VERIFICA TABLE
             if( !isset($this->table) ){
                 trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
+                exit;
             }
 
             // MONTA QUERY DE EXCLUSÃO
@@ -417,7 +417,7 @@
                     "query" => $query,
                     "info" => $this->PDO->errorInfo()
                 );
-                return false;        
+                return false;
             }else{
                 $this->queries[] = $query;
                 return $this;
@@ -437,7 +437,7 @@
                     $resultArray = $result->fetchAll(\PDO::FETCH_ASSOC);
                     if( empty($resultArray) ){
                         trigger_error("A tabela $table não existe na base de dados {$_M_CONFIG->mysql['database']}." , E_USER_ERROR);
-                        exit;    
+                        exit;
                     }else{
                         $this->table = "`$table`";
                     }
@@ -490,17 +490,17 @@
         public function getQueries(){
             return $this->queries;
         }
-        
+
         /**
          * Retorna query string do select
-         * 
+         *
          * @return string
          */
         public function getSelectQuery($columns, $where, $ifOneCuts=false, $paginate=true){
             // VERIFICA TABLE
             if( !isset($this->table) ){
                 trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
+                exit;
             }
 
             // PAGINAÇÃO
@@ -516,7 +516,7 @@
                 $strColumns = Array();
                 $relationships = Array();
                 foreach ($columns as $key => $val) {
-                    // SE A CHAVE FOR NUMERICA E O CAMPO NÃO FOR 
+                    // SE A CHAVE FOR NUMERICA E O CAMPO NÃO FOR
                     // UM ARRAY SIGNIFICA QUE NÃO FOI DEFINIDO NENHUM
                     // ALIAS PARA A COLUNA
                     if(is_numeric($key) && !is_array($val)){
@@ -524,14 +524,14 @@
                     }
 
                     // SE A CHAVE FOR NÃO FOR NUMERICA E O VALOR
-                    // NÃO FOR UM ARRAY, SIGNIFICA QUE UM ALIAS 
+                    // NÃO FOR UM ARRAY, SIGNIFICA QUE UM ALIAS
                     // FOI DEFINIDO PARA A COLUNA
                     else if(!is_numeric($key) && !is_array($val)){
                         if(preg_match("/^[\d\W]/i", $val) ){
-                            $strColumns[] = "$val as '$key'";  
+                            $strColumns[] = "$val as '$key'";
                         }else{
-                            $strColumns[] = "`$val` as '$key'";  
-                        }  
+                            $strColumns[] = "`$val` as '$key'";
+                        }
                     }
                 }
                 $strColumns = implode(", ", $strColumns);
@@ -544,7 +544,7 @@
         }
 
         /**
-         * Retorna um array com informações de todos os erros 
+         * Retorna um array com informações de todos os erros
          *
          * @return String
          */
@@ -561,7 +561,7 @@
             // VERIFICA TABLE
             if( !isset($this->table) ){
                 trigger_error("Tabela não definida, utilize setTable antes de executar select()" , E_USER_ERROR);
-                exit;                
+                exit;
             }
 
             //
@@ -575,7 +575,7 @@
                 }
             }else{
                 trigger_error("Erro ao buscar informações da tabela '{$this->table}': \r\n" . print_r($this->getErrors(), true) , E_USER_ERROR);
-                exit;    
+                exit;
             }
 
             //

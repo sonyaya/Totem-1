@@ -3,19 +3,19 @@ backend:
   _denny_: []
   _smenu_:
 
-        modules: 
+        modules:
           _grant_: all
           _denny_: []
           _smenu_:
 
-              user: 
+              user:
                 _grant_: all
                 _denny_: []
 
-              blog: 
+              blog:
                 _grant_: all
                 _denny_:  [ module ] # bloqueia acesso ao modulo completamente
-                
+
               example:
                 _grant_: all
                 _denny_: []

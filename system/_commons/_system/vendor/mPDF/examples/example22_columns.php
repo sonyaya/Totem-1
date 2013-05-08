@@ -28,7 +28,7 @@ $loremH = "<h4>Lectus facilisis</h4>
 //==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF('en-GB-x','A4','','',32,25,27,25,16,13); 
+$mpdf=new mPDF('en-GB-x','A4','','',32,25,27,25,16,13);
 
 $mpdf->SetDisplayMode('fullpage');
 

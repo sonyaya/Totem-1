@@ -5,7 +5,7 @@ else { die("No file specified"); }
 
 include("../mpdf.php");
 
-$mpdf=new mPDF('utf-8-s'); 
+$mpdf=new mPDF('utf-8-s');
 $mpdf->debug=true;
 $mpdf->tabSpaces = 6;
 

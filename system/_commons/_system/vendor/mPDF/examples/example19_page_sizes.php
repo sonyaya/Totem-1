@@ -22,7 +22,7 @@ $html = '
 //==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF('c','A4'); 
+$mpdf=new mPDF('c','A4');
 
 $mpdf->WriteHTML($hhtml);
 

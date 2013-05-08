@@ -442,7 +442,7 @@ Veja a seguir um exemplo de um tipo que não permite valores nulos em seu campo:
 [▲](#events) Antes de executar insert no banco de dados este método é chamado para
 cada campo do formulário, isto permite que seja executada alguma ação para qualquer
 campo antes que ele seja inserido no banco de dados, dentre estas ações é possível
-até mesmo remover a inserção do campo, é possivel até mesmo alterar ou formatar 
+até mesmo remover a inserção do campo, é possivel até mesmo alterar ou formatar
 campo.
 
 #### Parâmetros:
@@ -529,8 +529,8 @@ porém este evento é executado antes de ser executado o insert no banco de dado
 ### 3.2.4 beforeList: Antes do formulário de listagem mostrar os valores na interface                                                      <a name="event-beforeList"></a>
 
 [▲](#events) Este evento é executado logo após ser feita a busca de informações
-no banco de dados e antes destas informações serem apresentadas em tela, o que permite 
-a execução de qualquer processo antes mesmo que os dados sejam impressos na tela, 
+no banco de dados e antes destas informações serem apresentadas em tela, o que permite
+a execução de qualquer processo antes mesmo que os dados sejam impressos na tela,
 tornando viável também a formatação/manipulação dos dados apresentados.
 
 > Note que se caso não seja extremamente necessário **deve ser evitado o uso deste
@@ -566,7 +566,7 @@ veja o exemplo a seguir para esta situação:
 ### 3.2.5 beforeDelete: Antes de executar *delete* no banco de dados                                                                       <a name="event-beforeDelete"></a>
 
 [▲](#events) Antes de executar delete no banco de dados este método é chamado para
-cada campo do formulário, assim é possível executar quaisquer processos relacionados 
+cada campo do formulário, assim é possível executar quaisquer processos relacionados
 a exclusão de determinado campo do formulário.
 
 #### Parâmetros:
@@ -580,7 +580,7 @@ a exclusão de determinado campo do formulário.
 #### Exemplo:
 
 Imagine que um arquivo deve ser excluido antes que os valores que possuem algum
-tipo de relação com este arquivo seja removido, neste exemplo imagine que um arquivo 
+tipo de relação com este arquivo seja removido, neste exemplo imagine que um arquivo
 de imagem JPG com o mesmo nome do campo deverá ser excluido.
 
 ```php
@@ -603,7 +603,7 @@ como HTML pelo browser, segundos antes do sistema interpretar os arquivos de int
 do tipo, ele pernmite enviar para o arquivo de interface variaveis pertinentes através
 de um array chamado toLayout.
 
-> Leia o tópico [Como acessar valores do sistema na interface](#interface-access-values) 
+> Leia o tópico [Como acessar valores do sistema na interface](#interface-access-values)
 > para maiores informações de como é feito o acesso a variável toLayout.
 
 #### Parâmetros:
@@ -657,7 +657,7 @@ porém este evento é executado após de ser executado o insert no banco de dado
 
 #### Exemplo:
 
-Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
+Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os
 valores forem inseridos no banco de dados.
 
 ```php
@@ -684,7 +684,7 @@ porém este evento é executado após de ser executado o insert no banco de dado
 
 #### Exemplo:
 
-Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os 
+Imagine que um arquivo deve ser renomeado paro o valor do campo logo apóes que os
 valores forem atualizados no banco de dados.
 
 ```php
@@ -716,7 +716,7 @@ logo após a execução do delete no banco de dados, enquanto o [beforeDelete](#
 
 ### 3.2.10 ajax: Ao executar uma requisição ajax para o tipo                                                                               <a name="event-ajax"></a>
 
-[▲](#events) São eventos usados por aquivos de interface em sua maior parte do 
+[▲](#events) São eventos usados por aquivos de interface em sua maior parte do
 tempo, é utilizado para criar processos onde é possível buscar informações sem que
 seja necessário a atualização completa da página, o que significa que apenas treixos
 da pagina irão ser atualizados.
@@ -739,17 +739,17 @@ porém ser necessário a atualização da pagina sempre que este processo for ex
     class example{
         public function ajax(){
             $db = new MySQL();
-            echo 
+            echo
                 json_encode(
                     $db
                         ->setTable($_POST['table'])
                         ->setPage(1)
                         ->setRowsPerPage(5)
                         ->select(
-                            Array( 
-                                "value"=>$_POST['column'], 
+                            Array(
+                                "value"=>$_POST['column'],
                                 "label"=>$_POST['label']
-                            ), 
+                            ),
                             "`{$_POST['label']}` like '{$_POST['value']}%' ORDER BY `{$_POST['label']}`"
                         )
                 )
@@ -764,12 +764,12 @@ o link para execução deste Ajax deve ser algo como *?action=type-ajax&type=NOM
 3.3 Arquivo de interface                                                                                                                   <a name="interface"></a>
 ------------------------
 
-[▲](#creating) Os arquivos de interface são responsaveis por determinar como a 
-interface vai aparentar e como ira funcionar, neste caso estamos falando sobre as 
-interfaces dos inputs, então cada *tipo* deve ter sua representação visual para 
-os formulários de inserção, exclusão e atualização, estes arquivos são feitos com 
+[▲](#creating) Os arquivos de interface são responsaveis por determinar como a
+interface vai aparentar e como ira funcionar, neste caso estamos falando sobre as
+interfaces dos inputs, então cada *tipo* deve ter sua representação visual para
+os formulários de inserção, exclusão e atualização, estes arquivos são feitos com
 HTML extendido com o motor de interface do *totem*, porém também por vezes é necessária
-a utilização de arquivos *javascript* para eventuais funcionalidades do *tipo* e 
+a utilização de arquivos *javascript* para eventuais funcionalidades do *tipo* e
 para incrementar o visual da interface do *tipo* pode ser utilizado um arquivo CSS.
 
 O arquivo de interface devem ser informados no arquivo de configuração [config.yml](#config),
@@ -800,12 +800,12 @@ As variáveis que estão disponíveis são as seguinter:
 
 #### toLayout                                                                                                                              <a name="var-toLayout"></a>
 
-> São os valores vindos da classe de eventos, mais especificamente pelo método e 
-> evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes de mostrar 
+> São os valores vindos da classe de eventos, mais especificamente pelo método e
+> evento beforeLoadDataToForm, veja o tópico [beforeLoadDataToForm: Antes de mostrar
 > os valores que serão editados no formulário de atualização](#event-beforeLoadDataToForm),
-> pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo 
+> pode ser um array ou um valor qualquer, no caso de ser retornado um array pelo
 > evento o acesso se dá utilizando "." para separar as chaves, por exemplo: &m.var:toLayout.primeiro-nome;.
-> 
+>
 > Disponível nos formulários:
 > - Insert
 > - Update
@@ -834,7 +834,7 @@ As variáveis que estão disponíveis são as seguinter:
 
 #### type                                                                                                                                  <a name="var-type"></a>
 
-> Retorna o nome *tipo* que esta sendo utilizado no momento. 
+> Retorna o nome *tipo* que esta sendo utilizado no momento.
 >
 > Disponível nos formulários:
 > - List
@@ -844,7 +844,7 @@ As variáveis que estão disponíveis são as seguinter:
 #### value                                                                                                                                 <a name="var-value"></a>
 
 > Em formulários onde é carregado velores do banco de dados, esta variável tem
-> como responsabilidade retornar este valor previamente gravado no banco de 
+> como responsabilidade retornar este valor previamente gravado no banco de
 > dados.
 >
 > Disponível nos formulários:
@@ -862,7 +862,7 @@ As variáveis que estão disponíveis são as seguinter:
 
 #### column, name                                                                                                                          <a name="var-name"></a><a name="var-column"></a>
 
-> Os dois parâmetros retornam o nome da coluna no banco de dados ao qual o *tipo* 
+> Os dois parâmetros retornam o nome da coluna no banco de dados ao qual o *tipo*
 > esta sendo referido.
 >
 > Disponível nos formulários:

@@ -23,7 +23,7 @@ $html = '
 include("../mpdf.php");
 
 
-$mpdf=new mPDF('c','A4','','',42,15,67,67,20,15); 
+$mpdf=new mPDF('c','A4','','',42,15,67,67,20,15);
 
 $mpdf->SetDisplayMode('fullpage','two');
 

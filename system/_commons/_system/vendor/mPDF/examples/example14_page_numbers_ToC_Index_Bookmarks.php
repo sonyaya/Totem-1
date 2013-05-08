@@ -9,9 +9,9 @@ $lorem = "<p>Nulla felis erat, imperdiet eu, ullamcorper non, nonummy quis, elit
 //==============================================================
 // Set Header and Footer for ToC
 $h = array (
-  'odd' => 
+  'odd' =>
   array (
-    'R' => 
+    'R' =>
     array (
       'content' => 'Odd Header for ToC',
       'font-size' => 8,
@@ -20,9 +20,9 @@ $h = array (
     ),
     'line' => 1,
   ),
-  'even' => 
+  'even' =>
   array (
-    'L' => 
+    'L' =>
     array (
       'content' => 'Even Header for ToC',
       'font-size' => 8,
@@ -34,23 +34,23 @@ $h = array (
 );
 
 $f = array (
-  'odd' => 
+  'odd' =>
   array (
-    'L' => 
+    'L' =>
     array (
       'content' => '{DATE Y-m-d}',
       'font-size' => 8,
       'font-style' => 'BI',
       'font-family' => 'DejaVuSansCondensed',
     ),
-    'C' => 
+    'C' =>
     array (
       'content' => 'Odd Footer for ToC',
       'font-size' => 8,
       'font-style' => '',
       'font-family' => '',
     ),
-    'R' => 
+    'R' =>
     array (
       'content' => 'My Handbook',
       'font-size' => 8,
@@ -59,23 +59,23 @@ $f = array (
     ),
     'line' => 1,
   ),
-  'even' => 
+  'even' =>
   array (
-    'L' => 
+    'L' =>
     array (
       'content' => 'My Handbook',
       'font-size' => 8,
       'font-style' => 'BI',
       'font-family' => 'DejaVuSansCondensed',
     ),
-    'C' => 
+    'C' =>
     array (
       'content' => 'Even Footer for ToC',
       'font-size' => 8,
       'font-style' => '',
       'font-family' => '',
     ),
-    'R' => 
+    'R' =>
     array (
       'content' => '{DATE Y-m-d}',
       'font-size' => 8,
@@ -89,7 +89,7 @@ $f = array (
 //==============================================================
 include("../mpdf.php");
 
-$mpdf=new mPDF('en-GB-x','A4','','',32,25,27,25,16,13); 
+$mpdf=new mPDF('en-GB-x','A4','','',32,25,27,25,16,13);
 
 $mpdf->mirrorMargins = 1;
 
@@ -109,12 +109,12 @@ $mpdf->WriteHTML('<h1>mPDF</h1><h2>Table of Contents & Bookmarks</h2>',2);
 
 
 $mpdf->TOCpagebreakByArray(array(
-	'tocfont' => '', 
-	'tocfontsize' => '', 
-	'tocindent' => '5', 
-	'TOCusePaging' => true, 
-	'TOCuseLinking' => '', 
-	'toc_orientation' => '', 
+	'tocfont' => '',
+	'tocfontsize' => '',
+	'tocindent' => '5',
+	'TOCusePaging' => true,
+	'TOCuseLinking' => '',
+	'toc_orientation' => '',
 	'toc_mgl' => '45',
 	'toc_mgr' => '35',
 	'toc_mgt' => '',
@@ -128,14 +128,14 @@ $mpdf->TOCpagebreakByArray(array(
 	'toc_ohvalue' => 0,
 	'toc_ehvalue' => 0,
 	'toc_ofvalue' => -1,
-	'toc_efvalue' => -1, 
-	'toc_preHTML' => '<h2>Contents</h2>', 
-	'toc_postHTML' => '', 
-	'toc_bookmarkText' => 'Content list', 
-	'resetpagenum' => '1', 
-	'pagenumstyle' => 'A', 
-	'suppress' => 'off', 
-	'orientation' => '', 
+	'toc_efvalue' => -1,
+	'toc_preHTML' => '<h2>Contents</h2>',
+	'toc_postHTML' => '',
+	'toc_bookmarkText' => 'Content list',
+	'resetpagenum' => '1',
+	'pagenumstyle' => 'A',
+	'suppress' => 'off',
+	'orientation' => '',
 	'mgl' => '',
 	'mgr' => '',
 	'mgt' => '',
@@ -149,11 +149,11 @@ $mpdf->TOCpagebreakByArray(array(
 	'ohvalue' => 0,
 	'ehvalue' => 0,
 	'ofvalue' => 0,
-	'efvalue' => 0, 
-	'toc_id' => 0, 
-	'pagesel' => '', 
-	'toc_pagesel' => '', 
-	'sheetsize' => '', 
+	'efvalue' => 0,
+	'toc_id' => 0,
+	'pagesel' => '',
+	'toc_pagesel' => '',
+	'sheetsize' => '',
 	'toc_sheetsize' => ''
 	));
 
@@ -163,7 +163,7 @@ $mpdf->setHTMLFooter('<div align="center"><b><i>{PAGENO} / {nbpg}</i></b></div>'
 
 
 //==============================================================
-for ($j = 1; $j<7; $j++) { 
+for ($j = 1; $j<7; $j++) {
    if ($j==2)	$mpdf->WriteHTML('<pagebreak resetpagenum="0" pagenumstyle="a" />',2);
    if ($j==3)	$mpdf->WriteHTML('<pagebreak resetpagenum="1" pagenumstyle="I" />',2);
    if ($j==4)	$mpdf->WriteHTML('<pagebreak resetpagenum="0" pagenumstyle="i" />',2);
