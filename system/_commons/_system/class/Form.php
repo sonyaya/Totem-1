@@ -950,23 +950,26 @@
                         if(method_exists($formEvents, "beforeUpdate")){
                             $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
                         }
+                        
+                        // UPDATE LOG
+                        $oldData = $db->select(array_keys($data), $where);
+                        $oldData = $oldData[0];
+                        Log::log(
+                          "*** UPDATED ROW ***", 
+                          ucfirst($action) . " row $where from table `{$table}`", 
+                          "FROM -> " . json_encode( array_diff($oldData, $data) ) . " <- TO -> " . json_encode( array_diff($data, $oldData) )  
+                        );
                     }else{
                         $where = null;
                         // executa FormEvents::beforeInsert
                         if(method_exists($formEvents, "beforeInsert")){
                             $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
                         }
+                        
+                        // UPDATE LOG
+                        Log::log("*** INSERTED ROW ***", ucfirst($action) . " row $where from table `{$table}`", $data);
                     }
 
-                    // INSERE OU ATUALIZA DADOS NO BANCO DE DADOS
-                    $db->save(
-                        array_merge(
-                            Array($pk => $id),
-                            $data
-                        ),
-                        $where
-                      )
-                    ;
 
                     // EXECUTA EVENTO SE EXISTENTE
                     if($action == "update"){
