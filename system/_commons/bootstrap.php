@@ -121,7 +121,11 @@ class bootstrap {
             # -- SAVE ERROS IN A FILE ----------------------------------------------
 
             function error_handler($errno, $errstr, $errfile, $errline, $errcontext){
-
+                global $_M_MODULE_PATH;
+                
+                //
+                chdir($_M_MODULE_PATH);
+                
                 //
                 if( !file_exists($totemErrorFile = getcwd() . "/logs/".date('Y-m')."_-_errors.md") ){
                     $md  = "| Date                | System  | Error Num. | Error Type                                                           | Error Line | Description                                                                                                                                                                            | File                                                                                                                                                                                   | \r\n";
@@ -144,8 +148,8 @@ class bootstrap {
                         $md .= "\r\n| $date |   PHP   | $errno | <span style='color:#FFFF00; background:#E13C26'> FATAL ERROR </span> | $errline | $errstr | $errfile |";
 
                         // Separando os traceback no log de erros fatais
-                        $fileFatalErrors = fopen( getcwd() . "/logs/".date('Y-m')."_-_fatal-errors2.txt", "a+");
-                        fwrite($fileFatalErrors, "\r\n-------------------------------------------\r\n\r\n");
+                        $fileFatalErrors = fopen( getcwd() . "/logs/".date('Y-m')."_-_fatal-errors.txt", "a+");
+                        fwrite($fileFatalErrors, "\r\n--------------------------------------------------------------------------------\r\n\r\n");
                         fclose($fileFatalErrors);
 
                         break;
@@ -179,7 +183,6 @@ class bootstrap {
                 }
 
                 //
-                $md = utf8_encode($md);
                 $file = fopen($totemErrorFile,"a+");
                 fwrite($file, $md);
                 fclose($file);
@@ -188,10 +191,11 @@ class bootstrap {
                 return true;
             }
 
+            //
             set_error_handler("error_handler");
 
+            //
             register_shutdown_function(function(){
-                
                 $err = error_get_last();
                 if(!empty($err))
                     error_handler($err['type'], $err['message'], $err['file'], $err['line'], null);        
