@@ -945,43 +945,50 @@
                     // VERIFICA SE É PRA INSERIR OU ATUALIZAR
                     // E EXECUTA EVENTO SE EXISTENTE
                     if($action == "update"){
+                        // clausula where para atualizar
                         $where = "`$pk` = '$id'";
-                        // executa FormEvents::beforeUpdate
-                        if(method_exists($formEvents, "beforeUpdate")){
-                            $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
-                        }
                         
-                        // UPDATE LOG
+                        // executa FormEvents::beforeUpdate
+                        if(method_exists($formEvents, "beforeUpdate"))
+                            $formEvents->beforeUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
+                        
+                        // busca dados antigos para log
                         $oldData = $db->select(array_keys($data), $where);
                         $oldData = $oldData[0];
-                        Log::log(
-                          "*** UPDATED ROW ***", 
-                          ucfirst($action) . " row $where from table `{$table}`", 
-                          "FROM -> " . json_encode( array_diff($oldData, $data) ) . " <- TO -> " . json_encode( array_diff($data, $oldData) )  
-                        );
                     }else{
+                        // clausula where para inserir
                         $where = null;
-                        // executa FormEvents::beforeInsert
-                        if(method_exists($formEvents, "beforeInsert")){
-                            $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
-                        }
                         
-                        // UPDATE LOG
-                        Log::log("*** INSERTED ROW ***", ucfirst($action) . " row $where from table `{$table}`", $data);
+                        // executa FormEvents::beforeInsert
+                        if(method_exists($formEvents, "beforeInsert"))
+                            $formEvents->beforeInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
                     }
-
+                    
+                    // ORGANIZA DADOS A SEREM INSERIDOS
+                    $data = array_merge( Array($pk => $id), $data );
+                    
+                    // INSERE OU ATUALIZA DADOS NO BANCO DE DADOS
+                    $db->save( $data, $where );
 
                     // EXECUTA EVENTO SE EXISTENTE
+                    // GRAVA LOG DAS AÇOES EXECUTADAS
                     if($action == "update"){
-                        // executa FormEvents::beforeUpdate
-                        if(method_exists($formEvents, "afterUpdate")){
+                        // LOG
+                        $logFrom = array_diff($oldData, $data);
+                        $logTo   = array_diff($data, $oldData);
+                        $logBackup = array_merge_recursive($logFrom, $logTo);
+                        Log::log("** ROW UPDATED **", "Updated row `{$formArray['header']['p-key']}`=$id from table `$table`", $logBackup);
+                        
+                        // executa FormEvents::afterUpdate
+                        if(method_exists($formEvents, "afterUpdate"))
                             $formEvents->afterUpdate($data, Array($formArray['header']['p-key']=>$id), $formArray['header']);
-                        }
-                    }else{
-                        // executa FormEvents::beforeInsert
-                        if(method_exists($formEvents, "afterInsert")){
+                    }else{    
+                        // LOG
+                        Log::log("** ROW INSERTED **", "Inserted row `{$formArray['header']['p-key']}`=$id from table `$table`", $data);
+                        
+                        // executa FormEvents::afterInsert
+                        if(method_exists($formEvents, "afterInsert"))
                             $formEvents->afterInsert($data, Array($formArray['header']['p-key']=>null), $formArray['header']);
-                        }
                     }
 
                     // TRATA ERROS
@@ -1022,17 +1029,8 @@
 
         /**
          *
-         * @global array $_M_CONFIG
-         * @global array $_M_THIS_CONFIG
-         * @global array $_M_MENU
-         * @global array $_M_USER
          */
         public function deleteForm($formFilename, $deleteId){
-            #global $_M_CONFIG;
-            #global $_M_THIS_CONFIG;
-            #global $_M_MENU;
-            #global $_M_USER;
-
             // VERIFICA SE O ARQUIVO
             // DE FORMULÁRIO EXISTE
             if( file_exists($filePath = "$formFilename.yml") && !empty($formFilename) ){
