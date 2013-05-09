@@ -4,6 +4,7 @@
     use backend\MySQL;
     use backend\Frontend;
     use backend\Util;
+    use backend\Log;
     use vendor\Symfony\Component\Yaml\Yaml;
 
     class Form{
