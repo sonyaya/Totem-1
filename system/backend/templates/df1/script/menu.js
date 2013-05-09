@@ -7,20 +7,16 @@ $(function(){
         $this.closest(".window-holder").find(".content > .window").hide();
         $(".for-" + $this.attr("id")).show();
         window.location.hash = $this.attr("id");
+        
+        // atualiza se for a aba de listagem
+        if($this.attr("id") == "tab-list")
+            layout.list.button.reload();
     });
 
     if( (deepLink = window.location.hash) !== ''){
-        $(deepLink).click();
+        if(deepLink !== "#tab-list")
+            $(deepLink).click();
     }
-
-    // BOTÕES DE NAVEGAÇÃO ENTRE ABAS
-    $("body").on("click", ".next-tab", function(){
-        $(".top-tab ul").find(".active").next().click();
-    });
-
-    $("body").on("click", ".preview-tab", function(){
-        $(".top-tab ul").find(".active").prev().click();
-    });
     
     // ADICIONAR A CLASSE ACTIVE-PARENT NO SIDE-MENU
     $("nav.side").find(".active-by-module").parents("li").addClass('active-parent');
