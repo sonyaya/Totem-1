@@ -73,7 +73,6 @@ $(function(){
     //
     form.save = (function(e, $form){
         if(e.cancelable === true) return false; // impede apertar enter e enviar o formulário
-
         layout.ajax.showLoader();
         $.post(
             "?action=save-form&path=" + layout.uri("path"),
@@ -90,6 +89,9 @@ $(function(){
                         alert(data.message);
                     }
                 }else{
+                    // Limpa o formulário
+                    $form.find("input, textarea, select").val("");
+                    
                     // Fecha se for um popup
                     window.close();
                 }
