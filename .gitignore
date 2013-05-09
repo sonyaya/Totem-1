@@ -11,6 +11,12 @@
 /system/backend/image-buffer/buffer/*.png
 /system/backend/image-buffer/buffer/*.part
 
+/system/_commons/_system/vendor/imageBuffer/buffer/*.jpg
+/system/_commons/_system/vendor/imageBuffer/buffer/*.jpeg
+/system/_commons/_system/vendor/imageBuffer/buffer/*.gif
+/system/_commons/_system/vendor/imageBuffer/buffer/*.png
+/system/_commons/_system/vendor/imageBuffer/buffer/*.part
+
 /system/backend/logs/*.txt
 /system/backend/logs/*.md
 
