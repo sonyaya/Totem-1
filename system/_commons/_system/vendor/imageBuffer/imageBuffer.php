@@ -6,14 +6,16 @@
  */
 class imageBuffer {
     
-    private $mime   = "";
-    private $size   = "";
-    private $hash   = "";
-    private $gdImg  = "";
-    private $strImg = "";
-    private $buffer = "buffer/";
-    private $redirect = "";
+    private $mime      = "";
+    private $size      = "";
+    private $hash      = "";
+    private $gdImg     = "";
+    private $strImg    = "";
+    private $buffer    = "buffer/";
+    private $redirect  = "";
     private $thumbFile = "";
+    private $quality   = 90;
+    
     
     public function __construct($filename) {
         // Carrega a imagem como string
@@ -26,6 +28,7 @@ class imageBuffer {
         $this->ext = basename($filename);
         preg_match("/\.(.*?)$/i", $this->ext, $this->ext);
         $this->ext = $this->ext[1];
+        
 
         // Busca mime type do arquivo
         $finfo = new finfo(FILEINFO_MIME);
@@ -37,13 +40,23 @@ class imageBuffer {
     
     /**
      * 
+     * @param type $quality
+     * @param type $bufferFolder
+     */
+    public function setting($quality, $bufferFolder){
+        $this->quality = (int)$quality;
+        $this->buffer  = (string)$bufferFolder;
+    }
+    
+    /**
+     * 
      * @param type $method
      */
     public function thumb($method, $w, $h){   
         // Monta o path da nova imagem
         $args = func_get_args();
         $newfolder = $this->buffer . "/" . $this->hash;
-        $newfile   = implode($args, "_") . ".{$this->ext}";
+        $newfile   = $this->quality ."-". implode($args, "_") . ".{$this->ext}";
         $newfile   = str_replace(array("%", "#"), array("P", "C"), $newfile);// tira os %
         $this->redirect = "$newfolder/$newfile";
         
@@ -66,28 +79,30 @@ class imageBuffer {
             
             // Redimenciona a imagem
             switch( strtolower($method) ){
-                case "stretch": $this->stretch($w, $h); break;
-                case "fixed-w": $this->fixedW($w, $h) ; break;
-                case "fixed-h": $this->fixedH($w, $h) ; break;
-                case "inner"  : $this->inner($w, $h)  ; break;
-                case "crop"   : $this->crop($w, $h)   ; break;
-            }
-            
-            // Salva a imagem
-            switch ($this->mime){
-                case "image/png"  : 
-                    imagepng( $this->gdImg, $this->redirect ); 
+                case "stretch": 
+                    $this->stretch($w, $h); 
                     break;
                 
-                case "image/gif"  : 
-                    imagegif( $this->gdImg, $this->redirect ); 
+                case "fixed-w": 
+                    $this->fixedW($w, $h); 
                     break;
                 
-                case "image/jpeg" : 
-                case "image/pjpeg": 
-                    imagejpeg( $this->gdImg, $this->redirect ); 
+                case "fixed-h": 
+                    $this->fixedH($w, $h); 
+                    break;
+                
+                case "inner"  : 
+                    $this->inner($w, $h); 
+                    break;
+                
+                case "crop"   : 
+                    $args = func_get_args();
+                    $crop_l = (isset($args[3]))? $args[3] : "center";
+                    $crop_t = (isset($args[4]))? $args[4] : "center";
+                    $this->crop($w, $h, $crop_l, $crop_t); 
                     break;
             }
+
         }        
         
         //
@@ -96,9 +111,42 @@ class imageBuffer {
     
     /**
      * 
+     * @param type $save
+     */
+    private function saveFile(){
+        switch ($this->mime){
+            case "image/png"  : 
+                imagepng( $this->gdImg, $this->redirect, $this->quality ); 
+                break;
+
+            case "image/gif"  : 
+                imagegif( $this->gdImg, $this->redirect ); 
+                break;
+
+            case "image/jpeg" : 
+            case "image/pjpeg": 
+                imagejpeg( $this->gdImg, $this->redirect, $this->quality ); 
+                break;
+        }  
+        
+        return $this;
+    }
+
+    
+    /**
+     * 
+     */
+    public function redirect(){
+        $this->saveFile();
+        header("Location: {$this->redirect}");
+    }
+    
+    /**
+     * 
      */
     public function show(){
-        header("Location: {$this->redirect}");
+        header("Content-Type: {$this->mime}");
+        imagejpeg( $this->gdImg );
     }
     
     
@@ -108,7 +156,7 @@ class imageBuffer {
      * @param type $h
      * @return type
      */
-    private function calculeTop($t, $h){
+    private function calculeTop($t, $thumb_h, $new_h){
         if(!is_numeric($t)){
             switch ($t){
                 case "top":
@@ -116,18 +164,19 @@ class imageBuffer {
                     break;
 
                 case "center":
-                    $t = ($h/2) - ($h/2);
+                    $t = $new_h/2 - $thumb_h/2;
                     break;
 
                 case "bottom":
-                    $t = $h - $h;
+                    $t = $new_h - $thumb_h;
                     break;
 
                 default:
                     $t = trim($t);
                     if( preg_match("/[0-9]*?\%/i", $t) ){
                         $t = (int)preg_replace("/\D/i", "", $t);
-                        $t = ($h * $t) / 100;
+                        $t = ($new_h * $t) / 100;
+                        $t *= -1;
                     }else{
                         $t = 0;
                     }
@@ -146,7 +195,7 @@ class imageBuffer {
      * @param type $w
      * @return type
      */
-    private function calculeLeft($l, $w){
+    private function calculeLeft($l, $thumb_w, $new_w){
         if(!is_numeric($l)){
             switch ($l){
                 case "left":
@@ -154,19 +203,19 @@ class imageBuffer {
                     break;
 
                 case "center":
-                    $l = ($w/2) - ($w/2);
-                    break;
+                    $l = $new_w/2 - $thumb_w/2;
                     break;
 
                 case "right":
-                    $l = $w - $w;
+                    $l = $new_w - $thumb_w;
                     break;
 
                 default:
                     $l = trim($l);
                     if( preg_match("/[0-9]*?\%/i", $l) ){
                         $l = (int)preg_replace("/\D/i", "", $l);
-                        $l = ($w * $l) / 100;
+                        $l = ($new_w * $l) / 100;
+                        $l *= -1;
                     }else{
                         $l = 0;
                     }
@@ -259,11 +308,14 @@ class imageBuffer {
         $this->gdImg = $gdThumb; 
     }
     
-    private function crop($w, $h){
-        // Busca argumentos extras para o crop
-        $args = func_get_args();
-        $crop_l = (isset($args[3]))? $args[3] : "center";
-        $crop_t = (isset($args[4]))? $args[4] : "center";
+    /**
+     * 
+     * @param type $w
+     * @param type $h
+     * @param type $crop_l
+     * @param type $crop_t
+     */
+    private function crop($w, $h, $crop_l="center", $crop_t="center"){
 
         // Cria a imagem 
         $gdThumb = ImageCreateTrueColor( $w, $h );
@@ -281,11 +333,11 @@ class imageBuffer {
         }
 
         // Calcula left do crop
-        $crop_l = $this->calculeLeft($crop_l, $crop_w);
+        $crop_l = $this->calculeLeft($crop_l, $crop_w, $w);
 
         // Calcula top do crop
-        $crop_t = $this->calculeLeft($crop_t, $crop_h);
-
+        $crop_t = $this->calculeTop($crop_t, $crop_h, $h);
+        
         // Miniatura com o tamanho do crop
         imagecopyresized($gdThumb, $this->gdImg, $crop_l, $crop_t, 0, 0, $crop_w, $crop_h, $this->size['w'], $this->size['h']);
 
@@ -294,36 +346,3 @@ class imageBuffer {
     }
 }
 
-// -----------------------------------------------------------------------------
-
-
-//$image = new imageBuffer("http://blog.sisea.com.br/wp-content/uploads/2013/04/michael-jackson-3.jpg");
-//$image->thumb("fixed-w", 100, 100)->show();
-//$image->thumb("fixed-h", 100, 100)->show();
-
-
-//$image = new imageBuffer("http://1.bp.blogspot.com/-w_MgjQxZGgg/UArgBwof6nI/AAAAAAAAA3o/kYXpQnSgqEA/s1600/DarkKnightRises.jpg");
-//$image->thumb("stretch", 100, 100)->show();
-
-//$image = new imageBuffer("http://1.bp.blogspot.com/-w_MgjQxZGgg/UArgBwof6nI/AAAAAAAAA3o/kYXpQnSgqEA/s1600/DarkKnightRises.jpg");
-//$image->thumb("inner", 500, 500, "#330000")->show();
-
-$image = new imageBuffer("http://blog.sisea.com.br/wp-content/uploads/2013/04/michael-jackson-3.jpg");
-//$image->thumb("crop", 500, 500)->show();
-$image->thumb("crop", 500, 500, "center", "top");
-
-voce transformou o crop em um método agora
-vc precisa fazer com que ele receba todos 
-os parametros necessários
-
-//$image->thumb("crop", 500, 500, "center", "center");
-//$image->thumb("crop", 500, 500, "center", "bottom");
-
-//$image = new imageBuffer("http://1.bp.blogspot.com/-w_MgjQxZGgg/UArgBwof6nI/AAAAAAAAA3o/kYXpQnSgqEA/s1600/DarkKnightRises.jpg");
-//$image->thumb("crop", 500, 500, "left", "center");
-//$image->thumb("crop", 500, 500, "center", "center");
-//$image->thumb("crop", 500, 500, "right", "center");
-
-//$image->thumb("crop", 500, 500, 100, 10);
-
-//$image->thumb("crop", 500, 100, "10%", "10%")->show();
