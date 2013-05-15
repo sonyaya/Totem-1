@@ -52,7 +52,7 @@ class imageBuffer {
      * 
      * @param type $method
      */
-    public function thumb($method, $w, $h){   
+    public function thumb($method, $w, $h, $l="center", $t="center"){   
         // Monta o path da nova imagem
         $args = func_get_args();
         $newfolder = $this->buffer . "/" . $this->hash;
@@ -96,10 +96,7 @@ class imageBuffer {
                     break;
                 
                 case "crop"   : 
-                    $args = func_get_args();
-                    $crop_l = (isset($args[3]))? $args[3] : "center";
-                    $crop_t = (isset($args[4]))? $args[4] : "center";
-                    $this->crop($w, $h, $crop_l, $crop_t); 
+                    $this->crop($w, $h, strtolower($l), strtolower($t)); 
                     break;
             }
 
