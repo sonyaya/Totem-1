@@ -168,7 +168,7 @@
             // LAYOUT
             echo 
                 new Frontend(
-                    $_M_CONFIG->console['template'] . "recovery-password.html",
+                    $_M_THIS_CONFIG['template'] . "recovery-password.html",
                     array_merge(
                         $_M_THIS_CONFIG,
                         Array( "recovery_hash" => $recovery_hash )
