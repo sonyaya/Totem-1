@@ -93,7 +93,7 @@
             $this->PDO->exec('SET character_set_results=utf8');
 
             #
-            $this->rowsPerPage = $_M_CONFIG->mysql['rows-per-page'];
+            $this->rowsPerPage = $_M_CONFIG->backend['rows-per-page'];
         }
 
         /**
