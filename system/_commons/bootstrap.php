@@ -83,8 +83,10 @@ class bootstrap {
                 $path      = implode("/", $pathOrig);
 
                 switch($action){
+                    case "bridge"  :
+                    case "console" :
                     case "backend" :
-                        if(file_exists($exists_file = "_system/class/$file.php"))
+                        if(file_exists($exists_file = "../$action/_system/class/$file.php"))
                            require_once $exists_file;
                         else
                             require_once "../_commons/_system/class/$file.php";
