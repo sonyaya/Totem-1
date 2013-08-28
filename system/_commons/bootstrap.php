@@ -8,6 +8,7 @@ class bootstrap {
     
     public $_M_CONFIG = "";
     public $_M_THIS_CONFIG = "";
+    public $_M_LANGUAGE;
     public $module = "";
     
     /**
@@ -50,6 +51,10 @@ class bootstrap {
         //
         $this->_M_CONFIG = $_M_CONFIG;
         $this->_M_THIS_CONFIG = $_M_THIS_CONFIG;
+        $this->_M_LANGUAGE = (file_exists($laguageIniFile = "language/{$_M_THIS_CONFIG['language']}.ini")) 
+                                ? parse_ini_file($laguageIniFile, true) 
+                                : Array()
+                             ;
         $this->module = $module;
         
         //
