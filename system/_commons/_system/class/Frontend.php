@@ -5,25 +5,25 @@
      *
      * Changes::
      *     0.4a:
-     *      - mINIT           : o método foi removido da classe, mVAR agora é capaz de incorporar todas as funcionalidade
+     *      - mINIT            : o método foi removido da classe, mVAR agora é capaz de incorporar todas as funcionalidade
      *                          que antes eram inerentes ao método mINIT
      *
      *     0.3a:
-     *      - mStartVAR       : renomeado para mINIT
+     *      - mStartVAR        : renomeado para mINIT
      *      - Agora é possivel informar como você deseja que a variavel seja retornada adicionando o prefixo 'tipo':, exempo:
      *        &m.init:json:VARIAVEL; &m.var:json:VARIAVEL; -- Atualmente os tipos aceitos são: json, print_r, int, integer,
      *        str, string, bool, boolean
      *
      *    0.2a:
-     *      - criado mINCLUDE : permite incluir arquivos externos ao arquivo atual
+     *      - criado mINCLUDE  : permite incluir arquivos externos ao arquivo atual
      *
      *    0.1a:
-     *      - crido mIMPORT   : permite importar arquivos jSon
-     *      - crido mVAR      : permite imprimir variaveis importadas por mIMPORT
-     *      - crido mStartVAR : permite imprimir variaveis iniciaveis como _GET, _POST e arrays passados para o método construtor
-     *      - crido mIF       : permite criar condicionais if
-     *      - crido mREPEAT   : permite criar laços de repetição
-     *      - crido mFOREACH  : permite criar laços de repeticão para as variaveis importadas em mVAR
+     *      - criado mIMPORT   : permite importar arquivos jSon
+     *      - criado mVAR      : permite imprimir variaveis importadas por mIMPORT
+     *      - criado mStartVAR : permite imprimir variaveis iniciaveis como _GET, _POST e arrays passados para o método construtor
+     *      - criado mIF       : permite criar condicionais if
+     *      - criado mREPEAT   : permite criar laços de repetição
+     *      - criado mFOREACH  : permite criar laços de repeticão para as variaveis importadas em mVAR
      */
 
     namespace backend;
@@ -285,6 +285,14 @@
             switch($typeReturn){
                 case "json";
                     return json_encode($var);
+                    break;
+
+                case "ucfirst";
+                    return ucfirst((string)$var);
+                    break;
+                
+                case "ucwords";
+                    return ucwords((string)$var);
                     break;
 
                 case "print_r";
