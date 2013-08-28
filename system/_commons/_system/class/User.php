@@ -16,6 +16,7 @@
         public static function check($context="backend", $action="all", $returnType="html"){
             global $_M_CONF;
             global $_M_THIS_CONFIG;
+            global $_M_LANGUAGE;
 
             if( !empty($_SESSION['user']) ){
                     // busca variaveis
@@ -98,7 +99,8 @@
                                     $_M_THIS_CONFIG['template']."login-blocked.html",
                                     array_merge(
                                         $_M_THIS_CONFIG,
-                                        Array( "error" => $message )
+                                        Array( "error" => $message ),
+                                        Array( "lng" => $_M_LANGUAGE['template'] )
                                     )
                                 );
                                 exit;
@@ -112,7 +114,10 @@
             }else{
                 echo new Frontend(
                     $_M_THIS_CONFIG['template']."login.html",
-                    $_M_THIS_CONFIG
+                    array_merge(
+                        $_M_THIS_CONFIG,
+                        Array("lng" => $_M_LANGUAGE['template'])
+                    )
                 );
                 exit;
             }

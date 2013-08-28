@@ -13,7 +13,7 @@
         <div id="loader">
             <div class="inner-loader">
                 <div id="canvasloader-container"></div>
-                <span>Carregando...</span>
+                <span>&m.var:ucfirst:lng.loading;...</span>
             </div>
         </div>
         
@@ -28,9 +28,9 @@
         <div class="window-holder main list">
             <nav class="top-tabs">
                 <ul id="popup-menu">
-                    <li class="active" id="tab-list">Listar</li>
-                    <li id="tab-search">Pesquisar</li>
-                    <li id="tab-insert">Inserir</li>
+                    <li class="active" id="tab-list">&m.var:ucfirst:lng.list;</li>
+                    <li id="tab-search">&m.var:ucfirst:lng.search;</li>
+                    <li id="tab-insert">&m.var:ucfirst:lng.insert;</li>
                     <div class="clear"></div>
                 </ul>
             </nav>
@@ -38,7 +38,7 @@
             <div class="content" id="popup-window">
                 <div class="window for-tab-list list">
                     <div class="action-bar">
-                        <button class="bt-reload-list small square">Atualizar</button>
+                        <button class="bt-reload-list small square">&m.var:ucfirst:lng.update;</button>
                     </div>
                     <div class="list-content">
                         &m.include:__template__/list-content.html;
@@ -50,7 +50,7 @@
                         &m.var:search-form;
                     </form>
                     <div class="action-bar">
-                        <button id="bt-search">Pesquisar</button>
+                        <button id="bt-search">&m.var:ucfirst:lng.search;</button>
                     </div>
                 </div>
                 

@@ -13,6 +13,10 @@
     $_M_CONFIG      = $bootstrap->_M_CONFIG;
     $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
     $_M_MODULE_PATH = getcwd();
+    $_M_LANGUAGE    = (file_exists($laguageIniFile = "language/{$_M_THIS_CONFIG['language']}.ini")) 
+                          ? parse_ini_file($laguageIniFile, true) 
+                          : Array()
+                       ;
     
     # DESTROI O OBJETO BOOTSTRAP
     unset($bootstrap);

@@ -32,12 +32,12 @@
 
 <m.if cond="&m.var:bool:pages.list;">
 <div class="action-bar center">
-    <button class="bt-page" rel="page=1">Inicio</button>
-    <button class="prev-page">Anterior</button>
+    <button class="bt-page" rel="page=1">&m.var:ucfirst:lng.first;</button>
+    <button class="prev-page">&m.var:ucfirst:lng.loading;</button>
    <m.foreach var="pages.list" key="KEY">
     <button class="bt-page &m.var:pages.list.__KEY__.active;" rel="&m.var:pages.list.__KEY__.link;">&m.var:pages.list.__KEY__.number;</button>
    </m.foreach>
-    <button class="next-page">Próximo</button>
-    <button class="bt-page" rel="&m.var:pages.last.link;">Fim</button>
+    <button class="next-page">&m.var:ucfirst:lng.next;</button>
+    <button class="bt-page" rel="&m.var:pages.last.link;">&m.var:ucfirst:lng.last;</button>
 </div>
 </m.if>

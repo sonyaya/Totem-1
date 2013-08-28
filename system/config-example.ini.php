@@ -36,6 +36,7 @@
 
 [backend]
   root-path     = "system/backend/"
+  language      = "pt-br"
   template      = "templates/df1/"
   max-page-list = 10
   rows-per-page = 100

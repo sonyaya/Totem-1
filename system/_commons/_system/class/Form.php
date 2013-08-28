@@ -1215,6 +1215,7 @@
             global $_M_MENU_PARTS;
             global $_M_MENU_MODULE;
             global $_M_USER;
+            global $_M_LANGUAGE;
 
             // O minimo que o array deve ter
             $arrayBase = Array(
@@ -1271,7 +1272,8 @@
                     "data" => $array['table']['data'] ,
                     "tbody" => $array['table']['tbody'] ,
                     "thead" => $array['table']['thead']
-                )
+                ),
+                "lng" => $_M_LANGUAGE['template']
             );
 
             // Retorna para a variavel que irá para a tela
