@@ -94,14 +94,29 @@
         
         /**
          * 
+         * @global type $_M_LANGUAGE
          * @return type
          */
         public static function lng(){
+            // Idioma global
+            global $_M_LANGUAGE; 
+            
+            // Parametros
             $array = func_get_args();
-            $frase = array_shift($array);
+            
+            // Frase
+            if(is_array($array[0])){
+                $frase = $_M_LANGUAGE[ $array[0][0] ][ $array[0][1] ];
+                array_shift($array);
+            }else{
+                $frase = array_shift($array);
+            }
+            
+            // Retorno
             foreach ($array as $key=>$val){
                 $frase = str_replace("%$key", $val, $frase);
             }
+            
             return $frase;
         }
     }
