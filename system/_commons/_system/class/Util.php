@@ -91,4 +91,17 @@
 
                 trigger_error('mb_str_pad: Unknown padding type ('.$type.')', E_USER_ERROR);
         }
+        
+        /**
+         * 
+         * @return type
+         */
+        public static function lng(){
+            $array = func_get_args();
+            $frase = array_shift($array);
+            foreach ($array as $key=>$val){
+                $frase = str_replace("%$key", $val, $frase);
+            }
+            return $frase;
+        }
     }
