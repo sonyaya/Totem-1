@@ -11,22 +11,22 @@ Options +FollowSymlinks
 
     # BACK-END
     
-        RewriteRule ^(admin|backend|administrator)/?(.*)$  system/backend/$2                              [QSA,L]
+        RewriteRule ^(admin|backend|administrator)/?(.*)$  system/framework/backend/$2                              [QSA,L]
     
     # BRIDGE
     
-        RewriteRule ^(api|bridge|rest)/(.*?)/([0-9]*)$     system/bridge/index.php?_m_action=$2&_m_id=$3  [QSA,L]
-        RewriteRule ^(api|bridge|rest)/(.*?)$              system/bridge/index.php?_m_action=$2           [QSA,L]
+        RewriteRule ^(api|bridge|rest)/(.*?)/([0-9]*)$     system/framework/bridge/index.php?_m_action=$2&_m_id=$3  [QSA,L]
+        RewriteRule ^(api|bridge|rest)/(.*?)$              system/framework/bridge/index.php?_m_action=$2           [QSA,L]
     
     # FRONT-END
     
-        RewriteRule ^$                                     system/frontend/index.php                      [QSA,L]
-        RewriteRule ^(site|frontend)/(.*?)$                system/frontend/index.php?_m_html=$2.html      [QSA,L]
+        RewriteRule ^$                                     system/framework/frontend/index.php                      [QSA,L]
+        RewriteRule ^(site|frontend)/(.*?)$                system/framework/frontend/index.php?_m_html=$2.html      [QSA,L]
     
     # FRONT-END (ações na url raiz)
     
         RewriteCond %{REQUEST_FILENAME} !-f
         RewriteCond %{REQUEST_FILENAME} !-d
-        RewriteRule ^(.*?)$                                system/frontend/index.php?_m_html=$1.html      [QSA,L]
+        RewriteRule ^(.*?)$                                system/framework/frontend/index.php?_m_html=$1.html      [QSA,L]
         
 </IfModule>

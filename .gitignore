@@ -3,28 +3,28 @@
 
 /nbproject
 /uploads/*
-/system/config.ini.php
+/system/framework/config.ini.php
 
-/system/backend/image-buffer/buffer/*.jpg
-/system/backend/image-buffer/buffer/*.jpeg
-/system/backend/image-buffer/buffer/*.gif
-/system/backend/image-buffer/buffer/*.png
-/system/backend/image-buffer/buffer/*.part
+/system/framework/backend/image-buffer/buffer/*.jpg
+/system/framework/backend/image-buffer/buffer/*.jpeg
+/system/framework/backend/image-buffer/buffer/*.gif
+/system/framework/backend/image-buffer/buffer/*.png
+/system/framework/backend/image-buffer/buffer/*.part
 
-/system/_commons/_system/vendor/imageBuffer/buffer/*.jpg
-/system/_commons/_system/vendor/imageBuffer/buffer/*.jpeg
-/system/_commons/_system/vendor/imageBuffer/buffer/*.gif
-/system/_commons/_system/vendor/imageBuffer/buffer/*.png
-/system/_commons/_system/vendor/imageBuffer/buffer/*.part
+/system/framework/_commons/_system/vendor/imageBuffer/buffer/*.jpg
+/system/framework/_commons/_system/vendor/imageBuffer/buffer/*.jpeg
+/system/framework/_commons/_system/vendor/imageBuffer/buffer/*.gif
+/system/framework/_commons/_system/vendor/imageBuffer/buffer/*.png
+/system/framework/_commons/_system/vendor/imageBuffer/buffer/*.part
 
-/system/backend/logs/*.txt
-/system/backend/logs/*.md
+/system/framework/backend/logs/*.txt
+/system/framework/backend/logs/*.md
 
-/system/frontend/logs/*.txt
-/system/frontend/logs/*.md
+/system/framework/frontend/logs/*.txt
+/system/framework/frontend/logs/*.md
 
-/system/bridge/logs/*.txt
-/system/bridge/logs/*.md
+/system/framework/bridge/logs/*.txt
+/system/framework/bridge/logs/*.md
 
-/system/console/logs/*.txt
-/system/console/logs/*.md
+/system/framework/console/logs/*.txt
+/system/framework/console/logs/*.md
