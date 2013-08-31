@@ -49,3 +49,4 @@
   template = "templates/default/"
 
 [bridge]
+  none = none
