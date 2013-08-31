@@ -35,7 +35,7 @@
   html-start  = "index.html"
 
 [backend]
-  root-path     = "system/backend/"
+  root-path     = "system/framework/backend/"
   language      = "pt-br"
   template      = "templates/df1/"
   max-page-list = 10
