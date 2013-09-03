@@ -114,7 +114,7 @@
             
             // Retorno
             foreach ($array as $key=>$val){
-                $frase = str_replace("%$key", $val, $frase);
+                $frase = str_replace("%" . ($key+1), $val, $frase);
             }
             
             return $frase;
