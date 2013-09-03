@@ -71,7 +71,7 @@
 
                     // executa ação conforme permissão para o contexto
                     if( !$grant ){
-                        $message = "Você não possui permissão para executar o contexto '$context'.";
+                        $message = Util::lng(["User", "W01"], $context);
                         $return = Array(
                             "error"     => true,
                             "errorCode" => "check-2",
