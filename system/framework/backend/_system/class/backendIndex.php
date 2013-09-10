@@ -188,9 +188,10 @@
         static public function execAction($action="", $path="", $get, $post){
             //
             global $_M_THIS_CONFIG;
+            global $_M_APP;
             
             //
-            $path = "modules/$path";
+            $path = "../../applications/$_M_APP/backend/modules/$path";
             
             // TRATA O GET
             $get = 
@@ -212,7 +213,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DO
                 // DASHBOARD ESPECIFÍCO
                 case "view-dashboard":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     $dashboard = new DashboardComposer();
                     $dashboard->viewDashboard( $path, "dashboard.html" );
                     break;
@@ -221,7 +222,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 case "view-insert-form":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     self::viewFormInsert("form.html", $path);
                     break;
                 }
@@ -229,7 +230,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 case "view-update-form":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     self::viewFormUpdate("form.html", $path, $get['id']);
                     break;
                 }
@@ -237,7 +238,7 @@
                 // MOSTRA A INTERFACE GRÁFICA DA
                 // TELA DE FORMULÁRIO FALSO
                 case "view-dummy-form":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     self::viewFormUpdate("dummy-form.html", $path, "dummy");
                     break;
                 }
@@ -245,7 +246,7 @@
                 // BUSCA LISTA DE DADOS REFERENTE 
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 case "view-list-form":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     self::viewFormList("list.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -254,7 +255,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // E O FORMULÁRIO DE INSERÇÃO
                 case "view-inTabs-form":{
-                    User::check("backend/{$path}", $action, "html");
+                    User::check("{$_M_APP}/backend/{$path}", $action, "html");
                     self::viewFormInTabs("listAndInsert.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -263,7 +264,7 @@
                 // TELA DE FORMULÁRIO DE INSERÇÃO
                 // EM JANELA
                 case "view-insert-window-form":{
-                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
+                    User::check("{$_M_APP}/backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormInsert("form-window.html", $path);
                     break;
                 }
@@ -272,7 +273,7 @@
                 // TELA DE FORMULÁRIO DE ATUAIZAÇÃO
                 // EM JANELA
                 case "view-update-window-form":{
-                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
+                    User::check("{$_M_APP}/backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormUpdate("form-window.html", $path, $get['id']);
                     break;
                 }
@@ -281,7 +282,7 @@
                 // TELA DE FORMULÁRIO FALSO
                 // EM JANELA
                 case "view-dummy-window-form":{
-                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
+                    User::check("{$_M_APP}/backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormUpdate("dummy-form-window.html", $path, "dummy");
                     break;
                 }
@@ -290,7 +291,7 @@
                 // AO FORMULÁRIO NO BANCO DE DADOS
                 // EM JANELA
                 case "view-list-window-form":{
-                    User::check("backend/{$path}", str_replace("-window", "", $action), "html");
+                    User::check("{$_M_APP}/backend/{$path}", str_replace("-window", "", $action), "html");
                     self::viewFormList("list-window.html", $path, $get['orderBy'], $get['page'], $get['rowsPerPage'], $get['cond']);
                     break;
                 }
@@ -304,7 +305,7 @@
 
                 // DELETA UM FORMULÁRIO
                 case "delete-form":{
-                    User::check("backend/{$path}", "delete", "json");
+                    User::check("{$_M_APP}/backend/{$path}", "delete", "json");
                     $form = new Form();
                     echo json_encode( $form->deleteForm( $path, $get['id']) );
                     break;
@@ -314,9 +315,9 @@
                 // NO BANCO DE DADOS
                 case "save-form":{
                     if( preg_match("/update\:.*/i", $post['_M_ACTION']) ){
-                        User::check("backend/{$path}", "update", "json");
+                        User::check("{$_M_APP}/backend/{$path}", "update", "json");
                     }else{
-                        User::check("backend/{$path}", "insert", "json");
+                        User::check("{$_M_APP}/backend/{$path}", "insert", "json");
                     }
 
                     $form = new Form();
@@ -369,7 +370,8 @@
 
                 // AÇÃO PADRÃO
                 default:{
-                    header("Location: {$_M_THIS_CONFIG['start-place']}");
+                    $params = json_decode($_M_THIS_CONFIG['start-place'], true);
+                    header("Location: ?" . http_build_query($params));
                     break;
                 } 
             } # switch
@@ -403,6 +405,7 @@
          */
         static private function createMenuRecursive($array, $deep=0, $deepClass=1){
             global $_M_CONFIG;
+            global $_M_APP;
 
             
             $indent = 4;
@@ -418,7 +421,7 @@
                     parse_str( preg_replace("/^\?/", "", $val['link']), $mLnk);
                     
                     // permissões por menus
-                    if( User::check("backend/modules/{$mLnk['path']}", $mLnk['action'], "bool") ){
+                    if( User::check("{$_M_APP}/backend/modules/{$mLnk['path']}", $mLnk['action'], "bool") ){
                         $ret .= $pad1 . "<li>\r\n";
                         // os arrays de comparação devem 
                         // ter no minimo estas chaves
@@ -458,7 +461,8 @@
                     // Recursividade de modulo
                     if( isset($val['load-from-module']) && is_string($val['load-from-module']) ){
                         // permissões por modulo
-                        if( User::check("backend/modules/{$val['load-from-module']}", "all", "bool") ){
+                        if( User::check("{$_M_APP}/{$val['load-from-module']}", "all", "bool") || true ){
+                            
                             // verifica se o usuário pode ver este módulo
                             $ret .= $pad1 . "<li>\r\n";
                             $ret .= $pad2 . "<span>{$val['label']}</span>\r\n";
@@ -475,7 +479,7 @@
                             $_M_MENU_MODULE .= "\r\n    <li class='{$val['load-from-module']}'><a class='$cssClass' href='{$val['module-start-url']}'>{$val['label']}</a></li>";
 
                             // cria o itens filhos a partir do menu de formulário no main-menu
-                            $smenu = Yaml::parse( file_get_contents("../backend/modules/{$val['load-from-module']}/menu.yml") );
+                            $smenu = Yaml::parse( file_get_contents("../../applications/$_M_APP/backend/modules/{$val['load-from-module']}/menu.yml") );
                             $_M_MENU_PARTS[ $val['load-from-module'] ] =  self::createMenuRecursive($smenu, $deep+($indent*2), $deepClass+1);
 
                             // retorna o menu
