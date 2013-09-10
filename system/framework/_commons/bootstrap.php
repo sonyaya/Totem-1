@@ -10,6 +10,7 @@ class bootstrap {
     public $_M_THIS_CONFIG = "";
     public $_M_LANGUAGE;
     public $module = "";
+    public $_M_APP = "example_app";
     
     /**
      * 
@@ -18,6 +19,11 @@ class bootstrap {
     public function __construct($module) {
         //
         session_start();
+        
+        
+        //
+        $domains_x_app = parse_ini_file("../../domain_x_app.ini.php", true);
+        $this->_M_APP = $domains_x_app[ $_SERVER['SERVER_NAME'] ];
         
         //
         $this
@@ -36,9 +42,18 @@ class bootstrap {
      */
     private function loadConfigFile($module) {
         //
+        
+        //
         if(file_exists("../config.ini.php")){
-            $_M_CONFIG = (object)parse_ini_file("../config.ini.php", true);
+            // CARREGA A CONFIGURAÇÃO PADRÃO
+            $_M_CONFIG_DEFAULT = parse_ini_file("../config.ini.php", true);
 
+            // CARREGA A CONFIGURAÇÃO POR APLICATIVO
+            $_M_CONFIG_APP = parse_ini_file("../../applications/{$this->_M_APP}/config.ini.php", true);
+            
+            // MESCLAR CONFIGS
+            $_M_CONFIG = (object)array_replace_recursive($_M_CONFIG_DEFAULT, $_M_CONFIG_APP);
+            
             // CAMINHO DO PATH-UPLOAD RELATIVO A PASTA SYSTEM
             $_M_CONFIG->system['upload-path'] = "../{$_M_CONFIG->system['upload-path']}";
 
