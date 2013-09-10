@@ -1,0 +1,75 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Coleção'
+  table: fashionsite_collection
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Coleções'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Título
+        column: title
+              
+      - type: example
+        label: Tipo
+        column: (SELECT `name` FROM fashionsite_collection_type WHERE id = fashionsite_collection.type_id)
+
+        
+           
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Coleção'
+    input:
+      - type: meioMask
+        label: Título
+        column: title
+        parameter : 
+          size : 45
+
+      - type: fk
+        label: Tipo 
+        column: type_id
+        parameter:
+          column: id
+          table: fashionsite_collection_type
+          label: name 
+          insert-form  : "fashionsite/forms/collection-type" 
+    
+      - type: imagesUpload
+        label: Imagens
+        column: 'images'
+        parameter :
+          folder : "fashionsite/collection"
+
+          
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Coleção'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []
+      
+  # -- BRIDGE ------------------------------------------------------------------
+  
+  bridge:
+    merge-form: [ bridge, list ]
+    input: []

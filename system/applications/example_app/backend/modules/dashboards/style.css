@@ -1,0 +1,36 @@
+div.dash div.box{
+    float: left;
+    width: 49%;
+    margin-right: 1%; 
+
+    }
+    
+div.dash div.chart{
+    width: 100%;
+    margin-bottom: 50px;
+    height: 300px;
+    min-width: 50px;
+    }
+
+#printButton,
+#exportButton{
+    alpha: 0 !important
+    }
+    
+/* -- -- */
+@media screen and (max-width: 900px){
+        div.dash div.box{
+            float: none;
+            width: 100%;
+            margin-right: 0; 
+            }
+    }
+
+/* -- -- */
+@media screen and (min-width: 1500px){
+        div.dash div.box{
+            float: left;
+            width: calc(33.333% - 10px);
+            margin-right: 10px; 
+            }
+    }

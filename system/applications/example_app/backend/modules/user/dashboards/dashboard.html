@@ -1,0 +1,181 @@
+<div class="dash">
+        
+    <h2>Stats</h2>
+    <div class="box">
+        <div class="info-box">
+            <div class="main">90%</div>
+            <div class="label">alguma coisa</div>
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="info-box color1">
+            <div class="main">90%</div>
+            <div class="label">alguma coisa</div>
+        </div>
+    </div>    
+    
+    <div class="box">
+        <div class="info-box color2">
+            <div class="main">90%</div>
+            <div class="label">alguma coisa</div>
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="info-box color3">
+            <div class="main">90%</div>
+            <div class="label">alguma coisa</div>
+        </div>
+    </div>
+    
+    <div class="box">
+        <div class="info-box color4">
+            <div class="main">90%</div>
+            <div class="label">alguma coisa</div>
+        </div>
+    </div>
+    
+    <div class="clear"></div>
+    
+    
+    <h2>Stats</h2>
+    <div class="box">
+            <div class="simple-val">
+                <label>Número de mulheres usuárias</label> 
+                <span>1000pts</span>
+            </div>
+            <div class="simple-val color1">
+                <label>Número de mulheres usuárias</label> 
+                <span>1000pts</span>
+            </div>
+            <div class="simple-val color2">
+                <label>Número de homens usuários</label> 
+                <span>1000pts</span>
+            </div>
+            <div class="simple-val color3">
+                <label>Pessoas logadas no site agora</label> 
+                <span>1000pts</span>
+            </div>
+            <div class="simple-val color4">
+                <label>Novos comentários no site</label> 
+                <span>1000pts</span>
+            </div>
+
+    </div>
+    
+    <div class="clear"></div>
+    
+    <m.if cond="&m.var:bool:data.messages.0.send_at; || &m.var:bool:data.messages.0.send_at;">
+      <h2>Mensagens Recebidas</h2>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>Mensagens que você ainda não leu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.messages.__KEY__.id;')"></a></td>
+                <td>
+                    &m.var:data.messages.__KEY__.from_user_name;<br>
+                    <strong>&m.var:data.messages.__KEY__.title;</strong><br>
+                    <span class="blured">&m.var:data.messages.__KEY__.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.old-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>As últimas mensagens que você leu</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.old-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.old-messages.__KEY__.id;')"></a></td>
+                <td>
+                    &m.var:data.old-messages.__KEY__.from_user_name;<br>
+                    <strong>&m.var:data.old-messages.__KEY__.title;</strong><br>
+                    <span class="blured">&m.var:data.old-messages.__KEY__.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <div class="clear"></div>
+    
+    <m.if cond="&m.var:bool:data.read-send-messages.0.send_at; || &m.var:bool:data.unread-send-messages.0.send_at;">
+      <h2>Mensagens Enviadas</h2>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.unread-send-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>Mensagen que você enviou e ainda não foram lidas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.unread-send-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.unread-send-messages.__KEY__.id;')"></a></td>
+                <td>
+                    &m.var:data.unread-send-messages.__KEY__.to_user_name;<br>
+                    <strong>&m.var:data.unread-send-messages.__KEY__.title;</strong><br>
+                    <span class="blured">&m.var:data.unread-send-messages.__KEY__.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <m.if cond="&m.var:bool:data.read-send-messages.0.send_at; -eq- true">
+      <div class="messages">
+        <table>
+          <thead>
+            <tr>
+              <th class="action"></th>
+              <th>Mensagen que você enviou e já foram lidas</th>
+            </tr>
+          </thead>
+          <tbody>
+            <m.foreach var="data.read-send-messages" key="KEY">
+              <tr>
+                <td class="action"><a class="read" title="ler" href="javascript:layout.popup('?action=view-update-window-form&path=user/forms/message&id=&m.var:data.read-send-messages.__KEY__.id;')"></a></td>
+                <td>
+                    &m.var:data.read-send-messages.__KEY__.to_user_name;<br>
+                    <strong>&m.var:data.read-send-messages.__KEY__.title;</strong><br>
+                    <span class="blured">&m.var:data.read-send-messages.__KEY__.send_at;</span>
+                </td>
+              </tr>
+            </m.foreach>
+          </tbody>
+        </table>
+      </div>
+    </m.if>
+    
+    <div class="clear"></div>
+    
+ </div>

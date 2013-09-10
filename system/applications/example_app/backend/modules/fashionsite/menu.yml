@@ -1,0 +1,36 @@
+- label: "Dashboard"
+  link: "?action=view-dashboard&path=fashionsite/dashboards/dashboard"
+ 
+- label: "Textos"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/text"
+  
+- label: "Banners"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/banner"
+  
+- label: "Videos"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/video"
+ 
+- label: "Clippings"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/clipping"
+  
+- label: "Coleções"
+  link: "?action=view-inTabs-form&path=fashionsite/forms/collection"
+  
+- label: "Entidades"
+  submenu:
+    - label: Representantes
+      link: "?action=view-inTabs-form&path=fashionsite/forms/representante"
+      
+    - label: Lojas
+      link: "?action=view-inTabs-form&path=fashionsite/forms/store"
+  
+- label: artigos
+  submenu:
+    - label: "Postagens"
+      link: "?action=view-inTabs-form&path=fashionsite/forms/post"
+
+    - label: "Categorias"
+      link: "?action=view-inTabs-form&path=fashionsite/forms/post-category"
+
+    - label: "Tipos"
+      link: "?action=view-inTabs-form&path=fashionsite/forms/post-type"

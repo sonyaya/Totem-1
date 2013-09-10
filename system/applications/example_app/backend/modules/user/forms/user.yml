@@ -1,0 +1,94 @@
+header:
+    title: 'Cadastro de Usuários'
+    table: _m_user
+    p-key: id
+forms:
+    list:
+        title: 'Listagm de Usuários'
+        rows-per-page: 200
+        input:
+            - type: example
+              label: Cod.
+              column: id
+
+            - type: example
+              label: 'Nome'
+              column: first_name
+              
+            - type: example
+              label: 'Nome do Meio'
+              column: middle_name
+              
+            - type: example
+              label: Sobrenome
+              column: last_name
+              
+            - type: example
+              label: Login
+              column: login
+              
+            - type: example
+              label: Email
+              column: Email
+              
+            - type: example
+              label: Grupo
+              column: (SELECT `name` FROM _m_group WHERE id = _m_user.group_id)
+
+    update:
+        title: 'Atualizando Usuário'
+        input:
+            - type: fk
+              label: Grupo
+              column: group_id
+              parameter:
+                column: id
+                table: _m_group
+                label: name 
+                insert-form  : "user/forms/group" 
+              
+            - type: meioMask
+              label: 'Primeiro Nome'
+              column: first_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: 'Nome do Meio'
+              column: middle_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Sobrenome
+              column: last_name
+              parameter:
+                size: 20
+              
+            - type: meioMask
+              label: Login
+              column: login
+              parameter:
+                size: 20
+              
+            - type: password
+              label: Senha
+              column: password
+              
+            - type: textarea
+              label: Permissões
+              column: permissions
+              
+            - type: meioMask
+              label: email
+              column: Email
+              parameter:
+                size: 100
+    insert:
+        title: 'Inserindo Usuário'
+        merge-form: [ insert, update ]
+        input: []
+
+    bridge:
+        merge-form: [ bridge, list ]
+        input: []

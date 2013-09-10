@@ -1,0 +1,137 @@
+# -- HEADER --------------------------------------------------------------------
+
+header:
+  title: 'Bandas'
+  table: ddr_band
+  p-key: id
+  
+# -- FORMS ---------------------------------------------------------------------
+forms:
+  
+  # -- LIST --------------------------------------------------------------------
+  
+  list:
+    title: 'Listagem de Bandas'
+    rows-per-page: 15
+    input:
+      - type: number
+        label: Cod.
+        column: id
+        
+      - type: example
+        label: Nome
+        column: name
+        
+      - type: example
+        label: Artistas(s)
+        column: | 
+          (
+            SELECT 
+              group_concat(name SEPARATOR ', ')
+
+            FROM 
+              ddr_artist
+              JOIN ddr_band_x_artist ON ddr_artist.id = ddr_band_x_artist.ddr_artist_id
+
+            WHERE 
+              ddr_band.id = ddr_band_x_artist.ddr_band_id
+
+            GROUP BY
+              ddr_band.id
+          )  
+          
+  # -- INSERT ------------------------------------------------------------------
+  
+  insert:
+    title: 'Inserindo Banda'
+    input:
+      title:
+        type: meioMask
+        label: Nome
+        column: name
+        parameter : 
+          size : 45
+          
+      site:
+        type: meioMask
+        label: Site
+        column: site
+        parameter : 
+          size : 45
+          
+      born:
+        type: dateTimeBr
+        label: Data de Nascimento
+        column: born
+        parameter : 
+          year : 
+            start : '1940'
+            stop  : 'now'
+          
+      died:
+        type: dateTimeBr
+        label: Data de Falecimento
+        column: died
+        parameter : 
+          nullable : true
+          year : 
+            start : '1940'
+            stop  : 'now'
+            
+      origin_city:
+        type: fk
+        label: Cidade de Nascimento
+        column: origin_city
+        parameter : 
+          table : common_city
+          column : id
+          label : name
+          insert-form : "common/forms/city" 
+          
+      gender:
+        type: manyToMany
+        label: Gênero do Artista
+        column: 'ddr_aband_x_gender' # nome ficticio
+        ignore-select: true          # não busca os dados desta coluna em formulários de atualização
+        parameter:
+          middle-table : ddr_band_x_gender
+          middle-fk    : ddr_band_id
+          middle-pk    : ddr_gender_id
+          right-table  : ddr_gender
+          right-fk     : id
+          right-label  : name
+          insert-form  : "ddr/forms/gender"
+          
+      band:
+        type: manyToMany
+        label: Artistas
+        column: 'ddr_band_x_artist' # nome ficticio
+        ignore-select: true         # não busca os dados desta coluna em formulários de atualização
+        parameter:
+          nullable     : true
+          middle-table : ddr_band_x_artist
+          middle-fk    : ddr_band_id
+          middle-pk    : ddr_artist_id
+          right-table  : ddr_artist
+          right-fk     : id
+          right-label  : name
+          insert-form  : "ddr/forms/band"  
+            
+  # -- UPDATE ------------------------------------------------------------------
+  
+  update:
+    title: 'Atualizando Banda'
+    merge-form: [ update, insert ]
+    input: []
+          
+  # -- DELETE ------------------------------------------------------------------
+  
+  delete:
+    merge-form: [ delete, insert ]
+    input: []
+      
+  # -- BRIDGE ------------------------------------------------------------------
+  
+  bridge:
+    merge-form: [ bridge, list ]
+    input: []
