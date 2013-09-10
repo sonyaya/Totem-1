@@ -27,7 +27,7 @@
     if( isset($_SESSION['user']) && !empty($_SESSION['user']) ){
         # VARIAVEIS GLOBAIS
         // Menus
-        $_M_MENU        = Yaml::parse( file_get_contents("menu.yml") );;
+        $_M_MENU        = Yaml::parse( file_get_contents("../../applications/$_M_APP/menu.yml") );;
         $_M_MENU_MODULE = "";
         $_M_MENU_PARTS  = "";
         
