@@ -42,6 +42,10 @@
                 // arquivo de configuração
                 $this->dashboardConfig = Yaml::parse(file_get_contents($filenameYaml));
             }else{
+                echo "<pre>";
+                print_r( new \Exception() );
+                echo "</pre>";
+                
                 echo "Um dos arquivos de Dashboard não foram encontrado '$filenameDash' ou '$filenameYaml'.";
                 exit;
             }
