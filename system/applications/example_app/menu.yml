@@ -1,0 +1,32 @@
+- label: Usuários
+  load-from-module: user
+  module-start-url: ?action=view-dashboard&path=user/dashboards/dashboard
+
+- label: Blog
+  load-from-module: blog
+  module-start-url: ?action=view-inTabs-form&path=blog/forms/post
+
+- label: Disc. do Rock
+  load-from-module: ddr
+  module-start-url: ?action=view-inTabs-form&path=ddr/forms/artist
+  
+- label: Fashion Site
+  load-from-module: fashionsite
+  module-start-url: ?action=view-dashboard&path=fashionSite/dashboards/dashboard
+  
+- label: Example
+  submenu:
+    - label: Dashboard
+      link: ?action=view-dashboard&path=example/dashboards/dashboard
+
+    - label: InTabs
+      link: ?action=view-inTabs-form&path=example/forms/example
+      
+    - label: Insert Form
+      link: ?action=view-insert-form&path=example/forms/example      
+      
+    - label: Update Form
+      link: ?action=view-update-form&path=example/forms/example&id=1
+      
+    - label: Dummy Form
+      link: ?action=view-dummy-form&path=example/forms/example
