@@ -6,7 +6,7 @@
   pepper          = "your pepper phrase, change this phrase only once before installing the system, and never touch it again!"
   upload-path     = "../uploads"
   time-zone       = "America/Sao_Paulo"
-  log-php-errors  = true
+  log-php-errors  = false
 
 [smtp]
   host               = "smtp.gmail.com"
@@ -29,7 +29,7 @@
   table-groups = "_m_group"
 
 [frontend]
-  root-path     = "system/front/"
+  root-path   = "system/framework/front/"
   bridge-path = "http://127.0.0.1/totem/system/framework/bridge/"
   html-folder = "site/"
   html-start  = "index.html"
@@ -40,10 +40,14 @@
   template      = "templates/df1/"
   max-page-list = 10
   rows-per-page = 100
-  start-place   = "?action=view-dashboard&path=user/dashboards/dashboard"
-  bootstrap     = '
-    "userBootstrap" : "modules/user/extra/bootstrap.php"
-  '
+  
+  bootstrap     = '{
+  }'
+  
+  start-place   = '{
+    "action" : "view-dashboard",
+    "path"   : "user/dashboards/dashboard"
+  }'
 
 [console]
   template = "templates/default/"
