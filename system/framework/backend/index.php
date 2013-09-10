@@ -14,6 +14,7 @@
     $_M_THIS_CONFIG = $bootstrap->_M_THIS_CONFIG;
     $_M_MODULE_PATH = getcwd();
     $_M_LANGUAGE    = $bootstrap->_M_LANGUAGE;
+    $_M_APP         = $bootstrap->_M_APP;
     
     # DESTROI O OBJETO BOOTSTRAP
     unset($bootstrap);
@@ -45,8 +46,8 @@
         $_M_USER['name']        = preg_replace("/\ {1,4}/i", " ", "{$_M_USER['first_name']} {$_M_USER['middle_name']} {$_M_USER['last_name']}");
 
         // EXECUTA ADD ON BOOTSTRAP 
-        foreach(json_decode("{{$_M_THIS_CONFIG['bootstrap']}}") as $key=>$path){
-           require_once $path;
+        foreach(json_decode("{$_M_THIS_CONFIG['bootstrap']}") as $key=>$path){
+           require_once "../../applications/$_M_APP/$path";
            new $key($_M_THIS_CONFIG, $_M_USER, $_M_MENU);
         }
         
