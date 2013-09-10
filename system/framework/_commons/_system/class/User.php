@@ -17,13 +17,11 @@
             global $_M_CONF;
             global $_M_THIS_CONFIG;
             global $_M_LANGUAGE;
-
+            
             if( !empty($_SESSION['user']) ){
                     // busca variaveis
                     $contextArray = explode("/", $context);
                     $actualMenu = $_SESSION['user']['permissions'];
-
-
 
                     // pega permissão para o contexto
                     $count = 0;
@@ -63,7 +61,6 @@
                           !$grant ||
                           !is_array($actualMenu)
                         ) break;
-
 
                         //
                         $count++;
